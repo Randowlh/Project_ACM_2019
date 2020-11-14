@@ -5,20 +5,20 @@ const double huanjin = 0.618;
 int n,m;
 int now;
 int tim;
-struct ps{
+struct ps{//人
    int weight,naixin,to,ti;
-   ps(){
+   ps(){//乘客生成
       to =  rand()%n+1;
       naixin=rand()%11+15+tim;
       weight=rand()%101+30; 
    }
 };
-struct node{
+struct node{//节点
       ps date;
       node* nxt;
       node(ps a):date(a),nxt(NULL){}
 };
-struct que{
+struct que{//链表实现队列
    
    node* head,*tail;
    bool empty(){
