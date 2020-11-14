@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
+#include<fstream> 
 #include<windows.h>
 using namespace std;
 const double huanjin = 0.618;
 int n,m;
 int now;
 int tim;
+int SLPT,TOT_TIME; 
 struct ps{//人
    int weight,naixin,to,ti;
    ps(){//乘客生成
@@ -19,7 +21,6 @@ struct node{//节点
       node(ps a):date(a),nxt(NULL){}
 };
 struct que{//链表实现队列
-   
    node* head,*tail;
    bool empty(){
       return head==NULL;
@@ -49,7 +50,7 @@ int cnt[100];
 int too[1000];
 int qz[1000];
 int tt=0;
-void quchu(int pos){
+void quchu(int pos){//去除耐心已满 
    while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
       cnt[pos]++;
       q[pos].pop();
@@ -69,23 +70,25 @@ void quchu(int pos){
    return;
 }
 void flsh(){
-   for(int i=1;i<=m+18;i++)
+   for(int i=1;i<m+18;i++)
       cout<<"■";
    cout<<endl;
    for(int i=n;i>=1;i--){
-      tt=0;
+      tt=0;//记录总数 
       //quchu(i);
       node *no=q[i].head;
+      qz[0] = 0;
       while(no!=NULL){
          too[++tt]=no->date.to;
-         if(no->date.to>=10)
-            qz[i]=qz[i-1]+4;
-         else qz[i]=qz[i-1]+3;
+         //维护前缀和
+         if(no->date.to>=10)//大于10占用4  
+            qz[tt]=qz[tt-1]+4;
+         else qz[tt]=qz[tt-1]+3;//小于10占用3 
          no=no->nxt;
       }
       for(int j=3;j>=1;j--){
          int q;
-         cout<<"■";
+         cout<<"�";
          for(int k=1;k<=32;k++)
             if(now==((i-1)*3+j))
                cout<<"=";
@@ -95,9 +98,10 @@ void flsh(){
             cout<<"| ";
          else cout<<"■";
          if(j==3){
-            for(q=1;q<=tt&&qz[q]<m*2-1;q++){
+            for(q=1;q<=tt&&qz[q]<m*2-1;q++){ 
                cout<<"F"<<too[tt]<<" "; 
-            } 
+            }
+            q--;//debug
             for(int k=qz[q]+1;k<m*2-1;k++) 
                cout<<" ";
                cout<<"■";
@@ -107,6 +111,7 @@ void flsh(){
                if(qz[q]-qz[q-1]==4)
                   cout<<" ";
             }
+            q--;//debug
             for(int k=qz[q]+1;k<m*2-1;k++)
                cout<<" ";
                cout<<"■";
@@ -117,18 +122,34 @@ void flsh(){
          cout<<endl;
       }
    }
-   for(int i=1;i<=m+18;i++)
-      cout<<"■";
-   cout<<endl;
+   for(int i=1;i<m+18;i++)
+      	cout<<"■";
+   	cout<<endl;
+}
+void run(){
+	
 }
 int main(){
    system("chcp 65001");
    srand(time(NULL));
    cin>>n;
-   for(int i=1;i<=n;i++){
+   cout<<"请输入每次的间隔时间,单位为毫秒";
+   cin>>SLPT;//sleep time,刷新间隔时间
+   cout<<"请输入希望电梯运行的时间:"<<endl;
+   cin>>TOT_TIME;
+   ofstream fop;//输出流，输出电梯运行日志 
+   fop.open("check.txt");
+   /* 
+   for(int i=1;i<=n;i++){//一开始先生成几个人 
       int t=rand()%8;
       for(int j=1;j<=t;j++)
          q[i].push(ps());
+   }
+   */ 
+   for(int i=1;i<=TOT_TIME;i++){//一会儿要改 
+		run();
+		sleep(SLPT);
+		system("cls");
    }
    now=7;
    m=n*4/huanjin+4;
