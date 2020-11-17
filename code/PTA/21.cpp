@@ -46,16 +46,42 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    string a,b;
-    getline(cin,a);getline(cin,b);
-    set<int> s;
-    for(int i=0;i<b.length();i++){
-        s.insert(b[i]);
+    int n;
+    cin>>n;
+    int tmp;
+    set<int> tt;
+    set<int> ttt;
+    for(int i=1;i<=n;i++){
+        int k;
+        cin>>k;
+        if(k==1){
+            cin>>tmp;
+            continue;
+        }
+        ttt.clear();
+        for(int i=0;i<k;i++){
+            cin>>tmp;
+            tt.insert(tmp);
+        }
+        if(ttt.size()>1)
+            for(auto i=ttt.begin();i!=ttt.end();i++)
+                tt.insert(*i);
     }
-    for(int i=0;i<a.length();i++){
-        if(!s.count(a[i]))
-            cout<<a[i];
+    int m;
+    cin>>m;
+    int flag=0;
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        if(!tt.count(tmp)){
+            if(!flag){
+                flag=1;
+            }else cout<<' ';
+            printf("%5d",tmp);
+            tt.insert(tmp);
+        }
     }
+    if(!flag)
+    cout<<"No one is handsome";
     cout<<endl;
 }
 signed main()

@@ -47,16 +47,12 @@ const int maxn = 510000;
 void work()
 {
     string a,b;
-    getline(cin,a);getline(cin,b);
+    cin>>a>>b;
     set<int> s;
-    for(int i=0;i<b.length();i++){
-        s.insert(b[i]);
+    for(int i='1';i<='9';i++)   
+        s.insert(i);
+    for(int i=1;i<=n;i++){
     }
-    for(int i=0;i<a.length();i++){
-        if(!s.count(a[i]))
-            cout<<a[i];
-    }
-    cout<<endl;
 }
 signed main()
 {

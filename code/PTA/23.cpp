@@ -44,17 +44,29 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int cnt[1000];
 void work()
 {
-    string a,b;
-    getline(cin,a);getline(cin,b);
-    set<int> s;
-    for(int i=0;i<b.length();i++){
-        s.insert(b[i]);
+    string tmp;
+    cin>>tmp;
+    for(int i=0;i<tmp.size();i++){
+        if(tmp[i]>'Z'){
+            tmp[i]-='a';
+            tmp[i]+='A';
+        }
+        cnt[tmp[i]]++;
     }
-    for(int i=0;i<a.length();i++){
-        if(!s.count(a[i]))
-            cout<<a[i];
+    string tt="GPLT";
+    int flag=1;
+    while(flag){
+        flag=0;
+        for(int i=0;i<4;i++){
+            if(cnt[tt[i]]){
+                flag=1;
+                cout<<tt[i];
+                cnt[tt[i]]--;
+            }
+        }
     }
     cout<<endl;
 }

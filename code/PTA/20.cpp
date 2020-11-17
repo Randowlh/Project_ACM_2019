@@ -46,17 +46,28 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    string a,b;
-    getline(cin,a);getline(cin,b);
-    set<int> s;
-    for(int i=0;i<b.length();i++){
-        s.insert(b[i]);
+    int a,b;
+    cin>>a>>b;
+    int an=0,bn=0;
+    int d[5];
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        for(int i=1;i<=4;i++)
+            cin>>d[i];
+        int f1=(d[1]+d[3]==d[2]),f2=(d[1]+d[3]==d[4]);
+        if(f1&&f2)
+            continue;
+        if(f1)
+            an++;
+        else if(f2)
+            bn++;
+        if(an>a||bn>b)
+            break;
     }
-    for(int i=0;i<a.length();i++){
-        if(!s.count(a[i]))
-            cout<<a[i];
-    }
-    cout<<endl;
+    if(an>a)
+        cout<<'A'<<endl<<bn<<endl;
+    else cout<<"B"<<endl<<an<<endl;
 }
 signed main()
 {
