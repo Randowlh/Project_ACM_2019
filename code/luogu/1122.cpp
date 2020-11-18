@@ -47,6 +47,19 @@ const int maxn = 510000;
 vector<int> mp[110000];
 int dp[110000];
 int date[110000];
+void dfs(int pos,int fa){
+    int ans=0;
+    for(int i=0;i<mp[pos].size();i++){
+        if(mp[pos][i]==fa)
+            continue;
+        dfs(mp[pos][i],pos);
+        if(dp[mp[pos][i]]>0)
+            ans+=dp[mp[pos][i]];
+    }
+    ans+=date[pos];
+    dp[pos]=ans;
+    return;
+}
 void work()
 {
     int n;
@@ -54,12 +67,17 @@ void work()
     for(int i=1;i<=n;i++)
         cin>>date[i];
     int u,v;
-    for(int i=1;i<=n;i++){
+    for(int i=1;i<n;i++){
         cin>>u>>v;
         mp[u].push_back(v);
         mp[v].push_back(u);
     }
-    dfs()
+    dfs(1,-1);
+    int ans=-llinf;
+    for(int i=1;i<=n;i++){
+        MAX(ans,dp[i]);
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {

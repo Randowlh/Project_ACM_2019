@@ -44,45 +44,28 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[30][200];
-vector<int> dd[30][200];
-int w[30],v[30];
-void work()
-{
-    for(int i=1;i<=24;i++){
-        cin>>w[i];
-    }
-    for(int i=1;i<=24;i++)  
-        cin>>v[i];
-    memset(dp, 63, sizeof dp);
-    dp[0][0]=0;
-    for(int i=1;i<=24;i++){
-        for(int j=1;j<=24;j++)
-            for(int k=w[i];k<=25;k++){
-              
-                if(dp[j][k]>dp[j-1][k-w[i]]+v[i]){
-                     cout<<i<<' '<<j<<' '<<k<<' '<<dp[j-1][k-w[i]]<<endl;
-                    dp[j][k]=dp[j-1][k-w[i]]+v[i];
-                    dd[j][k]=dd[j-1][k-w[i]];
-                    dd[j][k].push_back(i);
-                }
-            }
-    }
-    vector<int> aa;
-    int ans=99999999;
-    for(int i=12;i<=24;i++){
-        for(int j=1;j<=25;j++){
-            if(ans>dp[i][j]){
-                ans=dp[i][j];
-                aa=dd[i][j];
-            }
+int our(int n){
+    int ans=n;
+    for(int i=2;i*i<=n;i++){
+        if(n%i==0){
+            ans-=ans/i;
+            while(n%i==0)n/=i;
         }
     }
-    cout<<ans<<endl;
-    for(int i=0;i<aa.size();i++){
-        cout<<aa[i]<<' ';
+    if(n>1)
+        ans-=ans/n;
+    return ans;
+}
+void work()
+{
+    int n;
+    cin>>n;
+    int ans=0;
+    if(n==1){printf("0\n");return ;}
+    for(int i=2;i<n;i++){
+        ans+=our(i)*2;
     }
-    cout<<endl;
+    cout<<ans+3<<endl;
 }
 signed main()
 {
