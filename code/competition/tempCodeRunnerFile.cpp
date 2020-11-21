@@ -1,31 +1,29 @@
-int exgcd(int a, int b, int &x, int &y)
+int nxt[210000];
+inline void cal_next(string &str)
 {
-    if (b == 0)
+    nxt[0] = -1;
+    int k = -1;
+    for (int q = 1; q < str.size(); q++)
     {
-        x = 1;
-        y = 0;
-        return a;
+        while (k > -1 && str[k + 1] != str[q])
+            k = nxt[k];
+        if (str[k + 1] == str[q])
+        k = k + 1;
+    nxt[q] = k;
     }
-    int r = exgcd(b, a % b, x, y);
-    int temp = y;
-    y = x - (a / b) * y;
-    x = temp;
-    return r;
 }
-
-int C(int n, int m)
+int KMP(string &a, string &b)
 {
-    if (m < 0)
-        return 0;
-    if (n < m)
-        return 0;
-    if (m > n - m)
-        m = n - m;
-    int aa = 1, bb = 1;
-    for (int i = 0; i < m; i++)
+    cal_next(b);
+    int k = -1;
+    for (int i = 0; i < a.size(); i++)
     {
-        aa = aa * (n - i) % mod;
-        bb = bb * (i + 1) % mod;
+        while (k > -1 && b[k + 1] != a[i])
+            k = nxt[k];
+        if (b[k + 1] == a[i])
+            k = k + 1;
+        if (k == b.size() - 1)
+            return i;
     }
-    return aa * niyuan(bb, mod) % mod;
+    return -1;
 }
