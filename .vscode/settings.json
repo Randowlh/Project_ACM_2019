@@ -72,5 +72,7 @@
         "typeindex": "cpp",
         "typeinfo": "cpp"
     },
-    "python.formatting.provider": "autopep8"
+    "python.formatting.provider": "autopep8",
+    "editor.snippetSuggestions": "bottom",
+    "editor.suggest.snippetsPreventQuickSuggestions": false
 }
