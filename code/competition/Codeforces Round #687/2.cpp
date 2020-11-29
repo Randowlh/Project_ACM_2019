@@ -42,71 +42,64 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 2100000;
-const int maxn = 210000;
-int dfn[maxn],low[maxn];
-bool isge[maxn];
-int cnt=0;
-struct edge{
-   int to,nxt;
-}eg[maxm];+int head[maxn];
-int ecnt=0;
-inline void add(int u,int v){
-   eg[++ecnt].nxt=head[u];
-   eg[ecnt].to=v;
-   head[u]=ecnt;
-}
-inline void cl(int n){
-    for(int i=0;i<=n;i++)
-        head[i]=-1;
-    ecnt=-1;
-}
-int n,m;
-int crd;
-void tarjan(int now,int fa){
-    int crd=0;
-    dfn[now]=low[now]=++cnt;
-    for(int i=head[now];i!=-1;i=eg[i].nxt){
-        int to=eg[i].to;
-        if(!dfn[to]){
-            tarjan(to,i^1);
-            if(low[to]>dfn[now]&&fa!=-1)
-                isge[now]=1;
-            else if(fa==-1){
-                crd++;
-            }
-            MIN(low[now],low[to]);
-        }else if(i!=fa){
-            MIN(low[now],dfn[to]);
-        }
-    }
-    if(crd>=2&&fa==-1)
-        isge[now]=1;
-}
+const int maxm= 1;
+const int maxn = 510000;
 void work()
 {
-    rd(n),rd(m);
-    int u,v;
-    cl(n);
-    for(int i=0;i<m;i++){
-        rd(u),rd(v);
-        add(u,v),add(v,u);
+    int n;
+    cin>>n;
+    int tmp;
+    vector<int> v;
+    vector<int> cc;
+    for(int i=0;i<n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
+        cc.push_back(0);
     }
-    for(int i=1;i<=n;i++){
-        if(!dfn[i]){
-            tarjan(i,-1);
+    int ans=llinf;
+    for(int i=4;i>=0;i--){
+        int cnt=0;
+        for(int j=0;j<v.size();j++){
+            if(v[j]&(1<<i)){
+                cnt++;
+            }else{
+                if(cnt){
+                    MIN(ans,cc[j]);
+                    v.pop_back();
+                    cc.pop_back();
+                    break;
+                }
+            }
+        }
+        if(cnt==3){
+            MIN(ans,cc[cc.size()-1]+cc[cc.size()-2]+1);
+            cc.pop_back();
+            cc.pop_back();
+            v.pop_back();
+            v.pop_back();
+        }else if(cnt>4){
+            ans=1;
+            break;
+        }else if(cnt==2){
+            v[v.size()-2]^=v[v.size()-1];
+            cc[cc.size()-2]++;
+            v.pop_back();
+            cc.pop_back();
+            if(v.size()>=2&&v[v.size()-1]<v[v.size()-2]){
+                MIN(ans,cc[cc.size()-1]);
+                cc.pop_back();
+                v.pop_back();
+            }
+        }else if(cnt==1){
+            v.pop_back();
+            cc.pop_back();
         }
     }
-    vector<int> ans;
-    for(int i=1;i<=n;i++){
-        if(isge[i])
-            ans.push_back(i);
-    }
-    wt(ans.size()),pt('\n');
-    for(int i=0;i<ans.size();i++){
-        wt(ans[i]),pt(' ');
-    }
-    pt('\n');
+    if(ans==llinf)
+        cout<<-1<<endl;
+    else
+    cout<<ans<<endl;
+
 }
 signed main()
 {

@@ -42,71 +42,32 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 2100000;
-const int maxn = 210000;
-int dfn[maxn],low[maxn];
-bool isge[maxn];
-int cnt=0;
-struct edge{
-   int to,nxt;
-}eg[maxm];+int head[maxn];
-int ecnt=0;
-inline void add(int u,int v){
-   eg[++ecnt].nxt=head[u];
-   eg[ecnt].to=v;
-   head[u]=ecnt;
-}
-inline void cl(int n){
-    for(int i=0;i<=n;i++)
-        head[i]=-1;
-    ecnt=-1;
-}
-int n,m;
-int crd;
-void tarjan(int now,int fa){
-    int crd=0;
-    dfn[now]=low[now]=++cnt;
-    for(int i=head[now];i!=-1;i=eg[i].nxt){
-        int to=eg[i].to;
-        if(!dfn[to]){
-            tarjan(to,i^1);
-            if(low[to]>dfn[now]&&fa!=-1)
-                isge[now]=1;
-            else if(fa==-1){
-                crd++;
-            }
-            MIN(low[now],low[to]);
-        }else if(i!=fa){
-            MIN(low[now],dfn[to]);
-        }
-    }
-    if(crd>=2&&fa==-1)
-        isge[now]=1;
+const int maxm= 1;
+const int maxn = 110000;
+int dp[maxn];int n,p,k,x,y;;
+string tmp;
+int dfs(int now){
+    if(now>n)
+        return 0;
+    if(dp[now]!=-1)
+        return dp[now];
+    else return dp[now]=(tmp[now]=='1'?0:x)+dfs(now+k);
 }
 void work()
 {
-    rd(n),rd(m);
-    int u,v;
-    cl(n);
-    for(int i=0;i<m;i++){
-        rd(u),rd(v);
-        add(u,v),add(v,u);
+    cin>>n>>p>>k;
+    cin>>tmp;
+    tmp=" "+tmp;
+    cin>>x>>y;
+    int ans=llinf;
+    for(int i=1;i<=n;i++)
+        dp[i]=-1;
+    int cst=0;
+    for(int i=0;i<=n-p;i++){
+        MIN(ans,dfs(i+p)+cst);
+        cst+=y;
     }
-    for(int i=1;i<=n;i++){
-        if(!dfn[i]){
-            tarjan(i,-1);
-        }
-    }
-    vector<int> ans;
-    for(int i=1;i<=n;i++){
-        if(isge[i])
-            ans.push_back(i);
-    }
-    wt(ans.size()),pt('\n');
-    for(int i=0;i<ans.size();i++){
-        wt(ans[i]),pt(' ');
-    }
-    pt('\n');
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -117,7 +78,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

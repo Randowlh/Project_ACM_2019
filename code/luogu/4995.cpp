@@ -42,76 +42,40 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 2100000;
-const int maxn = 210000;
-int dfn[maxn],low[maxn];
-bool isge[maxn];
-int cnt=0;
-struct edge{
-   int to,nxt;
-}eg[maxm];+int head[maxn];
-int ecnt=0;
-inline void add(int u,int v){
-   eg[++ecnt].nxt=head[u];
-   eg[ecnt].to=v;
-   head[u]=ecnt;
-}
-inline void cl(int n){
-    for(int i=0;i<=n;i++)
-        head[i]=-1;
-    ecnt=-1;
-}
-int n,m;
-int crd;
-void tarjan(int now,int fa){
-    int crd=0;
-    dfn[now]=low[now]=++cnt;
-    for(int i=head[now];i!=-1;i=eg[i].nxt){
-        int to=eg[i].to;
-        if(!dfn[to]){
-            tarjan(to,i^1);
-            if(low[to]>dfn[now]&&fa!=-1)
-                isge[now]=1;
-            else if(fa==-1){
-                crd++;
-            }
-            MIN(low[now],low[to]);
-        }else if(i!=fa){
-            MIN(low[now],dfn[to]);
-        }
-    }
-    if(crd>=2&&fa==-1)
-        isge[now]=1;
-}
+const int maxm= 1;
+const int maxn = 510000;
 void work()
 {
-    rd(n),rd(m);
-    int u,v;
-    cl(n);
-    for(int i=0;i<m;i++){
-        rd(u),rd(v);
-        add(u,v),add(v,u);
-    }
-    for(int i=1;i<=n;i++){
-        if(!dfn[i]){
-            tarjan(i,-1);
+    int n;
+    cin>>n;
+    vector<int> v;
+    int tmp;
+    for(int i=0;i<n;i++)
+        cin>>tmp,v.push_back(tmp);
+    int ans=0;
+    int now=0;
+    int flag=0;
+    int bg=0;
+    int ed=n;
+    sort(v.begin(),v.end());
+    while(bg^ed){
+        if(flag){
+            ans+=(now-v[bg])*(now-v[bg]);
+            now=v[bg];
+            bg++;
+        }else{
+            ed--;
+            ans+=(now-v[ed])*(now-v[ed]);
+            now=v[ed];
         }
+        flag^=1;
     }
-    vector<int> ans;
-    for(int i=1;i<=n;i++){
-        if(isge[i])
-            ans.push_back(i);
-    }
-    wt(ans.size()),pt('\n');
-    for(int i=0;i<ans.size();i++){
-        wt(ans[i]),pt(' ');
-    }
-    pt('\n');
+    cout<<ans<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
