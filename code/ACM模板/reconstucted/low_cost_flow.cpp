@@ -4,15 +4,15 @@ struct LCF
     {
         int from;
         int to;
-        int flow;
-        int cost;
+        char flow;
+        char cost;
         Edge(int fr = 0, int t = 0, int f = 0, int cc = 0) : from(fr), to(t), flow(f), cost(cc) {}
     };
 #define inf 0x3f3f3f3f
-#define maxn 201110
-    int book[maxn];
-    int dis[maxn];
-    int n, m, s, t, ans;
+#define maxn ((1<<20)+5)
+    bool book[maxn];
+    unsigned char dis[maxn];
+    int n, s, t, ans;
     vector<Edge> edge;
     vector<int> mp[maxn];
     void add_edge(int x, int y, int flow, int cost)
@@ -24,9 +24,9 @@ struct LCF
     }
     bool spfa()
     {
-        for (int i = 0; i <= n * m + 100; i++)
+        for (int i = 0; i <= n; i++)
         {
-            dis[i] = inf;
+            dis[i] = 200;
             book[i] = 0;
         }
         dis[t] = 0;
@@ -68,7 +68,7 @@ struct LCF
             int to = edge[mp[x][i]].to;
             if (!book[to] && edge[mp[x][i]].flow > 0 && dis[x] - edge[mp[x][i]].cost == dis[to])
             {
-                a = dfs(to, min(flow - used, edge[mp[x][i]].flow));
+                a = dfs(to, min(flow - used,(int) edge[mp[x][i]].flow));
                 if (a)
                     ans += a * edge[mp[x][i]].cost, edge[mp[x][i]].flow -= a, edge[mp[x][i] ^ 1].flow += a, used += a;
                 if (used == flow)
@@ -77,13 +77,12 @@ struct LCF
         }
         return used;
     }
-    void init(int tn, int tm, int ts, int tt)
+    void init(int tn, int ts, int tt)
     {
-        for (int i = 0; i <= tn * tm + 100; i++)
+        for (int i = 0; i <= tn ; i++)
             mp[i].clear();
         edge.clear();
         n = tn;
-        m = tm;
         s = ts;
         t = tt;
         ans = 0;
@@ -93,7 +92,7 @@ struct LCF
         int flow = 0;
         while (spfa())
         {
-            for (int i = 0; i <= n * m + 200; i++)
+            for (int i = 0; i <= n; i++)
                 book[i] = 0;
             flow += dfs(s, inf);
         }
