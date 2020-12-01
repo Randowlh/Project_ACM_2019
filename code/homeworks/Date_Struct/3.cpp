@@ -2,16 +2,22 @@
 #include<fstream> 
 #include<windows.h>
 using namespace std;
+#define rep(i,a,b) for(int i=(a);i<=(b);i++)
+#define repb(i,a,b) for(int i=(a);i>=(b);i--)
 const double huanjin = 0.618;
+const int MAXN = 21;//最高设置21层楼
 int n,m;
 int now;
 int tim;
-int SLPT,TOT_TIME; 
+int SLPT=300,TOT_TIME;
 struct ps{//人
-   int weight,naixin,to,ti;
-   ps(){//乘客生成
+   int weight,naixin;
+   int from,to;//从哪里到哪里
+   ps(int frm){//乘客生成
+      from = frm;
       to =  rand()%n+1;
-      naixin=rand()%11+15+tim;
+      while(to!=from) to = rand()%n+1;
+      naixin=rand()%11+15+tim;//耐心值要加上当前时间,方便计算
       weight=rand()%101+30; 
    }
 };
@@ -45,11 +51,12 @@ struct que{//链表实现队列
       if(head=NULL)
          tail=NULL;
    }
-}q[100],lt;
-int cnt[100];
-int too[1000];
-int qz[1000];
+}q[MAXN];
+
+int cnt[MAXN];
+int qz[MAXN];
 int tt=0;
+
 void quchu(int pos){//去除耐心已满 
    while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
       cnt[pos]++;
@@ -69,73 +76,126 @@ void quchu(int pos){//去除耐心已满
    }
    return;
 }
-void flsh(){
-   for(int i=1;i<m+18;i++)
-      cout<<"■";
-   cout<<endl;
-   for(int i=n;i>=1;i--){
-      tt=0;//记录总数 
-      //quchu(i);
-      node *no=q[i].head;
-      qz[0] = 0;
-      while(no!=NULL){
-         too[++tt]=no->date.to;
-         //维护前缀和
-         if(no->date.to>=10)//大于10占用4  
-            qz[tt]=qz[tt-1]+4;
-         else qz[tt]=qz[tt-1]+3;//小于10占用3 
-         no=no->nxt;
-      }
-      for(int j=3;j>=1;j--){
-         int q;
-         cout<<"�";
-         for(int k=1;k<=32;k++)
-            if(now==((i-1)*3+j))
-               cout<<"=";
-            else
-               cout<<" ";
-         if(j%3!=1)
-            cout<<"| ";
-         else cout<<"■";
-         if(j==3){
-            for(q=1;q<=tt&&qz[q]<m*2-1;q++){ 
-               cout<<"F"<<too[tt]<<" "; 
-            }
-            q--;//debug
-            for(int k=qz[q]+1;k<m*2-1;k++) 
-               cout<<" ";
-               cout<<"■";
-         }else if(j==2){
-            for(q=1;q<=tt&&qz[q]<m*2-1;q++){
-               cout<<" # ";
-               if(qz[q]-qz[q-1]==4)
-                  cout<<" ";
-            }
-            q--;//debug
-            for(int k=qz[q]+1;k<m*2-1;k++)
-               cout<<" ";
-               cout<<"■";
-         }else{
-            for(int i=1;i<=m;i++)
-               cout<<"■";
-         }
-         cout<<endl;
-      }
-   }
-   for(int i=1;i<m+18;i++)
-      	cout<<"■";
-   	cout<<endl;
+
+struct Dianti{
+	int floor;//当前楼层
+	que ren;
+	int zhuangtai;//-1下行,0停止,1上行 
+	Dianti(int floor=0,int zhuangtai=0):floor(floor),zhuangtai(zhuangtai){}//电梯默认停止 
+}dianti;
+
+bool up_botton[MAXN];
+bool down_botton[MAXN];
+
+void check_botton(){//检查每个楼层的上下按钮 
+	rep(i,1,n){
+		up_botton[i]=down_botton[i] = 0;
+		node*px = q[i].head; 
+		while(px!=NULL){
+			if((px->date).to<i) down_botton[i]=1;//有人要下楼 
+			if((px->date).to>i) up_botton[i] = 1;//有人要上楼
+			if(up_botton[i]&&down_botton[i]) break; 
+			px = px->nxt;
+		}
+	}
+}
+
+void flsh(){	
+	rep(i,1,62) cout<<"■";
+	cout<<endl;
+	int buquan;//用于补全空格 
+	repb(i,n,1){
+		check_botton();//遍历每一层的队列来检查上下按钮 
+		repb(j,4,1){//每层包含地板高4 
+			cout<<"■";
+			if(j==4){
+				buquan = 40;
+				if(dianti.floor==i){
+					if(dianti.zhuangtai==-1){cout<<"电梯下行",buquan=40-8;}
+					else if(dianti.zhuangtai==0){cout<<"电梯停止",buquan=40-8;}
+					else if(dianti.zhuangtai==1){cout<<"电梯上行",buquan=40-8;}
+				}
+				rep(i,1,buquan) cout<<" ";
+			}
+			if(j==3){
+				buquan = 40;
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(j==2){
+				buquan = 40;
+				if(dianti.floor==i){
+					int cnt = 0;
+					node *px = (dianti.ren).head;
+					while(px!=NULL&&cnt<10){//一个人占用4列,//电梯20*2列最多显示10个人 
+						int to = (px->date).to;
+						cout<<"F";
+						if(to/10) cout<<to<<' ';
+						else cout<<' '<<to<<' ';
+						cnt++;
+						px = px->nxt; 
+					}
+					buquan = 40-cnt*4;//补全空格  
+				}
+				rep(i,1,buquan) cout<<" ";
+			}
+			else if(j==1){
+				//印电梯 
+				if(dianti.floor==i||dianti.floor+1==i){
+					rep(i,1,20) cout<<"==";
+				}
+				else{
+					rep(i,1,20) cout<<"  ";
+				}
+			} 
+			//楼层队列部分
+			if(j==4){
+				if(up_botton[i]){cout<<"▲";buquan = 80-2;}
+				else {cout<<"△";buquan = 80-2;}
+				rep(i,1,buquan) cout<<' ';
+			} 
+			else if(j==3){
+				if(up_botton[i]){cout<<"▼";buquan = 80-2;}
+				else {cout<<"▽";buquan = 80-2;}
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(j==2){
+				int cnt = 0;
+				node *px = q[i].head;
+				while(px!=NULL&&cnt<20){//一个人占用4列,//电梯40*2列最多显示20个人 
+					int to = (px->date).to;
+					cout<<"F";
+					if(to/10) cout<<to<<' ';
+					else cout<<' '<<to<<' ';
+					cnt++;
+					px = px->nxt; 
+				}
+				buquan = 80-cnt*4;//补全空格  
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(j==1){
+				rep(i,1,40) cout<<"■";
+			} 
+			cout<<"■";
+			cout<<endl;
+		}
+	}
+}//已经基本完成了这部分 
+void move(int from,int to){//电梯从from到to层
+	 
 }
 void run(){
 	
 }
 int main(){
+   n = 5;
+   flsh();
+   system("pause");
    system("chcp 65001");
    srand(time(NULL));
    cin>>n;
    cout<<"请输入每次的间隔时间,单位为毫秒";
    cin>>SLPT;//sleep time,刷新间隔时间
-   cout<<"请输入希望电梯运行的时间:"<<endl;
+   cout<<"请输入希望电梯运行的时间(模拟多少个时间点):"<<endl;
    cin>>TOT_TIME;
    ofstream fop;//输出流，输出电梯运行日志 
    fop.open("check.txt");
@@ -148,7 +208,7 @@ int main(){
    */ 
    for(int i=1;i<=TOT_TIME;i++){//一会儿要改 
 		run();
-		sleep(SLPT);
+		Sleep(SLPT);
 		system("cls");
    }
    now=7;
