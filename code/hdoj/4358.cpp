@@ -5,6 +5,9 @@ const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
 typedef long double ld;
+
+#pragma GCC optimize("Ofast,no-stack-protector")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 template<class T>inline void MAX(T &x, T y) {
     if (y>x)x=y;
 }
