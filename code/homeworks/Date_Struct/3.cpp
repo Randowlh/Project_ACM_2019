@@ -21,18 +21,20 @@ struct ps{//人
       weight=rand()%101+30; 
    }
 };
-struct node{//节点
-      ps date;
-      node* nxt;
-      node(ps a):date(a),nxt(NULL){}
-};
-struct que{//链表实现队列
+template<class T>
+class que{//链表实现队列
+   public:
+   struct node{
+	   T date;
+	   node *nxt;
+	   node(T a):date(a){}
+   };
    node* head,*tail;
    bool empty(){
       return head==NULL;
    }
-   void push(ps a){
-      node* t=new node(a);
+   void push(T a){
+      node* t= new node(a);
       if(empty()){
          head=t;
          tail=t;
@@ -45,41 +47,49 @@ struct que{//链表实现队列
    void pop(){
       if(empty())
          return;
-      node *t=head;
+      T *t=head;
       head=head->nxt;   
       delete t;
       if(head=NULL)
          tail=NULL;
-   }
-}q[MAXN];
-
+   	}
+	vector<T> quchu(int pos){//去除耐心已满 
+   		while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
+      		cnt[pos]++;
+      		q[pos].pop();
+   		}
+		vector<T> ans;
+   		if(q[pos].empty())
+      		return;
+   		node* pr=q[now].head->nxt,* nn=q[now].head;
+   		while(nn!=NULL){
+			if(nn->date.naixin<tim){
+				pr->nxt=nn->nxt;
+				node *d=nn;
+				nn=nn->nxt;
+				ans.push_back(d->date);
+				delete d;
+				cnt[pos]++;
+			}
+   		}
+   		return;
+	}
+	vector<T> get(){
+		vector<int> ans;
+		node* now=head;
+		while(now!=NULL){
+			ans.push_back(now->date);
+		}
+		return  ans;
+	}
+};
+que<ps> q[MAXN];//楼层队列
 int cnt[MAXN];
 int qz[MAXN];
 int tt=0;
-
-void quchu(int pos){//去除耐心已满 
-   while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
-      cnt[pos]++;
-      q[pos].pop();
-   }
-   if(q[pos].empty())
-      return;
-   node* pr=q[now].head->nxt,* nn=q[now].head;
-   while(nn!=NULL){
-      if(nn->date.naixin<tim){
-         pr->nxt=nn->nxt;
-         node *d=nn;
-         nn=nn->nxt;
-         delete d;
-         cnt[pos]++;
-      }
-   }
-   return;
-}
-
 struct Dianti{
 	int floor;//当前楼层
-	que ren;
+	que<ps> ren;
 	int zhuangtai;//-1下行,0停止,1上行 
 	Dianti(int floor=0,int zhuangtai=0):floor(floor),zhuangtai(zhuangtai){}//电梯默认停止 
 }dianti;
@@ -87,25 +97,25 @@ struct Dianti{
 bool up_botton[MAXN];
 bool down_botton[MAXN];
 
-void check_botton(){//检查每个楼层的上下按钮 
-	rep(i,1,n){
-		up_botton[i]=down_botton[i] = 0;
-		node*px = q[i].head; 
-		while(px!=NULL){
-			if((px->date).to<i) down_botton[i]=1;//有人要下楼 
-			if((px->date).to>i) up_botton[i] = 1;//有人要上楼
-			if(up_botton[i]&&down_botton[i]) break; 
-			px = px->nxt;
-		}
-	}
-}
+// void check_botton(){//检查每个楼层的上下按钮 
+// 	rep(i,1,n){
+// 		up_botton[i]=down_botton[i] = 0;
+// 		node *px = q[i].head; 
+// 		while(px!=NULL){
+// 			if((px->date).to<i) down_botton[i]=1;//有人要下楼 
+// 			if((px->date).to>i) up_botton[i] = 1;//有人要上楼
+// 			if(up_botton[i]&&down_botton[i]) break; 
+// 			px = px->nxt;
+// 		}
+// 	}
+// }
 
 void flsh(){	
 	rep(i,1,62) cout<<"■";
 	cout<<endl;
 	int buquan;//用于补全空格 
 	repb(i,n,1){
-		check_botton();//遍历每一层的队列来检查上下按钮 
+		// check_botton();//遍历每一层的队列来检查上下按钮 
 		repb(j,4,1){//每层包含地板高4 
 			cout<<"■";
 			if(j==4){
