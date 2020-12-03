@@ -1,55 +1,108 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-vector<int> mp[11000];
-int tim[11000];
-int salt[11000];
-void work(){
-    int n,m,q;
-    cin>>n>>m>>q;
-    int a,b;
-    for(int i=1;i<=n;i++){
-        mp[i].clear();
-        salt[i]=0;
-    }
-    for(int i=1;i<=m;i++){
-        cin>>a>>b;
-        mp[a].push_back(b);
-        mp[b].push_back(a);
-    }
-    for(int j=1;j<=q;j++){
-        for(int i=1;i<=n;i++)
-            tim[i]=-1;
-        queue<int> q;
-        int a,ti;
-        cin>>a>>ti;
-        q.push(a);
-        salt[a]++;
-        tim[a]=0;
-        while(!q.empty()){
-            int t=q.front();
-            q.pop();
-            if(tim[t]==ti)
-                continue;
-            for(int i=0;i<mp[t].size();i++){
-                int to=mp[t][i];
-                if(tim[to]!=-1)
-                    continue;
-                tim[to]=tim[t]+1;
-                salt[to]++;
-                q.push(to);
-            }
-        }
-    }
-    for(int i=1;i<n;i++){
-        cout<<salt[i]<<' ';
-    }
-    cout<<salt[n]<<endl;
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
 }
-int main(){
-    freopen("in.txt","r",stdin);
-    int t;
-    cin>>t;
-    for(int i=1;i<=t;i++){
-        work();
+template<class T>
+void wt(T x){
+   if(x < 0) putchar('-'), x = -x;
+   if(x >= 10) wt(x / 10);
+   putchar('0' + x % 10);
+}
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 5100000;
+bitset<310000> b;
+vector<int> primes;
+bool is_prime[10000100];
+void euler()
+{
+   is_prime[1] = 1;
+   for (int i = 2; i < maxn; i++)
+   {
+      if (!is_prime[i])
+      primes.push_back(i);
+      for (int j = 0; j < primes.size() && i * primes[j] < maxn; j++)
+      {
+         is_prime[i * primes[j]] = 1;
+         if ((i % primes[j]) == 0)
+            break;
+      }
+   }
+}
+struct node{
+    int n,m,num,ans;
+    bool operator<(node a)const{
+        return m<a.m;
     }
+    bool operator>(node a)const{
+        return num<a.num;
+    }
+}aa[300010];
+void work()
+{
+    int n;
+    rd(n);
+    for(int i=1;i<=n;i++)
+        rd(aa[i].n),rd(aa[i].m),aa[i].num=i;
+    sort(aa,aa+n);
+    int tt=0;
+    b[0]=1;
+    for(int i=1;i<=n;i++){
+        while(primes[tt]<=aa[i].m)b^=(b<<primes[tt]),tt++;
+        aa[i].ans=b[aa[i].n];
+    }
+    sort(aa,aa+n,greater<node>());
+    for(int i=1;i<=n;i++){
+        wt(aa[i].ans),pt('\n');
+    }
+}
+signed main()
+{
+    euler();
+   #ifndef ONLINE_JUDGE
+   freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+#endif
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
+{
+work();
+}
+return 0;
 }
