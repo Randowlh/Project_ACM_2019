@@ -179,8 +179,8 @@ class que{//链表实现队列
    bool empty(){
       return head==NULL;
    }
-   void push(T a){
-      node* t= new node(a);
+   void push(ps a){
+      node* t=new node(a);
       if(empty()){
          head=t;
          tail=t;
@@ -193,7 +193,7 @@ class que{//链表实现队列
    void pop(){
       if(empty())
          return;
-      T *t=head;
+      node *t=head;
       head=head->nxt;   
       delete t;
       if(head==NULL)
@@ -233,6 +233,27 @@ que<ps> q[MAXN];//楼层队列
 int cnt[MAXN];
 int qz[MAXN];
 int tt=0;
+
+void quchu(int pos){//去除耐心已满 
+   while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
+      cnt[pos]++;
+      q[pos].pop();
+   }
+   if(q[pos].empty())
+      return;
+   node* pr=q[now].head->nxt,* nn=q[now].head;
+   while(nn!=NULL){
+      if(nn->date.naixin<tim){
+         pr->nxt=nn->nxt;
+         node *d=nn;
+         nn=nn->nxt;
+         delete d;
+         cnt[pos]++;
+      }
+   }
+   return;
+}
+
 struct Dianti{
 	int mi;//当前离地高度
 	que<ps> ren;
