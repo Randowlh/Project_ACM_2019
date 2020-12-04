@@ -1,28 +1,54 @@
 #include<bits/stdc++.h>
-#include<fstream> 
 #include<windows.h>
 using namespace std;
 #define rep(i,a,b) for(int i=(a);i<=(b);i++)
 #define repb(i,a,b) for(int i=(a);i>=(b);i--)
+#define bug cout<<"here"<<endl;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
 typedef long long ll;
 const double huanjin = 0.618;
-const int MAXN = 21;//最高设置21层楼
+const int MAXN = 210000;//最高设置21层楼
 const int maxn = 510000;
 mt19937 rnd(514114);
 int tot=0;
-template<class T>
-class fhq_treap
-{
+template<typename T>
+class vect{
 	public:
+		T* date;
+	int lim;
+	int sz;
+	vect(){date=new T[1],lim=1,sz=0;}
+	~vect(){delete[] date;}
+	T operator[](int i){return date[i];}
+	int size(){return sz;}
+	void push(T a){
+		if(sz+1>lim){
+			T *tmp=date;
+			lim<<=1;
+			date=new T[lim];
+			for(int i=0;i<sz;i++)
+				date[i]=tmp[i];
+			delete [] tmp;
+		}
+		date[sz]=a;
+		sz++;
+	}
+	void pop(){
+		if(sz>0)
+			sz--;
+	}
+};
+struct fhq_treap
+{
 	struct node
 	{
 		int l, r;
-		T val;
-		int key;
+		int val, key;
 		int size;
 	} fhq[maxn];
 	int cnt, root;
-	inline int newnode(T val)
+	inline int newnode(int val)
 	{
 		fhq[++cnt].val = val;
 		fhq[cnt].key = rnd();
@@ -32,9 +58,9 @@ class fhq_treap
 	}
 	inline void pushup(int now)
 	{
-		fhq[now].size = fhq[fhq[now].l].size + fhq[fhq[now].r].size + 1;
+	fhq[now].size = fhq[fhq[now].l].size + fhq[fhq[now].r].size + 1;
 	}
-	void split(int now, T val, int &x, int &y)
+	void split(int now, int val, int &x, int &y)
 	{
 		if (!now)
 		{
@@ -70,13 +96,13 @@ class fhq_treap
 			return y;
 		}
 	}
-	inline void insert(T val)
+	inline void insert(int val)
 	{
 		int x, y;
 		split(root, val, x, y);
 		root = merge(merge(x, newnode(val)), y);
 	}
-	inline void del(T val)
+	inline void del(int val)
 	{
 		int x, y, z;
 		split(root, val - 1, x, y);
@@ -84,7 +110,7 @@ class fhq_treap
 		y = merge(fhq[y].l, fhq[y].r);
 		root = merge(merge(x, y), z);
 	}
-	inline int getrk(T num)
+	inline int getrk(int num)
 	{
 		int x, y;
 		split(root, num - 1, x, y);
@@ -92,7 +118,7 @@ class fhq_treap
 		root = merge(x, y);
 		return ans;
 	}
-	inline T getnum(int rank)
+	inline int getnum(int rank)
 	{
 		int now=root;
 		while(now)
@@ -109,10 +135,9 @@ class fhq_treap
 		}
 		return fhq[now].val;
 	}
-	inline T pre(T val)
+	inline int pre(int val)
 	{
-		int x, y;
-		T	ans;
+		int x, y, ans;
 		split(root, val - 1, x, y);
 		int t = x;
 		while (fhq[t].r)
@@ -121,10 +146,9 @@ class fhq_treap
 		root = merge(x, y);
 		return ans;
 	}
-	inline T aft(T val)
+	inline int aft(int val)
 	{
-		int x, y;
-		T  ans;
+		int x, y, ans;
 		split(root, val, x, y);
 		int t = y;
 		while (fhq[t].l)
@@ -133,36 +157,36 @@ class fhq_treap
 		root = merge(x, y);
 		return ans;
 	}
-	inline bool count(T val){
+	inline bool count(int val){
 		int x,y;
 		split(root,val,x,y);
 		int t=x;
 		while(fhq[t].r)
 			t=fhq[t].r;
-		return val==fhq[t].val
+		return fhq[t].val==val;
 	}
-};
+} tree;
 int n,m;
 int now;
 int tim;
-int SLPT=300,TOT_TIME;
+int SLPT=10,TOT_TIME;
 struct ps{//人
    int weight,naixin;
    int from,to;//从哪里到哪里
    ll  num;
-   ps(int frm){//乘客生成
-	  num=++tot;
-      from = frm;
-      to =  rand()%n+1;
-      while(to==from) to = rand()%n+1;
-      naixin=rand()%11+15+tim;//耐心值要加上当前时间,方便计算
-      weight=rand()%101+30; 
-   	}
 	bool operator==(ps a){
 		return num==a.num;
 	}
+	bool operator<=(ps a)const{
+		return num<=a.num;
+	}
+	friend ostream& operator<<(ostream &out,ps a){
+		out<<a.num<<": "<<a.from<<"->"<<a.to<<endl;
+		return out;
+	}
 };
-fhq_treap<ps> s;
+
+fhq_treap s,ins;
 template<class T>
 class que{//链表实现队列
    public:
@@ -172,15 +196,18 @@ class que{//链表实现队列
 	   node(T a):date(a){}
    };
    node* head,*tail;
+   void init(){
+	   head=tail=NULL;
+   }
    T front(){
-	   if(head!=NULL)
-			return  head->date;
+		return  head->date;
    }
    bool empty(){
       return head==NULL;
    }
-   void push(ps a){
+   void push(T a){
       node* t=new node(a);
+	  t->nxt=NULL;
       if(empty()){
          head=t;
          tail=t;
@@ -200,31 +227,26 @@ class que{//链表实现队列
          tail=NULL;
    	}
 	vector<T> quchu(){//去除耐心已满 
-   		while(head!=NULL&&q[pos].head->date.naixin<tim){ 
-      		cnt[pos]++;
-      		pop();
-   		}
-		vector<T> ans;
-   		if(q[pos].empty())
-      		return;
-   		node* pr=q[now].head->nxt,* nn=q[now].head;
-   		while(nn!=NULL){
-			if(nn->date.naixin<tim){
-				pr->nxt=nn->nxt;
-				node *d=nn;
-				nn=nn->nxt;
-				ans.push_back(d->date);
-				delete d;
-				cnt[pos]++;
-			}
-   		}
-   		return;
+		vector<T> ans,tmp;
+		node* now=head;
+		while(now!=NULL){
+			if(now->date.naixin<tim||!s.count(now->date.num))
+				ans.push_back(now->date);
+			else tmp.push_back(now->date);
+			now=now->nxt;
+		}
+		while(!empty())
+			pop();
+		for(int i=0;i<tmp.size();i++)
+			push(tmp[i]);
+		return ans;
 	}
 	vector<T> get(){
 		vector<T> ans;
 		node* now=head;
 		while(now!=NULL){
 			ans.push_back(now->date);
+			now=now->nxt;
 		}
 		return  ans;
 	}
@@ -233,167 +255,256 @@ que<ps> q[MAXN];//楼层队列
 int cnt[MAXN];
 int qz[MAXN];
 int tt=0;
-
-void quchu(int pos){//去除耐心已满 
-   while(q[pos].head!=NULL&&q[pos].head->date.naixin<tim){ 
-      cnt[pos]++;
-      q[pos].pop();
-   }
-   if(q[pos].empty())
-      return;
-   node* pr=q[now].head->nxt,* nn=q[now].head;
-   while(nn!=NULL){
-      if(nn->date.naixin<tim){
-         pr->nxt=nn->nxt;
-         node *d=nn;
-         nn=nn->nxt;
-         delete d;
-         cnt[pos]++;
-      }
-   }
-   return;
-}
-
 struct Dianti{
 	int mi;//当前离地高度
 	que<ps> ren;
 	int to;
+	int zl;
+	int hezai;
 	int zhuangtai;//-1下行,0停止,1上行 
+	void tichu(int t){
+		vector<ps> v;
+		while(!ren.empty()){
+			if(ren.front().to!=t)
+				v.push_back(ren.front());
+			else zl-=ren.front().weight;
+			ren.pop();
+		}
+		for(int i=0;i<v.size();i++){
+			ren.push(v[i]);
+		}
+	}
+	inline int lc(){
+		return (mi-1)/4+1;
+	}
 	Dianti(int floor=0,int zhuangtai=0):mi(floor*3-3),zhuangtai(zhuangtai){}//电梯默认停止 
 }dianti;
-que<pair<int,int>> zt;
+que<pair<int,int>> zt,inzt;
 bool up_botton[MAXN];
 bool down_botton[MAXN];
-// void check_botton(){//检查每个楼层的上下按钮 
-// 	rep(i,1,n){
-// 		up_botton[i]=down_botton[i] = 0;
-// 		node *px = q[i].head; 
-// 		while(px!=NULL){
-// 			if((px->date).to<i) down_botton[i]=1;//有人要下楼 
-// 			if((px->date).to>i) up_botton[i] = 1;//有人要上楼
-// 			if(up_botton[i]&&down_botton[i]) break; 
-// 			px = px->nxt;
-// 		}
-// 	}
-// }
-
-void flsh(){	
-// 	rep(i,1,62) cout<<"■";
-// 	cout<<endl;
-// 	int buquan;//用于补全空格 
-// 	repb(i,n,1){
-// 		// check_botton();//遍历每一层的队列来检查上下按钮 
-// 		repb(j,4,1){//每层包含地板高4 
-// 			cout<<"■";
-// 			if(j==4){
-// 				buquan = 40;
-// 				if(dianti.floor==i){
-// 					if(dianti.zhuangtai==-1){cout<<"电梯下行",buquan=40-8;}
-// 					else if(dianti.zhuangtai==0){cout<<"电梯停止",buquan=40-8;}
-// 					else if(dianti.zhuangtai==1){cout<<"电梯上行",buquan=40-8;}
-// 				}
-// 				rep(i,1,buquan) cout<<" ";
-// 			}
-// 			if(j==3){
-// 				buquan = 40;
-// 				rep(i,1,buquan) cout<<' ';
-// 			}
-// 			else if(j==2){
-// 				buquan = 40;
-// 				if(dianti.floor==i){
-// 					int cnt = 0;
-// 					node *px = (dianti.ren).head;
-// 					while(px!=NULL&&cnt<10){//一个人占用4列,//电梯20*2列最多显示10个人 
-// 						int to = (px->date).to;
-// 						cout<<"F";
-// 						if(to/10) cout<<to<<' ';
-// 						else cout<<' '<<to<<' ';
-// 						cnt++;
-// 						px = px->nxt; 
-// 					}
-// 					buquan = 40-cnt*4;//补全空格  
-// 				}
-// 				rep(i,1,buquan) cout<<" ";
-// 			}
-// 			else if(j==1){
-// 				//印电梯 
-// 				if(dianti.floor==i||dianti.floor+1==i){
-// 					rep(i,1,20) cout<<"==";
-// 				}
-// 				else{
-// 					rep(i,1,20) cout<<"  ";
-// 				}
-// 			} 
-// 			//楼层队列部分
-// 			if(j==4){
-// 				if(up_botton[i]){cout<<"▲";buquan = 80-2;}
-// 				else {cout<<"△";buquan = 80-2;}
-// 				rep(i,1,buquan) cout<<' ';
-// 			} 
-// 			else if(j==3){
-// 				if(up_botton[i]){cout<<"▼";buquan = 80-2;}
-// 				else {cout<<"▽";buquan = 80-2;}
-// 				rep(i,1,buquan) cout<<' ';
-// 			}
-// 			else if(j==2){
-// 				int cnt = 0;
-// 				node *px = q[i].head;
-// 				while(px!=NULL&&cnt<20){//一个人占用4列,//电梯40*2列最多显示20个人 
-// 					int to = (px->date).to;
-// 					cout<<"F";
-// 					if(to/10) cout<<to<<' ';
-// 					else cout<<' '<<to<<' ';
-// 					cnt++;
-// 					px = px->nxt; 
-// 				}
-// 				buquan = 80-cnt*4;//补全空格  
-// 				rep(i,1,buquan) cout<<' ';
-// 			}
-// 			else if(j==1){
-// 				rep(i,1,40) cout<<"■";
-// 			} 
-// 			cout<<"■";
-// 			cout<<endl;
-// 		}
-// 	}
-}//已经基本完成了这部分 
-void work(){
-	while((double)clock()/CLOCKS_PER_SEC<TOT_TIME){
-		ps a(rand()%n+1);
-		q[a.from].push(a);
-		zt.push(make_pair(a.to,a.num));
-		flsh();
-		if(dianti.zhuangtai==0){
-			while(!zt.empty()){
-				pair<int,int> t=zt.front();
-				if(s.count(t.second)){
-					dianti.to=t.first;
-					dianti.zhuangtai=((dianti.mi/3)<t.first);
-					if(!dianti.zhuangtai)
-						dianti.zhuangtai=-1;
-				}
+vector<ps> vec;
+void flsh(){
+	// for(int i=1;i<=n;i++)
+	// 	q[i].quchu();	
+	rep(i,1,62) cout<<"■";
+	cout<<endl;
+	int buquan;//用于补全空格 
+	int siz;
+	repb(i,n,1){
+		// check_botton();//遍历每一层的队列来检查上下按钮 
+		repb(j,4,1){//每层包含地板高4
+			cout<<"■";
+			int tmp_mi = (i-1)*4+j;//当前处理行数代表的米数
+			if(tmp_mi==dianti.mi+3){
+				buquan = 40;
+				if(dianti.zhuangtai==-1){cout<<"电梯下行",buquan=40-8;}
+				else if(dianti.zhuangtai==0){cout<<"电梯停止",buquan=40-8;}
+				else if(dianti.zhuangtai==1){cout<<"电梯上行",buquan=40-8;}
+				rep(i,1,buquan) cout<<" ";
 			}
-		}else if(dianti.zhuangtai==1){
-			
-		}else{
-
+			else if(tmp_mi==dianti.mi+2){
+				buquan = 40;
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(tmp_mi==dianti.mi+1){
+				vec = dianti.ren.get();
+				siz = vec.size(); 
+				siz = min(10,siz);
+				rep(k,0,siz-1){
+					int to = vec[k].to;
+					cout<<'F';
+					if(to/10) cout<<to<<' ';
+					else cout<<to<<' '<<' ';
+				}
+				buquan = 40-siz*4;//补全空格 
+				rep(i,1,buquan) cout<<" ";
+			}
+			else if(tmp_mi==dianti.mi||tmp_mi==dianti.mi+4){
+				//印电梯的地板
+				rep(i,1,20) cout<<"==";
+			} 
+			else rep(i,1,20) cout<<"  ";
+			//楼层队列部分
+			vec = (q[i]).get();
+			siz = vec.size();
+			siz = min(siz,20);
+			up_botton[i] = down_botton[i] = 0;
+			rep(k,0,siz-1){
+				if(vec[k].to>i) up_botton[i] = 1;
+				if(vec[k].to<i) down_botton[i] = 1;
+				if(up_botton[i]&&down_botton[i]) break;
+			}
+			if(j==4){
+				if(up_botton[i]){cout<<"▲";buquan = 80-2;}
+				else {cout<<"△";buquan = 80-2;}
+				rep(i,1,buquan) cout<<' ';
+			} 
+			else if(j==3){
+				if(down_botton[i]){cout<<"▼";buquan = 80-2;}
+				else {cout<<"▽";buquan = 80-2;}
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(j==2){
+				rep(i,0,siz-1){
+					int to = vec[i].to;
+					cout<<"F";
+					if(to/10) cout<<to<<' ';
+					else cout<<to<<' '<<' ';
+				}
+				buquan = 80-siz*4;//补全空格  
+				rep(i,1,buquan) cout<<' ';
+			}
+			else if(j==1){
+				rep(i,1,40) cout<<"■";
+			} 
+			cout<<"■";
+			cout<<endl;
 		}
 	}
 }
-int main(){
-	n = 5;
+void test(){//测试函数 
+	n = 10;
+	int tmp;
+	rep(i,1,20){
+		tmp=rand()%n+1;
+		q[tmp].push(ps());
+	}
+	dianti.mi = rand()%(n*4-4)+1;
+	cout<<"diantimi"<<dianti.mi<<endl;
+	rep(i,1,7){
+		tmp=rand()%n+1;
+		(dianti.ren).push(ps());
+	}
 	flsh();
 	system("pause");
+}
+ps gen(){
+	ps a;
+	a.num=++tot;
+    a.from = rand()%n+1;;
+    a.to =  rand()%n+1;
+    while(a.to==a.from) a.to = rand()%n+1;
+    a.naixin=rand()%11+15+tim;//耐心值要加上当前时间,方便计算
+    a.weight=rand()%101+30; 
+	return a;
+}
+void work(){
+	//(double)clock()/CLOCKS_PER_SEC<TOT_TIME
+	dianti.mi=1;
+	while(1){
+		tim++;
+		ps a;
+		a=gen();
+		q[a.from].push(a);
+		s.insert(a.num);
+		zt.push(make_pair((ll)a.to,a.num));
+		// system("cls");
+		 flsh();
+			cout<<"dianti.mi="<<dianti.mi<<' '<<dianti.to<<endl;;
+		if(dianti.zhuangtai==0){
+			dianti.tichu(dianti.lc());
+			vec=q[dianti.lc()].get();
+			for(int i=0;i<vec.size();i++){
+				if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
+						s.del(vec[i].num);
+						dianti.ren.push(vec[i]);
+						bug;
+						dianti.zl+=vec[i].weight;
+						MAX(dianti.to,vec[i].to);
+				}
+			}
+			if(!dianti.ren.empty()){
+				dianti.zhuangtai=1;
+				break;
+			}
+			for(int i=0;i<vec.size();i++){
+				if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
+						s.del(vec[i].num);
+						dianti.ren.push(vec[i]);
+						bug;
+						dianti.zl+=vec[i].weight;
+						MAX(dianti.to,vec[i].to);
+				}
+			}
+			if(!dianti.ren.empty()){
+				dianti.zhuangtai=-1;
+				break;
+			}
+			while(!zt.empty()){
+				pair<int,int> t=zt.front();
+				zt.pop();
+				if(s.count(t.second)){
+					dianti.to=t.first;
+					dianti.zhuangtai=(dianti.lc()<t.first);
+					if(!dianti.zhuangtai)
+						dianti.zhuangtai=-1;
+					break;
+				}
+			}
+		}else if(dianti.zhuangtai==1){
+			if(!((dianti.mi-1)%4)){
+				bug;
+				if(dianti.lc()==dianti.to){
+					dianti.zhuangtai=0;
+					continue;
+				}
+				dianti.tichu(dianti.lc());
+				vec=q[dianti.lc()].get();
+				for(int i=0;i<vec.size();i++){
+					if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
+						s.del(vec[i].num);
+						dianti.ren.push(vec[i]);
+						bug;
+						dianti.zl+=vec[i].weight;
+						MAX(dianti.to,vec[i].to);
+					}
+				}
+	  			}
+			dianti.mi++;
+		}else{
+			if(!((dianti.mi-1)%4)){
+				bug;
+				if(dianti.lc()==dianti.to){
+					dianti.zhuangtai=0;
+					continue;
+				}
+				dianti.tichu(dianti.lc());
+				vec=q[dianti.lc()].get();
+				for(int i=0;i<vec.size();i++){
+					if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
+						s.del(vec[i].num);
+						dianti.ren.push(vec[i]);
+						bug;
+						dianti.zl+=vec[i].weight;
+						MIN(dianti.to,vec[i].to);
+					}
+				}
+			}
+			dianti.mi--;
+		}
+	
+	}
+}
+int main(){
+	freopen("out.txt","w",stdout);
+	n = 4;
 	system("chcp 65001");
+	// flsh();
+	for(int i=1;i<=n;i++)
+		q[i].init();
 	srand(time(NULL));
-	cin>>n;
-	cout<<"请输入每次的间隔时间,单位为毫秒";
-	cin>>SLPT;//sleep time,刷新间隔时间
-	cout<<"请输入希望电梯运行的时间(模拟多少个时间点):"<<endl;
-	cin>>TOT_TIME;
-	ofstream fop;//输出流，输出电梯运行日志 
-	fop.open("check.txt");
-		
+	SLPT=100;
+	TOT_TIME=1;
+	tot=0;
+	// cin>>n;
+	// cout<<"请输入每次的间隔时间,单位为毫秒";
+	// cin>>SLPT;//sleep time,刷新间隔时间
+	// cout<<"请输入希望电梯运行的时间(模拟多少个时间点):"<<endl;
+	// cin>>TOT_TIME;
+	// ofstream fop;//输出流，输出电梯运行日志 
+	// fop.open("check.txt");
+	// cout<<"dadasdsa"<<endl;
+	work();
 
 	system("cls");
 	flsh();
