@@ -261,7 +261,7 @@ void work()
         }else if(opt==3){
             int t=get(1,1,n,a);
             update(1,1,n,a,t,b);
-        }else if(opt==4){2
+        }else if(opt==4){
             rd(c);
             wt(getpr(1,1,n,a,b,c)),pt('\n');
         }else if(opt==5){
