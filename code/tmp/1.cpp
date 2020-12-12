@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -32,87 +35,64 @@ void wt(T x){
 #define int long long
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
 const ll mod = (0 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const ll llinf = 4223372036854775807;
 const int maxm= 1;
-const int maxn = 150000;
-int ans[maxn],date[maxn],bsz,now;
-int cnt[(int)1e6+100];
-struct qr{
-    int l,r,t,num;
-    inline bool operator<(qr a){
-        if(l/bsz==a.l/bsz)
-            if(r/bsz==a.r/bsz)
-                return t<a.t;
-            else return r<a.r;
-        else return l<a.l;
+const int maxn = 510000;
+struct rcd{
+    int l,r,num;
+    bool operator<(rcd a){
+        int mid=(l+r)>>1;
+        int dis=min(mid-l,r-mid);
+        int amid=(a.l+a.r)>>1;
+        int adis=min(amid-a.l,r-amid);
+        if(dis==adis)
+            return l<a.l;
+        else return dis<adis;
     }
-}q[maxn];
-int tailq,tailc;
-pair<int,int> cg[maxn];
-inline void add(int x){
-    if(!cnt[x])
-        now++;
-    cnt[x]++;
+    rcd(int a,int b,int c):l(a),r(b),num(c){}
+};
+int cz[100100];
+set<int> s;
+map<int,int> M;
+yx_queue<rcd> q;
+int cnt=0;
+int n,m,tot;
+int getpos(int l,int r){
+    int ans=(l+r)>>1;
+    MAX(ans,1LL);
+    MIN(ans,n);
 }
-inline void sub(int x){
-    cnt[x]--;
-    if(!cnt[x])
-        now--;
-}
-inline void modf(int i,int t){
-    if(cg[t].first>=q[i].l&&cg[t].first<=q[i].r){
-        sub(date[cg[t].first]);
-        add(cg[t].second);
-    }
-    swap(cg[t].second,date[cg[t].first]);
+bool hf(rcd a){
+    if(a.r<=0||a.l>n)
+        return false;
+
 }
 void work()
 {
-    int n,m;
-    cin>>n>>m;
-    for(int i=1;i<=n;i++)
-        cin>>date[i];
-    string opt;
-    int l,r;
-    for(int i=1;i<=m;i++){
-        cin>>opt>>l>>r;
-        if(opt=="Ask"){
-            tailq++;
-            q[tailq].l=l;
-            q[tailq].r=r;
-            q[tailq].t=tailc;q[tailq].num=tailq;
-        }else{
-            tailc++;
-            cg[tailc].first=l,cg[tailc].second=r;
+    while(scanf("%lld%lld",&n,&m)!=EOF){
+        s.insert(-llinf);
+        s.insert(llinf);
+        int opt;
+        for(int i=1;i<=m;i++){
+            rd(opt);
+            if(opt==1){
+                if(!cnt){
+                    wt(1),pt('\n');
+                    s.insert(1);
+                    q.push(rcd(1,llinf,++tot));
+                    M[1]=tot;
+                }
+
+            }else{
+
+            }
         }
-    }
-    bsz=pow(n,0.66666);
-    sort(q+1,q+tailq+1);
-    l=1,r=0;
-    int tim=0;
-    for(int i=1;i<=tailq;i++){
-        while(l>q[i].l)
-            add(date[--l]);
-        while(r<q[i].r)
-            add(date[++r]);
-        while(l<q[i].l)
-            sub(date[l++]);
-        while(r>q[i].r)
-            sub(date[r--]);
-        while(tim<q[i].t)
-            modf(i,++tim);
-        while(tim>q[i].t)
-            modf(i,tim--);
-        ans[q[i].num]=now;
-    }
-    for(int i=1;i<=tailq;i++){
-        cout<<ans[i]<<endl;
     }
 }
 signed main()
@@ -120,9 +100,9 @@ signed main()
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
- #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+#endif
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
 //cin>>t;
 while (t--)
