@@ -46,7 +46,12 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++){
+       cout<<1<<' ';
+    }
+    cout<<endl;
 }
 signed main()
 {
@@ -57,7 +62,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

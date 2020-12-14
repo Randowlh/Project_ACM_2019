@@ -20,6 +20,22 @@ class vect{
 	int sz;
 	vect(){date=new T[1],lim=1,sz=0;}
 	~vect(){delete[] date;}
+	vect operator=(const vect a){
+		delete [] date;
+		lim=a.lim;
+		sz=a.sz;
+		date=new T[lim];
+		for(int i=0;i<a.sz;i++)
+			date[i]=a.date[i];
+		return *this;
+	}
+	vect(const vect<T>& a){
+		lim=a.lim;
+		sz=a.sz;
+		date=new T[lim];
+		for(int i=0;i<a.sz;i++)
+			date[i]=a.date[i];
+	}
 	T operator[](int i){return date[i];}
 	int size(){return sz;}
 	void push(T a){
@@ -38,6 +54,7 @@ class vect{
 		if(sz>0)
 			sz--;
 	}
+	
 };
 struct fhq_treap
 {
@@ -185,7 +202,6 @@ struct ps{//人
 		return out;
 	}
 };
-
 fhq_treap s,ins;
 template<class T>
 class que{//链表实现队列
@@ -226,13 +242,26 @@ class que{//链表实现队列
       if(head==NULL)
          tail=NULL;
    	}
-	vector<T> quchu(){//去除耐心已满 
-		vector<T> ans,tmp;
+	void tichu(int num){
+		vect<T> tmp;
+		node * now =head;
+		while(now!=NULL){
+			if(now->date.num!=num)
+				tmp.push(now->date);
+			now=now->nxt;
+		}
+		while(!empty())
+			pop();
+		for(int i=0;i<tmp.size();i++)
+			push(tmp[i]);
+	}
+	vect<T> quchu(){//去除耐心已满 
+		vect<T> ans,tmp;
 		node* now=head;
 		while(now!=NULL){
 			if(now->date.naixin<tim||!s.count(now->date.num))
-				ans.push_back(now->date);
-			else tmp.push_back(now->date);
+				ans.push(now->date);
+			else tmp.push(now->date);
 			now=now->nxt;
 		}
 		while(!empty())
@@ -241,11 +270,11 @@ class que{//链表实现队列
 			push(tmp[i]);
 		return ans;
 	}
-	vector<T> get(){
-		vector<T> ans;
+	vect<T> get(){
+		vect<T> ans;
 		node* now=head;
 		while(now!=NULL){
-			ans.push_back(now->date);
+			ans.push(now->date);
 			now=now->nxt;
 		}
 		return  ans;
@@ -282,7 +311,7 @@ struct Dianti{
 que<pair<int,int>> zt,inzt;
 bool up_botton[MAXN];
 bool down_botton[MAXN];
-vector<ps> vec;
+vect<ps> vec;
 void flsh(){
 	// for(int i=1;i<=n;i++)
 	// 	q[i].quchu();	
@@ -325,7 +354,7 @@ void flsh(){
 			} 
 			else rep(i,1,20) cout<<"  ";
 			//楼层队列部分
-			vec = (q[i]).get();
+			vec =q[i].get();
 			siz = vec.size();
 			siz = min(siz,20);
 			up_botton[i] = down_botton[i] = 0;
@@ -392,101 +421,72 @@ void work(){
 	//(double)clock()/CLOCKS_PER_SEC<TOT_TIME
 	dianti.mi=1;
 	while(1){
+		system("cls");
 		tim++;
 		ps a;
 		a=gen();
 		q[a.from].push(a);
-		s.insert(a.num);
-		zt.push(make_pair((ll)a.to,a.num));
-		// system("cls");
-		 flsh();
-			cout<<"dianti.mi="<<dianti.mi<<' '<<dianti.to<<endl;;
+		flsh();
 		if(dianti.zhuangtai==0){
-			dianti.tichu(dianti.lc());
-			vec=q[dianti.lc()].get();
-			for(int i=0;i<vec.size();i++){
-				if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
+			vect<ps> v;
+			v=dianti.ren.get();
+			if(v.size()==0){
+				vect<pair<int,int>> vv;
+				for(int i=1;i<=n;i++){
+					vec=q[i].get();
+					for(int j=0;j<vec.size();j++)
+						vv.push(make_pair(vec[j].num,vec[i].to));
 				}
-			}
-			if(!dianti.ren.empty()){
-				dianti.zhuangtai=1;
-				break;
-			}
-			for(int i=0;i<vec.size();i++){
-				if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
-				}
-			}
-			if(!dianti.ren.empty()){
-				dianti.zhuangtai=-1;
-				break;
-			}
-			while(!zt.empty()){
-				pair<int,int> t=zt.front();
-				zt.pop();
-				if(s.count(t.second)){
-					dianti.to=t.first;
-					dianti.zhuangtai=(dianti.lc()<t.first);
-					if(!dianti.zhuangtai)
-						dianti.zhuangtai=-1;
-					break;
-				}
-			}
-		}else if(dianti.zhuangtai==1){
-			if(!((dianti.mi-1)%4)){
-				bug;
-				if(dianti.lc()==dianti.to){
-					dianti.zhuangtai=0;
+				if(vv.size()==0)
 					continue;
-				}
-				dianti.tichu(dianti.lc());
-				vec=q[dianti.lc()].get();
-				for(int i=0;i<vec.size();i++){
-					if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
+				sort(vv.date,vv.date+vv.size());
+				dianti.to=vv[0].second;
+				if(dianti.to<dianti.lc()){
+					dianti.zhuangtai=-1;
+				}else dianti.zhuangtai=1;
+			}else if(dianti.zhuangtai==1){
+				if((dianti.mi-1)%4==0){
+					dianti.tichu(dianti.lc());
+					q[dianti.lc()].quchu();
+					vec=q[dianti.lc()].get();
+					for(int j=0;j<n;j++){
+						if(vec[j].to>vec[j].from&&dianti.zl+vec[j].weight<=dianti.hezai){
+							dianti.ren.push(vec[j]);
+							q[dianti.lc()].tichu(vec[j].num);
+							MAX(dianti.to,vec[j].to);
+						}
+					}
+					if(dianti.to==dianti.lc()){
+						dianti.zhuangtai=0;
+						continue;
 					}
 				}
-	  			}
-			dianti.mi++;
-		}else{
-			if(!((dianti.mi-1)%4)){
-				bug;
-				if(dianti.lc()==dianti.to){
-					dianti.zhuangtai=0;
-					continue;
-				}
-				dianti.tichu(dianti.lc());
-				vec=q[dianti.lc()].get();
-				for(int i=0;i<vec.size();i++){
-					if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MIN(dianti.to,vec[i].to);
+				dianti.mi++;
+			}else{
+				if((dianti.mi-1)%4==0){
+					dianti.tichu(dianti.lc());
+					q[dianti.lc()].quchu();
+					vec=q[dianti.lc()].get();
+					for(int j=0;j<n;j++){
+						if(vec[j].to<vec[j].from&&dianti.zl+vec[j].weight<=dianti.hezai){
+							dianti.ren.push(vec[j]);
+							q[dianti.lc()].tichu(vec[j].num);
+							MIN(dianti.to,vec[j].to);
+						}
+					}
+					if(dianti.to==dianti.lc()){
+						dianti.zhuangtai=0;
+						continue;
 					}
 				}
+				dianti.mi++;
 			}
-			dianti.mi--;
+				
 		}
-	
 	}
 }
 int main(){
-	freopen("out.txt","w",stdout);
+	// freopen("out.txt","w",stdout);
 	n = 4;
 	system("chcp 65001");
 	// flsh();
@@ -505,7 +505,6 @@ int main(){
 	// fop.open("check.txt");
 	// cout<<"dadasdsa"<<endl;
 	work();
-
 	system("cls");
 	flsh();
 	system("pause");
