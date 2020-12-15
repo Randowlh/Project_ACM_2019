@@ -44,14 +44,21 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int date[1100]; 
 void work()
 {
     int n;
     cin>>n;
+    set<int> s;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        if(s.count(date[i])){
+            cout<<"YES"<<endl;
+            return;
+        }else s.insert(date[i]);
     }
-    cout<<endl;
+    cout<<"NO"<<endl;
 }
 signed main()
 {
@@ -59,8 +66,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)

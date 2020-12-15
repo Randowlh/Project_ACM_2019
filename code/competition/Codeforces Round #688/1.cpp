@@ -46,12 +46,19 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    cin>>n;
-    for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+    int n,m;
+    cin>>n>>m;
+    set<int> M;
+    int ans=0;
+    int tmp;
+    for(int i=1;i<=n;i++)    
+        cin>>tmp,M.insert(tmp);
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        if(M.count(tmp))
+            ans++;
     }
-    cout<<endl;
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -59,8 +66,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)

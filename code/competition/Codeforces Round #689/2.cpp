@@ -44,14 +44,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+char mp[510][510];
+int dp[510][510];
+  int n,m;
+bool ck(int x,int y){
+    if(x<=0||x>n)
+        return  false;
+    if(y<=0||y>m)
+        return false;
+    return mp[x][y]=='*';
+}
+int dfs(int i,int j){
+    if(!ck(i,j))
+        return 0;
+    if(dp[i][j])
+        return dp[i][j];
+    int aa=llinf;
+    for(int k=-1;k<=1;k++){
+        MIN(aa,dfs(i+1,j+k));
+    }
+    dp[i][j]=aa+1;
+    return dp[i][j];
+}
 void work()
 {
-    int n;
-    cin>>n;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++){
+            dp[i][j]=0;
+            cin>>mp[i][j];
+        }
+    
+    int ans=0;
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        for(int j=1;j<=m;j++){
+            ans+=dfs(i,j);
+        }
     }
-    cout<<endl;
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -59,8 +89,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)

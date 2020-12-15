@@ -44,14 +44,28 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int mp[110][110];
 void work()
 {
-    int n;
-    cin>>n;
+    int n,m;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++){
+            cin>>mp[i][j];
+            if((i+j)&1){
+                if(mp[i][j]%2==0){
+                    mp[i][j]++;
+                }
+            }else if(mp[i][j]&1){
+                mp[i][j]++;
+            }
+        }
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        for(int j=1;j<=m;j++){
+            cout<<mp[i][j]<<' ';
+        }
+        cout<<endl;
     }
-    cout<<endl;
 }
 signed main()
 {

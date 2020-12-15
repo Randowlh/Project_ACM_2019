@@ -44,17 +44,39 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int ex[20000];
 void work()
 {
     int n;
     cin>>n;
-    for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+    if(n%2){
+        cout<<-1<<endl;
+        return;
     }
+    vector<int> ans;
+    while(n){
+        int i;
+        for( i=1;i<=62;i++){
+            if(n<ex[i]){
+                i--;
+                break;
+            }
+        }
+        n-=ex[i];
+        ans.push_back(1);
+        for(int j=1;j<i;j++)
+            ans.push_back(0);
+    }
+    cout<<ans.size()<<endl;
+    for(int i=0;i<ans.size();i++)
+        cout<<ans[i]<<' ';
     cout<<endl;
 }
 signed main()
 {
+    ex[1]=2;
+    for(int i=2;i<=62;i++)
+        ex[i]=(ex[i-1]<<1)+2;
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);

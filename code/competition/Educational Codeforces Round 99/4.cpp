@@ -46,12 +46,30 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    cin>>n;
+    int n,x;
+    cin>>n>>x;
+    int tmp;
+    vector<int> v;
+    v.push_back(0);
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        cin>>tmp;
+        v.push_back(tmp);
     }
-    cout<<endl;
+    int ans=0;
+    for(int i=1;i<n;i++){
+        if(v[i]<=v[i+1])
+            continue;
+        for(int j=1;j<=i;j++){
+            if(v[j]>x){
+                swap(v[j],x);
+                ans++;
+            }
+        }
+    }
+    for(int i=1;i<n;i++)
+        if(v[i]>v[i+1])
+            ans=-1;   
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -59,7 +77,7 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
+//std::ios::sync_with_stdio(false);199
 //cin.tie(NULL);
 int t = 1;
 cin>>t;

@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 #pragma optimize(2)
-#pragma GCC optimize("Ofast,no-stack-protector")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -44,85 +44,56 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-struct node{
-   int val,num;
-   inline bool operator<(const node a)const{
-      if(val==a.val)
-         return num>a.num;
-      else return val>a.val;
-   }
+struct rcd{
+    int l,r,num;
+    bool operator<(rcd a){
+        int mid=(l+r)>>1;
+        int dis=min(mid-l,r-mid);
+        int amid=(a.l+a.r)>>1;
+        int adis=min(amid-a.l,r-amid);
+        if(dis==adis)
+            return l<a.l;
+        else return dis<adis;
+    }
+    rcd(int a,int b,int c):l(a),r(b),num(c){}
 };
-int n,a,b;
-int date[310000];
-node qr[310000];
-int seg[310000<<2];
-int lazy[310000<<2]; 
-inline void pushup(int pos){
-   seg[pos]=min(seg[lson(pos)],seg[rson(pos)]);
+int cz[100100];
+set<int> s;
+map<int,int> M;
+yx_queue<rcd> q;
+int cnt=0;
+int n,m,tot;
+int getpos(int l,int r){
+    int ans=(l+r)>>1;
+    MAX(ans,1LL);
+    MIN(ans,n);
 }
-inline void pushdown(int pos){
-   if(lazy[pos]){
-      seg[lson(pos)]+=lazy[pos];
-      seg[rson(pos)]+=lazy[pos];
-      lazy[lson(pos)]+=lazy[pos];
-      lazy[rson(pos)]+=lazy[pos];
-      lazy[pos]=0;
-   }
-}
-void build(int pos,int l,int r){
-   if(l==r){
-      lazy[pos]=0;
-      seg[pos]=date[l];
-      return;
-   }
-   int mid=(l+r)>>1;
-   lazy[pos]=0;
-   build(lson(pos),l,mid);
-   build(rson(pos),mid+1,r);
-   pushup(pos);
-}
-void update(int pos,int l,int r,int ql,int qr,int v){
-   if(l>=ql&&r<=qr){
-      if(l!=r)
-         lazy[pos]+=v;
-      seg[pos]+=v;
-      return;
-   }
-   pushdown(pos);
-   int mid=(l+r)>>1;
-   if(ql<=mid)
-      update(lson(pos),l,mid,ql,qr,v);
-   if(qr>=mid+1)
-      update(rson(pos),mid+1,r,ql,qr,v);
-   pushup(pos);
+bool hf(rcd a){
+    if(a.r<=0||a.l>n)
+        return false;
+
 }
 void work()
 {
-   while(scanf("%lld%lld%lld",&n,&a,&b)!=EOF){
-      for(int i=1;i<=n;i++)
-         scanf("%lld",&date[i]);
-      for(int i=1;i<=n;i++)
-         date[i]=(date[i]/b+(date[i]%b>0));
-      date[1]++;
-      for(int i=2;i<=n;i++)
-         date[i]=date[i-1]+date[i];
-      build(1,1,n);
-      for(int i=1;i<=n;i++){
-         int flag=(date[i]%b==0);
-         qr[i].val=(date[i]%b+flag*b+a-1)/a+1;
-         qr[i].val=-qr[i].val;
-         qr[i].num=i;
-      }
-      sort(qr+1,qr+n+1);
-      int ans=0;
-      for(int i=1;i<=n;i++){
-         update(1,1,n,qr[i].num,n,qr[i].val);
-         if(seg[1]>=0)
-            ans++;
-         else update(1,1,n,qr[i].num,n,-qr[i].val);
-      }
-      printf("%lld\n",ans);
-   }
+    while(scanf("%lld%lld",&n,&m)!=EOF){
+        s.insert(-llinf);
+        s.insert(llinf);
+        int opt;
+        for(int i=1;i<=m;i++){
+            rd(opt);
+            if(opt==1){
+                if(!cnt){
+                    wt(1),pt('\n');
+                    s.insert(1);
+                    q.push(rcd(1,llinf,++tot));
+                    M[1]=tot;
+                }
+
+            }else{
+
+            }
+        }
+    }
 }
 signed main()
 {

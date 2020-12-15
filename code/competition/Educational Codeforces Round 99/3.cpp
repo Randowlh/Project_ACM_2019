@@ -46,12 +46,9 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    cin>>n;
-    for(int i=1;i<=n;i++){
-       cout<<1<<' ';
-    }
-    cout<<endl;
+    int a,b;
+    cin>>a>>b;
+    cout<<a-1<<' '<<b<<endl;
 }
 signed main()
 {

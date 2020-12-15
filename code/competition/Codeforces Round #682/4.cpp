@@ -44,14 +44,40 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int date[110000];
 void work()
 {
     int n;
     cin>>n;
+    int tmp;
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        cin>>date[i];
     }
-    cout<<endl;
+    int now=3;
+    vector<pair<int,int>> ans;
+    for(now=3;now<=n;now+=2){
+        ans.push_back(make_pair(now-1,now));
+    }
+    if(n%2)
+    {
+        cout<<"YES"<<endl;
+        cout<<ans.size()*2<<endl;
+        for(int i=0;i<ans.size();i++)
+            cout<<1<<' '<<ans[i].first<<' '<<ans[i].second<<endl;
+        for(int i=0;i<ans.size();i++)
+            cout<<1<<' '<<ans[i].first<<' '<<ans[i].second<<endl;
+        return;
+    }
+    for(int i=0;i<ans.size();i++)
+        date[1]=date[1]^date[ans[i].first]^date[ans[i].second];
+    if(date[n]==date[1]){
+        cout<<"YES"<<endl;
+        cout<<ans.size()*2<<endl;
+        for(int i=0;i<ans.size();i++)
+            cout<<1<<' '<<ans[i].first<<' '<<ans[i].second<<endl;
+        for(int i=0;i<ans.size();i++)
+            cout<<1<<' '<<ans[i].first<<' '<<ans[i].second<<endl;
+    }else cout<<"NO"<<endl;
 }
 signed main()
 {
@@ -62,7 +88,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

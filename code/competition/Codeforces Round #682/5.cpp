@@ -44,14 +44,38 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int date[210000];
+int pre[210000];
+set<pair<int,int>> s;
 void work()
 {
     int n;
     cin>>n;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    for(int i=1;i<=n;i++)
+        pre[i]=pre[i-1]+date[i];
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        int sum=0;
+        for(int j=i+2;j<=n;j++){
+            int tot=pre[j-1]-pre[i];
+            if(tot==(date[i]^date[j]))
+                s.insert(make_pair(i,j));
+            if(tot>2*date[i])
+                break;
+        }
     }
-    cout<<endl;
+    for(int i=n;i>=1;i--){
+        int sum=0;
+        for(int j=i-2;j>=1;j--){
+            int tot=pre[i-1]-pre[j];
+            if(tot==(date[i]^date[j]))
+                s.insert(make_pair(j,i));
+            if(tot>2*date[i])
+                break;
+        }
+    }
+    cout<<s.size()<<endl;
 }
 signed main()
 {
@@ -62,7 +86,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

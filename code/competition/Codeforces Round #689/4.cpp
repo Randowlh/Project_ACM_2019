@@ -44,14 +44,39 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+set<int> s;
+int date[110000];
+int pre[110000];
+void dvd(int l,int r){
+    s.insert(pre[r]-pre[l-1]);
+    if(l==r)    
+        return;
+    int t=date[l]+date[r]>>1;
+    int c=upper_bound(date+l,date+r,t)-date;
+    if(c==r&&date[c]==t)
+        return;
+    dvd(l,c-1);
+    dvd(c,r);
+}
 void work()
 {
-    int n;
-    cin>>n;
-    for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+    s.clear();
+    int n,m;
+    rd(n), rd(m);
+    for(int i=1;i<=n;i++)
+        rd(date[i]);
+    sort(date+1,date+n+1);
+    pre[0]=0;
+    for(int i=1;i<=n;i++)
+        pre[i]=date[i]+pre[i-1];
+    dvd(1,n);
+    int tmp;
+    for(int i=1;i<=m;i++){
+        rd(tmp);
+        if(s.count(tmp)){
+            printf("Yes\n");
+        }else printf("No\n");
     }
-    cout<<endl;
 }
 signed main()
 {
@@ -62,7 +87,8 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-cin>>t;
+rd(t);
+//cin>>t;
 while (t--)
 {
 work();

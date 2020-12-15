@@ -46,12 +46,33 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    cin>>n;
+    int n,m;
+    cin>>n>>m;
+    int tmp;
+    vector<int> v;
     for(int i=1;i<=n;i++){
-       cout<<1<<' ';
+        cin>>tmp;
+        v.push_back(tmp);
     }
-    cout<<endl;
+    int mix;
+    for(mix=n-1;mix>=0;mix--){
+        if(v[mix]!=mix+1)
+            break;
+    }
+    mix++;
+    if(mix==0){
+        cout<<"1.000000000"<<endl;
+        return;
+    }
+    long double ans=1,tt;
+    int k;
+    for(int i=1;i<=m;i++){
+        cin>>k>>tt;
+        if(k>=mix)
+            ans*=(1-tt);
+    }
+    printf("%.9Lf\n",1-ans);
+    
 }
 signed main()
 {
@@ -59,8 +80,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+// std::ios::sync_with_stdio(false);
+// ?cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)
