@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include<windows.h>
+#include <unistd.h> 
 using namespace std;
 #define rep(i,a,b) for(int i=(a);i<=(b);i++)
 #define repb(i,a,b) for(int i=(a);i>=(b);i--)
@@ -37,6 +37,14 @@ class vect{
 	void pop(){
 		if(sz>0)
 			sz--;
+	}
+	vect operator=(vect a){
+		delete[] date;
+		date=new int(a.lim);
+		for(int i=0;i<a.sz;i++)
+			date[i]=a.date[i];
+		sz=a.sz;
+		lim=a.lim
 	}
 };
 struct fhq_treap
@@ -226,13 +234,13 @@ class que{//链表实现队列
       if(head==NULL)
          tail=NULL;
    	}
-	vector<T> quchu(){//去除耐心已满 
-		vector<T> ans,tmp;
+	vect<T> quchu(){//去除耐心已满 
+		vect<T> ans,tmp;
 		node* now=head;
 		while(now!=NULL){
 			if(now->date.naixin<tim||!s.count(now->date.num))
-				ans.push_back(now->date);
-			else tmp.push_back(now->date);
+				ans.push(now->date);
+			else tmp.push(now->date);
 			now=now->nxt;
 		}
 		while(!empty())
@@ -241,11 +249,11 @@ class que{//链表实现队列
 			push(tmp[i]);
 		return ans;
 	}
-	vector<T> get(){
-		vector<T> ans;
+	vect<T> get(){
+		vect<T> ans;
 		node* now=head;
 		while(now!=NULL){
-			ans.push_back(now->date);
+			ans.push(now->date);
 			now=now->nxt;
 		}
 		return  ans;
@@ -263,16 +271,18 @@ struct Dianti{
 	int hezai;
 	int zhuangtai;//-1下行,0停止,1上行 
 	void tichu(int t){
-		vector<ps> v;
+		vect<ps> v;
 		while(!ren.empty()){
 			if(ren.front().to!=t)
-				v.push_back(ren.front());
+				v.push(ren.front());
 			else zl-=ren.front().weight;
 			ren.pop();
 		}
 		for(int i=0;i<v.size();i++){
 			ren.push(v[i]);
 		}
+	}
+	for(int i=1;i<=n;i++){
 	}
 	inline int lc(){
 		return (mi-1)/4+1;
@@ -282,7 +292,7 @@ struct Dianti{
 que<pair<int,int>> zt,inzt;
 bool up_botton[MAXN];
 bool down_botton[MAXN];
-vector<ps> vec;
+vect<ps> vec;
 void flsh(){
 	// for(int i=1;i<=n;i++)
 	// 	q[i].quchu();	
@@ -389,106 +399,13 @@ ps gen(){
 	return a;
 }
 void work(){
-	//(double)clock()/CLOCKS_PER_SEC<TOT_TIME
-	dianti.mi=1;
-	while(1){
-		tim++;
-		ps a;
-		a=gen();
-		q[a.from].push(a);
-		s.insert(a.num);
-		zt.push(make_pair((ll)a.to,a.num));
-		// system("cls");
-		 flsh();
-			cout<<"dianti.mi="<<dianti.mi<<' '<<dianti.to<<endl;;
-		if(dianti.zhuangtai==0){
-			dianti.tichu(dianti.lc());
-			vec=q[dianti.lc()].get();
-			for(int i=0;i<vec.size();i++){
-				if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
-				}
-			}
-			if(!dianti.ren.empty()){
-				dianti.zhuangtai=1;
-				break;
-			}
-			for(int i=0;i<vec.size();i++){
-				if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
-				}
-			}
-			if(!dianti.ren.empty()){
-				dianti.zhuangtai=-1;
-				break;
-			}
-			while(!zt.empty()){
-				pair<int,int> t=zt.front();
-				zt.pop();
-				if(s.count(t.second)){
-					dianti.to=t.first;
-					dianti.zhuangtai=(dianti.lc()<t.first);
-					if(!dianti.zhuangtai)
-						dianti.zhuangtai=-1;
-					break;
-				}
-			}
-		}else if(dianti.zhuangtai==1){
-			if(!((dianti.mi-1)%4)){
-				bug;
-				if(dianti.lc()==dianti.to){
-					dianti.zhuangtai=0;
-					continue;
-				}
-				dianti.tichu(dianti.lc());
-				vec=q[dianti.lc()].get();
-				for(int i=0;i<vec.size();i++){
-					if(vec[i].from<vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MAX(dianti.to,vec[i].to);
-					}
-				}
-	  			}
-			dianti.mi++;
-		}else{
-			if(!((dianti.mi-1)%4)){
-				bug;
-				if(dianti.lc()==dianti.to){
-					dianti.zhuangtai=0;
-					continue;
-				}
-				dianti.tichu(dianti.lc());
-				vec=q[dianti.lc()].get();
-				for(int i=0;i<vec.size();i++){
-					if(vec[i].from>vec[i].to&&dianti.zl+vec[i].weight<=dianti.hezai){
-						s.del(vec[i].num);
-						dianti.ren.push(vec[i]);
-						bug;
-						dianti.zl+=vec[i].weight;
-						MIN(dianti.to,vec[i].to);
-					}
-				}
-			}
-			dianti.mi--;
-		}
-	
-	}
+	//(double)clock()/CLOCKS_PER_SEC<TOT_TIM
+
 }
 int main(){
-	freopen("out.txt","w",stdout);
+	// freopen("out.txt","w",stdout);
 	n = 4;
-	system("chcp 65001");
+	// system("chcp 65001");
 	// flsh();
 	for(int i=1;i<=n;i++)
 		q[i].init();
@@ -506,7 +423,7 @@ int main(){
 	// cout<<"dadasdsa"<<endl;
 	work();
 
-	system("cls");
+	system("clear");
 	flsh();
 	system("pause");
 }

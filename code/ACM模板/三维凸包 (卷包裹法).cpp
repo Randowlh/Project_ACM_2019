@@ -1,4 +1,4 @@
-namespace CH3D {
+amespace CH3D {
 	typedef std::pair <int, int> pr;
 	typedef std::set <pr> set;
 
