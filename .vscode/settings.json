@@ -70,7 +70,16 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "any": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "stop_token": "cpp",
+        "variant": "cpp"
     },
     // "code-runner.executorMap": {
     //     "c": "cd $dir && gcc '$fileName' -o '$fileNameWithoutExt.exe' -Wall -std=c11 && './$fileNameWithoutExt.exe'",
