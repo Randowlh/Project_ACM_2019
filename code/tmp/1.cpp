@@ -1,43 +1,102 @@
-#include<bits/stdc++.h>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <map>
 using namespace std;
-#define int long long
-const int llinf = 4223372036854775807;
-template<class T>inline void rd(T &x){
-   x=0;char o,f=1;
-   while(o=getchar(),o<48)if(o==45)f=-f;
-   do x=(x<<3)+(x<<1)+(o^48);
-   while(o=getchar(),o>47);
-   x*=f;
+
+typedef long long li;
+
+int m;
+li L;
+int a[200];
+map<li, int> sub[2][2];
+
+int fun(li x) {
+  int ans = 0;
+  while (x) {
+    ans ^= (x & 1);
+    x >>= 1;
+  }
+  return ans;
 }
-struct node{
-    int a,b;
-    node(){}
-    node(int a,int b):a(a),b(b){}
-    inline bool operator<(node aa){
-        if(a==aa.a){
-            return b<aa.b;
-        }return a>aa.a;
+
+li SolveSub(int f0, int f1, li lim) {
+  li sum = 0;
+  for (int len1 = 0; len1 <= 60; ++len1) {
+    // 011...11
+    li tail = (1LL << len1) - 1;
+    if (tail > lim) break;
+    li lim2 = (lim - tail) >> (len1 + 1);
+    if (!(f0 == f1 && (len1 & 1) || f0 != f1 && (~len1 & 1))) continue;
+    int dig = f0 ^ (len1 & 1);
+    if (lim2 & 1) {
+      sum += (lim2 + 1) >> 1;
+    } else {
+      sum += (lim2 >> 1);
+      sum += (fun(lim2) == dig);
     }
-}date[210000];
-signed main(){
-    int n;
-    rd(n);
-    int a,b;
-    for(int i=1;i<=n;i++){
-        rd(date[i].a);
+  }
+  return sum;
+}
+
+void Solve(void) {
+  for (int i = 0; i <= 1; ++i)
+    for (int j = 0; j <= 1; ++j)
+      sub[i][j].clear();
+  scanf("%d%lld", &m, &L);
+  for (int i = 0; i < m; ++i) {
+    scanf("%d", a + i);
+  }
+
+  for (int s = 0; s < 1 << 8; ++s) {
+    // turn to subtask
+    int x = s, c = 0;
+    int f[2] = {-1, -1};
+    bool bad = false;
+    for (int i = 0; i < m; ++i) {
+      int f_r = fun(x);
+      int f_l = a[i] ^ f_r;
+      if (f[c] == -1) {
+        f[c] = f_l;
+      }
+      if (f[c] != f_l) {
+        bad = true;
+        break;
+      }
+      // shift
+      ++x;
+      if (x == (1 << 8)) {
+        x = 0;
+        c = 1;
+      }
     }
-    for(int i=1;i<=n;i++){
-        rd(date[i].b);
+    if (bad) continue;
+    if (L - s < 0) continue;
+
+    li lim = (L - s) >> 8;
+    if (f[1] == -1) {
+      ++sub[f[0]][0][lim];
+      ++sub[f[0]][1][lim];
+    } else {
+      ++sub[f[0]][f[1]][lim];
     }
-    date[n+1]=node(0,0);
-    sort(date+1,date+n+1);
-    int am=date[1].a;
-    int bm=0;
-    int ans=date[1].a;
-    for(int i=1;i<=n;i++){
-        am=date[i+1].a;
-        bm=max(bm,date[i].b);
-        ans=min(ans,bm+am);
+  }
+
+  li ans = 0;
+  for (int f0 = 0; f0 <= 1; ++f0) {
+    for (int f1 = 0; f1 <= 1; ++f1) {
+      for (auto p : sub[f0][f1]) {
+        ans += SolveSub(f0, f1, p.first) * p.second;
+      }
     }
-    cout<<ans<<endl;
+  }
+  printf("%lld\n", ans);
+}
+
+int main(void) {
+  int T;
+  scanf("%d", &T);
+  while (T--) {
+    Solve();
+  }
 }
