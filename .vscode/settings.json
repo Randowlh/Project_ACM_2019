@@ -81,12 +81,7 @@
         "stop_token": "cpp",
         "variant": "cpp"
     },
-    // "code-runner.executorMap": {
-    //     "c": "cd $dir && gcc '$fileName' -o '$fileNameWithoutExt.exe' -Wall -std=c11 && './$fileNameWithoutExt.exe'",
-    //     "cpp": "cd $dir && g++ '$fileName' -o '$fileNameWithoutExt.exe' -Wall -std=c++17 - && './$fileNameWithoutExt.exe'"
-    //     // "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt.exe -Wall -g -O2 -static-libgcc -std=c11 -fexec-charset=GBK && $dir$fileNameWithoutExt",
-    //     // "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt.exe -Wall -g -O2 -static-libgcc -std=c++17 -fexec-charset=GBK && $dir$fileNameWithoutExt"
-    // }, // 右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认），文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认），PS和bash也能用，但文件名中有空格时无法运行
+    //右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认），文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认），PS和bash也能用，但文件名中有空格时无法运行
     "python.formatting.provider": "autopep8",
     "editor.snippetSuggestions": "bottom",
     "editor.suggest.snippetsPreventQuickSuggestions": false
