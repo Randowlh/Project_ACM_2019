@@ -32,7 +32,7 @@ void wt(T x){
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
+typedef long long ll;
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
@@ -44,24 +44,39 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[1100];
-int w[1100],v[1100];
+map<int,int> M;
 void work()
 {
-    int n,m;
-    while(scanf("%lld%lld", &m, &n)!= EOF){
-        if(n==-1&&m==-1){break;}
-        for(int j=0;j<=m;j++)dp[j]=-1;
-        dp[0]=0;  
-        for(int i=1;i<=n;i++){
-            rd(v[i]),rd(w[i]);
-            for(int j=m;j>=w[i];j--){
-                if(dp[j-w[i]]!=-1)
-                    MAX(dp[j],dp[j-w[i]]+v[i]);
-            }
-        }
-        cout<<dp[m]<<endl;
-    }
+   int n;
+   cin>>n;
+   int tmp;
+   M.clear();
+   for(int i=1;i<=n;i++){
+      cin>>tmp;
+      for(int j=2;j*j<=tmp;j++)
+         while(tmp%(j*j)==0)
+            tmp/=j*j;
+      M[tmp]++;
+   }
+   int ans1=0,ans2=0;
+   for(auto i:M)
+      MAX(ans1,i.second);
+   for(auto i:M)
+      if(i.second%2==0&&i.first!=1){
+         M[1]+=i.second;
+         M[i.first]=0;
+      }
+   for(auto i:M)
+      MAX(ans2,i.second);
+   int q;
+   cin>>q;
+   int w;
+   for(int i=1;i<=q;i++){
+      cin>>w;
+      if(w==0)
+         cout<<ans1<<endl;
+      else cout<<ans2<<endl;
+   }
 }
 signed main()
 {
@@ -69,10 +84,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

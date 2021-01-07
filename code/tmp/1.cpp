@@ -1,102 +1,82 @@
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
-
-typedef long long li;
-
-int m;
-li L;
-int a[200];
-map<li, int> sub[2][2];
-
-int fun(li x) {
-  int ans = 0;
-  while (x) {
-    ans ^= (x & 1);
-    x >>= 1;
-  }
-  return ans;
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
 }
-
-li SolveSub(int f0, int f1, li lim) {
-  li sum = 0;
-  for (int len1 = 0; len1 <= 60; ++len1) {
-    // 011...11
-    li tail = (1LL << len1) - 1;
-    if (tail > lim) break;
-    li lim2 = (lim - tail) >> (len1 + 1);
-    if (!(f0 == f1 && (len1 & 1) || f0 != f1 && (~len1 & 1))) continue;
-    int dig = f0 ^ (len1 & 1);
-    if (lim2 & 1) {
-      sum += (lim2 + 1) >> 1;
-    } else {
-      sum += (lim2 >> 1);
-      sum += (fun(lim2) == dig);
-    }
-  }
-  return sum;
+template<class T>
+void wt(T x){
+   if(x < 0) putchar('-'), x = -x;
+   if(x >= 10) wt(x / 10);
+   putchar('0' + x % 10);
 }
-
-void Solve(void) {
-  for (int i = 0; i <= 1; ++i)
-    for (int j = 0; j <= 1; ++j)
-      sub[i][j].clear();
-  scanf("%d%lld", &m, &L);
-  for (int i = 0; i < m; ++i) {
-    scanf("%d", a + i);
-  }
-
-  for (int s = 0; s < 1 << 8; ++s) {
-    // turn to subtask
-    int x = s, c = 0;
-    int f[2] = {-1, -1};
-    bool bad = false;
-    for (int i = 0; i < m; ++i) {
-      int f_r = fun(x);
-      int f_l = a[i] ^ f_r;
-      if (f[c] == -1) {
-        f[c] = f_l;
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int __int128
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 510000;
+int n;
+int biao[]={2,3,5,7};
+int cnt[4];
+void work()
+{
+    while(rd(n),n){
+      memset(cnt,0,4*sizeof(int));
+      for(int i=0;i<4;i++){
+        while(n%biao[i]==0){
+          n/=biao[i];
+          cnt[i]++;
+        }
+        cnt[i]++;
       }
-      if (f[c] != f_l) {
-        bad = true;
-        break;
-      }
-      // shift
-      ++x;
-      if (x == (1 << 8)) {
-        x = 0;
-        c = 1;
-      }
+      int ans=1;
+      for(int i=0;i<4;i++)
+        ans*=cnt[i];
+      wt(ans),pt('\n');
     }
-    if (bad) continue;
-    if (L - s < 0) continue;
-
-    li lim = (L - s) >> 8;
-    if (f[1] == -1) {
-      ++sub[f[0]][0][lim];
-      ++sub[f[0]][1][lim];
-    } else {
-      ++sub[f[0]][f[1]][lim];
-    }
-  }
-
-  li ans = 0;
-  for (int f0 = 0; f0 <= 1; ++f0) {
-    for (int f1 = 0; f1 <= 1; ++f1) {
-      for (auto p : sub[f0][f1]) {
-        ans += SolveSub(f0, f1, p.first) * p.second;
-      }
-    }
-  }
-  printf("%lld\n", ans);
 }
-
-int main(void) {
-  int T;
-  scanf("%d", &T);
-  while (T--) {
-    Solve();
-  }
+signed main()
+{
+   #ifndef ONLINE_JUDGE
+   freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+#endif
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
+{
+work();
+}
+return 0;
 }

@@ -44,24 +44,30 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[1100];
-int w[1100],v[1100];
 void work()
 {
     int n,m;
-    while(scanf("%lld%lld", &m, &n)!= EOF){
-        if(n==-1&&m==-1){break;}
-        for(int j=0;j<=m;j++)dp[j]=-1;
-        dp[0]=0;  
-        for(int i=1;i<=n;i++){
-            rd(v[i]),rd(w[i]);
-            for(int j=m;j>=w[i];j--){
-                if(dp[j-w[i]]!=-1)
-                    MAX(dp[j],dp[j-w[i]]+v[i]);
-            }
-        }
-        cout<<dp[m]<<endl;
+    cin>>n>>m;
+    vector<int> c,k;
+    int tmp;
+    for(int i=0;i<n;i++){
+        cin>>tmp;
+        k.push_back(tmp);
     }
+    for(int i=0;i<m;i++){
+        cin>>tmp;
+        c.push_back(tmp);
+    }
+    int tail=0;
+    int ans=0;
+    sort(k.begin(),k.end(),greater<int>());
+    for(int i=0;i<n;i++){
+        if(tail<k[i]-1){
+            ans+=c[tail];
+            tail++;
+        }else ans+=c[k[i]-1];
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -69,10 +75,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

@@ -44,39 +44,29 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[1000005];
-yx_queue<pair<int,int>,vector<pair<int,int> >,greater<pair<int,int> > > q;
 void work()
 {
-   int n;
-   rd(n);
-   for(int i=1;i<=n;i++)
-      rd(date[i]);
-   q.push(make_pair(date[1],1));
-   int ans=0;
-   int ans2=0;
-   for(int i=2;i<=n;i++){
-      if(q.top().first<date[i]){
-         ans+=date[i]-q.top().first;
-         if(q.top().second)
-            ans2++;
-         q.pop();
-         q.push(make_pair(date[i],0));
-      }
-      q.push(make_pair(date[i],1));
-   }
-   wt(ans),pt(' '),wt(ans2*2),pt('\n');
+   int a[3];
+   cin>>a[0]>>a[1]>>a[2];
+   sort(a,a+3);
+   if(a[0]+a[1]<a[2]){
+      cout<<"Impossible!"<<endl;
+   }else if(a[0]*a[0]+a[1]*a[1]<a[2]*a[2]){
+      cout<<"Obtuse triangle"<<endl;
+   }else if(a[0]*a[0]+a[1]*a[1]==a[2]*a[2]){
+      cout<<"Right triangle"<<endl;
+   }else cout<<"Acute triangle"<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
- //freopen("in.txt","r",stdin);
+ freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

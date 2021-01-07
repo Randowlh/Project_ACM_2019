@@ -44,24 +44,35 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[1100];
-int w[1100],v[1100];
+ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
 void work()
 {
-    int n,m;
-    while(scanf("%lld%lld", &m, &n)!= EOF){
-        if(n==-1&&m==-1){break;}
-        for(int j=0;j<=m;j++)dp[j]=-1;
-        dp[0]=0;  
-        for(int i=1;i<=n;i++){
-            rd(v[i]),rd(w[i]);
-            for(int j=m;j>=w[i];j--){
-                if(dp[j-w[i]]!=-1)
-                    MAX(dp[j],dp[j-w[i]]+v[i]);
+    int n,x;
+    cin>>n>>x;
+    int tmp;
+    vector<int>v,v1;
+    int aa=0;
+    for(int i=0;i<n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
+        aa+=tmp;
+    }
+    v1=v;
+    while(1){
+        int flag=0;
+        for(int i=0;i<n;i++){
+            if(v1[i]%x==0){
+                aa+=v[i];
+                v1[i]/=x;
+            }else{
+                flag=1;
+                break;
             }
         }
-        cout<<dp[m]<<endl;
+        if(flag)
+            break;
     }
+    cout<<aa<<endl;
 }
 signed main()
 {
@@ -69,10 +80,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
