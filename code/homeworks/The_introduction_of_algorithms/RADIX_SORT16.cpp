@@ -2,6 +2,8 @@
 using namespace std;
 #define int long long
 vector<int> date;
+#define get_part(n,i) ((n>>p[i])&(15LL))
+int p[]={0,4,8,12,16,20,24,28,32,36,40,44};
 int get_max()
 {
     int ma = date[0];
@@ -13,7 +15,7 @@ int get_max()
     while (ma > 0)
     {
         t++;
-        ma /= 10;
+        ma >>=4;
     }
     return t;
 }
@@ -21,44 +23,42 @@ void radix_sort()
 {
     int d = get_max();
     // cout << d << endl;
-    vector<int> tmp[10];
-    int chu = 1;
+    vector<int> tmp[16];
     for (int i = 0; i < d; i++)
     {
         for (int j = 0; j < date.size(); j++)
         {
-            tmp[date[j] / chu % 10].push_back(date[j]);
+            tmp[get_part(date[j],i)].push_back(date[j]);
         }
         date.clear();
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 16; j++)
         {
             for (int k = 0; k < tmp[j].size(); k++)
             {
                 date.push_back(tmp[j][k]);
             }
         }
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 16; j++)
         {
             tmp[j].clear();
         }
-        chu *= 10;
     }
     return;
 }
 signed main()
 {
     int n;
-    scanf("%d", &n);
+    scanf("%lld", &n);
     int tmp;
     for (int i = 0; i < n; i++)
     {
-        scanf("%d", &tmp);
+        scanf("%lld", &tmp);
         date.push_back(tmp);
     }
     radix_sort();
     for (int i = 0; i < n; i++)
     {
-        printf("%d ", date[i]);
+        printf("%lld ", date[i]);
     }
     printf("\n");
     return 0;
