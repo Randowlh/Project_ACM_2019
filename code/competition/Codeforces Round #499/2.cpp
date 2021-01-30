@@ -44,30 +44,38 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
+vector<int> v;
+bool ck(int a,int n){
+    int cnt=0;
+    for(int i=0;i<v.size();i++){
+        cnt+=v[i]/a;
+    }
+    return cnt>=n;
+}
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n,m;
+    cin>>n>>m;
+    map<int,int> M;
+    int tmp;
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        M[tmp]++;
+    }
+    
+    for(auto i=M.begin();i!=M.end();i++){
+        v.push_back(i->second);
+    }
+    sort(v.begin(), v.end());
+    int b=1,e=110000;
+    while(b<e){
+        int mid=(b+e)>>1;
+        if(ck(mid,n)){
+            b=mid+1;
+        }else e=mid;
+    }
+    cout<<b-1<<endl;
+
 }
 signed main()
 {
@@ -75,10 +83,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

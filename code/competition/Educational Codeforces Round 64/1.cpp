@@ -44,30 +44,46 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n;
+    cin>>n;
+    int tmp;
+    vector<int> v;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
+    }
+    reverse(v.begin(), v.end());
+    int ans=0;
+    for(int i=0;i<n-1;i++){
+        if(v[i]==1){
+            if(v[i+1]==2)
+                ans+=3;
+            else if(v[i+1]==3){
+                ans+=4;
+                if(i-1>=0&&v[i-1]==2){
+                    ans--;
+                }
+            }
+            else{
+                cout<<"Infinite"<<endl;
+                return;
+            }
+        }else if(v[i]==2){
+            if(v[i+1]!=1){
+                cout<<"Infinite"<<endl;
+                return;
+            }else ans+=3;
+        }else{
+            if(v[i+1]!=1){
+                cout<<"Infinite"<<endl;
+                return;
+            }else ans+=4;
+        }
+    }
+    cout<<"Finite"<<endl;
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -75,10 +91,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

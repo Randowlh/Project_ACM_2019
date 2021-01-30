@@ -44,30 +44,31 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n,m;
+    cin>>n>>m;
+    vector<int> a,b;
+    int tmp;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        a.push_back(tmp);
+    }
+    for(int j=1;j<=m;j++){
+        cin>>tmp;
+        b.push_back(tmp);
+    }
+    map<int,int> M;
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            M[b[i]-a[j]]++;
+        }
+    }
+    int ans=0;
+    for(auto i=M.begin(); i!=M.end();i++){
+        MAX(ans,i->second);
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -75,10 +76,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

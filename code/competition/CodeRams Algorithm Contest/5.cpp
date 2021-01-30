@@ -44,30 +44,60 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
+
+int a[110000],tmp[110000];
+int ans;
+ 
+void Merge(int l,int m,int r)
+{
+    int i = l;
+    int j = m + 1;
+    int k = l;
+    while(i <= m && j <= r)
+    {
+        if(a[i] > a[j])
+        {
+            tmp[k++] = a[j++];
+            ans += m - i + 1;
+        }
+        else
+        {
+            tmp[k++] = a[i++];
+        }
+    }
+    while(i <= m) tmp[k++] = a[i++];
+    while(j <= r) tmp[k++] = a[j++];
+    for(int i=l;i<=r;i++)
+        a[i] = tmp[i];
+}
+ 
+void Merge_sort(int l,int r)
+{
+    if(l < r)
+    {
+        int m = (l + r) >> 1;
+        Merge_sort(l,m);
+        Merge_sort(m+1,r);
+        Merge(l,m,r);
+    }
+}
+
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n;
+    cin>>n;
+    int tmp;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        int cnt=0;
+        while(tmp!=0&&(tmp%2==0)){
+            cnt++;
+            tmp>>=1;
+        }
+        a[i]=llinf-cvnt;
+    }
+    Merge_sort(1,n);
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -75,10 +105,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

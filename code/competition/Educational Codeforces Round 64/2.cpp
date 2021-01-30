@@ -44,30 +44,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
+int cnt[30];
+string ans;
+string tmp;
+int ff=0;
+void dfs(){
+    for(int i='a';i<='z';i++){
+        if(cnt[i-'a']&&(ans.empty()||abs(ans[ans.size()-1]-i)!=1)){
+            int t=0;
+            t=cnt[i-'a'];
+            cnt[i-'a']=0;
+            for(int j=0;j<t;j++)
+                ans.push_back(i);
+            dfs();
+            if(ff)
+                return;
+            cnt[i-'a']=t;
+            for(int j=0;j<t;j++)
+                ans.pop_back();
+        }
+    }
+    if(ans.size()==tmp.size()){
+        cout<<ans<<endl;
+        ff=1;
+        return;
+    }
+}
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
+    ans.clear();
+    memset(cnt, 0, sizeof(cnt));
     cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    for(int i=0;i<tmp.size(); i++){
+        cnt[tmp[i]-'a']++;
+    }
+    ff=0;
+    dfs();
+    if(!ff)
+        cout<<"No answer"<<endl;
 }
 signed main()
 {
@@ -75,8 +89,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)

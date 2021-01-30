@@ -44,30 +44,38 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n;
+    vector<int> c,a,b;
+    int tmp;
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        c.push_back(tmp);
+    }
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        a.push_back(tmp);
+    }
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        b.push_back(tmp);
+    }
+    a.push_back(1);
+    b.push_back(c[c.size()-1]);
+    int ans=0;
+    int le=abs(a[1]-b[1]);;
+    for(int i=1;i<n;i++){
+        le+=2;
+        MAX(ans,le+c[i]-1);
+        int now=abs(a[i+1]-b[i+1]);
+        le+=min(a[i+1],b[i+1])-1+(c[i]-max(b[i+1],a[i+1]));
+        MAX(le,now);
+        if(now==0)
+            le=0;
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {

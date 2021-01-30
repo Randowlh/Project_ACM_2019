@@ -44,30 +44,32 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n,k;
+    cin>>n>>k;
+    int tmp;
+    vector<int> v;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
+    }
+    int ans1=0,ans2=0;
+    int now=v[0];
+    int now2=v[0];
+    for(int i=1;i<n;i++){
+        if(v[i]*100>now*k)
+            MAX(ans1,(v[i]*100+k-1)/k-now);
+        now+=v[i];
+        if(v[i]*100>now2*k){
+            int tt=(v[i]*100-now2*k+(100*k-1))/100*k;
+            ans2+=tt;
+            v[i]-=tt;
+        }
+        // cout<<"v[i]="<<v[i]<<endl;
+        now2+=v[i];
+    }
+    cout<<ans1<<endl;
 }
 signed main()
 {

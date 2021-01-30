@@ -44,30 +44,43 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
-    cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    int n;
+    cin>>n;
+    map<int,int> M;
+    vector<int> v;
+    int tmp;
+    for(int i=1;i<=n*2;i++){
+        cin>>tmp;
+        M[tmp]++;
+    }
+    for(auto i=M.begin();i!=M.end();i++){
+        if(i->second%2!=0){
+            cout<<"NO"<<endl;
+            return;
+        }
+        if(i->first%2!=0){
+            cout<<"NO"<<endl;
+            return;
+        }
+        int t=i->second/2;
+        while(t--)
+            v.push_back(i->first);
+    }
+    set<int> s;
+    s.insert(0);
+    int ls=0;
+    sort(v.begin(), v.end(),greater<int>());
+    for(int i=0;i<n;i++){
+        if((v[i]-ls)%(n-i)!=0||(v[i]-ls)/(n-i)<=0||s.count((v[i]-ls)/(n-i))){
+            cout<<"NO"<<endl;
+            return;
+        }
+        s.insert((v[i]-ls)/(n-i));
+        ls+=(v[i]-ls)/(n-i);
+    }
+    cout<<"YES"<<endl;
 }
 signed main()
 {

@@ -44,30 +44,46 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
+int dpl[310000],dpr[310000];
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
+    int n;
+    cin>>n;
+    string tmp;
     cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
+    dpl[0]=0;
+    dpl[1]=1;
+    char fl=tmp[0];
+    for(int i=2;i<=n;i++){
+        if(fl^tmp[i-1])
+            dpl[i]=dpl[i-1]+1;
+        else dpl[i]=1;
+        fl=tmp[i-1];
+    }
+    dpr[n]=0;
+    dpr[n-1]=1;
+    fl=tmp[n-1];
+    for(int i=n-2;i>=0;i--){
+        if(fl^tmp[i])
+            dpr[i]=dpr[i+1]+1;
+        else dpr[i]=1;
+        fl=tmp[i];
+    }
+    // for(int i=0;i<=n;i++){
+    //     cout<<dpl[i]<<' '<<dpr[i]<<endl;
+    // }
+    if(dpr[0]&&tmp[0]=='R')
+        cout<<1+dpr[0]<<' ';
+    else cout<<1<<' ';
+    for(int i=1;i<=n;i++){
+        int ans=1;
+        if(dpl[i]&&tmp[i-1]=='L')
+            ans+=dpl[i];
+        if(dpr[i]&&tmp[i]=='R')
+            ans+=dpr[i];
+        cout<<ans<<' ';
+    }
+    cout<<endl;
 }
 signed main()
 {
