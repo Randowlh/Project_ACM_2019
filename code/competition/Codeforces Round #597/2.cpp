@@ -44,40 +44,59 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
+map<char,int> M;
+char date[1100];
+string cst="RPS";
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
+    int n;
+    cin>>n;
+    int a[3];
+    cin>>a[0]>>a[1]>>a[2];
+    string tmp;
     cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
-  
+    int cnt=0;
+    string ans;
+    for(int i=0;i<tmp.size();i++){
+        if(a[M[tmp[i]]]){
+            a[M[tmp[i]]]--;
+            ans.push_back(date[tmp[i]]);
+            cnt++;
+        }else{
+            ans.push_back('?');
+        }
+    }
+    if(cnt>=(n+1)/2){
+        cout<<"YES"<<endl;
+        for(int i=0;i<ans.size();i++){
+            if(ans[i]=='?'){
+                for(int j=0;j<3;j++){
+                    if(a[j]){
+                        a[j]--;
+                        cout<<cst[j];
+                        break;
+                    }
+                }
+            }else
+            cout<<ans[i];
+        }
+        cout<<endl;
+    }else cout<<"NO"<<endl;
 }
 signed main()
 {
+    M['R']=1;
+    M['P']=2;
+    M['S']=0;
+    date['R']='P';
+    date['P']='S';
+    date['S']='R';
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)

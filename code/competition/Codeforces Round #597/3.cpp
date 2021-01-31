@@ -36,7 +36,7 @@ void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = (1 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
@@ -45,30 +45,40 @@ const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
 int date[110000];
+int calc(int n){
+    return date[n];
+}
 void work()
 {
-  int n,k;
-  cin>>n>>k;
-  for(int i=0;i<=k;i++) 
-    date[i]=llinf;
-  int tmp;
-  vector<int> v;
-  for(int i=1;i<=n;i++){
+    date[0]=1;
+    date[1]=1;
+    for(int i=2;i<=100010;i++){
+        date[i]=(date[i-1]+date[i-2])%mod;
+    }
+    string tmp;
     cin>>tmp;
-    tmp%=k;
-    v.push_back(tmp);
-  }
-  int ans=-1;
-  int now=0;
-  date[0]=-1;
-  for(int i=0;i<n;i++){
-    now+=v[i];
-    now%=k;
-    MAX(ans,i-date[now]);
-    MIN(date[now],i);
-  }
-  cout<<ans<<endl;
-  
+    char now='&';
+    int cnt=0;
+    vector<pair<char,int>> v;
+    for(int i=0;i<tmp.size();i++){
+        if(now!=tmp[i]){
+            if(cnt)
+                v.push_back(make_pair(now,cnt));
+            cnt=1;
+            now=tmp[i];
+        }else
+            cnt++;
+    }
+    if(cnt)
+        v.push_back(make_pair(now,cnt));
+    int ans=1;
+    for(int i=0;i<v.size();i++){
+        if(v[i].first=='n'||v[i].first=='u')
+            ans=(ans*calc(v[i].second))%mod;
+        if(v[i].first=='m'||v[i].first=='w')
+            ans=0;
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -76,10 +86,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();
