@@ -47,11 +47,11 @@ void work()
     for(int i=0;i<n;i++){
         date[i]=date[i+1]*(i+1);
     }
-    while((r-l)>eps){
-        double mid=(l+r)/2.0;
-        if(f(mid)<0)
-        r=mid;
-        else l=mid;
+    while((r-l)>100){
+        int lm=l+(r-l)/3;
+        int rm=r-(r-l+2)/3;
+        if(f(lm)<=f(rm)) l=lm;
+        else r=rm;
     }
     printf("%.5lf\n",l);
 }
