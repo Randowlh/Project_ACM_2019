@@ -46,25 +46,39 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    rd(n);
+    int n,k;
     int tmp;
-    int ji=0,ou=0,rod=0;
-    for(int i=1;i<=n;i++){ 
-        rd(tmp);
-        if(tmp%2)
-            ji++;
-        else ou++;  
+    vector<int> v;
+    cin>>n>>k;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
     }
-    if(n%2){
-        cout<<"NiuMei"<<endl;
+    if(k>10000){
+        cout<<-1<<endl;
         return;
     }
-    cout<<rod<<endl;
-    if(rod*2>=ji+ji%2){
-        cout<<"NiuMei"<<endl;
-    }else cout<<"NiuNiu"<<endl;
-
+    while((--k)>=0){
+        int now=0;
+        // cout<<"snbsns"<<endl;
+        while(true){
+            if(now==n-1){
+                cout<<-1<<endl;
+                return;
+            }
+            if(v[now]>=v[now+1])
+                now++;
+            else {
+                v[now]++;
+                if(k==0){
+                    cout<<now+1<<endl;
+                    return ;
+                }
+                break;
+            }
+        }
+    }
+    cout<<-1<<endl;
 }
 signed main()
 {
@@ -72,10 +86,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

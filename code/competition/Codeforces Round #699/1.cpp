@@ -46,25 +46,32 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n;
-    rd(n);
-    int tmp;
-    int ji=0,ou=0,rod=0;
-    for(int i=1;i<=n;i++){ 
-        rd(tmp);
-        if(tmp%2)
-            ji++;
-        else ou++;  
+    int x,y;
+    cin>>x>>y;
+    string tmp;
+    cin>>tmp;
+    map<char,int> M;
+    for(int i=0;i<tmp.size();i++){
+        M[tmp[i]]++;
     }
-    if(n%2){
-        cout<<"NiuMei"<<endl;
-        return;
+    int f=0;
+    if(x<0){
+        if(-x>M['L'])
+            f=1;
+    }else{
+        if(x>M['R'])
+            f=1;
     }
-    cout<<rod<<endl;
-    if(rod*2>=ji+ji%2){
-        cout<<"NiuMei"<<endl;
-    }else cout<<"NiuNiu"<<endl;
-
+    if(y<0){
+        if(-y>M['D'])
+            f=1;
+    }else{
+        if(y>M['U'])
+            f=1;
+    }
+    if(!f)
+        cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 signed main()
 {
@@ -75,7 +82,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

@@ -44,27 +44,59 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+queue<int> mp[110000];
+int a[110000],b[110000],ans[110000];
 void work()
 {
-    int n;
-    rd(n);
+    int n,m;
     int tmp;
-    int ji=0,ou=0,rod=0;
-    for(int i=1;i<=n;i++){ 
-        rd(tmp);
-        if(tmp%2)
-            ji++;
-        else ou++;  
+    cin>>n>>m;
+    int eds;
+    for(int i=1;i<=n;i++)
+        while(!mp[i].empty())
+            mp[i].pop();
+    for(int i=1;i<=m;i++)
+        ans[i]=0;
+    for(int i=1;i<=n;i++)
+        cin>>b[i];
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
     }
-    if(n%2){
-        cout<<"NiuMei"<<endl;
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        mp[tmp].push(i);
+        if(i==m)
+            eds=tmp;
+    }
+    int ed;
+    int ff=0;
+    for(int i=1;i<=n;i++){
+        if(a[i]==eds){
+            ed=i;
+            ff=1;
+        }
+    }
+    if(!ff){
+        cout<<"NO"<<endl;
         return;
     }
-    cout<<rod<<endl;
-    if(rod*2>=ji+ji%2){
-        cout<<"NiuMei"<<endl;
-    }else cout<<"NiuNiu"<<endl;
-
+    for(int i=1;i<=n;i++){
+        if(a[i]!=b[i]){
+            if(mp[a[i]].empty()){
+                cout<<"NO"<<endl;
+                return;
+            }
+            ans[mp[a[i]].front()]=i;
+            mp[a[i]].pop();
+        }
+    }
+    cout<<"YES"<<endl;
+    for(int i=1;i<=m;i++){
+        if(ans[i])
+            cout<<ans[i]<<' ';
+        else cout<<ed<<' ';
+    }
+    cout<<endl;
 }
 signed main()
 {
@@ -72,10 +104,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+// std::ios::sync_with_stdio(false);
+// cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
