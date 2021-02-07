@@ -45,56 +45,63 @@ const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
 queue<int> mp[110000];
-int a[110000],b[110000],ans[110000];
+int a[110000],b[110000],ans[110000],c[110000];
+int n,m;
 void work()
 {
-    int n,m;
+    cin>>n>>m;  
     int tmp;
-    cin>>n>>m;
-    int eds;
     for(int i=1;i<=n;i++)
         while(!mp[i].empty())
             mp[i].pop();
     for(int i=1;i<=m;i++)
         ans[i]=0;
     for(int i=1;i<=n;i++)
-        cin>>b[i];
-    for(int i=1;i<=n;i++){
         cin>>a[i];
-    }
+    for(int i=1;i<=n;i++)
+        cin>>b[i];
     for(int i=1;i<=m;i++){
-        cin>>tmp;
-        mp[tmp].push(i);
-        if(i==m)
-            eds=tmp;
+        cin>>c[i];
+        mp[c[i]].push(i);
     }
-    int ed;
     int ff=0;
-    for(int i=1;i<=n;i++){
-        if(a[i]==eds){
+    int ed=0;
+    for(int i=1;i<=n;i++)
+        if(b[i]==c[m]){
             ed=i;
             ff=1;
         }
-    }
     if(!ff){
         cout<<"NO"<<endl;
         return;
     }
     for(int i=1;i<=n;i++){
         if(a[i]!=b[i]){
-            if(mp[a[i]].empty()){
+            if(mp[b[i]].empty()){
                 cout<<"NO"<<endl;
                 return;
             }
-            ans[mp[a[i]].front()]=i;
-            mp[a[i]].pop();
+            ans[mp[b[i]].front()]=i;
+            mp[b[i]].pop();
         }
+    }
+    for(int i=1;i<=m;i++){
+        if(!ans[i])
+            ans[i]=ed;
+        a[ans[i]]=c[i];
+    }
+    ff=0;
+    for(int i=1;i<=n;i++){
+        if(a[i]!=b[i])
+            ff=1;
+    }
+    if(ff){
+        cout<<"NO"<<endl;
+        return;
     }
     cout<<"YES"<<endl;
     for(int i=1;i<=m;i++){
-        if(ans[i])
-            cout<<ans[i]<<' ';
-        else cout<<ed<<' ';
+        cout<<ans[i]<<' ';
     }
     cout<<endl;
 }
@@ -104,8 +111,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-// std::ios::sync_with_stdio(false);
-// cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 cin>>t;
 while (t--)
