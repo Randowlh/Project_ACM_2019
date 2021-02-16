@@ -26,6 +26,7 @@
        		"   if(x >= 10) wt(x / 10);",
     		"   putchar('0' + x % 10);",
 			"}",
+			"#define lowbit(x) (x&-x)",
 			"#define MP make_pair",
 			"#define pb push_back",
 			"#define pt putchar",
