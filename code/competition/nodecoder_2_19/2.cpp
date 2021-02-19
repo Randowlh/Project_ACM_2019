@@ -1,5 +1,8 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define int long long
+const int maxn=310000;
+#define inf 0x7FFFFFFF
 struct LCF
 {
     struct Edge
@@ -10,8 +13,6 @@ struct LCF
         int cost;
         Edge(int fr, int t, int f, int cc) : from(fr), to(t), flow(f), cost(cc) {}
     };
-#define inf 0x3f3f3f3f
-#define maxn 200010
     int book[maxn];
     int dis[maxn];
     int n, m, s, t, ans = 0;
@@ -91,24 +92,31 @@ struct LCF
         }
         return flow;
     }
-} tmp;
-int main()
-{
-    std::ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    // freopen("in.txt", "r", stdin);
-    cin >> tmp.n >> tmp.m >> tmp.s >> tmp.t;
-    int w, u, v, c;
-    tmp.edge.clear();
-    for (int i = 0; i <= tmp.n; i++)
-    {
-        tmp.mp[i].clear();
+} fl;
+int tt[10];
+signed main(){
+    // freopen("in.txt","r",stdin);
+    int n,m;
+    scanf("%lld%lld",&n,&m);
+    fl.s=0;
+    fl.t=n+m+10;
+    fl.n=n+m+100;
+    for(int i=1;i<=m;i++)
+        fl.add_edge(0,i,1,0);
+    for(int i=m+1;i<=n+m;i++)
+        fl.add_edge(i,n+m+10,1,0);
+    int tmp;
+    for(int i=1;i<=m;i++){
+        int k;
+        scanf("%lld",&k);
+        for(int i=1;i<=k;i++)
+            scanf("%lld",&tt[i]);
+        int w;
+        scanf("%lld",&w);
+        for(int j=1;j<=k;j++)
+            fl.add_edge(i,tt[j]+m,1,inf-w);
     }
-    for (int i = 0; i < tmp.m; i++)
-    {
-        cin >> w >> u >> v >> c;
-        tmp.add_edge(w, u, v, c);
-    }
-    cout << tmp.cost_flow() << ' ' << tmp.ans << endl;
-    return 0;
+    // cout<<0x3f3f3f3f<<endl;
+    int aa=fl.cost_flow();
+    printf("%lld\n",aa*inf-fl.ans);
 }
