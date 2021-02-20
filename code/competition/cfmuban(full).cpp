@@ -113,28 +113,28 @@ struct modint
         else if (n < 0)
             n = (n % mod + mod) % mod;
     }
-    operator int() { return n; }
+    inline operator int() { return n; }
+    inline bool operator==(modint b) { return n == b.n; }
+    inline modint operator+=(modint b)
+    {
+        n += b.n;
+        if (n >= mod)
+            n -= mod;
+        return *this;
+    }
+    modint operator-=(modint b)
+    {
+        n -= b.n;
+        if (n < 0)
+            n += mod;
+        return *this;
+    }
+    modint operator*=( modint b)
+    {
+        n = ((ll)n * n) % mod;
+        return *this;
+    }
 };
-bool operator==(modint a, modint b) { return a.n == b.n; }
-modint operator+=(modint &a, modint b)
-{
-    a.n += b.n;
-    if (a.n >= mod)
-        a.n -= mod;
-    return a;
-}
-modint operator-=(modint &a, modint b)
-{
-    a.n -= b.n;
-    if (a.n < 0)
-        a.n += mod;
-    return a;
-}
-modint operator*=(modint &a, modint b)
-{
-    a.n = ((ll)a.n * b.n) % mod;
-    return a;
-}
 modint operator+(modint a, modint b) { return a += b; }
 modint operator-(modint a, modint b) { return a -= b; }
 modint operator*(modint a, modint b) { return a *= b; }

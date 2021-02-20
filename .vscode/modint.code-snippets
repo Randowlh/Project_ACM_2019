@@ -1,0 +1,12 @@
+{
+	"cpp":{
+		"prefix":"niyuan",
+		"body": [
+		"int inv(int a, int p)",
+		"{",
+    	"	return (a == 1 ? 1 : (1 - p * inv(p % a, a)) / a + p);",
+		"}",
+		],
+		"description": "get niyuan"
+	},
+}
