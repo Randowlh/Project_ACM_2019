@@ -45,45 +45,22 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-double date[100];
-vector<vector<int>> ans;
-vector<int> v;
-double tog;
-int n;
-void dfs(double now,int st){
-  if(now==tog){
-    if(ans.size()<=20)
-    ans.push_back(v);
-    return;
-  }
-  if(now>tog)
-    return;
-  for(int i=st;i<=n;i++){
-    v.push_back(i);
-    dfs(now+date[i],i);
-    v.pop_back();  
-  }
-  return ;
-}
 void work()
 {
-  cin>>n>>tog;
-  for(int i=1;i<=n;i++){
-    cin>>date[i];
-  }
-  dfs(0,1);
-  cout<<"there are "<<ans.size()<<" possible ans"<<endl;
-  for(int i=0;i<ans.size();i++){
-    for(int j=0;j<ans[i].size();j++){
-      cout<<ans[i][j]<<' ';
+    int n,m;
+    cin>>n>>m;
+    if(m==0){
+        cout<<1<<endl;
+        return;
     }
-    cout<<endl;
-  }
+    if(m>n/2){
+        cout<<n-m<<endl;
+    }else cout<<m<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
