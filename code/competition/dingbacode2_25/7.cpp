@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
+#include <thread>
 using namespace std;
 #pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#pragma GCC optimize("Ofast,no-stack-protector")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -45,14 +46,55 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int x[1100],v[1100];
+double t[510000];
+int x,y;
+double v1,v2;
+double calc(int pos,int tog){
+   double ans=pos/v1;
+   double dis=sqrt((x-pos)*(x-pos)+tog*tog);
+   double vv=log(1+t[pos]*tog);
+   ans+=dis/vv;
+   ans+=(y-tog)/v2;
+   return ans;
+}
+double ans;
+void getans(int ll,int rr){
+for(int i=ll;i<=rr;i++){
+   double l=0,r=y;
+   while((r-l)>=10){
+      int lm=l+(r-l)/3;
+      int rm=r-(r-l+2)/3;
+      if(calc(i,lm)>=calc(i,rm))
+         l=lm;
+      else r=rm;
+   }
+   for(int j=l;j<=r;j++)
+      MIN(ans,calc(i,j));
+   }
+}
 void work()
 {
-    int n;    
-    cin>>n;
-    for(int i=1;i<=n;i++){
-        
-    }
+   rd(x),rd(y);
+   scanf("%lf%lf",&v1,&v2);
+   int a,b,c,p;
+   rd(a),rd(b),rd(c),rd(p);
+   for (int i=0; i<=x; i++){
+      t[i]=(double)a/c;
+      a=(long long)a*b%p;
+   }
+   ans=x/v1+y/v2;
+   int mid=(0+x)>>1;
+   int mid1=(0+mid)>>1;
+   int mid2=(mid+1+x)>>1;
+   thread t1(calc,0,mid1);
+   thread t2(calc,mid1+1,mid);
+   thread t3(calc,mid+1,mid2);
+   thread t4(calc,mid2+1,x);
+   t1.join();
+   t2.join();
+   t3.join();
+   t4.join();
+   printf("%.4lf\n",ans);
 }
 signed main()
 {
@@ -63,6 +105,7 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
+cin>>t;
 //cin>>t;
 while (t--)
 {

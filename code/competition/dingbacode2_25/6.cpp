@@ -46,24 +46,34 @@ const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
 double t[110000];
+double v1,v2;
+int x,y;
+int a,b,c,p;
+double calc(int pos,int tog){
+   double ans=pos/v1;
+   double dis=sqrt((x-pos)*(x-pos)+tog*tog);
+   double vv=log(1+t[pos]*tog);
+   ans+=dis/vv;
+   ans+=(y-tog)/v2;
+   return ans;
+}
 void work()
 {
-    long double v1,v2;
-    int x,y;
-    int a,b,c,p;
+    
     cin>>x>>y;  
     cin>>v1>>v2;
     cin>>a>>b>>c>>p;
-    for (int i=0;i<=x;i++){
-        t[i]=(double)a/c;
-        a=(long long)a*b%p;
+     for (int i=0; i<=x; i++){
+      t[i]=(double)a/c;
+      a=(long long)a*b%p;
     }
-    long double ans=llinf;
+    double ans=llinf;
     for(int i=0;i<=x;i++){
         for(int j=0;j<=y;j++){
-            long double tt=(x-i)*(x-i)+j*j;
+            double tt=(x-i)*(x-i)+j*j;
             tt=sqrt(tt);
-            MIN(ans,tt/log(1+t[i]*j)+i/v1+(y-j)/v2);
+            // MIN(ans,tt/log(1+t[i]*j)+i/v1+(y-j)/v2);
+            MIN(ans,calc(i,j));
         }
     }
     printf("%.4lf\n",ans);
