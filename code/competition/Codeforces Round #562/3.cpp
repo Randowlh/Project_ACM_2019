@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
-#include <thread>
 using namespace std;
 #pragma optimize(2)
-#pragma GCC optimize("Ofast,no-stack-protector")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -46,41 +45,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-double t[510000];
-int x,y;
-double v1,v2;
-double calc(int pos,int tog){
-   double ans=pos/v1;
-   double dis=sqrt((x-pos)*(x-pos)+tog*tog);
-   double vv=log(1+t[pos]*tog);
-   ans+=dis/vv;
-   ans+=(y-tog)/v2;
-   return ans;
+int date[310000];
+int tdate[310000];
+int n,m;
+bool ck(int a){
+    for(int i=1;i<=n;i++)
+        tdate[i]=date[i];
+    for(int i=1;i<=n;i++){
+        if(i==1){
+            if((a+tdate[1])>=m)
+                tdate[1]=0;
+            continue;
+        }
+        if(tdate[i-1]>tdate[i]){
+            int dis=tdate[i-1]-tdate[i];
+            if(dis>a)
+                return false;
+            else tdate[i]=tdate[i-1];
+        }else{
+            if((a+tdate[i])>=m&&(a+tdate[i])%m>=tdate[i-1])
+                tdate[i]=tdate[i-1];
+        }
+    }
+    return true;
 }
 void work()
 {
-   rd(x),rd(y);
-   scanf("%lf%lf",&v1,&v2);
-   int a,b,c,p;
-   rd(a),rd(b),rd(c),rd(p);
-   for (int i=0; i<=x; i++){
-      t[i]=(double)a/c;
-      a=(long long)a*b%p;
-   }
-   double ans=x/v1+y/v2;
-   for(int i=0;i<=x;i++){
-      int l=0,r=y;
-      while((r-l)>=10){
-         int lm=((l+r)>>1);
-         int rm=lm+1;
-         if(calc(i,lm)>=calc(i,rm))
-            l=lm;
-         else r=rm;
-      }
-      for(int j=l;j<=r;j++)
-            MIN(ans,calc(i,j));
-   }
-   printf("%.4lf\n",ans);
+
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    int l=0,r=m;
+    while(l^r){
+        int mid=(l+r)>>1;
+        if(ck(mid)){
+            r=mid;
+        }else l=mid+1;
+    }
+    cout<<l<<endl;
 }
 signed main()
 {
@@ -91,7 +93,6 @@ signed main()
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);
 int t = 1;
-cin>>t;
 //cin>>t;
 while (t--)
 {

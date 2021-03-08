@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <thread>
 using namespace std;
 #pragma optimize(2)
 #pragma GCC optimize("Ofast,no-stack-protector")
@@ -46,41 +45,30 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-double t[510000];
-int x,y;
-double v1,v2;
-double calc(int pos,int tog){
-   double ans=pos/v1;
-   double dis=sqrt((x-pos)*(x-pos)+tog*tog);
-   double vv=log(1+t[pos]*tog);
-   ans+=dis/vv;
-   ans+=(y-tog)/v2;
-   return ans;
-}
+string tmp;
+int dis[310000];
 void work()
 {
-   rd(x),rd(y);
-   scanf("%lf%lf",&v1,&v2);
-   int a,b,c,p;
-   rd(a),rd(b),rd(c),rd(p);
-   for (int i=0; i<=x; i++){
-      t[i]=(double)a/c;
-      a=(long long)a*b%p;
-   }
-   double ans=x/v1+y/v2;
-   for(int i=0;i<=x;i++){
-      int l=0,r=y;
-      while((r-l)>=10){
-         int lm=((l+r)>>1);
-         int rm=lm+1;
-         if(calc(i,lm)>=calc(i,rm))
-            l=lm;
-         else r=rm;
-      }
-      for(int j=l;j<=r;j++)
-            MIN(ans,calc(i,j));
-   }
-   printf("%.4lf\n",ans);
+    cin>>tmp;
+    int n=tmp.size();
+    for(int i=0;i<n;i++)
+        dis[i]=llinf;
+    dis[n]=llinf;
+    for(int i=n-1;i>=0;i--)
+        for(int k=1;i+(k<<1)<min(n,dis[i+1]);k++)
+            if(tmp[i]==tmp[i+k]&&tmp[i]==tmp[i+(k<<1)]){
+                dis[i]=i+(k<<1);
+                break;
+            }
+    for(int i=n-2;i>=0;i--)
+        MIN(dis[i],dis[i+1]);
+    int ans=0;
+    for(int i=0;i<n;i++)
+        if(dis[i]==llinf)
+            continue;
+        else 
+            ans+=n-dis[i];
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -88,10 +76,9 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-cin>>t;
 //cin>>t;
 while (t--)
 {
