@@ -17,45 +17,18 @@ public:
     }
     void insert(int v)
     {
-        if (empty())
-        {
-            node *t = new node;
-            t->v = v;
-            t->next = NULL;
-            head = t;
+        node *tmp=new node;
+        tmp->v=v;
+        if(head==NULL||head->v>v){    
+            tmp->next=head;
+            head=tmp;
             return;
         }
-        node *pr = NULL;
-        node *now = head;
-        while (now != NULL && now->v < v)
-        {
-            pr = now;
-            now = now->next;
-        }
-        if (pr == NULL)
-        {
-            now = new node;
-            now->v = v;
-            now->next = head;
-            head = now;
-            return;
-        }
-        else if (now == NULL)
-        {
-            now = new node;
-            now->v = v;
-            now->next = NULL;
-            pr->next = now;
-            return;
-        }
-        else
-        {
-            node *t = new node;
-            t->v = v;
-            t->next = now;
-            pr->next = t;
-            return;
-        }
+        node **now=&head;
+        while(((*now)->next)!=NULL&&(*now)->next->v<=v)    
+            now=&((*now)->next);
+        tmp->next=((*now)->next);
+        (*now)->next=tmp;
     }
     int top()
     {
