@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+#include<bits/stdc++.h>
+using namespace std;
 struct node
     {
         int v;
@@ -28,6 +30,18 @@ public:
         while(now->next!=NULL)
             now=now->next;
         now->next= new node(v);
+        return;
+    }
+    void rgins(node * tt){
+        sz++;
+        if(empty()){
+            head=tt;
+            return;
+        }
+        node *now=head;
+        while(now->next!=NULL)
+            now=now->next;
+        now->next= tt;
         return;
     }
     void insert(int v)
@@ -77,48 +91,53 @@ public:
         return ans;
     }
 } lst[2];
-int stk[1000];
-int tail=0;
+void split(){
+    node **now=&lst[0].head;
+    while((*now)!=NULL&&(*now)->next!=NULL){
+        if((*now)->next->v%2==0){
+            node *tt=(*now)->next;
+            (*now)->next=tt->next;
+            tt->next=NULL;
+            lst[1].rgins(tt);
+            continue;
+        }
+        now=&(*now)->next;
+    }
+    if(*(now)!=NULL){
+        if((*now)->v%2==0){
+            lst[1].rgins(*now);
+            (*now)=NULL;
+        }
+    }
+}
 int main(){
     int n;
     cin>>n;
     int tmp;
     for(int i=1;i<=n;i++){
         cin>>tmp;
-        lst[(tmp>=0)].insert(tmp);
+        lst[0].insert(tmp);
     }
-    cout<<"list 1:"<<endl;;
-    while(!lst[0].empty()){
-        cout<<lst[0].top()<<' ';
-        stk[++tail]=lst[0].top();
-        lst[0].pop();
-    }
-    cout<<endl;
-    while(tail){
-        lst[0].rgins(stk[tail]);
-        tail--;
-    }
-    cout<<"list 1 after reverse:"<<endl;
-    while(!lst[0].empty()){
-        cout<<lst[0].top()<<' ';
-        lst[0].pop();
+    node *now=lst[0].head;
+    cout<<"the link_list before split()"<<endl;
+    while(now!=NULL){
+        cout<<now->v<<' ';
+        now=now->next;
     }
     cout<<endl;
-    cout<<"list 2:"<<endl;;
-    while(!lst[1].empty()){
-        cout<<lst[1].top()<<' ';
-        stk[++tail]=lst[1].top();
-        lst[1].pop();
+    split();
+    cout<<"the link_list after split()"<<endl;
+    now=lst[0].head;
+    while(now!=NULL){
+        cout<<now->v<<' ';
+        now=now->next;
     }
     cout<<endl;
-    while(tail){
-        lst[1].rgins(stk[tail]);
-        tail--;
-    }
-    cout<<"list 2 after reverse:"<<endl;
-    while(!lst[1].empty()){
-        cout<<lst[1].top()<<' ';
-        lst[1].pop();
+    now=lst[1].head;
+    while(now!=NULL){
+        cout<<now->v<<' ';
+        now=now->next;
     }
     cout<<endl;
+
 }
