@@ -129,7 +129,7 @@ public:
         size = a.size;
         return *this;
     }
-    bool operator<(const bignum &a) //重载小于号，利于后面对减法结果的判断
+    bool operator<(const bignum &a) 
     {
         if (sign > a.sign)
             return true;
@@ -163,11 +163,11 @@ public:
         }
         return false;
     }
-    bignum operator-(const bignum &a) //有符号的减法运算重载
+    bignum operator-(const bignum &a)
     {
         bignum tt = a;
         bignum ans;
-        if (*this < tt) //后一个数比前面的大，结果一定是负的
+        if (*this < tt) 
         {
             if (sign == 1 && tt.sign == 1)
             {
@@ -183,7 +183,7 @@ public:
             }
             ans.sign = 1;
         }
-        else //反之则是正的
+        else 
         {
             if (sign == 1 && tt.sign == 1)
             {
@@ -201,27 +201,27 @@ public:
         }
         return ans;
     }
-    bignum operator+(const bignum &a) //有符号加法
+    bignum operator+(const bignum &a) 
     {
         bignum tt(a);
         bignum ans;
-        if (sign == 1 && tt.sign == 1) //两个负数相加，结果为负
+        if (sign == 1 && tt.sign == 1) 
         {
             ans = (*this).plus(tt);
             ans.sign = 1;
         }
-        else if (sign == 0 && tt.sign == 0) //两个正数相加，结果为正
+        else if (sign == 0 && tt.sign == 0) 
         {
             ans = (*this).plus(tt);
             ans.sign = 0;
         }
-        else if (tt.sign == 1) //后面是负的等价于减法
+        else if (tt.sign == 1)
         {
             tt.sign = 0;
             ans = (*this) - tt;
             tt.sign = 1;
         }
-        else //前面的是负的等价于交换再相减
+        else 
         {
             sign = 0;
             ans = tt - (*this);
@@ -297,7 +297,6 @@ public:
 };
 int main()
 {
-    //freopen("in.txt", "r", stdin);
     bignum a, b;
     cin >> a >> b;
     cout << a + b << endl;
