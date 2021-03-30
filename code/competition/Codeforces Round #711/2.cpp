@@ -45,40 +45,41 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
+int date[100];
+map<int,int> M;
 void work()
 {
-    int n;
-    cin>>n;
-    // cout<<"n="<<n<<endl;
+    int n,w;
+    cin>>n>>w;
+    int tmp;
+    int ma=0;
     for(int i=1;i<=n;i++){
-        cin>>date[i];ans[i]=0;
+        cin>>tmp;
+        date[M[tmp]]++;
+        MAX(ma,M[tmp]);
     }
-    for(int i=1;i<=n;i++){
-        if(!ans[i])
-            dfs(i,i);
+    int ans=0;
+    int tot=n;
+    while(tot){
+        int tw=w;
+        for(int i=ma;i>=0;i--){
+            while(tw>=(1<<i)&&date[i]){
+                tw-=(1<<i);
+                date[i]--;
+                tot--;
+            }
+        }
+        ans++;
     }
-    for(int i=1;i<=n;i++){
-        cout<<ans[i]<<' ';
-    }
-    cout<<endl;
-    // vector<int> v;
-    // v.push_back(0)
+    cout<<ans<<endl;
 }
 signed main()
 {
+    int now=1;
+    for(int i=0;i<60;i++){
+        M[now]=i;
+        now<<=1;
+    }
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);

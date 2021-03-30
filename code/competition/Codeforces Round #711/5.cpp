@@ -45,48 +45,52 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
+int date[1100];
+struct node{
+   int x,y;
+   int dis;
+   node(){}
+   node(int a, int b){
+   x=a,y=b;
+   if(date[x]<date[y])
+      swap(x,y);
+   dis=abs(date[x]-date[y]);}
+   bool operator<(node a){
+      return dis<a.dis;
+   }
+};
 void work()
 {
-    int n;
-    cin>>n;
-    // cout<<"n="<<n<<endl;
-    for(int i=1;i<=n;i++){
-        cin>>date[i];ans[i]=0;
-    }
-    for(int i=1;i<=n;i++){
-        if(!ans[i])
-            dfs(i,i);
-    }
-    for(int i=1;i<=n;i++){
-        cout<<ans[i]<<' ';
-    }
-    cout<<endl;
-    // vector<int> v;
-    // v.push_back(0)
+   int n;
+   cin>>n;
+   vector<node> v;
+   for(int i=1;i<=n;i++)
+      cin>>date[i];
+   for(int i=1;i<=n;i++)
+      for(int j=i+1;j<=n;j++)
+         v.push_back(node(i,j));
+   sort(v.begin(), v.end());
+   for(int i=v.size()-1;i>=0;i--){
+      cout<<"? "<<v[i].x<<' '<<v[i].y<<endl;
+      string aa;
+      cin>>aa;
+      if(aa=="Yes"){
+         cout<<"! "<<v[i].x<<' '<<v[i].y<<endl;
+         return;
+      }
+   }
+   cout<<"! 0 0"<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+   // freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

@@ -45,37 +45,23 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
+int gcd(int a, int b){ return b ? gcd(b, a % b) : a;}
+bool ck(int a){
+    int tot=0;
+    int ta=a;
+    while(ta){
+        tot+=ta%10;
+        ta/=10;
     }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
+    return gcd(a,tot)!=1;
 }
 void work()
 {
     int n;
     cin>>n;
-    // cout<<"n="<<n<<endl;
-    for(int i=1;i<=n;i++){
-        cin>>date[i];ans[i]=0;
-    }
-    for(int i=1;i<=n;i++){
-        if(!ans[i])
-            dfs(i,i);
-    }
-    for(int i=1;i<=n;i++){
-        cout<<ans[i]<<' ';
-    }
-    cout<<endl;
-    // vector<int> v;
-    // v.push_back(0)
+    while(!ck(n))
+        n++;
+    cout<<n<<endl;   
 }
 signed main()
 {

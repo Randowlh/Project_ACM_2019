@@ -45,37 +45,55 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
+const int cc=100000;
+int dp[110000];
+int book[110000];
+int n,m;
+void dfs(int cnt,int pos,int opt,int x,int y,int step){
+   if(book[pos]==cnt)
+      return;
+   book[pos]=cnt;
+   if(step>y)
+      return;
+   if(dp[pos]==-1){
+      dp[pos]=cnt;
+   }else step=0;
+   if(opt==1){
+      int pr=pos+(x+cc-1)/cc;
+      if(pr>=0&&pr<=m){
+         dfs(cnt,pr,opt,x,y,step+1);
+      }
+   }else{
+      int pr=(pos*x+cc-1)/cc;
+      if(pr>=0&&pr<=m)
+         dfs(cnt,pr,opt,x,y,step+1);
+   }
 }
 void work()
 {
-    int n;
-    cin>>n;
-    // cout<<"n="<<n<<endl;
-    for(int i=1;i<=n;i++){
-        cin>>date[i];ans[i]=0;
-    }
-    for(int i=1;i<=n;i++){
-        if(!ans[i])
-            dfs(i,i);
-    }
-    for(int i=1;i<=n;i++){
-        cout<<ans[i]<<' ';
-    }
-    cout<<endl;
-    // vector<int> v;
-    // v.push_back(0)
+   cin>>n>>m;
+   for(int i=1;i<=m;i++)
+      dp[i]=-1;
+   int opt,x,y;
+   for(int i=1;i<=n;i++){
+      cin>>opt>>x>>y;
+      if(opt==2&&x<cc){
+         for(int j=0;j<=m;j++){
+            if(dp[j]!=-1)
+               dfs(i,j,opt,x,y,0);
+         }
+      }
+      else{
+         for(int j=m;j>=0;j--){
+            if(dp[j]!=-1){
+               dfs(i,j,opt,x,y,0);
+            }
+         }
+      }
+   }
+   for(int i=1;i<=m;i++)
+      cout<<dp[i]<<' ';
+   cout<<endl;
 }
 signed main()
 {
@@ -86,7 +104,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

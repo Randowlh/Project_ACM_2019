@@ -37,7 +37,7 @@ void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = (1 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
@@ -45,37 +45,43 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
+int date[1100];
 void work()
 {
-    int n;
-    cin>>n;
-    // cout<<"n="<<n<<endl;
-    for(int i=1;i<=n;i++){
-        cin>>date[i];ans[i]=0;
+    int n,k;
+    cin>>n>>k;   
+    if(k==1){
+        cout<<1<<endl;
+        return;
     }
-    for(int i=1;i<=n;i++){
-        if(!ans[i])
-            dfs(i,i);
+    int ans=1;
+    for(int i=1;i<=n;i++)
+        date[i]=1;
+    int flag=1;
+    for(int i=2;i<=k;i++){
+        // cout<<"dsadasd"<<endl;
+        int now=0;
+        if(flag){
+            for(int j=n;j>=1;j--){
+                ans=(ans+date[j])%mod;
+                int t=now;
+                now+=date[j];
+                now%=mod;
+                date[j]=t;
+            }
+        }else{
+            for(int j=1;j<=n;j++){
+                ans=(ans+date[j])%mod;
+                int t=now;
+                now+=date[j];
+                now%=mod;
+                date[j]=t;
+            }
+        }
+        // cout<<"now="<<now<<endl;
+        flag^=1;
     }
-    for(int i=1;i<=n;i++){
-        cout<<ans[i]<<' ';
-    }
-    cout<<endl;
-    // vector<int> v;
-    // v.push_back(0)
+    cout<<ans<<endl;
 }
 signed main()
 {
