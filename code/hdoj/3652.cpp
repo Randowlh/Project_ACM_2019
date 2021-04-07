@@ -16,7 +16,7 @@ inline void out(int a)
 }
 int dp[20][4][20];
 int disg[200];
-int dfs(int pos, int staus, int flag, int mod)
+int dfs1(int pos, int staus, int flag, int mod)
 {
     if (pos == 0)
         return staus == 2 && mod == 0;
