@@ -44,25 +44,61 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
+const int maxn = 210000;
+int pre[30][maxn];
+set<int> ss[30];
+int getaf(int pos,int v){
+    ss[v].insert(pos);
+    auto i=ss[v].find(pos);
+    i++;
+    ss[v].erase(pos);
+    return *i;
 }
 void work()
 {
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+    string tmp;
+    set<char> s;
+    cin>>tmp;
+    for(int i=0;i<26;i++)
+        ss[i].clear();
+    for(int i=0;i<tmp.size();i++){
+        s.insert(tmp[i]);
+        ss[tmp[i]-'a'].insert(i);
+    }
+    for(int i=0;i<26;i++)
+        pre[i][tmp.size()]=0;
+    for(int i=tmp.size()-1;i>=0;i--)
+        for(int j=0;j<26;j++)
+            pre[j][i]=pre[j][i+1]+(tmp[i]=='a'+j);
+    int tot=s.size();
+    int now=-1;
+    string ans;
+    for(int i=1;i<=tot;i++){
+        for(char j='z';j>='a';j--){
+            if(!s.count(j))
+                continue;
+            // cout<<"j="<<j<<endl;
+            set<char> aa=s;
+            int to=getaf(now,j-'a');
+            // cout<<"to="<<to<<' '<<now<<' '<<j<<endl;   
+            int ff=0;
+            aa.erase(j);
+            for(auto k=aa.begin();k!=aa.end();k++)
+                if(!pre[*k-'a'][to]){
+                    // cout<<"*k="<<*k<<endl;
+                    ff=1;
+                    break;
+                }
+            if(!ff){
+                // cout<<"dsadadsa"<<endl;
+                ans.push_back(j);
+                s.erase(j);
+                now=to;
+                break;
+            }
+        } 
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -73,7 +109,8 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-// cin>>t;
+cin>>t;
+// t=1;
 while (t--)
 {
 work();

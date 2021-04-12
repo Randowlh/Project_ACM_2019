@@ -45,24 +45,28 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
 void work()
-{
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+{   
+    int n;
+    cin>>n;
+    int tmp;
+    map<int,int> M;
+    for(int i=0;i<n;i++){
+        cin>>tmp;
+        M[tmp]++;
+    }
+    for(auto i=M.begin();i!=M.end();i++){
+        if(i->second == 1){
+            cout<<i->first<<endl;
+            return ;
+        }
+    }
+    if(len==k)
+    for(int i=0;i<=n-k;i++){
+        if(pre[i]-pre[i+k]==9){
+            cout<<"YES"<<endl;
+        }
+    }
 }
 signed main()
 {
@@ -73,7 +77,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-// cin>>t;
+cin>>t;
 while (t--)
 {
 work();

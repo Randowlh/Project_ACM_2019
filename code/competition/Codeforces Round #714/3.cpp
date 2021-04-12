@@ -37,7 +37,7 @@ void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = (1 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
@@ -45,24 +45,27 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
+int dp[210000][10];
+int dfs(int num,int stp){
+    if(dp[stp][num]!=-1)
+        return dp[stp][num];
+    if(stp<10-num)
+        return 1;
+    int tstp=stp-10+num;
+    int ans=(dfs(1,tstp)+dfs(0,tstp))%mod;
+    dp[stp][num]=ans;
+    return ans;
 }
 void work()
 {
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+    int n,m;
+    cin>>n>>m;
+    int ans=0;
+    while(n){
+        ans=(ans+dfs(n%10,m))%mod;
+        n/=10;
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -70,10 +73,11 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
+memset(dp,-1, sizeof(dp));
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-// cin>>t;
+cin>>t;
 while (t--)
 {
 work();

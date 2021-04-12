@@ -45,24 +45,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
 void work()
 {
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+    int n;
+    cin>>n;
+    int tmp;
+    vector<int> v;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        v.push_back(tmp);
+    }
+    sort(v.begin(),v.end(), greater<int>());
+    deque<int> q;
+    int flag=1;
+    for(int i=0;i<v.size();i++){
+        if(flag)
+            q.push_back(v[i]);
+        else q.push_front(v[i]);
+        flag^=1;
+    }
+    vector<int> ans;
+    while(!q.empty()){
+        ans.push_back(q.front());
+        q.pop_front();
+    }
+    flag=0;
+    for(int i=0;i<n;i++){
+        if(ans[(i-1+n)%n]+ans[(i+1)%n]<=ans[i])
+            flag=1;
+    }
+    if(flag)
+        cout<<"NO"<<endl;
+    else {
+        cout<<"YES"<<endl;
+        for(int i=0;i<n;i++)
+            cout<<ans[i]<<' ';
+        cout<<endl;
+    }
+
 }
 signed main()
 {
@@ -73,7 +93,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-// cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

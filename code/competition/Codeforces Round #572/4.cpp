@@ -45,24 +45,23 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
+int du[maxn];
 void work()
 {
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+    int n;
+    cin>>n;
+    int u,v;
+    for(int i=1;i<n;i++){
+        cin>>u>>v;
+        du[u]++,du[v]++;
+    }
+    int ff=0;
+    for(int i=1;i<=n;i++)
+        if(du[i]==2)
+            ff=1;
+    if(ff)
+        cout<<"NO"<<endl;
+    else cout<<"YES"<<endl;
 }
 signed main()
 {
@@ -70,10 +69,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-// cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

@@ -44,25 +44,50 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000],ans[210000];
-vector<int> vv;
-void dfs(int pos,int tpg){
-    if(!vv.empty()&&pos==tpg){
-        for(int i=0;i<vv.size();i++){
-            ans[vv[i]]=vv.size();
-        }
-        return;
-    }
-    vv.push_back(date[pos]);
-    dfs(date[pos],tpg);
-    vv.pop_back();
-}
+const int maxn = 210000;
+int date[maxn];
+bool vis[maxn];
+pair<int,int> st[maxn];
 void work()
 {
-    unsigned short usi=65535;
-    short si=usi;
-    cout<<si<<endl;
+    int n,p;
+    int cnt=0;
+    cin>>n>>p;
+    for(int i=1;i<=n;i++){
+        cin>>date[i];
+        vis[i]=0;
+        st[i]=make_pair(date[i],i);
+    }
+    int ans=0;
+    sort(st+1,st+n+1);
+    for(int i=1;i<=n;i++){
+        if(st[i].first>=p)
+            break;
+        if(vis[st[i].second])
+            continue;
+        vis[st[i].second]=1;
+        // cout<<"st[]"
+        for(int j=st[i].second-1;j>=1;j--){
+            if(date[j]%st[i].first)
+                break;
+            cnt++;
+            ans+=st[i].first;
+            if(vis[j])
+                break;
+            vis[j]=1;
+        }
+        for(int j=st[i].second+1;j<=n;j++){
+            if(date[j]%st[i].first)
+                break;
+            cnt++;
+            ans+=st[i].first;
+            if(vis[j])
+                break;
+            vis[j]=1;
+        }
+    }
+    ans+=p*(n-1-cnt);
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -73,7 +98,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-// cin>>t;
+cin>>t;
 while (t--)
 {
 work();
