@@ -45,12 +45,28 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-string cst="hello";
+int cl[51];
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+    int n,q;
+    cin>>n>>q;
+    int tmp;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        if(!cl[tmp])
+            cl[tmp]=i;
+    }
+    for(int i=1;i<=q;i++){
+        cin>>tmp;
+        cout<<cl[tmp]<<' ';
+        int tt=cl[tmp];
+        for(int j=1;j<=50;j++){
+            if(cl[j]<tt)
+                cl[j]++;
+        }
+        cl[tmp]=1;
+    }
+    cout<<endl;
 }
 signed main()
 {
@@ -61,7 +77,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

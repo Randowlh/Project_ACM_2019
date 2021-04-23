@@ -45,12 +45,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-string cst="hello";
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+    int n;
+    cin>>n;
+    int t[3];
+    memset(t,0, sizeof t);
+    string tt;
+    cin>>tt;
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        if(tt[i]=='M')
+            cnt++;
+    }
+    if(cnt*3!=n){
+        cout<<"NO"<<endl;
+        return;
+    }
+    int tot=0;
+    for(int i=0;i<n;i++){
+        if(tt[i]=='T')
+            tot++;
+        else tot--;
+        if(tot<0){
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+    tot=0;
+    for(int i=n-1;i>=0;i--){
+        if(tt[i]=='T')
+            tot++;
+        else tot--;
+        if(tot<0){
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+    cout<<"YES"<<endl;
 }
 signed main()
 {

@@ -45,12 +45,33 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-string cst="hello";
+int date[2100];
+int dp[2100][2100];
+int n;
+int dfs(int l,int r){
+    if(dp[l][r]!=-1)
+        return dp[l][r];
+    int ans=llinf;
+    if(l>1)
+        MIN(ans,dfs(l-1,r));
+    if(r<n)
+        MIN(ans,dfs(l,r+1));
+    ans+=date[r]-date[l];
+    dp[l][r]=ans;
+    return ans;
+}
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+    cin>>n;
+    memset(dp,-1, sizeof(dp));
+    int ans=llinf;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    sort(date+1,date+n+1);
+    dp[1][n]=date[n]-date[1];
+    for(int i=1;i<=n;i++)
+        MIN(ans,dfs(i,i));
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -61,7 +82,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

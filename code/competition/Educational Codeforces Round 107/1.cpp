@@ -45,12 +45,18 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-string cst="hello";
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+    int n;
+    cin>>n;
+    int cnt=0;
+    int tmp;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        if(tmp!=2)
+            cnt++;
+    }
+    cout<<cnt<<endl;
 }
 signed main()
 {

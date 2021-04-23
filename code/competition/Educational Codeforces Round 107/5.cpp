@@ -22,7 +22,6 @@ void wt(T x){
    if(x >= 10) wt(x / 10);
    putchar('0' + x % 10);
 }
-#define lowbit(x) (x&-x)
 #define MP make_pair
 #define pb push_back
 #define pt putchar
@@ -44,24 +43,67 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-string cst="hello";
+const int maxn = 310000;
+string mp[maxn];
+int dp[maxn];
+int ch[maxn];
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+   int n,m;
+   cin>>n>>m;
+//    cout<<"n="<<n<<' '<<m<<endl;
+   for(int i=0;i<n;i++)
+      cin>>mp[i];
+   dp[0]=dp[1]=0;
+   dp[2]=1;
+   ch[0]=1;
+   for(int i=1;i<=maxn-10;i++)
+      ch[i]=ch[i-1]*2%mod;
+   for(int i=3;i<=max(n,m);i++){
+      dp[i]=dp[i-1]+2*dp[i-2]%mod+ch[i-2];
+      dp[i]%=mod;
+   }
+   int tot=0;
+   for(int i=0;i<n;i++)
+      for(int j=0;j<m;j++)
+         tot+=(mp[i][j]=='o');
+//    cout<<"tot="<<tot<<endl;
+   int ans=0;
+   for(int i=0;i<n;i++){
+      int cnt=0;
+      for(int j=0;j<m;j++)
+         if(mp[i][j]=='*'){
+            ans+=dp[cnt]*(ch[tot-cnt])%mod;
+            cnt=0;
+         }else cnt++;
+      ans+=dp[cnt]*(ch[tot-cnt])%mod;
+      cnt=0;
+   }
+   for(int j=0;j<m;j++){
+      int cnt=0;
+      for(int i=0;i<n;i++)
+            if(mp[i][j]=='*'){
+               ans+=dp[cnt]*(ch[tot-cnt])%mod;
+            //    cout<<ch[tot-cnt]<<endl;
+               // ans%=mod;
+               cnt=0;
+            }else cnt++;
+      ans+=dp[cnt]*(ch[tot-cnt])%mod;
+            cnt=0;
+
+   }
+   cout<<ans%mod<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+ freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+// cin>>t;
 while (t--)
 {
 work();

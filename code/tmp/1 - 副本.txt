@@ -1,0 +1,110 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn=1100;
+struct node{
+    int nxt,to,w;
+}eg[maxn],eg2[maxn];
+int head[maxn],head2[maxn];
+int ed=0,ed2=0;
+int a[maxn],ta[maxn],aa[maxn];
+void add(int u,int v,int w){
+    eg[++ed].nxt=head[u];
+    eg[ed].w=w;
+    eg[ed].to=v;
+    head[u]=ed;
+}
+void add2(int u,int v,int w){
+    eg2[++ed2].nxt=head2[u];
+    eg2[ed2].w=w;
+    eg2[ed2].to=v;
+    head2[u]=ed2;
+}
+int dis[maxn];
+int mp[maxn][maxn];
+int belong[maxn];
+int n,t;
+int ans=0;
+int tt=0;
+void dfs(int now,int tot){
+    ans=max(ans,tt);
+    for(int i=head[now];i;i=eg[i].nxt){
+        int to=eg[i].to;        
+        if((tot+eg[i].w)+dis[to]<=t){
+            if(a[to]>0)
+            tt+=a[to];
+            swap(ta[to],a[to]);
+            dfs(to,tot+eg[i].w);
+            swap(ta[to],a[to]);
+            if(a[to]>0)
+            tt-=a[to];
+        }
+    }
+}
+void bfs(int pos,int cnt){
+    queue<int> q;
+    belong[pos]=1;
+    a[cnt]+=aa[pos];
+    q.push(pos);
+    while(!q.empty()){
+        int t=q.front();
+        q.pop();
+        for(int i=head2[t];i;i=eg2[i].nxt){
+            int to=eg2[i].to;
+            if(eg2[i].w)
+                continue;
+            if(!belong[to]){
+                belong[to]=cnt;
+                a[cnt]+=aa[to];
+                q.push(to);
+            }
+        }
+    }
+}
+
+void pre(int pos,int fa,int val){
+    dis[pos]=val;
+    for(int i=head[pos];i;i=eg[i].nxt){
+        int to=eg[i].to;
+        if(to==fa)
+            continue;
+        pre(to,pos,val+eg[i].w);
+    }
+}
+int main(){
+    
+    cin>>n>>t;
+    for(int i=1;i<=n;i++)
+        cin>>aa[i];
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=n;j++)
+            mp[i][j]=0x3f3f3f3f;
+    for(int i=1;i<=n;i++)
+        mp[i][i]=0;
+    int u,v,w;
+    for(int i=1;i<=n-1;i++){
+        cin>>u>>v>>w;
+        add2(u,v,w);
+        add2(v,u,w);
+    }
+    int cnt=0;
+    for(int i=1;i<=n;i++){
+        if(!belong[i]){
+            ++cnt;
+            bfs(i,cnt);
+        }
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=head[i];j;j=eg2[j].nxt){
+            int to=eg2[j].to;
+            if(belong[i]^belong[j]){
+                add(belong[i],belong[j],eg2[j].w);  
+            }
+        }
+    }
+    tt+=a[1];
+    swap(ta[1],a[1]);
+    dfs(1,0);
+    swap(ta[1],a[1]);
+    tt-=a[1];
+    cout<<ans<<endl;
+}

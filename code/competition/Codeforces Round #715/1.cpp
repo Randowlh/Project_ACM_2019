@@ -45,12 +45,21 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-string cst="hello";
 void work()
 {
-   string tt;
-   cin>>tt;
-   int now=0;
+    int n;
+    vector<int> v[2];
+    cin>>n;
+    int tmp;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        v[tmp%2].push_back(tmp);
+    }
+    for(int i=0;i<=1;i++)
+        for(int j=0;j<v[i].size();j++){
+            cout<<v[i][j]<<' ';
+        }
+    cout<<endl;
 }
 signed main()
 {
