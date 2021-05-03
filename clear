@@ -1,0 +1,1 @@
+find ./Desktop/Project_ACM_renewed -name '*.exe' -type f -print -exec rm -rf {} \;

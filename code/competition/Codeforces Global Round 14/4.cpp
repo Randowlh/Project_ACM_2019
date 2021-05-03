@@ -45,48 +45,46 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int a[5100],b[5100],pre[5100];
 void work()
 {
-    int n;
-    cin>>n;
-    int ans=0;
-    for(int i=1;i<=n;i++)
-        cin>>a[i];
-    for(int j=1;j<=n;j++)
-        cin>>b[j];
-    for(int i=1;i<=n;i++)
-        pre[i]=pre[i-1]+a[i]*b[i];
-    ans=pre[n];
-    int flag=0;
-    for(int i=1;i<=n;i++){
-        if(flag==1){
-            int l=i-1;
-            int r=i+1;
-            int now=a[i]*b[i];
-            while(l>=1&&r<=n){
-                now+=a[l]*b[r];
-                now+=a[r]*b[l];
-                MAX(ans,now+pre[l-1]+pre[n]-pre[r]);
-                l--;
-                r++;
-            }
-            i--;
-        }else{
-            int l=i;
-            int r=i+1;
-            int now=0;
-            while(l>=1&&r<=n){
-                now+=a[l]*b[r];
-                now+=a[r]*b[l];
-                MAX(ans,now+pre[l-1]+pre[n]-pre[r]);
-                l--;
-                r++;
-            }
-        }
-        flag^=1;
+    int n,l,r;
+    cin>>n>>l>>r;
+    multiset<int> ll,rr;
+    for(int i=1;i<=l;i++){
+        int tmp;
+        cin>>tmp;
+        ll.insert(tmp);
     }
-    cout<<ans<<endl;
+    for(int j=1;j<=r;j++){
+        int tmp;
+        cin>>tmp;
+        if(ll.find(tmp)!=ll.end())
+            ll.erase(ll.find(tmp));
+        else
+            rr.insert(tmp);
+    }
+    if(ll.size()<rr.size())
+        swap(ll,rr);
+    // int ans=0;
+    int sz=ll.size();
+    int ans=0;
+    for(auto i=ll.begin();i!=ll.end();i++){
+        auto j=i;
+        j++;
+        if(j==ll.end()) 
+            break;
+        if(*i==*j){
+            i++;
+            ans++;
+            sz-=2;
+        }
+    }
+    // cout<<"ll.size()"<<ll.size()<<endl;
+    if(sz<rr.size()){
+        cout<<(ll.size()+rr.size())/2<<endl;
+        return;
+    }
+    cout<<sz+ans<<endl;
 }
 signed main()
 {
@@ -94,10 +92,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

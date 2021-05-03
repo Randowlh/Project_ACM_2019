@@ -45,48 +45,40 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int a[5100],b[5100],pre[5100];
 void work()
 {
-    int n;
-    cin>>n;
-    int ans=0;
-    for(int i=1;i<=n;i++)
-        cin>>a[i];
-    for(int j=1;j<=n;j++)
-        cin>>b[j];
-    for(int i=1;i<=n;i++)
-        pre[i]=pre[i-1]+a[i]*b[i];
-    ans=pre[n];
-    int flag=0;
+    int n,x;
+    cin>>n>>x;
+    vector<int> v;
+    int tmp;
+    int tot=0;
     for(int i=1;i<=n;i++){
-        if(flag==1){
-            int l=i-1;
-            int r=i+1;
-            int now=a[i]*b[i];
-            while(l>=1&&r<=n){
-                now+=a[l]*b[r];
-                now+=a[r]*b[l];
-                MAX(ans,now+pre[l-1]+pre[n]-pre[r]);
-                l--;
-                r++;
-            }
-            i--;
-        }else{
-            int l=i;
-            int r=i+1;
-            int now=0;
-            while(l>=1&&r<=n){
-                now+=a[l]*b[r];
-                now+=a[r]*b[l];
-                MAX(ans,now+pre[l-1]+pre[n]-pre[r]);
-                l--;
-                r++;
+        cin>>tmp;
+        tot+=tmp;
+        v.push_back(tmp);
+    }
+    if(x==tot){
+        cout<<"NO"<<endl;
+        return;
+    }
+    int flag=1;
+    while(flag){
+        flag=0;
+        random_shuffle(v.begin(), v.end());
+        int now=0;
+        for(int i=0;i<n;i++){
+            now+=v[i];
+            if(now==x){
+                flag=1;
+                break;
             }
         }
-        flag^=1;
     }
-    cout<<ans<<endl;
+    cout<<"YES"<<endl;
+    for(int i=0;i<n;i++){
+        cout<<v[i]<<' ';
+    }   
+    cout<<endl;
 }
 signed main()
 {
@@ -94,10 +86,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

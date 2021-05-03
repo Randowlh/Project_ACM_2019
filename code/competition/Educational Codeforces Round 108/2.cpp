@@ -47,9 +47,14 @@ const int maxm= 1;
 const int maxn = 510000;
 void work()
 {
-    int n,m,k;
-    cin>>n>>m>>k;
-    
+   int n,m,k;
+   cin>>n>>m>>k;
+   if(n>m)
+      swap(n,m);
+   int ma=n*m-1;
+   if(k==ma){
+      cout<<"YES"<<endl;
+   }else cout<<"NO"<<endl;
 }
 signed main()
 {
@@ -57,10 +62,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
