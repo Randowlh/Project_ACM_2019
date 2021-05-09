@@ -3,6 +3,7 @@ date=[]
 tot=0
 tt= input()
 for i in tt.split():
+    # print('abababa');
     tmp=int(i);
     date.append(tmp)
     tot=tot+tmp
