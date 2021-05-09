@@ -37,53 +37,33 @@ void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-// const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = (0 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 500;
-int n,mod;
-int pre[maxn+100];int bit[maxn+100];
-ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
-inline int niyuan(int x, int mod) { return powmod(x, mod - 2); }
-void init(){
-    pre[0]=1;
-    for(int i=1;i<=maxn;i++)
-        pre[i]=pre[i-1]*i%mod;
-    bit[0]=1;
-    for(int i=1;i<=maxn;i++)
-       bit[i]=bit[i-1]*2%mod; 
-}
-int cc[maxn][maxn];
-int C(int n,int m){
-    if(n<m)
-        return 0;
-    if(cc[n][m])
-        return cc[n][m];
-    return cc[n][m]=pre[n]*powmod(pre[n-m],mod-2)%mod*powmod(pre[m],mod-2)%mod;
-}
-int dp[maxn][maxn];
+const int maxn = 510000;
+int a[110000];
 void work()
-{cin>>n>>mod;
-    init();
-    
-    int ans=0;
+{
+    int n;
+    cin>>n;
+    vector<pair<int,int>> v; 
     for(int i=1;i<=n;i++)
-        dp[i][i]=bit[i-1];
+        cin>>a[i];
+    int mi=llinf;
+    int mix=0;
     for(int i=1;i<=n;i++)
-        for(int j=1;j<=i;j++)
-            for(int k=1;i+k<=n;k++){
-                dp[i+1+k][j+k]+=dp[i][j]*bit[k-1]%mod*C(j+k,k)%mod;
-                dp[i+1+k][j+k]%=mod;
-            }
+        if(mi>a[i])
+            mi=a[i],mix=i;
+    cout<<n-1<<endl;
     for(int i=1;i<=n;i++){
-        ans+=dp[n][i];
-        ans%=mod;
+        if(i==mix)
+            continue;
+        cout<<i<<' '<<mix<<' '<<mi+(i%2!=mix%2)<<' '<<mi<<endl;
     }
-    cout<<ans<<endl;
 }
 signed main()
 {
@@ -91,10 +71,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
