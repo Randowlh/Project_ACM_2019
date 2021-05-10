@@ -6,6 +6,8 @@ using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define pii(a,b) pair<a,b> 
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -37,7 +39,6 @@ void wt(T x){
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
 #define int long long
-#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
@@ -49,10 +50,35 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+rbset(pii(int,int)) ss;
 void work()
 {
-    rbset(int) a;
-    a.lower_bound()
+    int n;
+    cin>>n;
+    int opt,a;
+    int cnt=0;
+    for(int i=1;i<=n;i++){
+        cin>>opt;
+        if(opt==1){
+            cin>>a;
+            ss.insert(make_pair(a,++cnt));
+        }else if(opt==2){
+            cin>>a;
+            ss.erase(ss.lower_bound(make_pair(a,0)));
+        }else if(opt==3){
+            cin>>a;
+            cout<<ss.order_of_key(make_pair(a,0))+1<<endl;
+        }else if(opt==4){
+            cin>>a;
+            cout<<ss.find_by_order(a-1)->first<<endl;
+        }else if(opt==5){
+            cin>>a;
+            cout<<(--ss.lower_bound(make_pair(a,0)))->first<<endl;
+        }else if(opt==6){
+            cin>>a;
+            cout<<(ss.lower_bound(make_pair(a+1,0)))->first<<endl;
+        }
+    }
 }
 signed main()
 {

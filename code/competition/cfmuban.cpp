@@ -1,4 +1,7 @@
 #include <bits/stdc++.h>
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
