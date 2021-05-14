@@ -40,6 +40,7 @@ void wt(T x){
 #define int long long
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
 const ll mod = (0 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
@@ -47,71 +48,32 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 10;
-const ll llinf = 4223372036854775807;
-mt19937 rnd(114514);
-int date[11000];
-void merge(int left, int mid, int right)
-{
-    int l1 = mid - left + 1;
-    int l2 = right - mid;
-    vector<int> l, r;
-    for (int i = 1; i <= l1; i++)
-        l.push_back(date[left + i - 1]);
-    for (int i = 1; i <= l2; i++)
-        r.push_back(date[mid + i]);
-    l.push_back(llinf);
-    r.push_back(llinf);
-    int i = 0;
-    int j = 0;
-    for (int k = left; k <= right; k++)
-    {
-        if (l[i] <= r[j])
-        {
-            date[k] = l[i];
-            i++;
-        }
-        else
-        {
-            date[k] = r[j];
-            j++;
-        }
-    }
-    return;
+const int maxn = 510000;
+int a[maxn];
+int maa(int l,int r){
+    if(l==r)
+        return a[l];
+    int mid=(l+r)>>1;
+    return max(maa(l,mid),maa(mid+1,r));
 }
-void merge_sort(int l,int r){
-    if(l>=r)
-        return;
-    int dis=(r-l+1);
-    int ss=sqrt(dis);
-    int now=1;
-    while(now+ss<=r){
-        merge_sort(now+1,now+ss);
-        merge(l,now,now+ss);
-        now+=ss;
-    }
-    merge_sort(now+1,r);
-    merge(l,now,r);
-    return;
+int mii(int l,int r){
+    if(l==r)
+        return a[l];
+    int mid=(l+r)>>1;
+    return min(mii(l,mid),mii(mid+1,r));
 }
 void work()
 {
-    for(int i=1;i<=maxn;i++)
-        date[i]=rand();
-    cout<<"pre_sort"<<endl;
-    for(int i=1;i<=maxn;i++)
-        cout<<date[i]<<' ';
-    cout<<endl;
-    merge_sort(1,maxn);
-    for(int i=1;i<=maxn;i++)
-        cout<<date[i]<<' ';
-    cout<<endl;
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+       cin>>a[i]; 
+    cout<<maa(1,n)<<' '<<mii(1,n)<<endl;
 }
 signed main()
 {
-    srand(time(NULL));
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
