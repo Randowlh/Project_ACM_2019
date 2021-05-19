@@ -49,23 +49,78 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-pair<int,int> date[310000];
+struct node{
+    int dir,lo,num;
+    bool operator<(const node a)const{
+        return lo<a.lo;
+    }
+}date[310000],date2[310000];
+int ans[310000];
+int n,m;
+int calc(int i,int j){
+    if(date2[i].lo>date2[j].lo)
+        swap(i,j);
+    int len=date2[j].lo-date2[i].lo;
+    if(date2[i].dir==0)
+        len+=date2[i].lo*2;
+    if(date2[j].dir==1)
+        len+=(m-date2[j].lo)*2;
+    return len/2;
+}
 void work()
 {
-    int n,m;
     cin>>n>>m;
     for(int i=1;i<=n;i++){
-        cin>>date[i].first;
+        cin>>date[i].lo;
+        ans[i]=-1;
+        date[i].num=i;
     }
     char aa;
     for(int i=1;i<=n;i++){
         cin>>aa;
-        date[i].second=(aa=='R');
+        date[i].dir=(aa=='R');
+        date2[i]=date[i];
     }
-    vector<pair<int,int>> line;
+    stable_sort(date+1,date+n+1);
+    stack<int> ss[2];
+    vector<int>bk[2];
     for(int i=1;i<=n;i++){
-        line.push_back(make_pair(-date[i].first,!date[i].second));
+        int t=date[i].lo%2;
+        if(date[i].dir==0){
+            if(ss[t].empty()){
+                bk[t].push_back(i);
+            }else{
+                ans[date[i].num]=ans[date[ss[t].top()].num]=calc(date[ss[t].top()].num,date[i].num);
+                // cout<<"dasdsad"<<date[i].num<<' '<<date[ss[t].top()].num<<endl;
+                ss[t].pop();
+            }
+        }else
+            ss[t].push(i);
     }
+    // cout<<"size()="<<ss[0].size()<<' '<<ss[1].size()<<endl;
+    for(int i=0;i<2;i++){
+        while(ss[i].size()>=2){
+            int a=ss[i].top();
+            ss[i].pop();
+            int b=ss[i].top();
+            ss[i].pop();
+            // cout<<"a="<<a<<' '<<b<<endl;
+            ans[date[a].num]=ans[date[b].num]=calc(date[b].num,date[a].num);
+        }
+        for(int j=0;j<bk[i].size();j++){
+            if(j+1<bk[i].size()){
+                ans[date[bk[i][j]].num]=ans[date[bk[i][j+1]].num]=calc(date[bk[i][j+1]].num,date[bk[i][j]].num);
+                j++;
+            }else 
+                break;
+        }
+        if(ss[i].size()&&bk[i].size()%2)
+            ans[date[ss[i].top()].num]=ans[date[*(bk[i].end()-1)].num]=calc(date[ss[i].top()].num,date[*(bk[i].end()-1)].num);
+    }
+    // cout<<"test"<<calc(3,6)<<endl;
+    for(int i=1;i<=n;i++)
+        cout<<ans[i]<<' ';
+    cout<<endl;
 }
 signed main()
 {
