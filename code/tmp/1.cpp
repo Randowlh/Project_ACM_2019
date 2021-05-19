@@ -1,107 +1,106 @@
 #include <bits/stdc++.h>
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
-//向前声明类模板和函数模板
-template <class T, class ContT >
-class CQueue;
-template <class T, class ContT >
-void Dump (ostream &os, CQueue<T, ContT> &rhs); //声明倒出队列内容函数模板
-
-template <class T, class ContT = deque<T>>
-class CQueue
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+// #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
+}
+template<class T>
+void wt(T x){
+   if(x < 0) putchar('-'), x = -x;
+   if(x >= 10) wt(x / 10);
+   putchar('0' + x % 10);
+}
+#define lowbit(x) (x&-x)
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 510000;
+int date[1100];
+int n,m;
+int cnt[10];
+int dp[400][32][32][32];
+int dfs(int pos,int l1,int l2,int l3){
+    // cout<<"pos="<<pos<<' '<<l1<<endl;
+    if(pos==n)
+        return date[n];
+    if(dp[pos][l1][l2][l3]!=-1)
+        return dp[pos][l1][l2][l3];
+    int to=l1+l2*2+l3*3;
+    to=n-pos-to;
+    to/=4;
+    int ans=0;
+    if(l1)
+        MAX(ans,dfs(pos+1,l1-1,l2,l3));
+    if(l2)
+        MAX(ans,dfs(pos+2,l1,l2-1,l3));
+    if(l3)
+        MAX(ans,dfs(pos+3,l1,l2,l3-1));
+    if(to)
+        MAX(ans,dfs(pos+4,l1,l2,l3));
+    ans+=date[pos];
+    dp[pos][l1][l2][l3]=ans;
+    return ans;
+}
+void work()
 {
-private :
-    ContT m_cont;
-    string label;    // label of the container
-public :
-    typedef T   valueType;           //类型成员举例，表示队列内元素类型
-    inline void push (const T & x);     //入队列
-    inline bool empty () const;  //判队列空
-    inline const T& top () const;    //取队列顶元素
-    inline void pop ();             //出队列
-    friend void Dump<T, ContT> (ostream &os, CQueue &rhs); //模板函数特定实例作为友元
-};
-template <class T, class ContT>inline void  CQueue<T,ContT>::push(const T& x){m_cont.push_back(x);}
-template <class T, class ContT> inline bool CQueue<T,ContT>::empty () const{return m_cont.empty();}
-template <class T, class ContT> inline const T& CQueue<T,ContT>::top () const{return m_cont.front();}
-template <class T, class ContT>  inline void CQueue<T,ContT>::pop (){m_cont.pop_front();}
-
-/* 请在这里填写答案：template <class T, class ContT>Cqueue的完整定义 */
-
-
-
-//先进先出显示队列内容函数模板定义
-template <class T, class ContT>
-void Dump (ostream &os, CQueue<T, ContT> &S)
-{
-    while (!S.m_cont.empty())//相当于!S.empty (),主要用于测试友元
-    {
-        os << S.top () << " ";
-        S.pop ();
+    memset(dp,-1,sizeof(dp));
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    int tmp;
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        cnt[tmp]++;
     }
-    os << endl;
+    cout<<dfs(1,cnt[1],cnt[2],cnt[3])<<endl;
 }
-
-//输入函数模板
-template <class T, class ContT = deque<T>>
-void    Input (int n)
+signed main()
 {
-    CQueue<T, ContT> S1;
-    int i;
-    T    x;
-
-    for (i = 0; i < n; i++)
-    {
-        //执行输入每条指令
-        cin >> x;
-        S1.push (x);
-    }
-
-    CQueue<T, ContT>  S2 (S1), S3; //拷贝构造S2，无参构造S3
-    S3 = S2; //S1复制赋值给S3
-    CQueue<T, ContT>  S4 (std::move (S2)), S5; //移动构造S4，无参构造S6
-    S5 = std::move (S4);//S3移动赋值给S5
-
-    // 顺序显式队列内容
-    Dump (cout, S1);
-    Dump (cout, S3);
-    Dump (cout, S5);
+   #ifndef ONLINE_JUDGE
+   freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+#endif
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
+{
+work();
 }
-
-
-
-// 定义一个苹果类 
-class Apple
-{
-    public:
-        Apple():product(""), weight(0.0), price(0.0){}
-        Apple(string product, double weight, double price )
-        {
-            this->weight = weight;
-            this->product = product;
-            this->price = price;
-        }
-        friend istream& operator >> (istream &in, Apple &obj);
-        friend ostream& operator << (ostream &out, const Apple &obj); 
-    private:
-        string product;
-        double weight, price;
-}; 
-
-// Apple的输入重载 
-istream & operator >> (istream &in, Apple &obj)
-{
-    in >> obj.product >> obj.weight >> obj.price;
-    return in;
-}
-
-// Apple的输出重载
-ostream & operator << (ostream &out, const Apple &obj)
-{
-    out << obj.product << " " << obj.weight << " " << obj.price;
-    return out;
-}
-
-int main ()
-{
-    Input<Apple>(2);
+return 0;
 }

@@ -1,200 +1,109 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
-//向前声明类模板和函数模板
-template <class T>
-class CQueue;
-template <class T>
-void Dump (ostream &os, CQueue<T> &rhs); //先进先出显示队列内容函数模板定义
-
-template <class T>
-class CQueue
-{
-    struct Node
-    {
-        T    data;
-        Node *next;
-    };
-private :
-    string label;    // label of the queue
-    Node *m_sp;     // pointer to head
-    Node *m_end;    // pointer to tail
-
-public :
-    CQueue(string s1) : m_sp(nullptr), label(s1)     //构造函数
-    {
-    }
-    CQueue (const CQueue &rhs); //拷贝构造函数
-    CQueue (CQueue &&rhs);      //移动构造
-    CQueue & operator = (const CQueue &rhs);//赋值运算符重载
-    CQueue & operator = (CQueue &&rhs);//移动赋值
-
-    ~CQueue ();                 //析构函数
-    inline void push (const T & x);     //入队列
-    inline bool empty () const;  //判空
-    inline const T& top () const;    //取队列首元素
-    inline void pop ();             //出队列 
-    friend void Dump<T> (ostream &os, CQueue &rhs); //模板函数特定实例作为友元
-};
-
-/* 请在这里填写答案：Template <class T> Cqueue的完整定义 */
-template <class T> 
-inline const T& CQueue<T>::top()const{
-    return m_sp->data;
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
 }
-template <class T> 
- inline bool CQueue<T>::empty () const{
-      if(m_sp==NULL)
-         return true;
-      return false;
-   } 
-   template <class T> 
-   inline void CQueue<T>::push (const T & x){
-      if(empty()){
-         Node* tmp=new Node;
-         tmp->data=x;
-         tmp->next=NULL;
-         m_sp=tmp;
-         m_end=tmp;
-         return;
-      }
-      Node* tmp=new Node;
-      tmp->data=x;
-      tmp->next=NULL;
-      m_end->next=tmp;
-      m_end=tmp;
-   }     //入队;
-     //判空
-     template <class T> 
-     inline void CQueue<T>::pop (){ 
-        if(m_end==m_sp){
-           Node *tmp=m_end;
-           delete tmp;
-           m_end=m_sp=NULL;
-           return;
+template<class T>
+void wt(T x){
+   if(x < 0) putchar('-'), x = -x;
+   if(x >= 10) wt(x / 10);
+   putchar('0' + x % 10);
+}
+#define lowbit(x) (x&-x)
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 510000;
+int dp[1100000];
+int lim[1100000];
+int date[1100000];
+int n,m,k;
+int dfs(int pos){
+    if(pos==n+1) return 0;
+    if(date[pos]-date[pos-1]>k)return 0;
+    if(dp[pos]!=-1)
+        return dp[pos];
+    int l=pos,r=n+1;
+    while(l^r){
+        int mid=l+r>>1;
+        if(date[mid]-date[pos-1]<=k)
+            l=mid+1;
+        else r=mid;
+    }
+    return dp[pos]=dfs(l)+1;
+}
+void work()
+{
+    memset(dp,-1,sizeof dp);
+    rd(n),rd(m),rd(k);
+    for(int i=1;i<=n;i++){
+        rd(date[i]);
+        if(date[i]>k)lim[i]=1;
+    }
+    for(int i=1;i<=n;i++){
+        date[i]=date[i-1]+date[i];
+        lim[i]=lim[i]+lim[i-1];
+    }
+    for(int i=1;i<=n;i++)
+        cout<<"asdasdas"<<dfs(i)<<endl;;
+    int l,r;
+    for(int i=1;i<=m;i++){
+        rd(l),rd(r);
+        if(lim[r]-lim[l-1]){
+            printf("Chtholly\n");
+            continue;
         }
-          Node *tmp=m_sp;
-          m_sp=m_sp->next;
-          delete tmp;
-     }
-    template <class T> 
-    CQueue<T>::CQueue (const CQueue &rhs){
-        //  label=rhs.label;
-         m_sp=NULL;
-         m_end=NULL;
-         Node* a=rhs.m_sp;
-         while(a!=NULL){
-            push(a->data);
-            a=a->next;
-         }
-    } //拷贝构造函数
-    template <class T> 
-    CQueue<T>::CQueue (CQueue &&rhs){
-    //    label=rhs.label;
-         m_sp=rhs.m_sp;
-         m_end=rhs.m_end;
-         rhs.m_end=rhs.m_sp=NULL;
-      return;
-    }     //移动构造
-    template <class T> 
-    CQueue<T> & CQueue<T>::operator = (const CQueue &rhs){
-        //  label=rhs.label;
-         m_sp=NULL;
-         m_end=NULL;
-         Node* a=rhs.m_sp;
-         while(a!=NULL){
-            push(a->data);
-            a=a->next;
-         }
-         return *this;
-    }//赋值运算符重载
-    template <class T> 
-    CQueue<T> & CQueue<T>::operator = (CQueue &&rhs){
-    //    label=rhs.label;
-         m_sp=rhs.m_sp;
-         m_end=rhs.m_end;
-         rhs.m_end=rhs.m_sp=NULL;
-      return *this;
-    }//移动赋
-    template <class T> 
-    CQueue<T>::~CQueue (){
-       while(!empty()){
-          pop();
-       }
-    }  
-
-// Dump<CQueue<Apple>>()显示队列中的所有苹果信息
-template <class T>
-void Dump (ostream &os, CQueue<T> &S)
-{
-    os << "Apples in " << S.label << ":"; 
-    while (S.m_sp != nullptr) //相当于!S.empty (),主要用于测试友元
-    {
-        os << S.top () << " ";
-        S.pop ();
+        wt(max(1LL,dfs(l)-dfs(r+1))),pt('\n');
     }
-    os << endl;
+}   
+signed main()
+{
+   #ifndef ONLINE_JUDGE
+   freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+#endif
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
+{
+work();
 }
-
-// 输入函数模板
-template  <class T>
-void    Input (int n)
-{
-    CQueue<T> S1("S1");
-    int i;
-    T    x;
-
-    for (i = 0; i < n; i++)
-    {
-        //执行输入每条指令
-        cin >> x;
-        S1.push (x);
-    }
-
-    CQueue<T>  S2 (S1), S3("S3"); //拷贝构造S2，无参构造S3
-    S3 = S2; //S1复制赋值给S3
-    CQueue<T>  S4 (std::move (S2)), S5("S5"); //移动构造S4，无参构造S6
-    S5 = std::move (S4);//S3移动赋值给S5
-
-    // 顺序显式队列内容
-    Dump (cout, S1);
-    Dump (cout, S3);
-    Dump (cout, S5);
-}
-
-// 定义一个苹果类 
-class Apple
-{
-    public:
-        Apple():product(""), weight(0.0), price(0.0){}
-        Apple(string product, double weight, double price )
-        {
-            this->weight = weight;
-            this->product = product;
-            this->price = price;
-        }
-        friend istream& operator >> (istream &in, Apple &obj);
-        friend ostream& operator << (ostream &out, const Apple &obj); 
-    private:
-        string product;
-        double weight, price;
-}; 
-
-// Apple的输入重载 
-istream & operator >> (istream &in, Apple &obj)
-{
-    in >> obj.product >> obj.weight >> obj.price;
-    return in;
-}
-
-// Apple的输出重载
-ostream & operator << (ostream &out, const Apple &obj)
-{
-    out << obj.product << " " << obj.weight << " " << obj.price;
-    return out;
-}
-
-// 主程序输入3个苹果信息
-int main ()
-{
-    Input<Apple>(3);
+return 0;
 }
