@@ -1,106 +1,21 @@
-#include <bits/stdc++.h>
-// #include <bits/extc++.h>
-// using namespace __gnu_pbds;
-// using namespace __gnu_cxx;
-using namespace std;
-#pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-// #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
-const int inf = 0x7FFFFFFF;
-typedef long long ll;
-typedef double db;
-typedef long double ld;
-template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
-template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
-template<class T>inline void rd(T &x){
-   x=0;char o,f=1;
-   while(o=getchar(),o<48)if(o==45)f=-f;
-   do x=(x<<3)+(x<<1)+(o^48);
-   while(o=getchar(),o>47);
-   x*=f;
+#include <stdio.h>
+//将n个盘中从x柱搬至z柱，可借助y柱
+void Hanoi (int n, char x, char y, char z);
+
+int main ()
+{   int n;  //盘子数量
+    scanf( "%d", &n);
+    Hanoi (n, 'A', 'B', 'C');
+    return 0;
 }
-template<class T>
-void wt(T x){
-   if(x < 0) putchar('-'), x = -x;
-   if(x >= 10) wt(x / 10);
-   putchar('0' + x % 10);
-}
-#define lowbit(x) (x&-x)
-#define MP make_pair
-#define pb push_back
-#define pt putchar
-#define yx_queue priority_queue
-#define lson(pos) (pos<<1)
-#define rson(pos) (pos<<1|1)
-#define y1 code_by_Rand0w
-#define yn A_muban_for_ACM
-#define j1 it_is just_an_eastegg
-#define lr hope_you_will_be_happy_to_see_this
-#define int long long
-#define rep(i, a, n) for (register int i = a; i <= n; ++i)
-#define per(i, a, n) for (register int i = n; i >= a; --i)
-const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
-const ll mod2 = 999998639;
-const int m1 = 998244353;
-const int m2 = 1000001011;
-const int pr=233;
-const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
-int date[1100];
-int n,m;
-int cnt[10];
-int dp[400][32][32][32];
-int dfs(int pos,int l1,int l2,int l3){
-    // cout<<"pos="<<pos<<' '<<l1<<endl;
-    if(pos==n)
-        return date[n];
-    if(dp[pos][l1][l2][l3]!=-1)
-        return dp[pos][l1][l2][l3];
-    int to=l1+l2*2+l3*3;
-    to=n-pos-to;
-    to/=4;
-    int ans=0;
-    if(l1)
-        MAX(ans,dfs(pos+1,l1-1,l2,l3));
-    if(l2)
-        MAX(ans,dfs(pos+2,l1,l2-1,l3));
-    if(l3)
-        MAX(ans,dfs(pos+3,l1,l2,l3-1));
-    if(to)
-        MAX(ans,dfs(pos+4,l1,l2,l3));
-    ans+=date[pos];
-    dp[pos][l1][l2][l3]=ans;
-    return ans;
-}
-void work()
+//将n个盘中从x柱搬至z柱，可借助y柱
+void Hanoi (int n, char x, char y, char z)
 {
-    memset(dp,-1,sizeof(dp));
-    cin>>n>>m;
-    for(int i=1;i<=n;i++)
-        cin>>date[i];
-    int tmp;
-    for(int i=1;i<=m;i++){
-        cin>>tmp;
-        cnt[tmp]++;
+    if (n == 1) {
+        printf ("%c->%c\n", x, z); //一个盘子时可直接搬动
+    } else {
+        Hanoi (n-1, x, z, y);//将n-1个盘中从x柱搬至y柱，借助z柱
+        printf ("%c->%c\n", x, z);//剩余一个盘子时可直接搬动
+        Hanoi (n-1, y, x, z);//将n-1个盘中从y柱搬至z柱，借助x柱
     }
-    cout<<dfs(1,cnt[1],cnt[2],cnt[3])<<endl;
-}
-signed main()
-{
-   #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
-//freopen("out.txt","w",stdout);
-#endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
-int t = 1;
-//cin>>t;
-while (t--)
-{
-work();
-}
-return 0;
 }
