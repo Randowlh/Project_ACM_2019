@@ -49,26 +49,31 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+map<int,int>cnt;
+map<int,int>last;
+map<int,int> aa;
 void work()
 {
+    cnt.clear();
+    last.clear();
+    aa.clear();
     int n;
     cin>>n;
     int tmp;
-    map<int,int> M;
+    int ans=0;
     for(int i=1;i<=n;i++){
         cin>>tmp;
-        M[tmp]++;
+        aa[tmp]+=cnt[tmp]*(n-i+1);
+        cnt[tmp]+=i;
     }
-    int ans=0;
-    for(auto i=M.begin();i!=M.end();i++){
-        ans+=(i->second*i->second+i->second)/2;
-    }
-    cout<<ans<<endl;
+    for(auto i=cnt.begin();i!=cnt.end();i++)
+        ans+=aa[i->first];
+    cout<<ans<<endl; 
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);

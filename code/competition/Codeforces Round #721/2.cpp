@@ -53,22 +53,53 @@ void work()
 {
     int n;
     cin>>n;
-    int tmp;
-    map<int,int> M;
-    for(int i=1;i<=n;i++){
-        cin>>tmp;
-        M[tmp]++;
+    string aa;
+    set<char> s;
+    cin>>aa;
+    int cc=0;
+    int flag=0;
+    for(int i=1;i<=n/2;i++)
+        if(aa[i-1]!=aa[n-i])
+            flag++;
+    for(int i=1;i<=n;i++)
+        cc+=aa[i-1]=='0';
+    if(!flag){
+        int cnt=0;
+        for(int i=1;i<=n;i++){
+            s.insert(aa[i-1]);
+            if(aa[i-1]=='0')
+                cnt++;
+        }
+        if(s.size()==1&&s.count('1')){
+            cout<<"DRAW"<<endl;
+        }else if(n%2&&cnt>1&&aa[n/2]=='0'){
+            cout<<"ALICE"<<endl;
+        }else
+        cout<<"BOB"<<endl;
+        return;
     }
-    int ans=0;
-    for(auto i=M.begin();i!=M.end();i++){
-        ans+=(i->second*i->second+i->second)/2;
+    if(flag==1){
+        if(n%2==0&&(cc+1)%4==0){
+            cout<<"BOB"<<endl;
+        }else
+        if(n%2&&aa[n/2]=='0'){
+            if(cc==4)
+                cout<<"DRAW"<<endl;
+            else cout<<"BOB"<<endl;
+        }else{
+            cout<<"ALICE"<<endl;
+        }
+        return;
     }
-    cout<<ans<<endl;
+    if(flag==2&&cc%4==0){
+        cout<<"DRAW"<<endl;
+    }else
+        cout    <<"ALICE"<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);
