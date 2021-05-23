@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+// #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -49,15 +49,15 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[1100000];
-int lim[1100000];
+int dp[1100000][30];
 int date[1100000];
+int lim[1100000];
 int n,m,k;
-int dfs(int pos){
-    if(pos==n+1) return 0;
-    if(date[pos]-date[pos-1]>k)return 0;
-    if(dp[pos]!=-1)
-        return dp[pos];
+void calc(int pos){
+    if(lim[pos]-lim[pos-1]){
+        dp[pos][0]=-1;
+        return;
+    }
     int l=pos,r=n+1;
     while(l^r){
         int mid=l+r>>1;
@@ -65,11 +65,10 @@ int dfs(int pos){
             l=mid+1;
         else r=mid;
     }
-    return dp[pos]=dfs(l)+1;
+    dp[pos][0]=l-1;
 }
 void work()
 {
-    memset(dp,-1,sizeof dp);
     rd(n),rd(m),rd(k);
     for(int i=1;i<=n;i++){
         rd(date[i]);
@@ -80,15 +79,47 @@ void work()
         lim[i]=lim[i]+lim[i-1];
     }
     for(int i=1;i<=n;i++)
-        cout<<"asdasdas"<<dfs(i)<<endl;;
+        calc(i);
+    for(int j=1;j<=25;j++){
+        for(int i=1;i<=n;i++){
+            if(dp[i][j-1]==-1)
+                dp[i][j]=-1;
+            else
+            dp[i][j]=dp[min(n,dp[i][j-1]+1)][j-1];
+            // cout<<dp[i][j]<<' ';
+        }
+        // cout<<endl;
+    }
     int l,r;
-    for(int i=1;i<=m;i++){
+    for(int i=1;i<=n;i++){
         rd(l),rd(r);
         if(lim[r]-lim[l-1]){
             printf("Chtholly\n");
             continue;
         }
-        wt(max(1LL,dfs(l)-dfs(r+1))),pt('\n');
+        int ans=0;
+        int now=l;
+        while(1){
+            int i;
+            // cout<<"now="<<now<<' '<<r<<' '<<l<<endl;
+            for(i=0;i<=25;i++){
+                if(dp[now][i]==r)
+                    break;
+                if(dp[now][i]>r||dp[now][i]==-1){
+                    i--;
+                    break;
+                }
+            }
+            if(i==-1){
+                ans+=1;
+                break;
+            }
+            if(dp[now][i]==r){
+                ans+=1<<(i);
+                break;
+            }else {ans+=(1<<(i));now=dp[now][i]+1;}
+        }
+        wt(ans),pt('\n');
     }
 }   
 signed main()

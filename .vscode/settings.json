@@ -87,5 +87,6 @@
     "python.formatting.provider": "autopep8",
     "editor.snippetSuggestions": "bottom",
     "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "jupyter.jupyterServerType": "local"
+    "jupyter.jupyterServerType": "local",
+    "python.pythonPath": "/opt/homebrew/bin/python3"
 }

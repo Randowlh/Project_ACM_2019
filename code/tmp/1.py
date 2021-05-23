@@ -1,29 +1,30 @@
+def hanoi(n,x,y,z):
+    stk=[];
+    stk.append([n,x,y,z,0]);
+    pos=0
+    is_return=0;
+    while True:
+        if pos==-1:
+            break
+        if stk[pos][0]==1:
+            print(stk[pos][1]+"->"+stk[pos][3]);
+            stk.pop();
+            pos=pos-1
+            continue;
+        else:
+            if stk[pos][4]==0:
+                stk[pos][4]=stk[pos][4]+1
+                stk.append([stk[pos][0]-1,stk[pos][1],stk[pos][3],stk[pos][2],0])
+                pos=pos+1;
+                continue;
+            elif stk[pos][4]==1:
+                print(stk[pos][1]+"->"+stk[pos][3]);
+                stk[pos][4]=stk[pos][4]+1;
+                stk.append([stk[pos][0]-1,stk[pos][2],stk[pos][1],stk[pos][3],0])
+                pos=pos+1;
+                continue;
+            else:
+                stk.pop();
+                pos=pos-1;
 n=int(input())
-date=[]
-tot=0
-tt= input()
-for i in tt.split():
-    tmp=int(i);
-    date.append(tmp)
-    tot=tot+tmp
-tot=tot//n;
-pre=[]
-aft=[]
-now=0
-for i in range(n):
-    pre.append(now+date[i])
-    now=now+date[i]
-now=0
-for i in range (n-1,-1,-1):
-    # print("i="+str(i))
-    aft.append(now+date[i])
-    now+=date[i];
-aft.reverse();
-# print(aft);
-ans=0
-for i in range(n):
-    if pre[i]< tot*(i+1):
-        ans=ans+1
-    if aft[i]<tot*(n-i):
-        ans=ans+1;
-print(ans)
+hanoi(n,'A','B','C');
