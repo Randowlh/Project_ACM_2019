@@ -37,7 +37,7 @@ void wt(T x){
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-// #define int long long
+#define int long long
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
@@ -48,12 +48,11 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn =40000;
+const int maxn =41000;
 int lazy[110][maxn<<1];
 int seg[110][maxn<<2];
 int date[maxn];
 int n,k;
-int dp[maxn];
 int now[maxn],pre[maxn];
 inline void pushup(int lr,int pos){
     seg[lr][pos]=min(seg[lr][lson(pos)],seg[lr][rson(pos)]);
@@ -68,7 +67,18 @@ inline void pushdown(int lr,int pos){
         seg[lr][rson(pos)]+=t;
     }
 }
+void build(int lr,int pos,int l,int r){
+    if(l==r){
+        seg[lr][pos]=1e9;
+        return;
+    }
+    int mid=(l+r)>>1;
+    build(lr,lson(pos),l,mid);
+    build(lr,rson(pos),mid+1,r);
+    pushup(lr,pos);
+}
 void update(int lr,int pos,int l,int r,int ql,int qr,int v){
+    // cout<<"l="<<l<<' '<<r<<' '<<ql<<' '<<qr<<' '<<v<<endl;
     if(ql<=l&&qr>=r){
         lazy[lr][pos]+=v;
         seg[lr][pos]+=v;
@@ -83,9 +93,9 @@ void update(int lr,int pos,int l,int r,int ql,int qr,int v){
     pushup(lr,pos);
 }
 int query(int lr,int pos,int l,int r,int ql,int qr){
-    if(ql>=l&&qr>=r)
+    if(ql<=l&&qr>=r)
         return seg[lr][pos];
-    int ans=llinf;
+    int ans=1e9;
     int mid=(l+r)>>1;
     pushdown(lr,pos);
     if(ql<=mid)
@@ -105,32 +115,18 @@ void work()
         else pre[i]=i;
         now[date[i]]=i;
     }
-    for(int i=1;i<=n;i++){
-        cout<<pre[i]<<' ';
-    }
-    memset(seg,0x3f,sizeof(seg));
-    cout<<endl;
+    for(int i=0;i<=k+5;i++)
+    build(i,1,0,n);
+    update(0,1,0,n,0,0,-1e9);
+    for(int j=1;j<=n;j++){
     for(int i=1;i<=k;i++)
-        for(int j=1;j<=n;j++){
-            if(j!=pre[j]){
-                if(pre[j]-1==0)
-                continue;
-                update(i-1,1,1,n,1,pre[j]-1,j-pre[j]);
-            cout<<pre[j]-1<<' '<<j-pre[j]<<endl;
-            }
-            int t=0;
-            if(j!=1)
-            t=query(i-1,1,1,n,j-1,j-1);
-            update(i,1,1,n,j,j,t-0x3f3f3f3f);
-            dp[j]=t;
-        } 
-    
-    for(int i=1;i<=k;i++){
-        for(int j=1;j<=n;j++)
-            cout<<query(i,1,1,n,j,j)<<' ';
-        cout<<endl;
+        {
+            if (j!=pre[j])
+                update(i-1,1,0,n,0,pre[j]-1,j-pre[j]);
+            update(i,1,0,n,j,j,query(i-1,1,0,n,0,j-1)-1e9);
+        }
     }
-    wt(query(k,1,1,n,1,n)),pt('\n');
+    wt(query(k,1,0,n,n,n)),pt('\n');
 }
 signed main()
 {
@@ -138,10 +134,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+// std::ios::sync_with_stdio(false);
+// cin.tie(NULL);
 int t = 1;
-//cin>>t;
+// cin>>t;
 while (t--)
 {
 work();
