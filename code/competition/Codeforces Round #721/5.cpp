@@ -37,7 +37,7 @@ void wt(T x){
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
+// #define int long long
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
@@ -49,7 +49,7 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn =41000;
-int lazy[110][maxn<<1];
+int lazy[110][maxn<<2];
 int seg[110][maxn<<2];
 int date[maxn];
 int n,k;
@@ -78,7 +78,6 @@ void build(int lr,int pos,int l,int r){
     pushup(lr,pos);
 }
 void update(int lr,int pos,int l,int r,int ql,int qr,int v){
-    // cout<<"l="<<l<<' '<<r<<' '<<ql<<' '<<qr<<' '<<v<<endl;
     if(ql<=l&&qr>=r){
         lazy[lr][pos]+=v;
         seg[lr][pos]+=v;
@@ -115,17 +114,16 @@ void work()
         else pre[i]=i;
         now[date[i]]=i;
     }
-    for(int i=0;i<=k+5;i++)
-    build(i,1,0,n);
+    for(int i=0;i<=k;i++)
+        build(i,1,0,n);
     update(0,1,0,n,0,0,-1e9);
-    for(int j=1;j<=n;j++){
-    for(int i=1;i<=k;i++)
+    for(int j=1;j<=n;j++)
+    for(int i=1;i<=min(j,k);i++)
         {
             if (j!=pre[j])
                 update(i-1,1,0,n,0,pre[j]-1,j-pre[j]);
             update(i,1,0,n,j,j,query(i-1,1,0,n,0,j-1)-1e9);
         }
-    }
     wt(query(k,1,0,n,n,n)),pt('\n');
 }
 signed main()
