@@ -1,0 +1,2720 @@
+[
+    {
+        "id": "1",
+        "type": 1,
+        "content": "当输入测试数据A=0FFFFH，B=1H时，该组数据相加产生什么结果？",
+        "choice": "{\"A\":\"0000\",\"B\":\"1,0000\",\"C\":\"1,0FFFH\",\"D\":\"0FFFFH\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "10",
+        "type": 1,
+        "content": "对于数据选择器,选择信号位数和被选择数据的数量之间存在什么关系？",
+        "choice": "{\"A\":\"没有关系\",\"B\":\"n:2n的关系\",\"C\":\"2n:n的关系\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"11\"}",
+        "relatedSet": "11"
+    },
+    {
+        "id": "100",
+        "type": 1,
+        "content": "DP0格式的数据处理指令，生成第二操作数的方式是：",
+        "choice": "{\"A\":\"对rm移位，移位次数是imm5，得到第二操作数\",\"B\":\"对rm移位，移位次数是rs[7:0]，得到第二操作数\",\"C\":\"对imm12[7:0]循环右移（imm12[11:8]×2后零扩展到8位）次，得到第二操作数\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "101",
+        "type": 1,
+        "content": "DP1格式的数据处理指令，生成第二操作数的方式是：",
+        "choice": "{\"A\":\"对rm移位，移位次数是imm5，得到第二操作数\",\"B\":\"对rm移位，移位次数是rs[7:0]，得到第二操作数\",\"C\":\"对imm12[7:0]循环右移（imm12[11:8]×2后零扩展到8位）次，得到第二操作数\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "102",
+        "type": 1,
+        "content": "DP2格式的数据处理指令，生成第二操作数的方式是：",
+        "choice": "{\"A\":\"对rm移位，移位次数是imm5，得到第二操作数\",\"B\":\"对rm移位，移位次数是rs[7:0]，得到第二操作数\",\"C\":\"对imm12[7:0]循环右移（imm12[11:8]×2后零扩展到8位）次，得到第二操作数\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "103",
+        "type": 2,
+        "content": "指令对标志寄存器的影响一般遵循的规律是：",
+        "choice": "{\"A\":\"传送类指令和跳转类指令不影响标志位\",\"B\":\"有符号算术运算类指令影响零标志ZF和溢出标志 VF\",\"C\":\"无符号算术运算类指令和逻辑运算类指令影响零标志ZF、进位/借位标志CF，不影响溢出标志VF\",\"D\":\"条件转移类指令使用零标志位ZF的情况相对多\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "104",
+        "type": 1,
+        "content": "对于运算器来说，数据有无符号都是一样运算，比如加法，有符号加和无符号加以及设置标志位都是一样操作的，用户分别根据ZF、VF或CF这样的不同标志位或标志位组合，来选择将运算看作有符号运算还是无符号运算。",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\", \"1\": \"6\"}",
+        "relatedSet": "2,6"
+    },
+    {
+        "id": "105",
+        "type": 1,
+        "content": "一个指令周期",
+        "choice": "{\"A\":\"只能包含1个机器周期\",\"B\":\"包含若干个机器周期\",\"C\":\"指令周期和机器周期无关\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "106",
+        "type": 2,
+        "content": "暂存器A、B、C、F的写入",
+        "choice": "{\"A\":\"在clk下跳沿\",\"B\":\"需要控制信号\",\"C\":\"不需要控制信号\",\"D\":\"在clk上跳沿\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "107",
+        "type": 1,
+        "content": "桶形移位器内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"组合逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "108",
+        "type": 1,
+        "content": "多功能ALU内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "109",
+        "type": 1,
+        "content": "CPSR寄存器的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "11",
+        "type": 1,
+        "content": "读寄存器操作需不需要时钟？",
+        "choice": "{\"A\":\"读操作的时钟在clk上升沿\",\"B\":\"不需要时钟\",\"C\":\"读操作的时钟在clk下跳沿\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "110",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_irq的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "111",
+        "type": 1,
+        "content": "通用寄存器R0的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "112",
+        "type": 1,
+        "content": "通用寄存器R7的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"时序逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "113",
+        "type": 1,
+        "content": "程序计数器PC(R15)的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "114",
+        "type": 1,
+        "content": "分模式寄存器LR_irq的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "115",
+        "type": 1,
+        "content": "分模式寄存器SP_irq的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "116",
+        "type": 1,
+        "content": "分模式寄存器LR_svc的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "117",
+        "type": 1,
+        "content": "分模式寄存器SP_svc的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "118",
+        "type": 1,
+        "content": "分模式寄存器LR_fiq的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "119",
+        "type": 1,
+        "content": "分模式寄存器SP_fiq的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "12",
+        "type": 1,
+        "content": "为什么寄存器的写操作要引入系统时钟CLK的下降沿？",
+        "choice": "{\"A\":\"下跳沿时当前clk周期的动作都已经完成，是写入结果最合适的时机\",\"B\":\"写操作的时钟不在clk下跳沿，而是上升沿\",\"C\":\"写操作不需要时钟\",\"D\":\"写操作在clk高电平期间完成\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "120",
+        "type": 1,
+        "content": "分模式寄存器LR_und的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "121",
+        "type": 1,
+        "content": "分模式寄存器SP_und的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "122",
+        "type": 1,
+        "content": "分模式寄存器LR_abt的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "123",
+        "type": 1,
+        "content": "分模式寄存器SP_abt的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "124",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_fiq的内部结构是",
+        "choice": "{\"A\":\"时序逻辑电路\",\"B\":\"时钟逻辑电路\",\"C\":\"组合逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "125",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_irq的内部结构是",
+        "choice": "{\"A\":\"时钟逻辑电路\",\"B\":\"组合逻辑电路\",\"C\":\"时序逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "126",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_svc的内部结构是",
+        "choice": "{\"A\":\"时钟逻辑电路\",\"B\":\"组合逻辑电路\",\"C\":\"时序逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "127",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_und的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "128",
+        "type": 1,
+        "content": "备份程序状态寄存器SPSR_abt的内部结构是",
+        "choice": "{\"A\":\"组合逻辑电路\",\"B\":\"时序逻辑电路\",\"C\":\"时钟逻辑电路\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "129",
+        "type": 1,
+        "content": "ARM V7的9种工作模式中，哪两种模式下可见的寄存器范围是相同的？",
+        "choice": "{\"A\":\"irq和fiq\",\"B\":\"abt和und\",\"C\":\"sys和svc\",\"D\":\"usr和sys\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "13",
+        "type": 2,
+        "content": "程序状态寄存器堆的设计上，哪些类似通用寄存器？",
+        "choice": "{\"A\":\"寄存器宽度一样\",\"B\":\"没有相似之处\",\"C\":\"它们都是边沿型D触发器构成的寄存器\",\"D\":\"写操作都发生在clk下跳沿\"}",
+        "answer": "ACD",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "130",
+        "type": 1,
+        "content": "ARM V7的9种工作模式中，哪种模式的专用分模式寄存器数量最多？",
+        "choice": "{\"A\":\"sys\",\"B\":\"svc\",\"C\":\"irq\",\"D\":\"fiq\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "131",
+        "type": 1,
+        "content": "程序计数器PC(R15)的写入是在",
+        "choice": "{\"A\":\"clk下跳沿\",\"B\":\"clk高电平期间\",\"C\":\"clk低电平期间\",\"D\":\"clk上跳沿\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "132",
+        "type": 1,
+        "content": "指令寄存器IR的写入是在",
+        "choice": "{\"A\":\"clk高电平期间\",\"B\":\"clk低电平期间\",\"C\":\"clk上跳沿\",\"D\":\"clk下跳沿\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "133",
+        "type": 1,
+        "content": "计算机就是一个有限状态机，它总是处在某一个状态下；当条件发生变化（譬如时钟周期切换，或者外设有输入，或者发生中断），CPU就会转到下一个状态；每个状态下，CPU执行设计者事先指定的操作",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "134",
+        "type": 1,
+        "content": "有限状态机包含了状态存储器、下一状态函数以及输出函数。",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "135",
+        "type": 1,
+        "content": "请对以下使用FPGA设计有限状态机的步骤排序：1. 对状态进行编码：有binary、gray、one-hot等编码方式，在FPGA的开发平台中，可以进行选择和自定义；2. 使用HDL描述，并综合、仿真与实现。3.确定输入、输出与状态机状态，画出状态转换图；4. 多周期CPU有限状态机的状态图设计5.状态简化，得到最简的状态转换图；",
+        "choice": "{\"A\":\"12345\",\"B\":\"32514\",\"C\":\"35124\",\"D\":\"31254\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "136",
+        "type": 2,
+        "content": "三段式方法描述多周期CPU的控制器有限状态机，即：",
+        "choice": "{\"A\":\"输出函数\",\"B\":\"输入函数\",\"C\":\"状态转换\",\"D\":\"次态函数\"}",
+        "answer": "ACD",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "137",
+        "type": 1,
+        "content": "以下是三段式有限状态机的框架代码中的：<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAABtCAYAAAACoOWHAAAe+UlEQVR4Ae3dB7RdRdUAYGGFsABBIAGkBhSTEBApUhKCFI2oNOmoEKkiSBSpCkpHQKMIkaKQoNJ7iSCKJaB06SBNVBClV+kC869v1trvP1xeve/el3vzZq913z3v3HPmzOzZ/ew9875UoGCgYKBPGHhfn64uFxcMFAykwjSFCAoG+oiBwjR9RFi5vGCgME2hgYKBPmKgME0fEVYuLxgoTFNooGCgjxgoTNNHhJXLCwYK0xQaKBjoIwYK0/QRYeXygoHCNIUGCgb6iIGGM81PfvKTdM455/SxG42/fI899kjrr79+/kyYMCHdf//973nIK6+8ks4444z0r3/96z2/NfrEm2++mX7605+m3/3ud41uuu3bu+qqq9Jpp52W3njjjYaPBc7POuus3O6FF17YcRwPuuOOO9LFF18c//bqu6FM89vf/jbNO++86dBDD+3Vw5tx0R/+8Ie0+eabp8MOOyz9/Oc/T7/4xS/Ssccem7beeut09dVXdzwSw3z/+99PJ510Unr++ec7zjfrYOrUqemDH/xgZpxmPSPavfXWW9Ndd90V/7b0N6L92Mc+lrbZZptEsDQSzPcHPvCBTI9//OMf04gRI9I3v/nNdz3in//8Z5o0aVI699xz33W+u38ayjT33HNPWnnlldNRRx3V3TOb9tuDDz6Yvv3tb2cm+d///pdOOeWUdPTRR6e33nor7b///mm77bZLmAWQPrTRk08+2bT+VBu+5ZZb0lprrZVOP/306umGH7/00ktZYNx8880Nb7sZDb788st5XnbdddeGaxr0uNpqq2V6/Otf/5o+85nPpAMPPPA9w/j973+f9tprr/TQQw+957fOTtTNNB7wla98JW2xxRbphBNO6Gh7xx13TN/73vfSr3/96zRx4sQs7e+88870pS99Ke29994JZ1OHX//617PJhLC18eUvfzk9/vjj6Ze//GVGIjPv7bffzkT/1a9+NUHuJZdckgn97LPPTv/+9787nhkH06ZNy+aW/0mODTfcMP3oRz/Kz/rxj3+cjjnmmIwYjLLffvslmhG8+OKL6Yc//GE2nbbccsvMbO+8807+TZ9IQZqKFgvAhN/4xjeSsUVfPMNYvvWtb6VXX301X/rMM8+kr33ta2nPPffM3/oIbr/99jxm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'>",
+        "choice": "{\"A\":\"输出函数\",\"B\":\"输入函数\",\"C\":\"状态转换\",\"D\":\"次态函数\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "138",
+        "type": 1,
+        "content": "以下是三段式有限状态机的框架代码中的：<img src='data:image/png;base64,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'>",
+        "choice": "{\"A\":\"输出函数\",\"B\":\"输入函数\",\"C\":\"状态转换\",\"D\":\"次态函数\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "139",
+        "type": 1,
+        "content": "以下是三段式有限状态机的框架代码中的：<img src='data:image/png;base64,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'>",
+        "choice": "{\"A\":\"输出函数\",\"B\":\"输入函数\",\"C\":\"状态转换\",\"D\":\"次态函数\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "14",
+        "type": 1,
+        "content": "当前程序状态寄存器CPSR和备份程序状态寄存器在写入的时候应怎样选择写入的数据？",
+        "choice": "{\"A\":\"无法选择\",\"B\":\"在数据输入端添加译码器\",\"C\":\"在数据输出端添加多路选择器\",\"D\":\"在数据输入端添加多路选择器\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "140",
+        "type": 2,
+        "content": "MSR指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"特权指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "BC",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "141",
+        "type": 1,
+        "content": "ADDMI指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "142",
+        "type": 1,
+        "content": "MRS指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"传送指令\",\"C\":\"跳转指令\",\"D\":\"访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "143",
+        "type": 1,
+        "content": "SUBCS指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"访存指令\",\"C\":\"数据传输指令\",\"D\":\"跳转指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "144",
+        "type": 1,
+        "content": "MOVHI指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"访存指令\",\"C\":\"跳转指令\",\"D\":\"数据传输指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "145",
+        "type": 1,
+        "content": "ADCLE指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "146",
+        "type": 1,
+        "content": "指定ARM工作模式的模式位M[4:0]位于",
+        "choice": "{\"A\":\"SPSR_svc\",\"B\":\"SPSR_sys\",\"C\":\"SPSR_usr\",\"D\":\"CPSR\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "147",
+        "type": 1,
+        "content": "标志位NZCV位于",
+        "choice": "{\"A\":\"LR\",\"B\":\"CPSR\",\"C\":\"PC\",\"D\":\"SP\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "148",
+        "type": 1,
+        "content": "哪种模式下，不能执行改写CPSR[7:0]的操作",
+        "choice": "{\"A\":\"sys\",\"B\":\"svc\",\"C\":\"usr\",\"D\":\"und\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "149",
+        "type": 2,
+        "content": "ARM CPU支持两种指令集，分别是",
+        "choice": "{\"A\":\"ARM\",\"B\":\"RISC-V\",\"C\":\"Thumb\",\"D\":\"MIPS\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "15",
+        "type": 2,
+        "content": "程序状态寄存器堆模块在与多功能ALU、桶形移位器、ARM通用寄存器堆连接时应分别注意什么？",
+        "choice": "{\"A\":\"将桶形移位器的移位输出数据，连接到通用寄存器的写入数据\",\"B\":\"将桶形移位器的移位输出数据，连接到ALU的A操作数\",\"C\":\"将桶形移位器的移位输出数据，连接到ALU的B操作数\",\"D\":\"将ALU的标志位输出NZCF，连接到CPSR的高4位\"}",
+        "answer": "CD",
+        "relatedKnowledge": "{\"0\": \"2\"}",
+        "relatedSet": "2"
+    },
+    {
+        "id": "150",
+        "type": 1,
+        "content": "BL指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "151",
+        "type": 1,
+        "content": "BCC指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "152",
+        "type": 1,
+        "content": "BX指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "153",
+        "type": 1,
+        "content": "BXCS指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"访存指令\",\"C\":\"数据传输指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "154",
+        "type": 1,
+        "content": "BNE指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"访存指令\",\"C\":\"跳转指令\",\"D\":\"数据传输指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "155",
+        "type": 1,
+        "content": "BEQ指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"访存指令\",\"C\":\"传送指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "156",
+        "type": 1,
+        "content": "BXEQ指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"传送指令\",\"C\":\"跳转指令\",\"D\":\"访存指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "157",
+        "type": 1,
+        "content": "BLS指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"跳转指令\",\"C\":\"数据传输指令\",\"D\":\"访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "158",
+        "type": 1,
+        "content": "BLE指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"跳转指令\",\"C\":\"数据传输指令\",\"D\":\"访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "159",
+        "type": 1,
+        "content": "BXGT指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"访存指令\",\"C\":\"数据传输指令\",\"D\":\"跳转指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "16",
+        "type": 1,
+        "content": "ARM V7 有几种工作模式？",
+        "choice": "{\"A\":\"7\",\"B\":\"8\",\"C\":\"9\",\"D\":\"10\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"11\"}",
+        "relatedSet": "11"
+    },
+    {
+        "id": "160",
+        "type": 1,
+        "content": "B指令的功能是：",
+        "choice": "{\"A\":\"rm→PC\",\"B\":\"PC→LR，(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"C\":\"(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "161",
+        "type": 1,
+        "content": "BL指令的功能是：",
+        "choice": "{\"A\":\"rm→PC\",\"B\":\"PC→LR，(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"C\":\"(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "162",
+        "type": 1,
+        "content": "BX指令的功能是：",
+        "choice": "{\"A\":\"rm→PC\",\"B\":\"PC→LR，(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"C\":\"(PC)+ SignExtend(imm24:’00’, 32)→PC\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "163",
+        "type": 1,
+        "content": "MRS指令的功能是：",
+        "choice": "{\"A\":\"if  R==0 then CPSR→rd else分模式SPSR→rd\",\"B\":\"if  R==0 then rm→CPSR else rm→分模式SPSR\",\"C\":\"if  R==0 then second_opr→CPSR else second_opr→分模式SPSR\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "164",
+        "type": 2,
+        "content": "MSR指令的功能是：",
+        "choice": "{\"A\":\"if  R==0 then CPSR→rd else分模式SPSR→rd\",\"B\":\"if  R==0 then rm→CPSR else rm→分模式SPSR\",\"C\":\"if  R==0 then second_opr→CPSR else second_opr→分模式SPSR\",\"D\":\"以上都不对\"}",
+        "answer": "BC",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "165",
+        "type": 1,
+        "content": "MSR指令的格式有几种？",
+        "choice": "{\"A\":\"1\",\"B\":\"2\",\"C\":\"3\",\"D\":\"4\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "166",
+        "type": 1,
+        "content": "MRS指令是",
+        "choice": "{\"A\":\"普通指令\",\"B\":\"特权指令\",\"C\":\"以上都不对\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "167",
+        "type": 1,
+        "content": "MSR指令是",
+        "choice": "{\"A\":\"普通指令\",\"B\":\"特权指令\",\"C\":\"以上都不对\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "168",
+        "type": 1,
+        "content": "如图,地址为0x0040_0000处的指令1是<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAY8AAADaCAYAAABers4XAAAcdUlEQVR4Ae2dXXIbORKE5bnHPsm32APIR7H8upcY+WVjLmH5HNY1rKOMuZGcSDFVC4DdYlvqVn+IoPFXKBQ+kJVseiZ8daBAAAIQgAAEZhK4mmmPOQQgAAEIQOCAePAmgAAEIACB2QQQj9nIWAABCEAAAogH7wEIQAACEJhNAPGYjYwFEIAABCCAePAegAAEIACB2QQQj9nIWAABCEAAAr9NPK6urg56zSlz17TsNXZzc9PdtrVGxr3xriMmfhuBvItse8PWmOdcT7GxLTUEliDw4cOHYx759evXbHeXrJ292UIL5mX3mZvO/QAvYS8fiMfMi1qZeb4PWm2NjYrm7+/v+UIwgsTcogSc/P1+rXUKim1zTMH0xhcNdEFn40/hghu1XFXA5/rVh+01rrYThsTDc6qzeDzHvL7aVhv6r0Mg78ht1+ciqHa1f2498xCYS0BJ/9u3b/+X/EdiMJqbu/9b2T/PrBdG4Q/qubq1jde05npjuUZti0dt5/q6Rn2VHE972q9HwHfgOu8zo/B8jqk9d7yupw+BSwlYFPxerE8X1X+19zrX59ZXf6/ZX1Q8auAGUMdrX3bX19fHYa+pda6pc5lkWr60drSmNZ/70X5dAr4r7+p+rVvzGrOd53NMcxQILE0gRcAJvzU22tf2Xj+yXcPcb/0ktT7ErUPLzuKR8+fWe53tbm9vj4nDvjze85nz2U572q9PYIm7WMLH65+cHbdGwAlf77de0q827lf73vhamby5ePhD7oRvUB53v1XLxuvURjxalLY35ruvT5Qed50n89ioTnvaEFiSgBN/7/03RSjso9ouGeeSvhYVjx64Ou4DaNwJQiJQ7Wrf61xrviceudb2qj0+aqc97dcj4LtxXe/IkeS8x0b1XPuRL+Yg0CKQib/XHq3ze7TWaxaSRcWjwjGIOl77srMIeG7K2lyndn3ysK+s02+vnfa0X59A6148lvWUyGw/xRYbCLyUgAXD77daTxEB+5hi+9I4l1y3efHQJfnpReKRxRfYGvMa2ai0bHMd7dcjkHeRbUfQGtOcx1Vn3+uoIfC7CGTi77Vz77TxeGvMc2usNykeNUkIrMZG4tFbQ6JZ39vSd+V7db/WvcjTrmfDOASWJODEn++9bOfThG1zTLH0xpeMc0lfi4lHgprSzkPIPn+2yvVpd66d67LdWpfzrXZrDWO/n0DehXZzP3dujeW827ZTTYHA7yTQS/y9ccXiuXyfttpVZH7nOeb45lM1hxa2EIAABCBwJIB48EaAAAQgAIHZBBCP2chYAAEIQAACiAfvAQhAAAIQmE0A8ZiNjAUQgAAEIIB48B6AAAQgAIHZBBCP2chYAAEIQAACiAfvAQhAAAIQmE0A8ZiNjAUQgAAEIIB48B6AAAQgAIHZBBCP2chYAAEIQAACiAfvAQhAAAIQmE0A8ZiNjAUQgAAEIIB48B6AAAQgAIHZBBCP2chYAAEIQAACiAfvAQhAAAIQmE0A8ZiNjAUQgAAEIIB48B6AAAQgAIHZBBCP2chYAAEIQAACiAfvgbchoH9X3P+2eLYdTWvMc66n2NiWenME9G9869/vbv1b31P+XW+vbx28zrX28L8nPmWv1h7vfQzxeO83vNbzZeJvtTU2Kpr/73//EaBztiM/zP1WAnOTcto7abcSveccfK5z0m/VuS79Zts+VbfGp+yV+6S/99Q+8wk9HB4fHw++hPv7+8lnv7m5Oa5TnWWKP615eHjIZYeev2dGpXN3d/cUe5nq+hvFN/JX/dM/Q6AnGFOEINdqm9pvbf3vf5/s/vOflgVjLySgz4WLPrf1s+s5162E7DnXaZNtzdd+b8y+ptTps9e2n5xv7V3nve691WfFQ8KhhKpyfX391B6BuL29PfgNpdptrTnnTwIlm3wDjvz14pAfC5d8uS37kb9efCN/vRgYbxBwonfde3rwfHUxdzzXey/EI6lc1NbnwvlBjvKz3nI8NbGmndr6XOarfrO3fcvW6+qajK+1XvYeb9l6rNrUvu3eWz0Uj0yYOrjeGEq850omYH+T15op/uRfIpXi0fM3ikNiof1c0mfP3yi+kT/vQT2DQBUB92ttlzmuMfc9n2OaaxXEo0XlorEqFrWfzqckVdk42aseJfypvlv7eh/7T5te2/t5bcZZ2/brNe+x7nzK/jmqEnmKhZOrasNSW4lZfb1xlPTVzqK+RKTnz7beKxP9yJ/XtWrtmQLk5D/yN4qv56+1N2MTCLSS/4Rlz0zm+kA8nuG7tKPPtD7/LmrnU4jHXWdS9livTttWsq7JuWUvmxyve+Vcaw995vUa7SWf6afVr/u+l/7zLF9OpWSa3yT05vDPP07CqmXnN436Sv5ZdAEWj5E/vxGrePT85R617T09nuLR8zc6b8+f/VPPJODE74Tufq3TbZ1r9dO+tr0XP1tVMi/q67Psz70c6PPjRDtKxvos5ctrHESuzbmapG2vujXXGuut6dm2xuvYub73lJ3OnWfy3BbrF4uHDqtkLxhO+hp7qXjojeeCeJjEO6xrwtcRPZbHbY3lfG1PsUc8KrWL+vlFUI5qvzqvSbbOu59JNtdk27auvSZFqdXOxJ3+3E4/svW491GdNq09NJb7eK3XteZss6V6KB75pKFD6c2RbxC1lfQFK4v6/kai2t/0e/78FFMvwnv1/OWete0nDY8rBsfU89eLTz5G/rwH9QwCmezdbtVTXHrdOVvE4xyhyfP6LOWXRrX9+eo5aSXiamsb15p30s38UBNw2ttnHRv1Pder7dPx5P5eY5va93hrbc5trf086zeiz0Sbbb1ZnNxVa84lf/7JtubTR7a9VnU+eaifPrKda2o7hSDb5/xlTNlOH9mu+9KfSCATfra9vDWmOY+rzv4/vfGfiMeYz4xZf/a9pPY9nvUoqaad2i3b1pjXteZyLNu5Rp9xCYHnVWusjntNKzavtU3tnxv3/NbqU8bvRJ5PBUqaKh7z338YtmoXCYD6tvG412rO/jznuoqHxnv+vKZVS2gcW53v+RvFN/JX/dM/Q8AiIDO3W3XPTdr2bHL8X/96vo/+vw/Kiwnos+CiJ461i4djzTqTfLZ7Nh6vtuf6Xvfe6lO2f28n4zzrJVATv/sZcWss5922nWrKKgkoufpLXP7cMwrWCTnX2odr+7Jt+vM62+RcbY/Wa6/00bK1P+9Z13j+vdV84t7bjXIeCEAAAq9AYLPikT8v+ZuI6ymP0K/Ali0gAAEIvFsCmxWPd3sjHAwCEIDABgggHhu4JEKEAAQgsDYCiMfaboR4IAABCGyAAOKxgUsiRAhAAAJrI4B4rO1GiAcCEIDABgggHhu4JEKEAAQgsDYCiMfaboR4IAABCGyAAOKxgUsiRAhAAAJrI4B4rO1GiAcCEIDABgggHhu4JEKEAAQgsDYCiMfaboR4IAABCGyAAOKxgUsiRAhAAAJrI4B4rO1GiAcCEIDABgggHhu4JEKEAAQgsDYCiMfaboR4IAABCGyAAOKxgUsiRAhAAAJrI4B4rO1GiAcCEIDABgggHhu4JEKEAAQgsDYCiMfaboR4IAABCGyAAOKxgUsiRAislcCHDx8OV1dXh7u7u8khfvny5bjm+vr68OvXr2fr7O/PP/98Nu6O1t7f37t7rEf+nhlGRz6818+fP2PmcJA/zZ2Lr8YuJ634njm/oPPw8HCMq8Zrl1+/fj3eQysu2yxZIx5L0sQXBHZE4OPHjwclNJVPnz49tUcIJDK3t7dH0VACd1tr5O/Hjx9df06e3759e9pi5O/JqDTkR3spyT4+Pj61ZaYE7JjOxedY7b4Vn+dqLXGak+TtW0LdEg+dQz4lunP81rjm9BGPObSwhQAEjgSUzPKbuRLtzc3N2cSVAiFHSnhKhpnQNd7yp2/12kNzLj1/nm/V8iPRcZKV8Nlnz9+c+FLcWvt7TGeXGDgOj/dqC0RLPHQmiV6eq+dnqXHEYymS+IHAjggoSaVYWEz0bdxJ0TZKkEpsreTnZG1bJ9KarDWv9ZnoR/5GV6E9M8FbTEb+zsWnJxbHl77NQgzOvXz279+/H88pcU5xacWnc8pevHwO+xkxWGIO8ViCIj4gsDMCSqYSBBeLhxKXk5ySqOw0p+LxTG4pHv65SLYpHlonPyot8Wj5Oxp3/vCennbSvTQ+xaH4Ujy8R6u2sGT8OrfH6xOG46vjil8+fI7019p3qTHEYymS+IHAjgiMxEMYnASd9DXm5JfJzYnc/jyX4uHkKB9rFI8a3xTxkED4rPVt4yePOm9+KR65N+JRSdKHAARWR0DJvf6dRz456O8Q1NfPLpnsLBY+kJNoioXmvN4Js/7k4716/uy/VdckK0HyX373/PXi09n8pJAxfv78uSsOrZhybI54tPbOnxPT79JtnjyWJoo/COyEgBKtkqpKtjXm5C4RUIKzgOQTRrbto5fEjTSfPDSWPrJt+1adQpBt2eZ/bZVtzaWwZDv3mPOzVa7L9hzxyHVVFHPud7QRj99BFZ8Q2AGBfCpQ4lbxmJ9KlGT9jdwCogSrMdsYlddqrvf/eVTx0NqeP/tt1RIGf2t3XLbr+avx1Z+VHMuUn628V60lZo4rn15yb/GpMctPFQ+xr4zrfpf0EY9L6LEWAhCAwIoJSCRbIrdEyIjHEhTxAQEIQGBlBPQEpSdCxGNlF0M4EIDAOgnUn3j8s5lq/13MOiPfVlQ8eWzrvogWAhCAwCoIIB6ruAaCgAAEILAtAojHtu6LaCEAAQisggDisYprIAgIQAAC2yKAeGzrvogWAhCAwCoIIB6ruAaCgAAEILAtAojHtu6LaCEAAQisggDisYprIAgIQAAC2yKAeGzrvogWAhCAwCoIIB6ruAaCgAAEILAtAojHtu6LaCEAAQisggDisYprIAgIQAAC2yKAeGzrvogWAhCAwCoIIB6ruAaCgAAEILAtAojHtu6LaCEAAQisggDisYprIAgIQAAC2yKAeGzrvogWAhCAwCoIIB6ruAaCgAAEILAtAojHtu6LaCEAAQisggDisYprIAgIQAAC2yKAeGzrvogWAqsjcHd39xTTw8PDQa9aNPbhw4fD1dXV4cePH3W62//48eNxze3t7eHXr19PdlP8ae3Pnz+f1qjR8/fMqHS+fPlyjP36+vpZDOnv8+fPz+ZeGl/Zetj9+vXrE1Nx9aue+fv378/s/v7774POlDyHG3UmEY8OGIYhAIHzBO7v7w+Pj49PhikkHtS8hMPJKtu2adWfPn06yL+Kkp3bU/w5sWYi7flr7e0x+bFwaX+3Nd/z99L4vGetR7wkUhJEs1VMEhEJhIqFz32N/fHHH4ebm5unNXW/qX3EYyop7CAAgf8jUMWi9rVAY5l0ldBadum8JuBMkuf8aa1slHQtHiN/uW9tKzHnk5J9jvyl4Mifz+sE34qv7lv72leiYB+eTy4a8xOPYnaMGb/XSWSqL89NrRGPqaSwgwAEnhFQcvLTgCbU1lgtSlQpFk7+qv1TixKcE+S3b9+OvvIbtROhEl7Pn5OhkrXaTvSOreevxuu+97QAadxiorP2/Dk+x9MSkxqffPv8ZjKq7buKRz5paN+M0edaqkY8liKJHwjsjICSf4pFPl0kCiXTFBmLhxKgxp3kZeekqPH8acWJXPPn/Cmhqtiv2iN/GWu2c0+Pp3iM4pMAuqR4KI5WfLbt1RYW87GdnzRSaPykISFp/T2N115aIx6XEmQ9BHZKQCKQpfY9N0r2stE6JT8nPY2Nkv3In5865GON4tGLz6xatc5RRcN29cnD46p58kgatCEAgVUQ0LdyJXgXtfMpxOOq80lDfSXQXKu+nlryW3L91q8k6W/6PX/y6W/o+U1cTwEtf/mkk/Fm208aHnMiH/nLJ4087yg++59bj8TDTyUpyvY/5ey27dU8efTIMA4BCHQJ1KeM2s+FmWizLRuts5BIRFJA8gkj2+kj27mn2vnkoX76yHZdl/0UgmyP/GVM2U6/atf46vyU/kg8tF5M6z4W797TzJR9ZYN4TCWFHQQg8ERATwouSpAj8ZBdfuv2N2GPyZeTrJ4YUkCU+DRW/z7Fa+vPXY5JdU2aHmv5y3W1LaGpcdnG8dX/z+Ol8dnvlFpi5v0VX/7Ffq6vdnoSu1Q45B/xSMq0IQABCEBgEgHEYxImjCAAAQhAIAkgHkmDNgQgsCsC+fOSfvrJV/7ntruCMvGwiMdEUJhBAAIQgMCJAOJxYkELAhCAAAQmEkA8JoLCDAIQgAAETgQQjxMLWhCAAAQgMJEA4jERFGYQgAAEIHAigHicWNCCAAQgAIGJBBCPiaAwgwAEIACBEwHE48SCFgQgAAEITCSAeEwEhRkEIAABCJwIIB4nFrQgAAEIQGAiAcRjIijMIAABCEDgRADxOLGgBQEIQAACEwkgHhNBYQYBCEAAAicCiMeJBS0IQAACEJhIAPGYCAozCEAAAhA4EUA8TixoQQACEIDARAKIx0RQmEEAAhCAwIkA4nFiQQsCEIAABCYSQDwmgsIMAhCAAAROBM6Kx+Pj49O/66t/73dqubm5Oa5TnWWKP615eHjIZYeev2dGpXN3d/cUe5nq+ntpfNU/fQhAAALvmcBZ8dA/CK+EqnJ9ff3UHkG5vb09KHGrqHZb/XP+JFCySfEY+evFIT8WLvlyW/Yjfy+JrxcD4xCAAATeK4GheGQCFgCJgBLvuZIJ2N/ktWaKP/mXSKV49PyN4pBYaD+X9Nnz99L4vAc1BCAAgb0QGIqHEnmKhZOraiVgvdRWYlZb4qKkr3YW9SUiPX+29V6Z6Ef+vK5Va88UIIvJyN9L4mvtzRgEIACB907geZYvp1UyzZ+cLB4ycxJWLTv/tKW+kn+WFI+RP/lXqeLR85d71Lb39HiKR8/fufO24rN/aghAAAJ7IvBi8RAkJVMlaSdVjb1UPJS4XdYoHr34HDM1BCAAgT0RGIqHRCH/ollPDfnkoLaSqgQkS37r1xOJv+n3/PkpRuvy5b16/nLP2vaThscVg5+Oev5eGp/3oIYABCCwFwLPs37j1Jlos61E6+SuWnMu+fNPtjWfPrLttarzyUP99JHtXFPbKQTZPucvY8p2+q/x5RxtCEAAAnsgcMr4ndPmU4GSsIrH/FSiJOuX3SjBasw2Hvdazdmf51y3knPPn9e0aglNjct2PX8vjc9+37rWmXU2F59HtYuYWPg11rKRD/lyqX49Tg0BCOyTwFnx2CcWTg0BCEAAAiMCiMeIDnMQgAAEINAksFnx8E8t/lkq6/xJpnlqBiEAAQhA4CICmxWPi07NYghAAAIQuIgA4nERPhZDAAIQ2CcBxGOf986pIQABCFxEAPG4CB+LIQABCOyTAOKxz3vn1BCAAAQuIoB4XISPxRCAAAT2SQDx2Oe9c2oIQAACFxFAPC7Cx2IIQAAC+ySAeOzz3jk1BCAAgYsIIB4X4WMxBCAAgX0SQDz2ee+cGgIQgMBFBBCPi/CxGAIQgMA+CSAe+7x3Tg0BCEDgIgKIx0X4WAwBCEBgnwQQj33eO6eGAAQgcBEBxOMifCyGAAQgsE8CiMc+751TQwACELiIAOJxET4WQwACENgnAcRjn/fOqSEAAQhcRADxuAgfiyEAAQjskwDisc9759QQgAAELiKAeFyEj8UQgAAE9kkA8djnvXNqCEAAAhcRQDwuwsdiCEAAAvskgHjs8945NQQgAIGLCCAeF+FjMQQgAIF9EkA89nnvnBoCEIDARQTeVDzu7+8PV1dXh8fHx6dDqH93d/fUv7m5OejlIlvZaK1LtdF62eyx3N7eHq6vr5+O/vDwcGSh2qUybtnIh3y5VL8ep4YABPZJYJ8Zdp93zakhAAEILEYA8VgMJY4gAAEI7IcA4rGfu+akEIAABBYjgHgshhJHEIAABPZDAPHYz11zUghAAAKLEUA8FkOJIwhAAAL7IYB47OeuOSkEIACBxQggHouhxBEEIACB/RBAPPZz15wUAhCAwGIEEI/FUOIIAhCAwH4IIB77uWtOCgEIQGAxAojHYihxBAEIQGA/BBCP/dw1J4UABCCwGAHEYzGUOIIABCCwHwKIx37umpNCAAIQWIwA4rEYShxBAAIQ2A8BxGM/d81JIQABCCxGAPFYDCWOIAABCOyHAOKxn7vmpBCAAAQWI4B4LIYSRxCAAAT2QwDx2M9dc1IIQAACixFAPBZDiSMIQAAC+yFwVjweHx8PV1dXx9f9/f1kMjc3N8c1qrNM8ac1Dw8PuezQ8/fMqHTu7u6eYi9TXX+5pheDeMxhUfdeS9938ZrxiO/t7e1FWzruej8XOWUxBCAwi8BZ8VCi1IdV5fr6+qk92kXJQUlCRbXb6p/zp6Qsm0wMI3+9OOTHwiVfbsu+5092jlXrdV4XjduH7BTj1ovO8LvPIVZLCq2Fo75Htn4XxA+BrREYZsBMwDqYEuiUb436YFtw/GHX+in+5F9JW0nHpefP861aiT6TVvrs+XPM8qd2njXPnmdq7b2Vsdc4R72HpdggHkuRxA8EXkZgKB5KnplAnfxV68Orl9pKzGorwba+lWvOybjlz6F7LhP9yJ/XtWrtmQLkJDbVn2Oxbydardc5U5hss4Za7PRSfIpV5/A9+eyaV/GZ8j41pmKx1Frbp53H7NNPZRo3e42prZfnFY98q2it7O1Ddlm81nvVOa3LIrt6bzlPGwIQWI7A809r8ZsfdE0peTgJ+AOvWnZOOurXD7uSgObP+ZN/FScUtUf+jsadP7ynpxW3/J/z54Sq9T6rfWitxp38PL6WWufTy2dQvCo+u9qa9/3YzglXtW11Tr1cZJs8bGufOad1rb3Fzfy8t/pem/eebe3lGB1P7uExaghA4PUInLJDY099YDNRKvH4gy5z9fUhVu0ySs4jf5kcMnGM/HnPVq24lKBcFLfinOrPZ3MSlB/HKN9u2/8aaifkGpvPrhh1rioejt3r1de9px/1870gG3FQkc98X2jc3HJv2cqn/dS7UFzy5Tjkx6/07729xzEI/oAABF6VwFA8alKoCUR9JQMnEUeuvhO3aiernj8lASeJrJ1kev68X6uuSUsxOKap/uTDCSqTnvaTD8+19n/LMXFWfKpVkoXGfB9O0o4178p367na17j2UKn3mmxyb9kmR/FzLJpTW75qXMdNyh+5R5miCwEIvAKBoXhof31IW0lXH3Ind9VOJFqTCSLbI395ViWRTMzpI9u5prYzoWVbdukj2+kjE6nXKBG6JBePvXWdd6K2zqaiuH1XGlPsqmuSThZVLHQfeWb17V97WQRs5/fDS8RDMcuf/aufbfXlP98jGqNAAAKvR+CseGQyUJJQ8ZiTqT7Ifjl0ffg1ZhuPe63m7M9zrqt4aLznz2tatRJOjct2LX9pr/lavGYUe13zmn3xFG+f2aKvcY9pPs+Wc07QOWbR0TlyvN5r+lfbid1Mtae/ZGj+r7/+ehZTxu219pn+FEdvXHv4DEtxl7/k5fevY3Q8yallU2OrfpeKFz8QeC0CZ8XjtQJhHwhAAAIQ2A4BxGM7d0WkEIAABFZDYLPi4Z8G8icMt/MnhNWQJhAIQAAC74jAZsXjHd0BR4EABCCwOQKIx+aujIAhAAEIvD0BxOPt74AIIAABCGyOAOKxuSsjYAhAAAJvTwDxePs7IAIIQAACmyOAeGzuyggYAhCAwNsTQDze/g6IAAIQgMDmCCAem7syAoYABCDw9gQQj7e/AyKAAAQgsDkC/wMHHfrNrZopZgAAAABJRU5ErkJggg=='>",
+        "choice": "{\"A\":\"BX subroutine1\",\"B\":\"B subroutine1\",\"C\":\"BL subroutine1\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "169",
+        "type": 1,
+        "content": "如图,地址为0x0040_0040处的指令2是<img src='data:image/png;base64,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'>",
+        "choice": "{\"A\":\"B LR\",\"B\":\"BX LR\",\"C\":\"BL LR\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "17",
+        "type": 1,
+        "content": "ARM V7 每条指令都可以条件执行",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "170",
+        "type": 1,
+        "content": "在如图所示的子程序调用中，BL指令的功能是：<img src='data:image/png;base64,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'>",
+        "choice": "{\"A\":\"子程序返回 r14→PC\",\"B\":\"子程序调用，0x0040_0004→LR, 0x0040_0004→PC\",\"C\":\"子程序调用，0x0040_0004→SP, 0x0040_0004→PC\",\"D\":\"子程序返回 r13→PC\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "171",
+        "type": 1,
+        "content": "在如图所示的子程序调用中，BX指令的功能是：<img src='data:image/png;base64,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'>",
+        "choice": "{\"A\":\"子程序返回 r14→PC\",\"B\":\"子程序调用，0x0040_0004→LR, 0x0040_0004→PC\",\"C\":\"子程序调用，0x0040_0004→SP, 0x0040_0004→PC\",\"D\":\"子程序返回 r13→PC\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "172",
+        "type": 1,
+        "content": "B指令中的24位立即数imm24进行",
+        "choice": "{\"A\":\"零扩展\",\"B\":\"符号扩展\",\"C\":\"不扩展\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "173",
+        "type": 1,
+        "content": "BL指令中的24位立即数imm24进行",
+        "choice": "{\"A\":\"符号扩展\",\"B\":\"零扩展\",\"C\":\"不扩展\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "174",
+        "type": 1,
+        "content": "跳转指令中，偏移地址是有符号数的原因是",
+        "choice": "{\"A\":\"往当前PC之前跳转\",\"B\":\"往当前PC之后跳转\",\"C\":\"可以往当前PC之前或之后跳转\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "175",
+        "type": 2,
+        "content": "BL subroutine1指令中，子程序名subroutine1",
+        "choice": "{\"A\":\"存在于指令二进制代码中，由指令译码得到\",\"B\":\"subroutine1是符号地址\",\"C\":\"汇编器做了翻译工作，它不仅将助记符变成了某种格式的字段编码，还会自动计算偏移量字段\",\"D\":\"以上都不对\"}",
+        "answer": "BC",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "176",
+        "type": 1,
+        "content": "PC地址来源有3种情况，这应该用什么器件从3种来源中选一个写入PC寄存器？",
+        "choice": "{\"A\":\"译码器\",\"B\":\"编码器\",\"C\":\"数据分配器\",\"D\":\"数据选择器\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "177",
+        "type": 1,
+        "content": "PC地址来源有3种情况，用数据选择器从3种来源中选一个写入PC寄存器，控制信号是",
+        "choice": "{\"A\":\"不需要控制信号\",\"B\":\"1位\",\"C\":\"2位\",\"D\":\"3位\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "178",
+        "type": 1,
+        "content": "PC值三选一数据选择器用Verilog HDL的哪条语句实现比较方便？",
+        "choice": "{\"A\":\"assign\",\"B\":\"case\",\"C\":\"always\",\"D\":\"negedge\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "179",
+        "type": 1,
+        "content": "二选一数据选择器用Verilog HDL的哪条语句实现比较方便？",
+        "choice": "{\"A\":\"assign\",\"B\":\"case\",\"C\":\"always\",\"D\":\"negedge\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "18",
+        "type": 1,
+        "content": "指令高4位条件码为0011时，指令执行条件是“无符号数小于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=0\",\"B\":\"ZF=0\",\"C\":\"CF=0\",\"D\":\"VF=0\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "180",
+        "type": 1,
+        "content": "PC值三选一数据选择器用Verilog HDL描述为",
+        "choice": "{\"A\":\"assign W_Data = W_Rdata_s ? CPSR_SPSR_Data:F\",\"B\":\"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALoAAACICAYAAABQvPFXAAAeT0lEQVR4Xu3dB/RcRRXH8YmACoiAoIL0poDYkIRuQECaVGkKhBZQIUCkSlGq0qU3UQxSRSlWihoSpJuQIAiEEggYepWOAp7PnDM5L4/9Z/fP7pp9vJlz/ifJ7r73Zu787p0788/97oB33nnnnZBbtsD73AIDstDf5zOchxctkIWehVALC2Sh12Ka8yCz0LMGamGBLPRaTHMeZKWFfvnll4d//vOf4cknnwyvvvpqePnll4NDpM9+9rPh0EMPnWp2f/azn4Vrrrkmvr/22muHNdZYI/znP/8Jn/nMZ1pWwd/+9rfwr3/9K3zzm99s+Zr8wd6wQGWFfs4554SbbropbLXVVuGOO+4IP/zhD8MRRxwRPvzhD4cf/ehHYeuttw7HH398FLbXr7rqqvjZj370o+GRRx4Jf/7zn8NOO+0Udtxxx5Zn4sEHHwyHH354WGaZZcK+++7b8nX5g9PfAl0R+n//+984shlnnHHKCAnO614bMGDAlNfTa0VTvP322+Gtt94KM800U0MLjRw5MvzqV78Ku+22W/j85z8fCHCDDTYIN954Y5hzzjnDAQccEC644IIwZsyY6Azf//73w1FHHRU23XTTeL/nn38+XHTRReGVV14J++233zRnQf9mmGGGKX1+6KGHolO51yabbDL9ZzD3oCULdFzot99+exg2bFhMJb70pS8Fkfeee+6J4nj00UfD66+/Hi6++OIYFYntvPPOi2IdOHBg2HLLLWO0Peyww8KECRPCwgsvHE444YTwyU9+cspg3PeYY44JH//4x+NztPHjx8drOcB8880XRowYEaP4r3/963DiiSdGQV966aVTOZ7rnnnmmTD33HP3aag//elP4eSTT46p0FJLLRV23nnn+FlOZhX53ve+F/uRW+9boKNCf/bZZ2Okkx/Ll4nsrLPOCldffXW4++67ww9+8IOw++67hyWWWCL++eMf/zh85zvfCb/73e9itPe+a0X9QYMGxX9vttlmMU0QVbVx48aF008/PaYcK620UnyN6DbffPPw85//PHzkIx8J2267bfj0pz8dxb7NNtuEwYMHh5NOOqlfs6E/HGnIkCHx/vp/6qmnxntYQTjuDjvsENZcc81+3Td/ePpYoKNCF0F///vfBxu/D37wg+G1116Lf0pVPvCBD8SNnLRinnnmCcOHDw977LFHWGWVVcLqq68eN4XSgl122SW8+OKLYY455gj//ve/w9e//vUoqg996EPRQpzm3HPPjU6y+OKLx9fuuuuumLrMNttsMd0RZYleCrTeeuvFjWd/hS514iT65d6eNfvss8fn6de6664bnU2en1vvW6CjQj/77LPDnXfeGSN5Mb9+7rnnYiQ+//zzw/XXXx9z26OPPjoKVNR86aWXogNIO6QK++yzT4zoKYoXzeikxXOsFIsssshUqYuVgSDTdRzGBpST/fa3v31X6uLERlrSV7v//vvDt7/97fD444/H6M0xbXb1d6211opC55i59b4FOip0Jxt77bVX+Mtf/hJFa/m/7777woUXXhiuuOKK+Lr8/IUXXojClrOLmHJ1UfqQQw6JkZojJAHde++9UdApojvi4zB77733lKNBK8H6668/ZTNaNPsvfvGLmPpwrKFDh05566c//WncLxBvo2Y1sLfgCJ655557xr7rL8eVKm2//fYxTcqt9y3QUaE//fTTYddddw1vvPFGWGGFFaKQROY//vGPMceVhkhtOICNnFTHhtU5uNxaOiNaX3bZZTFdIO5ZZpklpgfSEk10tRldddVVwze+8Y3wj3/8IzqJ/NlKYIVYYIEFplje5tV7VoCNNtoofOITn4gpVdpD9DVFUhcRe8EFF4wnQKL4wQcfHDfGVieOwnG+/OUv9/4s5x52/j91EaLzaycd0gjik86IrEQ377zzRgfgCAR07bXXRhGLjqInJ5Ffu8aR5IEHHhjFlprXjjzyyMCp5N233nprdAyp0ptvvhm++93vTsndi/NrVXH8KFJzKn1s1qxA6d7ydU6reS7hG9vMM8/c7Db5/R6wQEcj+v9rPI4gRVfRVErx/2x//etfw7HHHhtXlS9+8Yv/z0fnZ7VhgUoK3Xgd+aXjSac276VJmfwWdeLEie+63NGl/F30T02uLgXKx4rvxdrT95rKCp3ZHnjggXh8WUxt+mNO6ZV0xua43Oaff/6w3HLLxfunZvPss5/73Of685j82R6wQKWF3gP2y12oiAWy0CsyUbmb7VkgC709++WrK2KBLPSKTFTuZnsWyEJvz3756opYIAu9IhOVu9meBbLQ27NfvroiFshCr8hE5W62Z4Es9Pbsl6+uiAWy0CsyUbmb7VkgC709++WrK2KB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' alt=''/>\",\"C\":\"assign W_Addr = rd_s ? 4’b1110: rd\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "181",
+        "type": 2,
+        "content": "二选一选择器用Verilog HDL描述为",
+        "choice": "{\"A\":\"assign W_Addr = rd_s ? 4’b1110: rd\",\"B\":\"assign W_Data = W_Rdata_s ? CPSR_SPSR_Data:F\",\"C\":\"<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALoAAACICAYAAABQvPFXAAAeT0lEQVR4Xu3dB/RcRRXH8YmACoiAoIL0poDYkIRuQECaVGkKhBZQIUCkSlGq0qU3UQxSRSlWihoSpJuQIAiEEggYepWOAp7PnDM5L4/9Z/fP7pp9vJlz/ifJ7r73Zu787p0788/97oB33nnnnZBbtsD73AIDstDf5zOchxctkIWehVALC2Sh12Ka8yCz0LMGamGBLPRaTHMeZKWFfvnll4d//vOf4cknnwyvvvpqePnll4NDpM9+9rPh0EMPnWp2f/azn4Vrrrkmvr/22muHNdZYI/znP/8Jn/nMZ1pWwd/+9rfwr3/9K3zzm99s+Zr8wd6wQGWFfs4554SbbropbLXVVuGOO+4IP/zhD8MRRxwRPvzhD4cf/ehHYeuttw7HH398FLbXr7rqqvjZj370o+GRRx4Jf/7zn8NOO+0Udtxxx5Zn4sEHHwyHH354WGaZZcK+++7b8nX5g9PfAl0R+n//+984shlnnHHKCAnO614bMGDAlNfTa0VTvP322+Gtt94KM800U0MLjRw5MvzqV78Ku+22W/j85z8fCHCDDTYIN954Y5hzzjnDAQccEC644IIwZsyY6Azf//73w1FHHRU23XTTeL/nn38+XHTRReGVV14J++233zRnQf9mmGGGKX1+6KGHolO51yabbDL9ZzD3oCULdFzot99+exg2bFhMJb70pS8Fkfeee+6J4nj00UfD66+/Hi6++OIYFYntvPPOi2IdOHBg2HLLLWO0Peyww8KECRPCwgsvHE444YTwyU9+cspg3PeYY44JH//4x+NztPHjx8drOcB8880XRowYEaP4r3/963DiiSdGQV966aVTOZ7rnnnmmTD33HP3aag//elP4eSTT46p0FJLLRV23nnn+FlOZhX53ve+F/uRW+9boKNCf/bZZ2Okkx/Ll4nsrLPOCldffXW4++67ww9+8IOw++67hyWWWCL++eMf/zh85zvfCb/73e9itPe+a0X9QYMGxX9vttlmMU0QVbVx48aF008/PaYcK620UnyN6DbffPPw85//PHzkIx8J2267bfj0pz8dxb7NNtuEwYMHh5NOOqlfs6E/HGnIkCHx/vp/6qmnxntYQTjuDjvsENZcc81+3Td/ePpYoKNCF0F///vfBxu/D37wg+G1116Lf0pVPvCBD8SNnLRinnnmCcOHDw977LFHWGWVVcLqq68eN4XSgl122SW8+OKLYY455gj//ve/w9e//vUoqg996EPRQpzm3HPPjU6y+OKLx9fuuuuumLrMNttsMd0RZYleCrTeeuvFjWd/hS514iT65d6eNfvss8fn6de6664bnU2en1vvW6CjQj/77LPDnXfeGSN5Mb9+7rnnYiQ+//zzw/XXXx9z26OPPjoKVNR86aWXogNIO6QK++yzT4zoKYoXzeikxXOsFIsssshUqYuVgSDTdRzGBpST/fa3v31X6uLERlrSV7v//vvDt7/97fD444/H6M0xbXb1d6211opC55i59b4FOip0Jxt77bVX+Mtf/hJFa/m/7777woUXXhiuuOKK+Lr8/IUXXojClrOLmHJ1UfqQQw6JkZojJAHde++9UdApojvi4zB77733lKNBK8H6668/ZTNaNPsvfvGLmPpwrKFDh05566c//WncLxBvo2Y1sLfgCJ655557xr7rL8eVKm2//fYxTcqt9y3QUaE//fTTYddddw1vvPFGWGGFFaKQROY//vGPMceVhkhtOICNnFTHhtU5uNxaOiNaX3bZZTFdIO5ZZpklpgfSEk10tRldddVVwze+8Y3wj3/8IzqJ/NlKYIVYYIEFplje5tV7VoCNNtoofOITn4gpVdpD9DVFUhcRe8EFF4wnQKL4wQcfHDfGVieOwnG+/OUv9/4s5x52/j91EaLzaycd0gjik86IrEQ377zzRgfgCAR07bXXRhGLjqInJ5Ffu8aR5IEHHhjFlprXjjzyyMCp5N233nprdAyp0ptvvhm++93vTsndi/NrVXH8KFJzKn1s1qxA6d7ydU6reS7hG9vMM8/c7Db5/R6wQEcj+v9rPI4gRVfRVErx/2x//etfw7HHHhtXlS9+8Yv/z0fnZ7VhgUoK3Xgd+aXjSac276VJmfwWdeLEie+63NGl/F30T02uLgXKx4rvxdrT95rKCp3ZHnjggXh8WUxt+mNO6ZV0xua43Oaff/6w3HLLxfunZvPss5/73Of685j82R6wQKWF3gP2y12oiAWy0CsyUbmb7VkgC709++WrK2KBLPSKTFTuZnsWyEJvz3756opYIAu9IhOVu9meBbLQ27NfvroiFshCr8hE5W62Z4Es9Pbsl6+uiAWy0CsyUbmb7VkgC709++WrK2KB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' alt=''/>\",\"D\":\"以上都不对\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "182",
+        "type": 1,
+        "content": "PC值的修改在clk下跳沿进行，用Verilog HDL描述为",
+        "choice": "{\"A\":\"always @(*)\",\"B\":\"always @(posedge clk)\",\"C\":\"always @(negedge clk)\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\", \"1\": \"8\"}",
+        "relatedSet": "5,8"
+    },
+    {
+        "id": "183",
+        "type": 1,
+        "content": "IR值的修改在clk下跳沿进行，用Verilog HDL描述为",
+        "choice": "{\"A\":\"always @(*)\",\"B\":\"always @(posedge clk)\",\"C\":\"always @(negedge clk)\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "184",
+        "type": 1,
+        "content": "LDR指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "185",
+        "type": 1,
+        "content": "STR指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "186",
+        "type": 1,
+        "content": "SWP指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "187",
+        "type": 1,
+        "content": "LDRCC指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "188",
+        "type": 1,
+        "content": "STREQ指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "189",
+        "type": 1,
+        "content": "LDRNE指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "19",
+        "type": 1,
+        "content": "指令高4位条件码为0010时，指令执行条件是“无符号数大于或等于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"ZF=1\",\"C\":\"CF=1\",\"D\":\"VF=1\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "190",
+        "type": 1,
+        "content": "以下哪些是LDR指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then Mem[rn±ZeroExtend(imm24,32)]→rt  else Mem[rn]→rt;if （W==1|| P==0）then  (rn) ±ZeroExtend(imm24,32) →rn\",\"C\":\"If P then  rt→Mem[rn±ZeroExtend(imm24,32)] else rt→Mem[rn]; if （W==1|| P==0） then (rn) ±ZeroExtend(imm24:, 32) →rn\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "191",
+        "type": 1,
+        "content": "以下哪些是SWP指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then Mem[rn±ZeroExtend(imm24,32)]→rt  else Mem[rn]→rt;if （W==1|| P==0）then  (rn) ±ZeroExtend(imm24,32) →rn\",\"C\":\"If P then  rt→Mem[rn±ZeroExtend(imm24,32)] else rt→Mem[rn]; if （W==1|| P==0） then (rn) ±ZeroExtend(imm24:, 32) →rn\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "192",
+        "type": 1,
+        "content": "以下哪些是STR指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then Mem[rn±ZeroExtend(imm24,32)]→rt  else Mem[rn]→rt;if （W==1|| P==0）then  (rn) ±ZeroExtend(imm24,32) →rn\",\"C\":\"If P then  rt→Mem[rn±ZeroExtend(imm24,32)] else rt→Mem[rn]; if （W==1|| P==0） then (rn) ±ZeroExtend(imm24:, 32) →rn\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "193",
+        "type": 1,
+        "content": "以下哪些是LDR指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then rt→Mem[rn±offset] else rt→Mem[rn]; if （W==1|| P==0）then (rn) ±Offset →rn\",\"C\":\"If P then  Mem[rn±offset]→rt  else Mem[rn]→rt; if（W==1|| P==0）then  (rn) ±Offset→rn\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "194",
+        "type": 1,
+        "content": "以下哪些是SWP指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then rt→Mem[rn±offset] else rt→Mem[rn]; if （W==1|| P==0）then (rn) ±Offset →rn\",\"C\":\"If P then  Mem[rn±offset]→rt  else Mem[rn]→rt; if（W==1|| P==0）then  (rn) ±Offset→rn\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "195",
+        "type": 1,
+        "content": "以下哪些是STR指令的功能？",
+        "choice": "{\"A\":\"Mem[rn]→rd ，rm→Mem[rn]\",\"B\":\"If P then rt→Mem[rn±offset] else rt→Mem[rn]; if （W==1|| P==0）then (rn) ±Offset →rn\",\"C\":\"If P then  Mem[rn±offset]→rt  else Mem[rn]→rt; if（W==1|| P==0）then  (rn) ±Offset→rn\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "196",
+        "type": 1,
+        "content": "LDR和STR指令码中的P位的含义是",
+        "choice": "{\"A\":\"P==1表示在访存前加偏移量，P==0表示在访存后加偏移量\",\"B\":\"P==1表示基址rn加上偏移量，P==0表示基址rn减去偏移量\",\"C\":\"P==1表示将地址写回到基址rn，P==0表示无回写\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "197",
+        "type": 1,
+        "content": "LDR和STR指令码中的U位的含义是",
+        "choice": "{\"A\":\"U==1表示在访存前加偏移量，U==0表示在访存后加偏移量\",\"B\":\"U==1表示基址rn加上偏移量，U==0表示基址rn减去偏移量\",\"C\":\"U==1表示将地址写回到基址rn，U==0表示无回写\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "198",
+        "type": 1,
+        "content": "LDR和STR指令码中的W位的含义是",
+        "choice": "{\"A\":\"W==1表示在访存前加偏移量，W==0表示在访存后加偏移量\",\"B\":\"W==1表示基址rn加上偏移量，W==0表示基址rn减去偏移量\",\"C\":\"W==1表示将地址写回到基址rn，W==0表示无回写\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "199",
+        "type": 1,
+        "content": "LDR1和STR1格式的偏移地址Offset的计算方法，与哪种格式下数据处理指令计算第二操作数second_opr的方法一样？",
+        "choice": "{\"A\":\"DP0\",\"B\":\"DP1\",\"C\":\"DP2\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "2",
+        "type": 1,
+        "content": "测试数据A=0FFFFH，B=1H，加法运算时，当A、B被看作无符号数和A、B被看成有符号数，这两种情况下运算器硬件操作上有区别吗？",
+        "choice": "{\"A\":\"有\",\"B\":\"无\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "20",
+        "type": 1,
+        "content": "指令高4位条件码为0000时，指令执行条件是“相等”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"ZF=1\",\"C\":\"CF=1\",\"D\":\"VF=1\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "200",
+        "type": 1,
+        "content": "LDR1、STR0、STR1格式下，如果rm==PC或W=1&&(rn==PC || rn==rt)，那么",
+        "choice": "{\"A\":\"正常译码\",\"B\":\"译码失败\",\"C\":\"译码结果随机\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "201",
+        "type": 1,
+        "content": "LDM指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "202",
+        "type": 1,
+        "content": "STM指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "203",
+        "type": 1,
+        "content": "STMDA指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "204",
+        "type": 1,
+        "content": "STMIA指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "205",
+        "type": 1,
+        "content": "STMDB指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "206",
+        "type": 1,
+        "content": "STMIB指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "207",
+        "type": 1,
+        "content": "LDMDA指令是",
+        "choice": "{\"A\":\"块数据传送指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"数据传输指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "208",
+        "type": 1,
+        "content": "LDMIA指令是",
+        "choice": "{\"A\":\"块数据传送指令\",\"B\":\"传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "209",
+        "type": 1,
+        "content": "LDMDB指令是",
+        "choice": "{\"A\":\"数据传输指令\",\"B\":\"单数据访存指令\",\"C\":\"传送指令\",\"D\":\"块数据传送指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "21",
+        "type": 1,
+        "content": "指令高4位条件码为0001时，指令执行条件是“不相等”，对应的条件是：",
+        "choice": "{\"A\":\"NF=0\",\"B\":\"ZF=0\",\"C\":\"CF=0\",\"D\":\"VF=0\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "210",
+        "type": 1,
+        "content": "LDMIB指令是",
+        "choice": "{\"A\":\"传送指令\",\"B\":\"块数据传送指令\",\"C\":\"数据传输指令\",\"D\":\"单数据访存指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "211",
+        "type": 1,
+        "content": "对于堆栈操作，FD表示",
+        "choice": "{\"A\":\"空递增堆栈\",\"B\":\"空递减堆栈\",\"C\":\"满递减堆栈\",\"D\":\"满递增堆栈\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "212",
+        "type": 1,
+        "content": "对于堆栈操作，ED表示",
+        "choice": "{\"A\":\"满递减堆栈\",\"B\":\"空递增堆栈\",\"C\":\"空递减堆栈\",\"D\":\"满递增堆栈\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "213",
+        "type": 1,
+        "content": "对于堆栈操作，FA表示",
+        "choice": "{\"A\":\"空递减堆栈\",\"B\":\"满递增堆栈\",\"C\":\"满递减堆栈\",\"D\":\"空递增堆栈\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "214",
+        "type": 1,
+        "content": "对于堆栈操作，EA表示",
+        "choice": "{\"A\":\"空递增堆栈\",\"B\":\"满递减堆栈\",\"C\":\"满递增堆栈\",\"D\":\"空递减堆栈\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "215",
+        "type": 2,
+        "content": "空递减堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMDA\",\"B\":\"STMED\",\"C\":\"LDMIB\",\"D\":\"LDMED\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "216",
+        "type": 2,
+        "content": "空递增堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIA\",\"B\":\"STMEA\",\"C\":\"LDMDB\",\"D\":\"LDMEA\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "217",
+        "type": 2,
+        "content": "满递减堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMDB\",\"B\":\"STMFD\",\"C\":\"LDMIA\",\"D\":\"LDMFD\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "218",
+        "type": 2,
+        "content": "满递增堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIB\",\"B\":\"STMFA\",\"C\":\"LDMDA\",\"D\":\"LDMFA\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "219",
+        "type": 2,
+        "content": "空递减堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIB\",\"B\":\"STMED\",\"C\":\"LDMIA\",\"D\":\"LDMED\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "22",
+        "type": 1,
+        "content": "指令高4位条件码为1000时，指令执行条件是“无符号数大于”，对应的条件是：",
+        "choice": "{\"A\":\"CF=0 or ZF=1\",\"B\":\"ZF=0\",\"C\":\"CF=1\",\"D\":\"CF=1 and ZF=0\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "220",
+        "type": 2,
+        "content": "空递增堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIA\",\"B\":\"STMED\",\"C\":\"LDMDB\",\"D\":\"LDMED\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "221",
+        "type": 2,
+        "content": "满递减堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIB\",\"B\":\"STMFA\",\"C\":\"LDMIB\",\"D\":\"LDMED\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "222",
+        "type": 2,
+        "content": "满递增堆栈/数据块对应指令是",
+        "choice": "{\"A\":\"STMIA\",\"B\":\"STMEA\",\"C\":\"LDMDA\",\"D\":\"LDMFA\"}",
+        "answer": "CD",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "223",
+        "type": 1,
+        "content": "对于非堆栈数据块，ARM允许有4种内存存储和传输数据方式,分别是",
+        "choice": "{\"A\":\"FD/ED/FA/EA\",\"B\":\"FD/ED/DA/DB\",\"C\":\"IA/IB/FA/EA\",\"D\":\"IA/IB/DA/DB\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "224",
+        "type": 1,
+        "content": "STMED指令是",
+        "choice": "{\"A\":\"空递减堆栈出栈指令\",\"B\":\"空递减堆栈入栈指令\",\"C\":\"空递减数据块写入指令\",\"D\":\"空递减数据块读出指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "225",
+        "type": 1,
+        "content": "STMEA指令是",
+        "choice": "{\"A\":\"空递增堆栈出栈指令\",\"B\":\"空递增堆栈入栈指令\",\"C\":\"空递增数据块写入指令\",\"D\":\"空递增数据块读出指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "226",
+        "type": 1,
+        "content": "STMFD指令是",
+        "choice": "{\"A\":\"满递减堆栈出栈指令\",\"B\":\"满递减堆栈入栈指令\",\"C\":\"满递减数据块写入指令\",\"D\":\"满递减数据块读出指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "227",
+        "type": 1,
+        "content": "STMFA指令是",
+        "choice": "{\"A\":\"满递增堆栈出栈指令\",\"B\":\"满递增堆栈入栈指令\",\"C\":\"满递增数据块写入指令\",\"D\":\"满递增数据块读出指令\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "228",
+        "type": 1,
+        "content": "LDMED指令是",
+        "choice": "{\"A\":\"空递减堆栈出栈指令\",\"B\":\"空递减堆栈入栈指令\",\"C\":\"空递减数据块写入指令\",\"D\":\"空递减数据块读出指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "229",
+        "type": 1,
+        "content": "LDMEA指令是",
+        "choice": "{\"A\":\"空递增堆栈出栈指令\",\"B\":\"空递增堆栈入栈指令\",\"C\":\"空递增数据块写入指令\",\"D\":\"空递增数据块读出指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "23",
+        "type": 1,
+        "content": "指令高4位条件码为1001时，指令执行条件是“无符号数小于或等于”，对应的条件是：",
+        "choice": "{\"A\":\"CF=0 or ZF=1\",\"B\":\"ZF=0\",\"C\":\"CF=1\",\"D\":\"CF=1 and ZF=0\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "230",
+        "type": 1,
+        "content": "LDMFD指令是",
+        "choice": "{\"A\":\"满递减堆栈出栈指令\",\"B\":\"满递减堆栈入栈指令\",\"C\":\"满递减数据块写入指令\",\"D\":\"满递减数据块读出指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "231",
+        "type": 1,
+        "content": "LDMFA指令是",
+        "choice": "{\"A\":\"满递增堆栈出栈指令\",\"B\":\"满递增堆栈入栈指令\",\"C\":\"满递增数据块写入指令\",\"D\":\"满递增数据块读出指令\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "232",
+        "type": 1,
+        "content": "STMDA指令是",
+        "choice": "{\"A\":\"空递减堆栈出栈指令\",\"B\":\"空递减堆栈入栈指令\",\"C\":\"空递减数据块写入指令\",\"D\":\"空递减数据块读出指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "233",
+        "type": 1,
+        "content": "STMIA指令是",
+        "choice": "{\"A\":\"空递增堆栈出栈指令\",\"B\":\"空递增堆栈入栈指令\",\"C\":\"空递增数据块写入指令\",\"D\":\"空递增数据块读出指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "234",
+        "type": 1,
+        "content": "STMDB指令是",
+        "choice": "{\"A\":\"满递减堆栈出栈指令\",\"B\":\"满递减堆栈入栈指令\",\"C\":\"满递减数据块写入指令\",\"D\":\"满递减数据块读出指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "235",
+        "type": 1,
+        "content": "STMIB指令是",
+        "choice": "{\"A\":\"满递增堆栈出栈指令\",\"B\":\"满递增堆栈入栈指令\",\"C\":\"满递增数据块写入指令\",\"D\":\"满递增数据块读出指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "236",
+        "type": 1,
+        "content": "LDMIB指令是",
+        "choice": "{\"A\":\"空递减堆栈出栈指令\",\"B\":\"空递减堆栈入栈指令\",\"C\":\"空递减数据块写入指令\",\"D\":\"空递减数据块读出指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "237",
+        "type": 1,
+        "content": "LDMDB指令是",
+        "choice": "{\"A\":\"空递增堆栈出栈指令\",\"B\":\"空递增堆栈入栈指令\",\"C\":\"空递增数据块写入指令\",\"D\":\"空递增数据块读出指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "238",
+        "type": 1,
+        "content": "LDMIA指令是",
+        "choice": "{\"A\":\"满递减堆栈出栈指令\",\"B\":\"满递减堆栈入栈指令\",\"C\":\"满递减数据块写入指令\",\"D\":\"满递减数据块读出指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "239",
+        "type": 1,
+        "content": "LDMDA指令是",
+        "choice": "{\"A\":\"满递增堆栈出栈指令\",\"B\":\"满递增堆栈入栈指令\",\"C\":\"满递增数据块写入指令\",\"D\":\"满递增数据块读出指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "24",
+        "type": 1,
+        "content": "指令高4位条件码为1010时，指令执行条件是“有符号数大于或等于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=VF\",\"B\":\"NF≠VF\",\"C\":\"Z=0 and N=V\",\"D\":\"Z=1 or N≠V\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "240",
+        "type": 1,
+        "content": "在实现访存指令的实验中，实验板卡HDU-XL-01上存储器的写时钟则必须设为",
+        "choice": "{\"A\":\"clk上跳沿\",\"B\":\"clk下跳沿\",\"C\":\"clk高电平\",\"D\":\"clk低电平\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "241",
+        "type": 1,
+        "content": "控制器何时检测外设是否有中断请求？",
+        "choice": "{\"A\":\"取指令时\",\"B\":\"指令译码时\",\"C\":\"指令执行时\",\"D\":\"指令执行完毕时\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "242",
+        "type": 1,
+        "content": "什么是中断源？",
+        "choice": "{\"A\":\"就是中断响应\",\"B\":\"中断的源头\",\"C\":\"中断过程\",\"D\":\"由于某种原因引起CPU中断的事件或设备\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "243",
+        "type": 1,
+        "content": "中断源分为：",
+        "choice": "{\"A\":\"一般中断源和特殊中断源\",\"B\":\"普通中断源和高级中断源\",\"C\":\"硬中断和软中断\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "244",
+        "type": 1,
+        "content": "中断系统是计算机中实现中断功能的软硬件的总称。一般在CPU中配置：",
+        "choice": "{\"A\":\"中断机构\",\"B\":\"中断控制器\",\"C\":\"中断初始化程序\",\"D\":\"中的服务程序\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "245",
+        "type": 1,
+        "content": "中断系统是计算机中实现中断功能的软硬件的总称。一般在外设接口中配置：",
+        "choice": "{\"A\":\"中断机构\",\"B\":\"中断控制器\",\"C\":\"中断初始化程序\",\"D\":\"中的服务程序\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "246",
+        "type": 2,
+        "content": "中断系统是计算机中实现中断功能的软硬件的总称。一般在软件上设计：",
+        "choice": "{\"A\":\"中断机构\",\"B\":\"中断控制器\",\"C\":\"中断初始化程序\",\"D\":\"中的服务程序\"}",
+        "answer": "CD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "247",
+        "type": 2,
+        "content": "由外部设备和其他CPU外部事件引起的中断称为:",
+        "choice": "{\"A\":\"硬中断\",\"B\":\"软中断\",\"C\":\"外中断\",\"D\":\"内中断\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "248",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"指令中断\",\"B\":\"输入输出请求\",\"C\":\"程序异常\",\"D\":\"实时时钟\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "249",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"计时器\",\"B\":\"除数为0\",\"C\":\"电源故障\",\"D\":\"运算溢出\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "25",
+        "type": 1,
+        "content": "指令高4位条件码为1011时，指令执行条件是“有符号数小于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=VF\",\"B\":\"NF≠VF\",\"C\":\"Z=0 and N=V\",\"D\":\"Z=1 or N≠V\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "250",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"设备故障\",\"B\":\"输入输出请求\",\"C\":\"指令单步运行\",\"D\":\"程序运行至断点处\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "251",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"除数为0\",\"B\":\"校验线路\",\"C\":\"电源故障\",\"D\":\"指令中断\"}",
+        "answer": "BC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "252",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"运算溢出\",\"B\":\"程序运行至断点处\",\"C\":\"实时时钟\",\"D\":\"计时器\"}",
+        "answer": "CD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "253",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"指令中断\",\"B\":\"输入输出请求\",\"C\":\"电源故障\",\"D\":\"计时器\"}",
+        "answer": "BCD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "254",
+        "type": 2,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"计时器\",\"B\":\"除数为0\",\"C\":\"电源故障\",\"D\":\"运算溢出\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "255",
+        "type": 2,
+        "content": "以下哪些是软中断（或称内中断）？",
+        "choice": "{\"A\":\"设备故障\",\"B\":\"运算溢出\",\"C\":\"除数为0\",\"D\":\"程序运行至断点处\"}",
+        "answer": "BCD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "256",
+        "type": 2,
+        "content": "以下哪些是软中断（或称内中断）？",
+        "choice": "{\"A\":\"除数为0\",\"B\":\"校验线路\",\"C\":\"电源故障\",\"D\":\"指令中断\"}",
+        "answer": "AD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "257",
+        "type": 2,
+        "content": "以下哪些是软中断（或称内中断）？",
+        "choice": "{\"A\":\"运算溢出\",\"B\":\"程序运行至断点处\",\"C\":\"实时时钟\",\"D\":\"计时器\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "258",
+        "type": 1,
+        "content": "以下哪些是硬中断（或称外中断）？",
+        "choice": "{\"A\":\"指令中断\",\"B\":\"除数为0\",\"C\":\"指令单步运行\",\"D\":\"实时时钟\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "259",
+        "type": 2,
+        "content": "以下哪些是软中断（或称内中断）？",
+        "choice": "{\"A\":\"指令中断\",\"B\":\"除数为0\",\"C\":\"指令单步运行\",\"D\":\"实时时钟\"}",
+        "answer": "ABC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "26",
+        "type": 1,
+        "content": "指令高4位条件码为1100时，指令执行条件是“有符号数大于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=VF\",\"B\":\"NF≠VF\",\"C\":\"Z=0 and N=V\",\"D\":\"Z=1 or N≠V\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "260",
+        "type": 2,
+        "content": "由CPU内部的指令或程序执行中的突发事件所引起的中断称为：",
+        "choice": "{\"A\":\"硬中断\",\"B\":\"软中断\",\"C\":\"异常\",\"D\":\"内中断\"}",
+        "answer": "BCD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "261",
+        "type": 2,
+        "content": "程序取数失败引起的异常属于",
+        "choice": "{\"A\":\"硬中断\",\"B\":\"软中断\",\"C\":\"外中断\",\"D\":\"内中断\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "262",
+        "type": 1,
+        "content": "在很多中断系统中，对所有的中断源编码，为其分配唯一的代号，称为：",
+        "choice": "{\"A\":\"中断源号\",\"B\":\"异常源号\",\"C\":\"中断类型号\",\"D\":\"中断分类号\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "263",
+        "type": 1,
+        "content": "80X86有256种中断类型，对应中断类型号应为几位？",
+        "choice": "{\"A\":\"4\",\"B\":\"8\",\"C\":\"16\",\"D\":\"256\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "264",
+        "type": 2,
+        "content": "中断类型号的用途是什么？",
+        "choice": "{\"A\":\"寻找中断向量\",\"B\":\"寻找中断源\",\"C\":\"寻找中断服务程序入口地址\",\"D\":\"寻找中断向量表\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "265",
+        "type": 1,
+        "content": "中断全过程包含几个阶段？",
+        "choice": "{\"A\":\"2\",\"B\":\"3\",\"C\":\"4\",\"D\":\"6\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "266",
+        "type": 2,
+        "content": "以下哪些阶段属于中断的过程",
+        "choice": "{\"A\":\"中断请求\",\"B\":\"中断响应\",\"C\":\"中断服务\",\"D\":\"中断返回\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "267",
+        "type": 1,
+        "content": "CPU判断是否有中断发生，这个判断属于中断过程的4个阶段",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "268",
+        "type": 1,
+        "content": "外设或其他中断源通过CPU的中断请求引脚向CPU发送中断请求信号,CPU在每条指令执行完后，检测是否有中断请求，这个阶段称为",
+        "choice": "{\"A\":\"中断请求\",\"B\":\"中断响应\",\"C\":\"中断服务\",\"D\":\"中断返回\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "269",
+        "type": 1,
+        "content": "CPU在每条指令执行完后，检测是否有中断请求，若有，则转入",
+        "choice": "{\"A\":\"中断请求\",\"B\":\"中断响应\",\"C\":\"中断服务\",\"D\":\"中断返回\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "27",
+        "type": 1,
+        "content": "指令高4位条件码为1101时，指令执行条件是“有符号数小于或等于”，对应的条件是：",
+        "choice": "{\"A\":\"NF=VF\",\"B\":\"NF≠VF\",\"C\":\"Z=0 and N=V\",\"D\":\"Z=1 or N≠V\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "270",
+        "type": 1,
+        "content": "对于那些CPU目前不准备响应的中断源，采取什么方法实现“不响应”？",
+        "choice": "{\"A\":\"关中断\",\"B\":\"开中断\",\"C\":\"中断屏蔽\",\"D\":\"优先级判断\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "271",
+        "type": 1,
+        "content": "CPU目前不准备响应任何中断源，采取什么方法实现“不响应”？",
+        "choice": "{\"A\":\"关中断\",\"B\":\"开中断\",\"C\":\"中断屏蔽\",\"D\":\"优先级判断\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "272",
+        "type": 2,
+        "content": "中断响应阶段，CPU首先应该",
+        "choice": "{\"A\":\"关中断\",\"B\":\"保存断点地址\",\"C\":\"转入中断服务程序入口地址\",\"D\":\"保存标志寄存器\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "273",
+        "type": 1,
+        "content": "中断响应阶段，CPU首先通过硬件保存程序断点地址（PC）和标志寄存器，以便中断返回，由于该过程对软件设计者是透明的，因此又称为",
+        "choice": "{\"A\":\"黑盒\",\"B\":\"盲区\",\"C\":\"中断隐指令\",\"D\":\"中断初始化程序\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "274",
+        "type": 1,
+        "content": "中断向量又称为",
+        "choice": "{\"A\":\"中断隐指令\",\"B\":\"中断初始化程序\",\"C\":\"断点地址\",\"D\":\"中断服务程序入口地址\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "275",
+        "type": 1,
+        "content": "CPU在执行某个中断服务程序的过程中，又出现新的中断请求，CPU打断当前正在执行的中断服务程序，而去响应新的中断请求，称为",
+        "choice": "{\"A\":\"中断返回\",\"B\":\"中断响应\",\"C\":\"中断嵌套\",\"D\":\"中断服务\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "276",
+        "type": 1,
+        "content": "中断返回解决的问题是",
+        "choice": "{\"A\":\"解决外设的服务请求\",\"B\":\"转回主程序\",\"C\":\"恢复断点地址和中断处理之前的标志位\",\"D\":\"通知CPU结束中断处理\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "277",
+        "type": 1,
+        "content": "中断返回时，从哪里找出断点地址写入程序计数器PC?",
+        "choice": "{\"A\":\"堆栈\",\"B\":\"通用寄存器\",\"C\":\"标志寄存器\",\"D\":\"多功能运算器\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "278",
+        "type": 2,
+        "content": "中断的作用有：",
+        "choice": "{\"A\":\"实现CPU与多台I/O设备并行工作\",\"B\":\"执行程序功能\",\"C\":\"使CPU具有处理应急事件的能力\",\"D\":\"能够进行实时处理\"}",
+        "answer": "ACD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "279",
+        "type": 2,
+        "content": "中断的作用有：",
+        "choice": "{\"A\":\"实现人机通信\",\"B\":\"实现多道程序运行和分时操作\",\"C\":\"实现应用程序和操作系统的联系\",\"D\":\"实现多机系统中各处理机间的联系\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "28",
+        "type": 1,
+        "content": "指令高4位条件码为0100时，指令执行条件是“运算结果为负数”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"NF=0\",\"C\":\"VF=1\",\"D\":\"VF=0\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "280",
+        "type": 1,
+        "content": "如果同一时刻有多个中断源向CPU申请中断，CPU按照某规则选择一个进行处理，这是",
+        "choice": "{\"A\":\"中断响应\",\"B\":\"中断优先级\",\"C\":\"中断屏蔽\",\"D\":\"中断嵌套\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "281",
+        "type": 2,
+        "content": "子程序调用的条件是",
+        "choice": "{\"A\":\"用指令实现调用\",\"B\":\"只能在程序中指定的位置调用\",\"C\":\"预定调用\",\"D\":\"子程序调用是一种程序转移\"}",
+        "answer": "ABCD",
+        "relatedKnowledge": "{\"0\": \"13\"}",
+        "relatedSet": "13"
+    },
+    {
+        "id": "282",
+        "type": 2,
+        "content": "中断和子程序调用对比",
+        "choice": "{\"A\":\"中断的触发是随机的，子程序调用是预定调用\",\"B\":\"都只能在程序中指定的位置调用\",\"C\":\"中断是一种特殊的子程序调用\",\"D\":\"中断触发不需要指令，子程序需要用指令来调用\"}",
+        "answer": "ACD",
+        "relatedKnowledge": "{\"0\": \"12\", \"1\": \"13\"}",
+        "relatedSet": "12,13"
+    },
+    {
+        "id": "283",
+        "type": 2,
+        "content": "中断和子程序调用对比",
+        "choice": "{\"A\":\"中断的触发是随机的，子程序调用是预定调用\",\"B\":\"中断返回和子程序返回都需要指令来实现\",\"C\":\"中断返回和子程序返回都是程序转移\",\"D\":\"都需要用指令来调用\"}",
+        "answer": "ABC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "284",
+        "type": 1,
+        "content": "子程序返回时，从哪里找出返回地址写入程序计数器PC?",
+        "choice": "{\"A\":\"通用寄存器\",\"B\":\"标志寄存器\",\"C\":\"多功能运算器\",\"D\":\"堆栈\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "285",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，外设怎样提起中断请求？",
+        "choice": "{\"A\":\"通过Int_r\",\"B\":\"通过Input\",\"C\":\"通过INT按钮\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "286",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，中断向量是如何得到的？",
+        "choice": "{\"A\":\"通过Int_r输入\",\"B\":\"通过Input输入\",\"C\":\"通过INT按钮得到\",\"D\":\"程序内置\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "287",
+        "type": 2,
+        "content": "在Yy-Z02模型机仿真软件上，点击INT按钮提起中断请求前，如果没有在Int_r框中输入中断向量，会发生什么情况？",
+        "choice": "{\"A\":\"中断响应时，程序跑飞\",\"B\":\"不响应中断\",\"C\":\"无法转入中断服务程序\",\"D\":\"无法中断返回\"}",
+        "answer": "AC",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "288",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，如果打开文件<中断功能的模型机设计与实现.yyy>，但是没有下装，执行程序的时候会怎样？",
+        "choice": "{\"A\":\"无法执行程序\",\"B\":\"正常执行程序\",\"C\":\"内存窗口里可以看到程序\",\"D\":\"执行程序前，需要先总清clr\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "289",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，总清以后，程序总是从哪个地址开始执行？",
+        "choice": "{\"A\":\"0\",\"B\":\"0FFH\",\"C\":\"0DH\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "29",
+        "type": 1,
+        "content": "指令高4位条件码为0101时，指令执行条件是“运算结果为正数或零”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"NF=0\",\"C\":\"VF=1\",\"D\":\"VF=0\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "290",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，用Int_r输入中断向量时",
+        "choice": "{\"A\":\"中断向量值随意定\",\"B\":\"无论怎样改动程序，中断向量与硬件有关，永远只能为0DH\",\"C\":\"必须与内存中中断服务程序的第一条指令地址一致\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "291",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，如果打开内存窗口，把中断服务程序从原来0DH开始的地址，整体搬迁到起始地址为70H的一段空间，CPU总是从0地址开始执行程序，那么 用Int_r输入中断向量时，应输入",
+        "choice": "{\"A\":\"0\",\"B\":\"0DH\",\"C\":\"70H\",\"D\":\"条件不足，无法判断\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "292",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，如果打开内存窗口，把子程序从原来17H开始的地址，整体搬迁到起始地址为70H的一段空间，CPU总是从0地址开始执行程序，那么 用Int_r输入中断向量时，应输入",
+        "choice": "{\"A\":\"0\",\"B\":\"0DH\",\"C\":\"70H\",\"D\":\"条件不足，无法判断\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "293",
+        "type": 1,
+        "content": "计算机里跳转指令的寻址方式是",
+        "choice": "{\"A\":\"直接寻址\",\"B\":\"间接寻址\",\"C\":\"相对寻址\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "294",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，CPU总是从0地址开始执行程序，CALL指令采用直接寻址，如果打开内存窗口，把子程序从原来17H开始的地址，整体搬迁到起始地址为70H的一段空间，那么应该做哪些改变才能够正确实现子程序调用？",
+        "choice": "{\"A\":\"修改堆栈指针\",\"B\":\"修改PC值为70H\",\"C\":\"修改CALL指令地址\",\"D\":\"修改CALL指令中跳转直接地址为70H\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "295",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上，执行文件<中断功能的模型机设计与实现.yyy>时，中断触发只能发生在HLT指令处",
+        "choice": "{\"A\":\"对\",\"B\":\"错\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "296",
+        "type": 1,
+        "content": "在Yy-Z02模型机仿真软件上执行文件<中断功能的模型机设计与实现.yyy>时，在ADD指令执行期间点击了INT按钮，CPU却在指令结束时并不理睬外设的中断请求，原因可能是：",
+        "choice": "{\"A\":\"ADD指令屏蔽了中断\",\"B\":\"处于关中断状态\",\"C\":\"发生了中断屏蔽\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "297",
+        "type": 1,
+        "content": "CLI指令是",
+        "choice": "{\"A\":\"开中断指令\",\"B\":\"关中断指令\",\"C\":\"中断返回指令\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "298",
+        "type": 1,
+        "content": "STI指令是",
+        "choice": "{\"A\":\"开中断指令\",\"B\":\"关中断指令\",\"C\":\"中断返回指令\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "299",
+        "type": 1,
+        "content": "IRET指令是",
+        "choice": "{\"A\":\"开中断指令\",\"B\":\"关中断指令\",\"C\":\"中断返回指令\",\"D\":\"子程序返回指令\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "3",
+        "type": 1,
+        "content": "测试数据A=0FFFFH，B=1H，加法运算时，标志位NZCV的值分别是多少？",
+        "choice": "{\"A\":\"1100\",\"B\":\"0111\",\"C\":\"0110\",\"D\":\"0101\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "30",
+        "type": 1,
+        "content": "指令高4位条件码为0111时，指令执行条件是“运算结果未溢出”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"NF=0\",\"C\":\"VF=1\",\"D\":\"VF=0\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "300",
+        "type": 1,
+        "content": "CALL指令是",
+        "choice": "{\"A\":\"开中断指令\",\"B\":\"关中断指令\",\"C\":\"中断返回指令\",\"D\":\"子程序调用指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "301",
+        "type": 1,
+        "content": "RET指令是",
+        "choice": "{\"A\":\"中断调用指令\",\"B\":\"子程序调用指令\",\"C\":\"中断返回指令\",\"D\":\"子程序返回指令\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "302",
+        "type": 1,
+        "content": "关于IRET和RET指令",
+        "choice": "{\"A\":\"前者是中断返回指令，后者是子程序返回指令\",\"B\":\"前者是子程序返回指令，后者是中断返回指令\",\"C\":\"两条指令都可用于子程序返回\",\"D\":\"两条指令都可用于中断返回\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"12\"}",
+        "relatedSet": "12"
+    },
+    {
+        "id": "31",
+        "type": 1,
+        "content": "指令高4位条件码为0110时，指令执行条件是“运算结果溢出”，对应的条件是：",
+        "choice": "{\"A\":\"NF=1\",\"B\":\"NF=0\",\"C\":\"VF=1\",\"D\":\"VF=0\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "32",
+        "type": 1,
+        "content": "指令高4位条件码为1110时，指令无条件执行，这是指：",
+        "choice": "{\"A\":\"不判断条件\",\"B\":\"无论条件码为何值都执行该指令\",\"C\":\"无论条件码为何值都不执行该指令\",\"D\":\"始终判断指令条件有错\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "33",
+        "type": 1,
+        "content": "当指令高4位的条件判断成功，应该执行指令时，取指令clk周期执行的操作是：",
+        "choice": "{\"A\":\"PC+4→PC\",\"B\":\"Mem[PC]→IR\",\"C\":\"空操作\",\"D\":\"Mem[PC]→IR且PC+4→PC\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "34",
+        "type": 1,
+        "content": "当指令高4位的条件不匹配成功，不执行指令时，取指令clk周期执行的操作是：",
+        "choice": "{\"A\":\"PC+4→PC\",\"B\":\"Mem[PC]→IR\",\"C\":\"空操作\",\"D\":\"Mem[PC]→IR且PC+4→PC\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "35",
+        "type": 1,
+        "content": "指令高4位条件码为0000时，指令执行条件是“相等”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"EQ\",\"B\":\"NE\",\"C\":\"CS\",\"D\":\"CC\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "36",
+        "type": 1,
+        "content": "指令高4位条件码为0001时，指令执行条件是“不相等”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"EQ\",\"B\":\"NE\",\"C\":\"CS\",\"D\":\"CC\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "37",
+        "type": 1,
+        "content": "指令高4位条件码为0011时，指令执行条件是“无符号数小于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"EQ\",\"B\":\"NE\",\"C\":\"CS\",\"D\":\"CC\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "38",
+        "type": 1,
+        "content": "指令高4位条件码为0010时，指令执行条件是“无符号数大于或等于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"EQ\",\"B\":\"NE\",\"C\":\"CS\",\"D\":\"CC\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "39",
+        "type": 1,
+        "content": "指令高4位条件码为1000时，指令执行条件是“无符号数大于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"HI\",\"B\":\"LS\",\"C\":\"GE\",\"D\":\"LT\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "4",
+        "type": 1,
+        "content": "测试数据A=0FFFFH，B=1H，加法运算时，当A、B被看作无符号数，本次运算？",
+        "choice": "{\"A\":\"溢出\",\"B\":\"不溢出\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "40",
+        "type": 1,
+        "content": "指令高4位条件码为1001时，指令执行条件是“无符号数小于或等于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"HI\",\"B\":\"LS\",\"C\":\"GE\",\"D\":\"LT\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "41",
+        "type": 1,
+        "content": "指令高4位条件码为1100时，指令执行条件是“有符号数大于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"HI\",\"B\":\"LS\",\"C\":\"GT\",\"D\":\"LE\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "42",
+        "type": 1,
+        "content": "指令高4位条件码为1101时，指令执行条件是“有符号数小于或等于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"HI\",\"B\":\"LS\",\"C\":\"GT\",\"D\":\"LE\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "43",
+        "type": 1,
+        "content": "指令高4位条件码为1010时，指令执行条件是“有符号数大于或等于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"GE\",\"B\":\"LT\",\"C\":\"GT\",\"D\":\"LE\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "44",
+        "type": 1,
+        "content": "指令高4位条件码为1011时，指令执行条件是“有符号数小于”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"GE\",\"B\":\"LT\",\"C\":\"GT\",\"D\":\"LE\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "45",
+        "type": 1,
+        "content": "指令高4位条件码为0100时，指令执行条件是“运算结果为负数”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"MI\",\"B\":\"PL\",\"C\":\"VS\",\"D\":\"VC\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "46",
+        "type": 1,
+        "content": "指令高4位条件码为0101时，指令执行条件是“运算结果为正数或零”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"MI\",\"B\":\"PL\",\"C\":\"VS\",\"D\":\"VC\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "47",
+        "type": 1,
+        "content": "指令高4位条件码为0111时，指令执行条件是“运算结果未溢出”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"MI\",\"B\":\"PL\",\"C\":\"VS\",\"D\":\"VC\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "48",
+        "type": 1,
+        "content": "指令高4位条件码为0110时，指令执行条件是“运算结果溢出”，对应条件的汇编指令写法是：",
+        "choice": "{\"A\":\"MI\",\"B\":\"PL\",\"C\":\"VS\",\"D\":\"VC\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"5\"}",
+        "relatedSet": "5"
+    },
+    {
+        "id": "49",
+        "type": 2,
+        "content": "数据处理指令有三种格式，分别是：",
+        "choice": "{\"A\":\"DP0\",\"B\":\"DP1\",\"C\":\"DP2\",\"D\":\"DP3\"}",
+        "answer": "ABC",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "5",
+        "type": 1,
+        "content": "测试数据A=0FFFFH，B=1H，加法运算时，当A、B被看作有符号数，本次运算？",
+        "choice": "{\"A\":\"溢出\",\"B\":\"不溢出\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "50",
+        "type": 1,
+        "content": "以下哪些是数据处理指令的格式：",
+        "choice": "{\"A\":\"B\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "51",
+        "type": 1,
+        "content": "以下哪些是数据处理指令的格式：",
+        "choice": "{\"A\":\"B\",\"B\":\"BL\",\"C\":\"DP2\",\"D\":\"STR\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "52",
+        "type": 2,
+        "content": "以下哪些是分支跳转指令的格式：",
+        "choice": "{\"A\":\"B\",\"B\":\"BL\",\"C\":\"DP2\",\"D\":\"STR\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "53",
+        "type": 2,
+        "content": "以下哪些是分支跳转指令的格式：",
+        "choice": "{\"A\":\"DP0\",\"B\":\"BX\",\"C\":\"MRS\",\"D\":\"BL\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "54",
+        "type": 2,
+        "content": "以下哪些是分支跳转指令的格式：",
+        "choice": "{\"A\":\"BX\",\"B\":\"BL\",\"C\":\"DP2\",\"D\":\"B\"}",
+        "answer": "ABD",
+        "relatedKnowledge": "{\"0\": \"8\"}",
+        "relatedSet": "8"
+    },
+    {
+        "id": "55",
+        "type": 1,
+        "content": "以下哪些是传送指令的格式：",
+        "choice": "{\"A\":\"BX\",\"B\":\"BL\",\"C\":\"DP2\",\"D\":\"MRS\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "56",
+        "type": 2,
+        "content": "以下哪些是传送指令的格式：",
+        "choice": "{\"A\":\"BX\",\"B\":\"MSR\",\"C\":\"MRS\",\"D\":\"BL\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"7\"}",
+        "relatedSet": "7"
+    },
+    {
+        "id": "57",
+        "type": 1,
+        "content": "以下哪些是单数据交换指令的格式：",
+        "choice": "{\"A\":\"SWP\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "58",
+        "type": 1,
+        "content": "以下哪些是单数据访存指令的格式：",
+        "choice": "{\"A\":\"SWP\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "59",
+        "type": 1,
+        "content": "以下哪些是单数据访存指令的格式：",
+        "choice": "{\"A\":\"B\",\"B\":\"BL\",\"C\":\"DP2\",\"D\":\"STR\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "6",
+        "type": 1,
+        "content": "当ALU的运算为F=A，即ALU不运算，作为A操作数的通路时，标志位VF(OF)的值应该是多少？",
+        "choice": "{\"A\":\"A31⊕B31⊕F31⊕C32\",\"B\":\"不定\",\"C\":\"\",\"D\":\"\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "60",
+        "type": 1,
+        "content": "以下哪些是单数据访存指令的格式：",
+        "choice": "{\"A\":\"B\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"9\"}",
+        "relatedSet": "9"
+    },
+    {
+        "id": "61",
+        "type": 2,
+        "content": "以下哪些是块数据传送指令的格式：",
+        "choice": "{\"A\":\"STM\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "AB",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "62",
+        "type": 1,
+        "content": "以下哪些是块数据传送指令的格式：",
+        "choice": "{\"A\":\"DP0\",\"B\":\"BX\",\"C\":\"MRS\",\"D\":\"LDM\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "63",
+        "type": 1,
+        "content": "以下哪些是块数据传送指令的格式：",
+        "choice": "{\"A\":\"BX\",\"B\":\"STM\",\"C\":\"DP2\",\"D\":\"MRS\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "64",
+        "type": 1,
+        "content": "以下哪些是块数据传送指令的格式：",
+        "choice": "{\"A\":\"SWP\",\"B\":\"LDM\",\"C\":\"LDR\",\"D\":\"都不是\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"10\"}",
+        "relatedSet": "10"
+    },
+    {
+        "id": "65",
+        "type": 1,
+        "content": "数据处理指令有三种格式，I[24:21]操作码长度为4位，那么数据处理指令最多有多少条？",
+        "choice": "{\"A\":\"3\",\"B\":\"8\",\"C\":\"16\",\"D\":\"48\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "66",
+        "type": 1,
+        "content": "ADD指令和ADDS指令",
+        "choice": "{\"A\":\"没有区别\",\"B\":\"前者运算后不修改CPSR里的NZCV标志位，后者根据运算结果修改NZCV标志位\",\"C\":\"前者根据运算结果修改CPSR里的NZCV标志位，后者运算后不修改NZCV标志位\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "67",
+        "type": 1,
+        "content": "SUBS指令和SUB指令",
+        "choice": "{\"A\":\"没有区别\",\"B\":\"前者运算后不修改CPSR里的NZCV标志位，后者根据运算结果修改NZCV标志位\",\"C\":\"前者根据运算结果修改CPSR里的NZCV标志位，后者运算后不修改NZCV标志位\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "68",
+        "type": 1,
+        "content": "ADC指令和ADCS指令",
+        "choice": "{\"A\":\"没有区别\",\"B\":\"前者运算后不修改CPSR里的NZCV标志位，后者根据运算结果修改NZCV标志位\",\"C\":\"前者根据运算结果修改CPSR里的NZCV标志位，后者运算后不修改NZCV标志位\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "69",
+        "type": 1,
+        "content": "AND指令和ANDS指令",
+        "choice": "{\"A\":\"没有区别\",\"B\":\"前者运算后不修改CPSR里的NZCV标志位，后者根据运算结果修改NZCV标志位\",\"C\":\"前者根据运算结果修改CPSR里的NZCV标志位，后者运算后不修改NZCV标志位\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "7",
+        "type": 1,
+        "content": "在带桶形移位器的ALU模块中，当ALU的运算为F=A，即ALU不运算，作为A操作数的通路时，模块输出标志位VF(OF)的值应该是多少？",
+        "choice": "{\"A\":\"A31⊕B31⊕F31⊕C32\",\"B\":\"不定\",\"C\":\"CPSR中VF的值\",\"D\":\"\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "70",
+        "type": 1,
+        "content": "CMP指令的功能是：",
+        "choice": "{\"A\":\"减法运算但是不保存结果\",\"B\":\"等价于减法运算\",\"C\":\"减法运算，保存结果但是不修改标志位\",\"D\":\"减法运算，不保存结果但根据运算情况修改标志位\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "71",
+        "type": 1,
+        "content": "SUB指令和CMP指令的区别是：",
+        "choice": "{\"A\":\"前者减法运算，保存结果但是不修改标志位，后者不保存结果，但是根据运算情况修改标志位\",\"B\":\"前者减法运算，保存结果但是不修改标志位，后者不保存结果也不修改标志位\",\"C\":\"两者等价\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "72",
+        "type": 1,
+        "content": "AND指令是怎样影响VF标志位的？",
+        "choice": "{\"A\":\"运算不影响VF标志位\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "73",
+        "type": 1,
+        "content": "EOR指令是怎样影响VF标志位的？",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"运算不影响VF标志位\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "74",
+        "type": 1,
+        "content": "ADD指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"运算不影响VF标志位\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "75",
+        "type": 1,
+        "content": "TST指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"运算不影响VF标志位\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "76",
+        "type": 1,
+        "content": "ORR指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"运算不影响VF标志位\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "77",
+        "type": 1,
+        "content": "MOV指令执行生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"运算不影响VF标志位\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "78",
+        "type": 1,
+        "content": "TEQ指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"运算不影响VF标志位\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "79",
+        "type": 1,
+        "content": "RSB指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"运算不影响VF标志位\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "8",
+        "type": 2,
+        "content": "桶形移位器输出的Shift_carry_out与桶形移位器+ALU模块整体输出的CF标志位之间存在什么关系？",
+        "choice": "{\"A\":\"模块输出的CF就是Shift_carry_out\",\"B\":\"逻辑运算时，模块输出的CF就是Shift_carry_out\",\"C\":\"模块输出的CF总是ALU运算产生的CF标志位\",\"D\":\"算术运算时，模块输出的CF是ALU运算产生的CF标志位\"}",
+        "answer": "BD",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "80",
+        "type": 1,
+        "content": "ADC指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"运算不影响VF标志位\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "81",
+        "type": 1,
+        "content": "SBC指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"运算不影响VF标志位\",\"C\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "82",
+        "type": 1,
+        "content": "MVN指令执行生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"运算不影响VF标志位\",\"C\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"D\":\"以上都不对\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "83",
+        "type": 1,
+        "content": "SUBS指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=Shift_carry_out\",\"B\":\"运算不影响VF标志位\",\"C\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"D\":\"以上都不对\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "84",
+        "type": 1,
+        "content": "ADCS指令运算生成VF标志位值的逻辑是：",
+        "choice": "{\"A\":\"VF=A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"运算不影响VF标志位\",\"C\":\"VF=Shift_carry_out\",\"D\":\"以上都不对\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "85",
+        "type": 1,
+        "content": "AND指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"运算不影响CF标志位，输出值不定\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "86",
+        "type": 1,
+        "content": "EOR指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=Shift_carry_out\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"运算不影响CF标志位，输出值不定\",\"D\":\"来自ALU运算\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "87",
+        "type": 1,
+        "content": "ADD指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"运算不影响CF标志位，输出值不定\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "88",
+        "type": 1,
+        "content": "TST指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=Shift_carry_out\",\"B\":\"来自ALU运算\",\"C\":\"运算不影响CF标志位，输出值不定\",\"D\":\"CF=A_31⊕B_31⊕F_31⊕C_32\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "89",
+        "type": 1,
+        "content": "ORR指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"运算不影响CF标志位，输出值不定\",\"B\":\"来自ALU运算\",\"C\":\"CF=Shift_carry_out\",\"D\":\"CF=A_31⊕B_31⊕F_31⊕C_32\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "9",
+        "type": 2,
+        "content": "CPSR寄存器提供的VF标志位与ALU输出的VF标志位之间存在什么关系？",
+        "choice": "{\"A\":\"没有关系\",\"B\":\"ALU输出的VF标志位是引自CPSR的VF\",\"C\":\"ALU输入引自CPSR的VF，如果逻辑运算，以来自CPSR的VF作为ALU输出的VF标志位\",\"D\":\"ALU输入引自CPSR的VF，如果算术运算，用ALU运算生成的VF作为ALU输出的VF标志位\"}",
+        "answer": "CD",
+        "relatedKnowledge": "{\"0\": \"1\"}",
+        "relatedSet": "1"
+    },
+    {
+        "id": "90",
+        "type": 1,
+        "content": "MOV指令执行时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"运算不影响CF标志位，输出值不定\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "91",
+        "type": 1,
+        "content": "TEQ指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"运算不影响CF标志位，输出值不定\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "92",
+        "type": 1,
+        "content": "RSB指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"运算不影响CF标志位，输出值不定\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "93",
+        "type": 1,
+        "content": "ADC指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"来自ALU运算\",\"B\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"C\":\"运算不影响CF标志位，输出值不定\",\"D\":\"CF=Shift_carry_out\"}",
+        "answer": "A",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "94",
+        "type": 1,
+        "content": "SBC指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=Shift_carry_out\",\"B\":\"运算不影响CF标志位，输出值不定\",\"C\":\"来自ALU运算\",\"D\":\"CF=A_31⊕B_31⊕F_31⊕C_32\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "95",
+        "type": 1,
+        "content": "MVN指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=Shift_carry_out\",\"B\":\"运算不影响CF标志位，输出值不定\",\"C\":\"来自ALU运算\",\"D\":\"CF=A_31⊕B_31⊕F_31⊕C_32\"}",
+        "answer": "B",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "96",
+        "type": 1,
+        "content": "SUBS指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=Shift_carry_out\",\"B\":\"运算不影响CF标志位，输出值不定\",\"C\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"D\":\"来自ALU运算\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "97",
+        "type": 1,
+        "content": "ADCS指令运算时，带桶形移位器和多功能ALU的运算器模块输出的CF标志位",
+        "choice": "{\"A\":\"CF=A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"运算不影响CF标志位，输出值不定\",\"C\":\"CF=Shift_carry_out\",\"D\":\"来自ALU运算\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"6\"}",
+        "relatedSet": "6"
+    },
+    {
+        "id": "98",
+        "type": 1,
+        "content": "生成零标志位ZF的逻辑是：",
+        "choice": "{\"A\":\"A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"Shift_carry_out\",\"C\":\"IsZeroBit(F)\",\"D\":\"F[31]\"}",
+        "answer": "C",
+        "relatedKnowledge": "{\"0\": \"2\", \"1\": \"6\"}",
+        "relatedSet": "2,6"
+    },
+    {
+        "id": "99",
+        "type": 1,
+        "content": "生成零标志位NF的逻辑是：",
+        "choice": "{\"A\":\"A_31⊕B_31⊕F_31⊕C_32\",\"B\":\"Shift_carry_out\",\"C\":\"IsZeroBit(F)\",\"D\":\"F[31]\"}",
+        "answer": "D",
+        "relatedKnowledge": "{\"0\": \"2\", \"1\": \"6\"}",
+        "relatedSet": "2,6"
+    }
+]

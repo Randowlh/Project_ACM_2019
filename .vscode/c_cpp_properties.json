@@ -10,10 +10,10 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "compilerPath": " /usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++20",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "macos-gcc-arm"
         }
     ],
     "version": 4
