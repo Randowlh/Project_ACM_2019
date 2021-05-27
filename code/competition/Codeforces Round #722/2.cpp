@@ -4,8 +4,8 @@ using namespace __gnu_pbds;
 using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#pragma GCC optimize("Ofast,no-stack-protector")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
@@ -37,11 +37,9 @@ void wt(T x){
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
+// #define int long long
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
-#define X first
-#define Y second
 const ll llinf = 4223372036854775807;
 const ll mod = (0 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
@@ -50,67 +48,69 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 410000;
-vector<int> mp[maxn],mp2[maxn];
-int in[maxn],lf[maxn];
-set<pair<int,int>> s;
-int cnt,ans,now;
-void dfsx(int pos){
-    in[pos]=++cnt;
-    for(auto i:mp2[pos])
-        dfsx(i);
-    lf[pos]=cnt;
+const int maxn = 1000000;
+int dp[1100000];
+int ys[1100000];
+vector<int> primes;
+bool is_prime[1000010];
+void euler()
+{
+   is_prime[1] = 1;
+   for (int i = 2; i < maxn; i++)
+   {
+      if (!is_prime[i])
+      primes.push_back(i);
+      for (int j = 0; j < primes.size() && i * primes[j] < maxn; j++)
+      {
+         is_prime[i * primes[j]] = 1;
+         if ((i % primes[j]) == 0)
+            break;
+      }
+   }
 }
-void calc(int u){
-    int tmp=now;
-    auto t=s.lower_bound({in[u],0});
-    auto is_in= [&](int u,int v){return in[u]<=in[v]&&lf[u]>=lf[v];};
-    if(t!=s.end())
-        now+=1-is_in(u,t->Y);
-    if(t!=s.begin()){
-        auto aa=t;
-        t--;
-        now+=1-is_in(t->Y,u);
-        if (aa != s.end())
-            now -= 1 - is_in(t->Y, aa->Y);
-    }
-    MAX(ans,now);
-    s.insert({in[u],u});
-    for(auto i:mp[u])
-        calc(i);
-    s.erase({in[u],u});
-    now=tmp;
+inline int yinzi(int n){
+   int ans=1;
+   for(int i=0;primes[i]*primes[i]<=n;i++){
+      if(n%primes[i]==0){
+         int cnt=0;
+         while(n%primes[i]==0){
+            cnt++;
+            n/=primes[i];
+         }
+         ans=ans*(cnt+1);
+      }
+   }
+   if(n!=1)
+      ans*=2;
+   return ans;
 }
 void work()
 {
-    int n;
-    cin>>n;
-    for(int i=1;i<=n;i++)
-        mp[i].clear(),mp2[i].clear();
-    int tmp;
-    for(int i=2;i<=n;i++){
-        cin>>tmp;
-        mp[tmp].push_back(i);
-    }
-    for(int i=2;i<=n;i++){
-        cin>>tmp;
-        mp2[tmp].push_back(i);
-    }
-    ans=cnt=now=0;
-    dfsx(1);
-    calc(1);
-    cout<<ans+1<<endl;
+   dp[1]=1;
+   dp[0]=1;
+   register int n;
+   cin>>n;
+   for(register int j=1;j<=n;j++)
+      ys[j]=yinzi(j);
+
+   register int tot=1;
+   for(register int i=2;i<=n;i++){
+      dp[i]=(ys[i]+tot)%mod;
+      tot=(tot+dp[i])%mod;
+   }
+   cout<<dp[n]<<endl;
 }
 signed main()
 {
+   euler();
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+   // freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

@@ -4,9 +4,9 @@ using namespace __gnu_pbds;
 using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
-#pragma GCC optimize("Ofast,no-stack-protector")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-// #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -43,11 +43,6 @@ void wt(T x){
 #define X first
 #define Y second
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
-const ll mod2 = 999998639;
-const int m1 = 998244353;
-const int m2 = 1000001011;
-const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 210000;

@@ -137,8 +137,6 @@ void work()
             }else
                 break;
         }
-        // cout<<l<<' '<<r<<endl;
-        // cout<<tl<<' '<<tr<<'d'<<endl;
         ans[i]=tl*tr;
     }
     int tot=0;
