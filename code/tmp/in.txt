@@ -1,7 +1,38 @@
-5 5 7
-2 3 2 3 4
-3 3
-4 4
-5 5
-1 5
-2 4
+please enter N
+ans=l=1 58
+tail=42
+l=1 41
+tail=33
+l=1 32
+tail=15
+l=1 14
+tail=6
+l=1 5
+tail=5
+l=1 4
+tail=2
+l=1 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
+l=2 4
+tail=2
+l=2 1
