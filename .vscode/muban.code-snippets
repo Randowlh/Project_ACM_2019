@@ -31,6 +31,9 @@
 			"	while(x)stk[++top]=x%10,x/=10;",
 			"	while(top)putchar(stk[top--]+'0');",
 			"}",
+			"#define pii(a,b) pair<a,b>"
+			"#define X first",
+			"#define Y second",
 			"#define lowbit(x) (x&-x)",
 			"#define MP make_pair",
 			"#define pb push_back",

@@ -2,10 +2,12 @@
 	"cpp":{
 		"prefix":"fwrite",
 		"body":[
-			"void wt(T x){",
-    		"   if(x < 0) putchar('-'), x = -x;",
-       		"   if(x >= 10) wt(x / 10);",
-    		"   putchar('0' + x % 10);",
+			"template<class T>inline void wt(T x){",
+			"	static int top,stk[105];",
+			"	if(x<0)x=-x,putchar('-');",
+			"	if(x==0)putchar('0');",
+			"	while(x)stk[++top]=x%10,x/=10;",
+			"	while(top)putchar(stk[top--]+'0');",
 			"}"
 		],
 		"description": "快写"
