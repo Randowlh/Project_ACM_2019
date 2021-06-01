@@ -58,6 +58,20 @@ class Computer
         friend ostream & operator << (ostream &out, const Computer &obj);
         friend istream & operator >> (istream &in, Computer &obj);
 }; 
+ostream & operator << (ostream &out, const Computer &obj){
+	out<<obj.m_vendor<<' '<<obj.m_price<<endl;
+	return out;
+}
+istream & operator >> (istream &in, Computer &obj){
+	in>>obj.m_vendor>>obj.m_price;
+	return in;
+}
+template <class T>
+void printElements(CMyVector<T> &vect){
+	for(int i=0; i<vect.size();i++){
+		cout<<vect[i]<<endl;
+	}
+}
 template <class T>
 T& CMyVector<T>::at(int i){
 	if(i>m_size)
@@ -73,18 +87,54 @@ int   CMyVector<T>::size ()const{
 	return m_size;
 }
 template <class T>
-T  & CMyVector<T>::operator [] (int i){
-	return m_pBuffer[i];
+CMyVector<T>::CMyVector (const CMyVector &rhs){
+	m_size = rhs.m_size;
+	m_bufferSize= rhs.m_bufferSize;
+	m_pBuffer=new T[m_bufferSize];
+	for(int i=0;i<m_bufferSize;i++)
+		m_pBuffer[i]=rhs.m_pBuffer[i];
 }
 template <class T>
-T  & CMyVector<T>::operator [] (int i){
-	return m_pBuffer[i];
+CMyVector<T>::CMyVector (CMyVector &&rhs){
+	m_size=rhs.m_size;
+	m_bufferSize= rhs.m_bufferSize;
+	m_pBuffer=rhs.m_pBuffer;
+	rhs.m_pBuffer=NULL;
 }
 template <class T>
-T  & CMyVector<T>::operator [] (int i){
-	return m_pBuffer[i];
+CMyVector<T>& CMyVector<T>::operator = (const CMyVector<T> &rhs){
+	m_size = rhs.m_size;
+	m_bufferSize= rhs.m_bufferSize;
+	m_pBuffer=new T[m_bufferSize];
+	for(int i=0;i<m_bufferSize;i++)
+		m_pBuffer[i]=rhs.m_pBuffer[i];
+	return *this;
 }
-
+template <class T>
+CMyVector<T>& CMyVector<T>::operator = (CMyVector &&rhs){
+	m_size=rhs.m_size;
+	m_bufferSize= rhs.m_bufferSize;
+	m_pBuffer=rhs.m_pBuffer;
+	rhs.m_pBuffer=NULL;
+	return *this;
+}
+template <class T>
+void CMyVector<T>::push_back (const T &rhs){
+	if(m_pBuffer==NULL){
+		m_pBuffer=new T[11000];
+		m_bufferSize=11000;
+	}else if(m_bufferSize!=11000){
+		T* tmp=new T[11000];
+		for(int i=0;i<m_bufferSize;i++)
+			tmp[i]=m_pBuffer[i];
+		T *tt=m_pBuffer;
+		m_pBuffer=tmp;
+		m_bufferSize=11000;
+		delete[] tt;
+	}
+	m_pBuffer[m_bufferSize]=rhs;
+	m_bufferSize++;
+} 
 /* 请在这里填写答案 */
 
 int main ()
