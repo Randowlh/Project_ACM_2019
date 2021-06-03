@@ -88,5 +88,5 @@
     "editor.snippetSuggestions": "bottom",
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "jupyter.jupyterServerType": "local",
-    "python.pythonPath": "C:\\Users\\13037\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
+    "python.pythonPath": "/opt/homebrew/bin/python3"
 }

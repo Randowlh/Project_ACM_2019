@@ -1,181 +1,122 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-template <class T>
-class CMyVector
-{
-private :
-    T    *m_pBuffer;     //存放元素缓冲区指针
-    int  m_size, m_bufferSize; //存放元素个数，缓冲区大小
-public:
-    CMyVector () : m_pBuffer (nullptr), m_size (0), m_bufferSize (0) {}
-    CMyVector (int n) : m_pBuffer (nullptr),m_size (n), m_bufferSize (n)
-    {
-        if  (m_bufferSize > 0)
-            m_pBuffer = new T [m_bufferSize];
-    }
-    ~CMyVector ()
-    {
-        delete [] m_pBuffer;
-    }
-    CMyVector (const CMyVector &rhs);//复制构造
-    CMyVector (CMyVector &&rhs);  //C++11 移动构造
-    CMyVector& operator = (const CMyVector &rhs);//复制赋值
-    CMyVector& operator = (CMyVector &&rhs);//C++ 11 移动赋值
-    void push_back (const T &rhs);  //尾部添加元素
-    T  & at (int i);     //at重载，下标越界时抛出异常
-    T  & operator [] (int i); //下标运算符重载，为效率不检查下标越界
-    int size () const;  //获得元素个数
-};
-class CException : public exception
-{
-    string m_errMsg;
-public :
-    CException (string errMsg, int i) : m_errMsg (errMsg)
-    {
-        stringstream stream; //字符串流
-        stream << i;  //插入字符串流，整形输出成字符流
-        string str;
-        stream >> str; //从字符串流提取字符串，字符流成为字符串
-        m_errMsg += str; //字符串拼接
-    }
-    const char * what () const noexcept
-    {
-        return m_errMsg.c_str ();
-    }
-};
-
-template <typename T>
-void printElements(CMyVector<T> &vect);
-class Computer
+// 集训队 
+template <class T> 
+class CTeam
 {
     private:
-        double m_price;
-        string m_vendor;
+        string m_name;  // 集训队名称
+        vector<T> m_team;   // 集训队成员容器 
+    public:
+        void join(const T& obj);      // 加入集训队
+        void quit(const T& obj);      // 退出集训队 
+        CTeam(string name):m_name(name){}
+};
+// 班级 
+template <class T>
+class CClass
+{
+    private:
+        string m_name;  // 班级名称 
+        vector<T> m_class;  // 班级中的学生容器 
 
     public:
-        Computer():m_price(0.0), m_vendor(""){        }
-        Computer(string vendor, double price):m_price(price), m_vendor(vendor){}
-        friend ostream & operator << (ostream &out, const Computer &obj);
-        friend istream & operator >> (istream &in, Computer &obj);
+        CClass(string name):m_name(name){}
+        void add(const T& obj);     // 向班级添加学生, 托管学生对象 
+        void remove(const T& obj);  // 将学生从班级中移除, 解除学生对象托管 
+        void print();                       // 输出班级所有学生 
 }; 
-ostream & operator << (ostream &out, const Computer &obj){
-	out<<obj.m_vendor<<' '<<obj.m_price<<endl;
+// 学生
+class CStudent
+{public:
+    
+        string m_name;  // 名字 
+        string m_no;    // 学号 
+    
+        CStudent(string name, string no):m_name(name), m_no(no){}
+        friend ostream & operator << (ostream &out, const CStudent &obj);
+        friend istream & operator >> (istream &in, CStudent &obj); 
+};
+template <class T> 
+void CTeam<T>::join(const T& obj){
+	m_team.push_back(obj);
+}
+template <class T> 
+void CTeam<T>::quit(const T& obj){
+	// m_team.erase(obj);
+	int tail=0;
+	for(int i=0;i<m_team.size();i++){
+		if(m_team[i]==NULL)
+			continue;
+		if(m_team[i]==obj)
+			m_team[i].reset();
+	}
+}
+template <class T> 
+void CClass<T>::add(const T& obj){
+	m_class.push_back(obj);
+}
+template <class T> 
+void CClass<T>::remove(const T& obj){
+	int tail=0;
+	for(int i=0;i<m_class.size();i++){
+		if(m_class[i]==NULL)
+			continue;
+		if(m_class[i]==obj->m_no)
+			m_class[i].reset();
+	}
+
+}
+ostream & operator << (ostream &out, const CStudent &obj){
+	cout<<obj.m_name<<' '<<obj.m_no<<endl;
+	// cout<<"dadasd"<<endl;
 	return out;
 }
-istream & operator >> (istream &in, Computer &obj){
-	in>>obj.m_vendor>>obj.m_price;
+template <class T> 
+void CClass<T>::print(){
+	for(int i=0;i<m_class.size();i++){
+		cout<<*m_class[i];
+		// cout<<"dadas"<<endl;
+	}
+}
+
+istream & operator >> (istream &in, CStudent &obj){
+	in>>obj.m_name>>obj.m_no;
 	return in;
 }
-template <class T>
-void printElements(CMyVector<T> &vect){
-	for(int i=0; i<vect.size();i++){
-		cout<<vect[i]<<endl;
-	}
-}
-template <class T>
-T& CMyVector<T>::at(int i){
-	if(i>m_size)
-		throw CException("invalid index:",i);
-	else return m_pBuffer[i];
-}
-template <class T>
-T  & CMyVector<T>::operator [] (int i){
-	return m_pBuffer[i];
-}
-template <class T>
-int   CMyVector<T>::size ()const{
-	return m_size;
-}
-template <class T>
-CMyVector<T>::CMyVector (const CMyVector &rhs){
-	m_size = rhs.m_size;
-	m_bufferSize= rhs.m_bufferSize;
-	m_pBuffer=new T[m_bufferSize];
-	for(int i=0;i<m_bufferSize;i++)
-		m_pBuffer[i]=rhs.m_pBuffer[i];
-}
-template <class T>
-CMyVector<T>::CMyVector (CMyVector &&rhs){
-	m_size=rhs.m_size;
-	m_bufferSize= rhs.m_bufferSize;
-	m_pBuffer=rhs.m_pBuffer;
-	rhs.m_pBuffer=NULL;
-}
-template <class T>
-CMyVector<T>& CMyVector<T>::operator = (const CMyVector<T> &rhs){
-	m_size = rhs.m_size;
-	m_bufferSize= rhs.m_bufferSize;
-	m_pBuffer=new T[m_bufferSize];
-	for(int i=0;i<m_bufferSize;i++)
-		m_pBuffer[i]=rhs.m_pBuffer[i];
-	return *this;
-}
-template <class T>
-CMyVector<T>& CMyVector<T>::operator = (CMyVector &&rhs){
-	m_size=rhs.m_size;
-	m_bufferSize= rhs.m_bufferSize;
-	m_pBuffer=rhs.m_pBuffer;
-	rhs.m_pBuffer=NULL;
-	return *this;
-}
-template <class T>
-void CMyVector<T>::push_back (const T &rhs){
-	if(m_pBuffer==NULL){
-		m_pBuffer=new T[11000];
-		m_bufferSize=11000;
-	}else if(m_bufferSize!=11000){
-		T* tmp=new T[11000];
-		for(int i=0;i<m_bufferSize;i++)
-			tmp[i]=m_pBuffer[i];
-		T *tt=m_pBuffer;
-		m_pBuffer=tmp;
-		m_bufferSize=11000;
-		delete[] tt;
-	}
-	m_pBuffer[m_bufferSize]=rhs;
-	m_bufferSize++;
-} 
-/* 请在这里填写答案 */
-
+/* 你的答案将被放置在这里 */
 int main ()
 {
-    CMyVector<Computer> vect1(2);
-    cin>>vect1[0];
-    Computer t1("lenovo", 7800.0);
-    vect1[1] = t1;
-    printElements(vect1);
-    // try put additional one
-    try{
-        Computer t2("Dell", 8000);
-        vect1.push_back(t2);
-        vect1.at(3);
-    }
-    catch (exception &ex)
-    {
-        cout << "exception:" << ex.what() << endl;
-    }
-    try{
-        // copy constructor
-        CMyVector<Computer> vect2 = vect1;
-        vect2.push_back(Computer("Huashuo", 6000));
-        cout << vect2.at(3) << endl;
+    CStudent s1("Li", "001"), s2("Song", "002"), s3("Zhang", "003");
+    CClass<shared_ptr<CStudent>> class1("ComputerOne");
+    auto ps1 = make_shared<CStudent>(s1);
+    auto ps2 = make_shared<CStudent>(s2);
+    auto ps3 = make_shared<CStudent>(s3);
+    class1.add(ps1);
+    class1.add(ps2);
+    class1.add(ps3);
+    class1.print();
 
-        // copy assignment
-        CMyVector<Computer> vect3(3);
-        vect3 = vect2;
-        printElements(vect3);
-        // move constructor
-        CMyVector<Computer> vect4 = std::move(vect2);
-        printElements(vect4);
-
-        // move assignment
-        vect4.push_back(Computer("Apple", 10000));
-        vect4 = std::move(vect3);
-        printElements(vect3);
-    }
-    catch(exception &ex)
+    CTeam<shared_ptr<CStudent>> team1("ACM");
+    team1.join(ps1);
+    team1.join(ps2);
+    CTeam<shared_ptr<CStudent>> team2("PTA");
+    team2.join(ps1);
+    team2.join(ps3);
+    cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
     {
-        cout << "exception:" << ex.what() << endl;
-    } 
+        shared_ptr<CStudent> pst = ps1;
+        cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
+    }
+
+    team1.quit(ps1);
+    team1.quit(ps2);
+    cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
+
+    // 以下是不好的示例 
+    {
+        /* CStudent *sx1 = new CStudent("Wrong", "000");
+        shared_ptr<CStudent> px1 = shared_ptr<CStudent>(sx1);
+        shared_ptr<CStudent> px2 = shared_ptr<CStudent>(sx1);*/
+    }
 }
-
