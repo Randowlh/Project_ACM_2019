@@ -88,6 +88,7 @@
     "editor.snippetSuggestions": "bottom",
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "jupyter.jupyterServerType": "local",
+<<<<<<< HEAD
     "python.pythonPath": "/opt/homebrew/bin/python3",
     "code-runner.executorMap": {
 
@@ -142,4 +143,7 @@
         "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
     }
+=======
+    "python.pythonPath": "C:\\Users\\13037\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe"
+>>>>>>> b628211a44901f148ac4b15f21be1ba08cf6c346
 }
