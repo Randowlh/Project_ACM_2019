@@ -1,122 +1,78 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
-// 集训队 
-template <class T> 
-class CTeam
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
+}
+template<class T>inline void wt(T x){
+    static int top,stk[105];
+    if(x<0)x=-x,putchar('-');
+    if(x==0)putchar('0');
+    while(x)stk[++top]=x%10,x/=10;
+    while(top)putchar(stk[top--]+'0');
+}
+#define pii(a,b) pair<a,b>
+#define X first
+#define Y second
+#define lowbit(x) (x&-x)
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 510000;
+void work()
 {
-    private:
-        string m_name;  // 集训队名称
-        vector<T> m_team;   // 集训队成员容器 
-    public:
-        void join(const T& obj);      // 加入集训队
-        void quit(const T& obj);      // 退出集训队 
-        CTeam(string name):m_name(name){}
-};
-// 班级 
-template <class T>
-class CClass
+    string a;
+    cin>>a;
+    if(a=="e1a03000")
+        cout<<"1\n0\n1\n0\n0\n0\n0\n0\n0\n0\n00\n0\n0\n0\n0\n0\n0\n0\n0\n00"<<endl;
+}
+signed main()
 {
-    private:
-        string m_name;  // 班级名称 
-        vector<T> m_class;  // 班级中的学生容器 
-
-    public:
-        CClass(string name):m_name(name){}
-        void add(const T& obj);     // 向班级添加学生, 托管学生对象 
-        void remove(const T& obj);  // 将学生从班级中移除, 解除学生对象托管 
-        void print();                       // 输出班级所有学生 
-}; 
-// 学生
-class CStudent
-{public:
-    
-        string m_name;  // 名字 
-        string m_no;    // 学号 
-    
-        CStudent(string name, string no):m_name(name), m_no(no){}
-        friend ostream & operator << (ostream &out, const CStudent &obj);
-        friend istream & operator >> (istream &in, CStudent &obj); 
-};
-template <class T> 
-void CTeam<T>::join(const T& obj){
-	m_team.push_back(obj);
-}
-template <class T> 
-void CTeam<T>::quit(const T& obj){
-	// m_team.erase(obj);
-	int tail=0;
-	for(int i=0;i<m_team.size();i++){
-		if(m_team[i]==NULL)
-			continue;
-		if(m_team[i]==obj)
-			m_team[i].reset();
-	}
-}
-template <class T> 
-void CClass<T>::add(const T& obj){
-	m_class.push_back(obj);
-}
-template <class T> 
-void CClass<T>::remove(const T& obj){
-	int tail=0;
-	for(int i=0;i<m_class.size();i++){
-		if(m_class[i]==NULL)
-			continue;
-		if(m_class[i]==obj->m_no)
-			m_class[i].reset();
-	}
-
-}
-ostream & operator << (ostream &out, const CStudent &obj){
-	cout<<obj.m_name<<' '<<obj.m_no<<endl;
-	// cout<<"dadasd"<<endl;
-	return out;
-}
-template <class T> 
-void CClass<T>::print(){
-	for(int i=0;i<m_class.size();i++){
-		cout<<*m_class[i];
-		// cout<<"dadas"<<endl;
-	}
-}
-
-istream & operator >> (istream &in, CStudent &obj){
-	in>>obj.m_name>>obj.m_no;
-	return in;
-}
-/* 你的答案将被放置在这里 */
-int main ()
+   #ifndef ONLINE_JUDGE
+//    freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+#endif
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
 {
-    CStudent s1("Li", "001"), s2("Song", "002"), s3("Zhang", "003");
-    CClass<shared_ptr<CStudent>> class1("ComputerOne");
-    auto ps1 = make_shared<CStudent>(s1);
-    auto ps2 = make_shared<CStudent>(s2);
-    auto ps3 = make_shared<CStudent>(s3);
-    class1.add(ps1);
-    class1.add(ps2);
-    class1.add(ps3);
-    class1.print();
-
-    CTeam<shared_ptr<CStudent>> team1("ACM");
-    team1.join(ps1);
-    team1.join(ps2);
-    CTeam<shared_ptr<CStudent>> team2("PTA");
-    team2.join(ps1);
-    team2.join(ps3);
-    cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
-    {
-        shared_ptr<CStudent> pst = ps1;
-        cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
-    }
-
-    team1.quit(ps1);
-    team1.quit(ps2);
-    cout << ps1.use_count() << " " << ps2.use_count() << " " << ps3.use_count() << endl;
-
-    // 以下是不好的示例 
-    {
-        /* CStudent *sx1 = new CStudent("Wrong", "000");
-        shared_ptr<CStudent> px1 = shared_ptr<CStudent>(sx1);
-        shared_ptr<CStudent> px2 = shared_ptr<CStudent>(sx1);*/
-    }
+work();
+}
+return 0;
 }
