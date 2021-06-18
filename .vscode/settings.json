@@ -81,7 +81,9 @@
         "stop_token": "cpp",
         "variant": "cpp",
         "rope": "cpp",
-        "slist": "cpp"
+        "slist": "cpp",
+        "__bit_reference": "cpp",
+        "ios": "cpp"
     },
     //右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认），文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认），PS和bash也能用，但文件名中有空格时无法运行
     "python.formatting.provider": "autopep8",
@@ -142,5 +144,5 @@
         "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
     }
-    "python.pythonPath": "C:\\Users\\13037\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe"
+    // "python.pythonPath": "C:\\Users\\13037\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe"
 }
