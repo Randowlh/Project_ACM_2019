@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<windows.h>
 using namespace std;
  
 string s;
@@ -57,6 +58,7 @@ void F(){
 }
 
 int main(){
+    system("chcp 65001");
 	freopen("Test2.sy","r",stdin);
     cout<<"请输入需要递归下降分析的语句"<<endl;
     while(cin>>s){

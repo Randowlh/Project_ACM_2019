@@ -15,7 +15,6 @@ struct chair_man_tree{
         return tail;
     }
     int build(int l,int r){
-        
         if(l==r){
             fa[++tail2]=l;
             depth[tail2]=1;
@@ -85,3 +84,11 @@ void merge(int a,int b){
                 tmp=t.add(tmp,1,n,f2);
             root.push_back(tmp);
 }
+
+//---------------------------------------------------------------
+//1  1 -1 -1 -1
+//1 -1  1 -1  1
+//1  1  1  1  1
+//1  1  1  1  1
+//1  1  1  1  1
+//

@@ -127,6 +127,6 @@ void work(){
     }
 }
 int main(){
-    freopen("tests/00_arr_defn2.sy","r",stdin);
+    freopen("tests/33_func_test1.sy","r",stdin);
     work();
 }
