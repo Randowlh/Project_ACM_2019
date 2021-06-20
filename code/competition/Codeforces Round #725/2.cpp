@@ -53,65 +53,45 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int ff[21000];
-int tt[21000];
-set<pair<int,int>> ans;
+int x,y,a,b;
+int calc(int pos){
+    int tx=x-pos*a;
+    int ty=y-pos*b;
+    return pos+min(tx/b,ty/a);
+}
+double get(double pos) {
+    double rr = x - a * pos;
+    double bb = y - b * pos;
+    double y = min(rr / b, bb / a);
+    return pos + y;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    cout<<"? 1"<<endl;
-    int b[2]={0,0};
-    for(int i=1;i<=n;i++){
-        cin>>tt[i];
-        ff[i]=tt[i];
-        b[tt[i]%2]++;
+    cin>>x>>y>>a>>b;
+    double l=0,r=min(x/a,y/b);
+    for(int i=1;i<=100;i++){
+        double mid=(l+r)/2;
+        double mid1=mid;
+        double mid2=(mid+r)/2;
+        if(get(mid1)>get(mid2)){
+            r=mid2;
+        }else l=mid1;
     }
-    if(b[0]-1<b[1]){
-        for(int i=1;i<=n;i++){
-            if(ff[i]==1){
-                ans.insert(make_pair(1,i));
-            }
-        }
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2==0){
-                cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }else{
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2){
-            cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }
-    cout<<"!"<<endl;
-    for(auto i:ans){
-        cout<<i.first<<' '<<i.second<<endl;
-    }
+    int ans=0;
+    for(int i=max(0.0,l-1);i<=min(l+1,min(x/a,y/b)+0.0);i++)
+        MAX(ans,calc(i));
+    cout<<ans<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

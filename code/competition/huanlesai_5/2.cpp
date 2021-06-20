@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,59 +53,28 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int ff[21000];
-int tt[21000];
-set<pair<int,int>> ans;
+int dp[20][20][20];
 void work()
 {
-    int n;
-    cin>>n;
-    cout<<"? 1"<<endl;
-    int b[2]={0,0};
-    for(int i=1;i<=n;i++){
-        cin>>tt[i];
-        ff[i]=tt[i];
-        b[tt[i]%2]++;
-    }
-    if(b[0]-1<b[1]){
-        for(int i=1;i<=n;i++){
-            if(ff[i]==1){
-                ans.insert(make_pair(1,i));
+    for(int i=0;i<=8;i++)
+        for(int j=0;j<=8;j++)
+            for(int k=0;k<=8;k++){
+                MAX(dp[i+1][j+1][k+1],dp[i][j][k]+1);
+                MAX(dp[i+2][j+1][k],dp[i][j][k]+1);
+                MAX(dp[i+2][j][k+1],dp[i][j][k]+1);
+                MAX(dp[i+1][j+2][k],dp[i][j][k]+1);
+                MAX(dp[i][j+2][k+1],dp[i][j][k]+1);
+                MAX(dp[i+1][j][k+2],dp[i][j][k]+1);
+                MAX(dp[i][j+1][k+2],dp[i][j][k]+1);
             }
-        }
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2==0){
-                cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }else{
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2){
-            cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }
-    cout<<"!"<<endl;
-    for(auto i:ans){
-        cout<<i.first<<' '<<i.second<<endl;
-    }
+    int a,b,c;
+    cin>>a>>b>>c;
+    cout<<dp[min(8LL,a)][min(8LL,b)][min(8LL,c)]<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);

@@ -53,65 +53,90 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int ff[21000];
-int tt[21000];
-set<pair<int,int>> ans;
+struct node{
+    string ls,fs;
+    int cnt;
+    int sz;
+    string tot;
+    
+};
+map<string,node> M;
+node fx(string s){
+    node a;
+    a.sz=s.size();
+    a.tot=s;
+    a.fs=s.substr(0,3);
+    a.ls="";
+    for(int i=s.size()-1;i>=0;i--){
+        a.ls.push_back(s[i]);
+        if(a.ls.size()>=3)
+            break;
+    }
+    reverse(a.ls.begin(),a.ls.end());
+    a.cnt=0;
+    if(s.size()>=4)
+        for(int i=0;i<=s.size()-4;i++)
+            if(s.substr(i,4)=="haha")
+                a.cnt++;
+    return a;
+}
+node jia(node b,node a){
+        node ans;
+        ans.sz=b.sz+a.sz;
+        if(ans.sz<10){
+            ans=fx(b.tot+a.tot);
+            return ans;
+        }
+        ans.cnt=b.cnt+a.cnt;
+        string aa=b.ls+a.fs;
+        // cout<<"aa="<<aa<<endl;
+        if(aa.size()>=4)
+            for(int i=0;i<=aa.size()-4;i++)
+                if(aa.substr(i,4)=="haha")
+                    ans.cnt++;
+        ans.fs=b.fs;
+        ans.ls=a.ls;
+        return ans;
+    }
 void work()
 {
+    M.clear();
     int n;
     cin>>n;
-    cout<<"? 1"<<endl;
-    int b[2]={0,0};
+    string tmp;
+    string tt,opt;
+    getline(cin,tmp);
     for(int i=1;i<=n;i++){
-        cin>>tt[i];
-        ff[i]=tt[i];
-        b[tt[i]%2]++;
-    }
-    if(b[0]-1<b[1]){
-        for(int i=1;i<=n;i++){
-            if(ff[i]==1){
-                ans.insert(make_pair(1,i));
-            }
+        getline(cin,tmp);
+        // cout<<"tmp="<<tmp<<endl;
+        stringstream ss(tmp);
+        ss>>tt>>opt;
+        // cout<<"tt="<<tt<<' '<<opt<<endl;
+        if(opt=="="){
+            // cout<<"i="<<i<<endl;
+            string a,b,c;
+            ss>>a>>b>>c;
+            M[tt]=jia(M[a],M[c]);
+        }else{
+            string a;
+            ss>>a;
+            // cout<<"a="<<a<<endl;
+            M[tt]=fx(a);
         }
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2==0){
-                cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }else{
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2){
-            cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }
-    cout<<"!"<<endl;
-    for(auto i:ans){
-        cout<<i.first<<' '<<i.second<<endl;
-    }
+    } 
+    // cout<<"tt="<<tt<<endl;
+    cout<<M[tt].cnt<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

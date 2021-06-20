@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#pragma GCC optimize("Ofast,no-stack-protector")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
@@ -52,66 +52,58 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int ff[21000];
-int tt[21000];
-set<pair<int,int>> ans;
+const int maxn = 1110000;
+int shu[maxn<<1];
+int a[maxn],b[maxn],c[maxn];
+int date[maxn<<1];
+int find(int x){
+    if(date[x]==x)
+        return x;
+    return date[x]=find(date[x]);
+}
+void merge(int a,int b){
+    int l=find(a);
+    int r=find(b);
+    if(l!=r)
+    date[r]=l;
+}
 void work()
 {
     int n;
-    cin>>n;
-    cout<<"? 1"<<endl;
-    int b[2]={0,0};
+    rd(n);
+    int tail=0;
+    int tt=0;
+    for(int i=1;i<=n;i++)
+        rd(a[i]),rd(b[i]),rd(c[i]);
+    for(int i=1;i<=n;i++)
+        shu[i]=a[i],shu[n+i]=b[i];
+    sort(shu+1,shu+2*n+1);
+    int len=unique(shu+1,shu+2*n+1)-shu;
+    for(int i=1;i<=len;i++) 
+        date[i]=i;
     for(int i=1;i<=n;i++){
-        cin>>tt[i];
-        ff[i]=tt[i];
-        b[tt[i]%2]++;
+        a[i]=lower_bound(shu+1,shu+len+1,a[i])-shu;
+        b[i]=lower_bound(shu+1,shu+len+1,b[i])-shu;
+        if(c[i])
+            merge(a[i],b[i]);
     }
-    if(b[0]-1<b[1]){
-        for(int i=1;i<=n;i++){
-            if(ff[i]==1){
-                ans.insert(make_pair(1,i));
-            }
-        }
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2==0){
-                cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
-        }
-    }else{
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2){
-            cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
+    for(int i=1;i<=n;i++){
+        if(!c[i])
+        if(find(a[i])==find(b[i])){
+            printf("NO\n");
+            return;
         }
     }
-    cout<<"!"<<endl;
-    for(auto i:ans){
-        cout<<i.first<<' '<<i.second<<endl;
-    }
+    printf("YES\n");
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
 int t = 1;
-//cin>>t;
+rd(t);
 while (t--)
 {
 work();

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -52,64 +52,50 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int ff[21000];
-int tt[21000];
-set<pair<int,int>> ans;
+const int maxn = 110000;
+multiset<int> s[maxn][2];
 void work()
 {
-    int n;
-    cin>>n;
-    cout<<"? 1"<<endl;
-    int b[2]={0,0};
+    int n,m;
+    cin>>n>>m;
+    int l,r,d;
+    for(int i=1;i<=m;i++){
+        cin>>l>>r>>d;
+        if(l>r)
+            swap(l,r);
+        s[l][0].insert(d);
+        s[r+1][1].insert(d);
+    }
+    int ans=0;
+    int aa=-1;
+    multiset<int>ss;
+    int cnt=0;
     for(int i=1;i<=n;i++){
-        cin>>tt[i];
-        ff[i]=tt[i];
-        b[tt[i]%2]++;
-    }
-    if(b[0]-1<b[1]){
-        for(int i=1;i<=n;i++){
-            if(ff[i]==1){
-                ans.insert(make_pair(1,i));
-            }
+        for(auto j=s[i][1].begin();j!=s[i][1].end();j++){
+            ss.erase(ss.find(*j));
+            if(ss.count(*j)==0)
+                cnt--;
         }
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2==0){
-                cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
+        for(auto j=s[i][0].begin();j!=s[i][0].end();j++){
+            if(ss.count(*j)==0)
+                cnt++;
+            ss.insert(*j);
         }
-    }else{
-        for(int i=2;i<=n;i++){
-            if(ff[i]%2){
-            cout<<"? "<<i<<endl;
-                for(int j=1;j<=n;j++){
-                    cin>>tt[j];
-                    if(tt[j]==1){
-                        ans.insert(make_pair(i,j));
-                    }
-                }
-            }
+        if(aa<cnt){
+            ans=i;
+            aa=cnt;
         }
     }
-    cout<<"!"<<endl;
-    for(auto i:ans){
-        cout<<i.first<<' '<<i.second<<endl;
-    }
+    cout<<ans<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-//    freopen("in.txt","r",stdin);
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 //cin>>t;
 while (t--)
