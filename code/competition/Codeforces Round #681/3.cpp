@@ -1,8 +1,12 @@
 #include <bits/stdc++.h>
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -16,12 +20,17 @@ template<class T>inline void rd(T &x){
    while(o=getchar(),o>47);
    x*=f;
 }
-template<class T>
-void wt(T x){
-   if(x < 0) putchar('-'), x = -x;
-   if(x >= 10) wt(x / 10);
-   putchar('0' + x % 10);
+template<class T>inline void wt(T x){
+    static int top,stk[105];
+    if(x<0)x=-x,putchar('-');
+    if(x==0)putchar('0');
+    while(x)stk[++top]=x%10,x/=10;
+    while(top)putchar(stk[top--]+'0');
 }
+#define pii(a,b) pair<a,b>
+#define X first
+#define Y second
+#define lowbit(x) (x&-x)
 #define MP make_pair
 #define pb push_back
 #define pt putchar
@@ -43,32 +52,33 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[31000];
-int mx[31000];
-int ml[31000];
+const int maxn = 210000;
+int a[maxn],b[maxn];
+int n;
+bool f(int t){
+    int tot=0;
+    for(int i=1;i<=n;i++){
+        if(a[i]>t)
+            tot+=b[i];
+    }
+    return tot<=t;
+}
 void work()
 {
-    int n;
     cin>>n;
-    int tmp;
     for(int i=1;i<=n;i++)
-        cin>>date[i];
-    date[0]=llinf;
-    date[n+1]=llinf;
-    ml[0]=llinf;
-    for(int i=1;i<=n;i++)
-        ml[i]=min(date[i],ml[i-1]);
-    mx[n+1]=llinf;
-    for(int i=n;i>=1;i--)
-        mx[i]=min(date[i],mx[i+1]);
+        cin>>a[i];
     for(int i=1;i<=n;i++){
-        if(ml[i-1]+mx[i+1]<date[i]){
-            cout<<"NO"<<endl;
-            return;
-        }
+        cin>>b[i];
     }
-    cout<<"YES"<<endl;
+    int l=0,r=1e10;
+    while(l^r){
+        int mid=l + r >> 1;
+        if(f(mid))
+            r=mid;
+        else l=mid+1;
+    }
+    cout<<l<<endl;
 }
 signed main()
 {
