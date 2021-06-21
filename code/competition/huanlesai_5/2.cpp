@@ -53,28 +53,21 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int dp[20][20][20];
+// int dp[20][20][20];
 void work()
 {
-    for(int i=0;i<=8;i++)
-        for(int j=0;j<=8;j++)
-            for(int k=0;k<=8;k++){
-                MAX(dp[i+1][j+1][k+1],dp[i][j][k]+1);
-                MAX(dp[i+2][j+1][k],dp[i][j][k]+1);
-                MAX(dp[i+2][j][k+1],dp[i][j][k]+1);
-                MAX(dp[i+1][j+2][k],dp[i][j][k]+1);
-                MAX(dp[i][j+2][k+1],dp[i][j][k]+1);
-                MAX(dp[i+1][j][k+2],dp[i][j][k]+1);
-                MAX(dp[i][j+1][k+2],dp[i][j][k]+1);
-            }
-    int a,b,c;
-    cin>>a>>b>>c;
-    cout<<dp[min(8LL,a)][min(8LL,b)][min(8LL,c)]<<endl;
+    int a[3];
+    cin>>a[0]>>a[1]>>a[2];
+    sort(a,a+3);
+    if((a[0]+a[1])*2>=a[2]){
+        cout<<(a[1]+a[2]+a[0])/3<<endl;
+        return;
+    }else cout<<a[0]+a[1]<<endl;
 }
 signed main()
 {
-   #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+#ifndef ONLINE_JUDGE
+freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
