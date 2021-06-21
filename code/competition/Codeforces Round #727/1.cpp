@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <bits/extc++.h>
-// using namespace __gnu_pbds;
-// using namespace __gnu_cxx;
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,11 +53,15 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int a[4];
 void work()
 {
-    cin>>a[0]>>a[1]>>a[2];
-    sort(a,a+3);
+    int n,x,t;
+    cin>>n>>x>>t;
+    int dis=t/x;
+    if(n<dis){
+        cout<<n*(n-1)/2<<endl;
+        return;
+    }else cout<<(n-dis-1)*dis+dis*(dis+1)/2<<endl;
 }
 signed main()
 {
@@ -65,10 +69,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

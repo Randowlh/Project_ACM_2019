@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <bits/extc++.h>
-// using namespace __gnu_pbds;
-// using namespace __gnu_cxx;
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,11 +53,48 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int a[4];
 void work()
 {
-    cin>>a[0]>>a[1]>>a[2];
-    sort(a,a+3);
+   int n;
+   cin>>n;
+   vector<pair<int,int>> v;
+   int a,b;
+   int tot=0;
+   for(int i=1;i<=n;i++){
+      cin>>a>>b;
+      tot+=a;
+      v.push_back(pair<int,int>(b,a));
+   }
+   sort(v.begin(),v.end());
+   int now=0;
+   int ed=n-1;
+   for(int i=0;i<n;i++){
+      if(now>=v[i].first){
+         now+=v[i].second;
+         continue;
+      }
+      int dis=v[i].first-now;
+      while(ed>=i){
+         if(dis<=v[ed].second){
+            tot+=dis;
+            now=v[i].first;
+            v[ed].second-=dis;
+            dis=0;
+            break;
+         }else{
+            tot+=v[ed].second;
+            dis-=v[ed].second;
+            now+=v[ed].second;
+            v[ed].second=0;
+         }
+         ed--;
+      }
+      if(dis){
+         tot+=v[i].second;
+         now+=v[i].second;
+      }else now+=v[i].second;
+   }
+   cout<<tot<<endl;
 }
 signed main()
 {

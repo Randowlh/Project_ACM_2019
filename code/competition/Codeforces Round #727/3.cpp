@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <bits/extc++.h>
-// using namespace __gnu_pbds;
-// using namespace __gnu_cxx;
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,11 +53,29 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int a[4];
+int date[210000];
 void work()
 {
-    cin>>a[0]>>a[1]>>a[2];
-    sort(a,a+3);
+    int n,k,x;
+    cin>>n>>k>>x;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    sort(date+1,date+n+1);
+    vector<int> v;
+    for(int i=1;i<n;i++){
+        if(date[i+1]-date[i]>x){
+            v.push_back((date[i+1]-date[i]-1)/x);
+        }
+    }
+    sort(v.begin(),v.end());
+    int ans=v.size()+1;
+    for(int i=0;i<v.size();i++){
+        if(v[i]>k)
+            break;
+        ans--;
+        k-=v[i];
+    }
+    cout<<ans<<endl;
 }
 signed main()
 {
