@@ -52,10 +52,62 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 210000;
+set<pair<int,int>> a;
+int lk[maxn];
+int pre(int now){
+   auto i=a.find(MP(lk[now],now));
+   if(i==a.begin())
+      return 0;
+   i--;
+   return i->second;
+}
+int aft(int now){
+   auto i=a.find(MP(lk[now],now));
+   i++;
+   if(i==a.end())
+      return 0;
+   else return i->second;
+}
 void work()
 {
-    
+   int n,m;
+   cin>>n>>m;
+   a.clear();
+   set<int> s;
+   int tmp;
+   for(int i=1;i<=n;i++){
+      cin>>tmp;
+      a.insert(make_pair(i,tmp));
+      lk[tmp]=i;
+   }
+   vector<int> v;
+   for(int i=1;i<=m;i++){
+      cin>>tmp;
+      v.push_back(tmp);
+      s.insert(tmp);
+   }
+   int ans=1;
+   for(int i=0;i<m;i++){
+      s.erase(v[i]);
+      int aa=pre(v[i]);
+      int bb=aft(v[i]);
+      if(s.count(aa))
+         aa=0;
+      if(s.count(bb))
+         bb=0;
+      ans*=((aa>0)+(bb>0));
+      ans%=mod;
+      if(aa){
+         a.erase(MP(lk[aa],aa));
+         continue;
+      }
+      if(bb){
+         a.erase(MP(lk[bb],bb));
+         continue;
+      }
+   }
+   cout<<ans<<endl;
 }
 signed main()
 {
@@ -63,10 +115,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
