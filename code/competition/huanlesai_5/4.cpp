@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -45,85 +45,56 @@ template<class T>inline void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = 9999973;
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 210000;
-int f[20];
-int jc[20];
-int pre[maxn];
-inline int getnum(int rk){
-   // cout<<"rk="<<rk<<endl;
-   int i;
-   for(i=1;;i++){
-      // cout<<"i=="<<i<<endl;
-      if(f[i])
-         continue;
-      if(!rk)
-         break;
-      rk--;
-   }
-   f[i]=1;
-   // cout<<"i="<<i<<endl;
-   return i;
-}
-vector<int> rkt(int num,int lim){
-   vector<int> ans;
-   // cout<<"num="<<num<<endl;
-   for(int i=1;i<=19;i++)
-      f[i]=0;
-   for(int i=lim;i>=1;i--){
-      // cout<<"num/jc[i-1]"<<num/jc[i-1]<<endl;
-      ans.push_back(getnum(num/jc[i-1]));
-      num%=jc[i-1];
-   }
-   return ans;
+const int maxn = 510000;
+int c[110][110];
+int dp[110][110][110];
+void init(){
+    for(int i=0;i<=105;i++){
+        c[0][i]=0;
+        c[i][0]=1;   
+    }
+    for(int i=1;i<=105;i++)
+        for(int j=1;j<=105;j++)
+            c[i][j]=(c[i-1][j]+c[i-1][j-1])%mod;
 }
 void work()
 {
-   jc[0]=1;
-   for(int i=1;i<20;i++)
-      jc[i]=jc[i-1]*i;
-   // cout<<jc[16]<<endl;
-   for(int i=1;i<maxn;i++)
-      pre[i]=pre[i-1]+i;
-   int n,k;
-   cin>>n>>k;
-   int now=0;
-   for(int i=1;i<=k;i++){
-      int opt;
-      cin>>opt;
-      if(opt==1){
-         int l,r;
-         cin>>l>>r;
-         int ans=0;
-         vector<int> a=rkt(now,min(16LL,n));
-         if(n<=16){
-            for(int i=l;i<=r;i++)
-               ans+=a[i-1];
-         }else if(l>n-16){
-            for(int i=l-n+16;i<=r-n+16;i++){
-               ans+=a[i-1]+n-16;
+    init();
+    int n,m;
+    cin>>n>>m;
+    dp[0][0][0]=1;
+    for(int i=1;i<=n;i++)
+        for(int j=0;j<=m;j++)
+            for(int k=0;k<=m-j;k++){
+                dp[i][j][k]+=dp[i-1][j][k];
+                if(j>=1)
+                dp[i][j][k]+=dp[i-1][j-1][k]*c[m-j+1-k][1]%mod;
+                if(k>=1)
+                dp[i][j][k]+=dp[i-1][j+1][k-1]*c[j+1][1]%mod;
+                if(j>=2)
+                dp[i][j][k]+=dp[i-1][j-2][k]*c[m-j+2-k][2]%mod;
+                if(k>=1)
+                dp[i][j][k]+=dp[i-1][j][k-1]*c[m-j-k+1][1]%mod*c[j][1]%mod;
+                if(k>=2)
+                dp[i][j][k]+=dp[i-1][j+2][k-2]*c[j+2][2]%mod;
+                dp[i][j][k]%=mod;
             }
-         }else if(r>n-16){
-            int dis=r-n+16;
-            for(int i=1;i<=dis;i++)
-               ans+=a[i-1]+n-16;
-            ans+=pre[n-16]-pre[l-1];
-         }else{
-            ans+=pre[r]-pre[l-1];
-         }
-         cout<<ans<<endl;
-      }else{
-         int x;
-         cin>>x;
-         now+=x;
-      }
-   }
+    int ans=0;
+    for(int j=0;j<=m;j++)
+        for(int k=0;k<=m;k++){
+            if(j+k<=m){
+                ans+=dp[n][j][k];
+                ans%=mod;
+            }
+        }
+    cout<<ans<<endl;
 }
 signed main()
 {
