@@ -52,26 +52,83 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1010000;
-int pre[maxn];
+const int maxn = 2005;
+int mp[maxn][maxn];
+int n,m,w;
+bool book[maxn][maxn][2];
+int b[][2]={{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+struct node{
+    int x,y,len;
+    node(int a,int b,int c):x(a),y(b),len(c){}
+};
+inline bool ck(int x,int y){
+    if(x<1||x>n)
+        return false;
+    if(y<1||y>m)
+        return false;
+    return mp[x][y]!=-1;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    string tmp;
-    cin>>tmp;
+    rd(n),rd(m),rd(w);
     for(int i=1;i<=n;i++)
-        pre[i]=pre[i-1]+(tmp[i-1]=='*');
-    int ans=0;
-    int now=0;
-    for(int i=n;i>=1;i--){
-        if(tmp[i-1]=='*'){
-            now++;
-        }else{
-            ans+=min(pre[i],now);
+        for(int j=1;j<=m;j++)
+            rd(mp[i][j]);
+    int ans=llinf;
+    int hp=llinf,sp=llinf;
+    queue<node> q;
+    q.push(node(1,1,0));
+    book[1][1][0]=1;
+    if(mp[1][1]==-1){
+        cout<<-1<<endl;
+        return;
+    }else if(mp[1][1]){
+        hp=mp[1][1];
+    }
+    while(!q.empty()){
+        node t=q.front();
+        q.pop();
+        for(int i=0;i<4;i++){
+            int xx=t.x+b[i][0];
+            int yy=t.y+b[i][1];
+            if(ck(xx, yy)&&!book[xx][yy][0]){
+                book[xx][yy][0]=1;
+                q.push(node(xx,yy,t.len+w));
+                if(mp[xx][yy])
+                    MIN(hp,t.len+w+mp[xx][yy]);
+                if(xx==n&&yy==m)
+                    MIN(ans,t.len+w);
+            }
         }
     }
-    cout<<ans<<endl;
+    q.push(node(n,m,0));
+    book[n][m][1]=1;
+    if(mp[n][m]==-1){
+        cout<<-1<<endl;
+        return;
+    }else if(mp[n][m]){
+        sp=mp[n][m];
+    }
+    while(!q.empty()){
+        node t=q.front();
+        q.pop();
+        for(int i=0;i<4;i++){
+            int xx=t.x+b[i][0];
+            int yy=t.y+b[i][1];
+            if(ck(xx, yy)&&!book[xx][yy][1]){
+                book[xx][yy][1]=1;
+                q.push(node(xx,yy,t.len+w));
+                if(mp[xx][yy])
+                    MIN(sp,t.len+w+mp[xx][yy]);
+                if(xx==1&&yy==1)
+                    MIN(ans,t.len+w);
+            }
+        }
+    }
+    if(min(ans,hp+sp)==llinf){
+        cout<<-1<<endl;
+    }else
+    cout<<min(ans,hp+sp)<<endl;
 }
 signed main()
 {
@@ -79,10 +136,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

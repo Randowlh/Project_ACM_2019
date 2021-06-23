@@ -1,8 +1,12 @@
 #include <bits/stdc++.h>
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
@@ -16,12 +20,16 @@ template<class T>inline void rd(T &x){
    while(o=getchar(),o>47);
    x*=f;
 }
-template<class T>
-void wt(T x){
-   if(x < 0) putchar('-'), x = -x;
-   if(x >= 10) wt(x / 10);
-   putchar('0' + x % 10);
+template<class T>inline void wt(T x){
+   static int top,stk[105];
+   if(x<0)x=-x,putchar('-');
+   if(x==0)putchar('0');
+   while(x)stk[++top]=x%10,x/=10;
+   while(top)putchar(stk[top--]+'0');
 }
+#define pii(a,b) pair<a,b>
+#define X first
+#define Y second
 #define lowbit(x) (x&-x)
 #define MP make_pair
 #define pb push_back
@@ -45,12 +53,29 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[110000];
 void work()
 {
-   int n,t;
-   cin>>n>>t;
-   
+    int n;
+    cin>>n;
+    string tmp;
+    cin>>tmp;
+   set<char> s;
+   int now=0;
+   for(int i=0;i<n;i++){
+      if(now!=tmp[i]){
+         if(s.count(now)){
+            cout<<"NO"<<endl;
+            return;
+         }
+         s.insert(now);
+         now=tmp[i];
+      }
+   }
+   if(s.count(now)){
+            cout<<"NO"<<endl;
+            return;
+         }
+   cout<<"YES"<<endl;
 }
 signed main()
 {
@@ -58,10 +83,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

@@ -52,37 +52,35 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1010000;
-int pre[maxn];
+const int maxn = 510000;
 void work()
 {
-    int n;
-    cin>>n;
-    string tmp;
-    cin>>tmp;
-    for(int i=1;i<=n;i++)
-        pre[i]=pre[i-1]+(tmp[i-1]=='*');
-    int ans=0;
-    int now=0;
-    for(int i=n;i>=1;i--){
-        if(tmp[i-1]=='*'){
-            now++;
-        }else{
-            ans+=min(pre[i],now);
-        }
+    int n,t;
+    cin>>n>>t;
+    int k;
+    cin>>k;
+    int l=k,r=n+1;
+    while(l^r){
+        int mid=(l+r)>>1;
+        cout<<"? 1 "<<mid<<endl;
+        int now=0;
+        cin>>now;
+        if(mid-now>=k){
+            r=mid;
+        }else l=mid+1;
     }
-    cout<<ans<<endl;
+    cout<<"! "<<l<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+// cin>>t;
 while (t--)
 {
 work();
