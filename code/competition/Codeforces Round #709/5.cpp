@@ -27,6 +27,9 @@ template<class T>inline void wt(T x){
     while(x)stk[++top]=x%10,x/=10;
     while(top)putchar(stk[top--]+'0');
 }
+#define pii(a,b) pair<a,b>
+#define X first
+#define Y second
 #define lowbit(x) (x&-x)
 #define MP make_pair
 #define pb push_back
@@ -49,11 +52,73 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-
+const int maxn = 110000;
+set<int> s,p;
+int gcd(int a, int b){ return b ? gcd(b, a % b) : a;}
+int date[maxn];
+int aft(int pos){
+    auto i=s.find(pos);
+    i++;
+    if(i==s.end())
+        return *s.begin();
+    return *i;
+}
+int pre(int pos){
+    auto i=s.find(pos);
+    if(i==s.begin())
+        return *s.rbegin();
+    i--;
+    return *i;
+}
 void work()
 {
-    
+    s.clear();
+    p.clear();
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+        cin>>date[i],s.insert(i);
+    for(int i=0;i<n;i++)
+        if(gcd(date[i],date[(i+1)%n])==1)
+            p.insert(i);
+    vector<int> ans;
+    while(1){
+        int flag=0;
+        if(s.size()==1){
+            if(date[*s.begin()]==1)
+                ans.push_back(*s.begin());
+            break;
+        }
+        for(auto i=p.begin();i!=p.end();){
+            // cout<<"i="<<*i<<endl;
+            if(s.count(*i)==0){
+                auto j=i;
+                i++;
+                p.erase(j);
+                continue;
+            }
+            int to=aft(*i);
+            ans.push_back(to);
+            s.erase(to);
+            // cout<<"to="<<to<<endl;
+            flag=1;
+            to=aft(*i);
+            // cout<<"to2="<<to<<endl;
+            if(gcd(date[*i],date[to])!=1){
+                auto j=i;
+                i++;
+                p.erase(j);
+                continue;
+            }
+            i++;
+        }
+        if(!flag)
+            break;
+    }
+    cout<<ans.size()<<' ';
+    for(int i=0;i<ans.size();i++)
+        cout<<ans[i]+1<<' ';
+    cout<<endl;
 }
 signed main()
 {
@@ -61,10 +126,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
