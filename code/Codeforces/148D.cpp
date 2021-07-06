@@ -53,60 +53,37 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+double dp[1100][1100];
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
+    int n,m;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        dp[i][0]=1;
+    for(int i=1;i<=m;i++)
+        dp[0][i]=0;
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++){
+            dp[i][j]=0;
+            dp[i][j]+=i/(db)(i+j);
+            if(j>=3)
+                dp[i][j]+=dp[i][j-3]*(j/(double)(i+j))*((j-1)/((double)i+j-1))*((j-2)/(double)(i+j-2));
+            if(i>=1&&j>=2)
+                dp[i][j]+=dp[i-1][j-2]*(j/(double)(i+j))*((j-1)/((double)i+j-1))*(i/(double)(i+j-2));
         }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    // cout<<dp[n][m]<<endl;
+    printf("%.10f\n",dp[n][m]);
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();
