@@ -59,7 +59,6 @@ void jiadian(int pos,int to,int w){
     }
 }
 void tarjan(int pos,int f){
-    // cout<<"pos="<<pos<<' '<<f<<endl;
     dfn[pos]=low[pos]=++cnt1;
     fa[pos][0]=f;
     for(int i=head[pos][0];i;i=eg[i][0].nxt){
@@ -88,11 +87,9 @@ void dfs(int pos,int f){
         if(to==f)
             continue;
         fa[to][0]=pos;
-        // cout<<"pos="<<pos<<"->to="<<to<<endl;
         cd[to][0]=w;
         dfs(to,pos);
     }
-    // cout<<"fa["<<pos<<"]="<<fa[pos][0]<<endl;
 }
 int n,m,q;
 int getans(int a,int b){
