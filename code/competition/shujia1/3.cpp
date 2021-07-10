@@ -52,10 +52,73 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 110000;
+int dp[maxn][3][3][2],h[100][3][3][2],tmp[100][3][3][2];
+struct edge{
+   int to,nxt;
+}eg[maxm];
+int dfn[maxn];
+int cnt;
+int qcnt;
+int head[maxn];
+int di[maxn];
+int ecnt=0;
+inline void add(int u,int v){
+   eg[++ecnt].nxt=head[u];
+   eg[ecnt].to=v;
+   head[u]=ecnt;
+}
+void tarjan(int pos,int fa){
+   dfn[pos]=++cnt;
+   for(int i=head[pos];i;i=eg[i].nxt){
+      int to=eg[i].to;
+      if(to==fa)  
+         continue;
+      if(!dfn[to])
+         tarjan(to,pos);
+      else if(dfn[to]<dfn[pos]){
+         qcnt++;
+         di[pos]=1;
+         int now=pos;
+         while(now!=to){
+            if(from[now]){
+               cout<<-1<<endl;
+               exit(0);
+            }
+            from[now]=qcnt;
+         }
+      }
+   }
+   memset(h,63,sizeof(h));
+   if(di[pos]){
+      for(int i=0;i<3;i++) 
+         for(int j=0;j<=3;j++){
+            if((i+j)%3==1)
+               continue;
+            h[(1<<i)|(1<<j)][j][k][(j+k)%2]=j;
+      }
+   }else
+      for(int j=0;j<3;j++)h[1<<j][j][0]=j;
+   for(int i=head[pos];i;i=eg[i].nxt){
+      int to=eg[i].to;
+      if(fa[to]!=pos)
+         continue;
+      memeset(tmp,63,sizeof(tmp));
+      
+   }
+}
 void work()
 {
-    
+   int n,m;
+   cin>>n>>m;
+   int u,v;
+   for(int i=1;i<=m;i++){
+      cin>>u>>v;
+      add(u,v);
+      add(v,u);
+   }
+   for(int i=1;i<=n;i++)
+      tarjan(i,-1);
 }
 signed main()
 {

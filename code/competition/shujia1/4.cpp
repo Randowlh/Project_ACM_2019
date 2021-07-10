@@ -1,75 +1,107 @@
-#include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+#include<bits/stdc++.h>
 using namespace std;
-#pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
-const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
 typedef long double ld;
 template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
 template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
 template<class T>inline void rd(T &x){
-   x=0;char o,f=1;
-   while(o=getchar(),o<48)if(o==45)f=-f;
-   do x=(x<<3)+(x<<1)+(o^48);
-   while(o=getchar(),o>47);
-   x*=f;
+	x=0;char o,f=1;
+	while(o=getchar(),o<48)if(o==45)f=-f;
+	do x=(x<<3)+(x<<1)+(o^48);
+	while(o=getchar(),o>47);
+	x*=f;
 }
-template<class T>inline void wt(T x){
-    static int top,stk[105];
-    if(x<0)x=-x,putchar('-');
-    if(x==0)putchar('0');
-    while(x)stk[++top]=x%10,x/=10;
-    while(top)putchar(stk[top--]+'0');
+const int M=1e5+5;
+int n,m,tot,head[M],to[M<<1],nxt[M<<1];
+inline void add_edge(int a,int b){
+	to[++tot]=b;
+	nxt[tot]=head[a];
+	head[a]=tot;
 }
-#define pii(a,b) pair<a,b>
-#define X first
-#define Y second
-#define lowbit(x) (x&-x)
-#define MP make_pair
-#define pb push_back
-#define pt putchar
-#define yx_queue priority_queue
-#define lson(pos) (pos<<1)
-#define rson(pos) (pos<<1|1)
-#define y1 code_by_Rand0w
-#define yn A_muban_for_ACM
-#define j1 it_is just_an_eastegg
-#define lr hope_you_will_be_happy_to_see_this
-#define int long long
-#define rep(i, a, n) for (register int i = a; i <= n; ++i)
-#define per(i, a, n) for (register int i = n; i >= a; --i)
-const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
-const ll mod2 = 999998639;
-const int m1 = 998244353;
-const int m2 = 1000001011;
-const int pr=233;
-const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
-void work()
-{
-    
+int dfsid,fa[M],dfn[M],bot[M];
+int all,from[M];
+int dp[M][3][3][2],DP[8][3][3][2],tmp[8][3][3][2];
+//dp[i][j][k][t] i的子树，i-fa[i]的权值为j，i-fa[i]所在的环的非树边为k，环的和为t
+bool check(int s,int x){
+	if((s&1<<0)&&x==1)return 1;
+	if((s&1<<1)&&x==0)return 1;
+	if((s&1<<2)&&x==2)return 1;
+	return 0;
 }
-signed main()
-{
-   #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
-//freopen("out.txt","w",stdout);
+void dfs(int x,int f){
+	fa[x]=f;
+	dfn[x]=++dfsid;
+	for(int i=head[x];i;i=nxt[i]){
+		int y=to[i];
+		if(y==f)continue;
+		if(!dfn[y])dfs(y,x);
+		else if(dfn[y]<dfn[x]){
+			all++;
+			bot[x]=1;
+			for(int k=x;k!=y;k=fa[k]){
+				if(from[k]){puts("-1");exit(0);}
+				from[k]=all;
+			}
+		}
+	}
+	memset(DP,63,sizeof(DP));
+	if(bot[x]){
+		for(int j=0;j<3;j++)for(int k=0;k<3;k++){
+			if((j+k)%3==1)continue;
+			DP[(1<<j)|(1<<k)][j][k][(j+k)%2]=j+k;
+		}
+	}
+	else{
+		for(int j=0;j<3;j++)DP[1<<j][j][0][j]=j;
+	}
+	for(int i=head[x];i;i=nxt[i]){
+		int y=to[i];
+		if(fa[y]!=x)continue;
+		memset(tmp,63,sizeof(tmp));
+		for(int s=0;s<8;s++)for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++){
+			if(DP[s][j][k][t]>1e9)continue;
+			for(int a=0;a<3;a++)for(int b=0;b<3;b++)for(int c=0;c<2;c++){
+				if(dp[y][a][b][c]>1e9)continue;
+				if(check(s,a))continue;
+				if(from[y]==0){
+					MIN(tmp[s|1<<a][j][k][t],DP[s][j][k][t]+dp[y][a][b][c]);
+				}
+				else if(from[y]!=from[x]){
+					if(check(s,b))continue;
+					if((a+b)%3==1)continue;
+					if(c==0)continue;
+					MIN(tmp[s|1<<a|1<<b][j][k][t],DP[s][j][k][t]+dp[y][a][b][c]);
+				}
+				else if(from[y]==from[x]){
+					MIN(tmp[s|1<<a][j][b][(c+j)%2],DP[s][j][k][t]+dp[y][a][b][c]);
+				}
+			}
+		}
+		for(int s=0;s<8;s++)for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++)DP[s][j][k][t]=tmp[s][j][k][t];
+	}
+	for(int s=0;s<8;s++)for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++)MIN(dp[x][j][k][t],DP[s][j][k][t]);
+}
+int main(){
+#ifndef ONLINE_JUDGE
+	freopen("jiedai.in","r",stdin);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
-int t = 1;
-//cin>>t;
-while (t--)
-{
-work();
-}
-return 0;
+	memset(dp,63,sizeof(dp));
+	rd(n),rd(m);
+	for(int i=1;i<=m;i++){
+		int a,b;
+		rd(a),rd(b);
+		add_edge(a,b);
+		add_edge(b,a);
+	}
+	int ans=0;
+	for(int i=1;i<=n;i++)if(!dfn[i]){
+		dfs(i,0);
+		int res=1e9;
+		for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++)MIN(res,dp[i][j][k][t]-j);
+		if(res==1e9){ans=-1;break;}
+		ans+=res;
+	}
+	printf("%d\n",ans);
+	return 0;
 }
