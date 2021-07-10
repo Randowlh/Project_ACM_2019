@@ -104,7 +104,8 @@ void tarjan(int pos,int fa){
       if(fa[to]!=pos)
          continue;
       memeset(tmp,63,sizeof(tmp));
-      
+      for(int s=0;s<8;s++)
+      for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++)
    }
 }
 void work()
