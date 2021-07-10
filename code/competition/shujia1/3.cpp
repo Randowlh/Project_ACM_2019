@@ -51,16 +51,16 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 1;
+const int maxm= 210000;
 const int maxn = 110000;
-int dp[maxn][3][3][2],h[100][3][3][2],tmp[100][3][3][2];
+int dp[maxn][3][3][2],h[8][3][3][2],tmp[8][3][3][2];
 struct edge{
    int to,nxt;
 }eg[maxm];
 int dfn[maxn];
 int cnt;
 int qcnt;
-int head[maxn];
+int head[maxn],from[maxn],faa[maxn];
 int di[maxn];
 int ecnt=0;
 inline void add(int u,int v){
@@ -68,8 +68,16 @@ inline void add(int u,int v){
    eg[ecnt].to=v;
    head[u]=ecnt;
 }
+bool ck(int s,int x){
+   if(s&1<<0&&x==1)return true;
+   if(s&2&&x==0)return true;
+   if(s&4&&x==2)return true;
+   return false;
+}
 void tarjan(int pos,int fa){
+   // cout<<"pos="<<pos<<endl;
    dfn[pos]=++cnt;
+   faa[pos]=fa;
    for(int i=head[pos];i;i=eg[i].nxt){
       int to=eg[i].to;
       if(to==fa)  
@@ -81,32 +89,63 @@ void tarjan(int pos,int fa){
          di[pos]=1;
          int now=pos;
          while(now!=to){
+            // cout<<"now="<<now<<endl;
             if(from[now]){
                cout<<-1<<endl;
                exit(0);
             }
             from[now]=qcnt;
+            now=faa[now];
          }
       }
    }
    memset(h,63,sizeof(h));
    if(di[pos]){
       for(int i=0;i<3;i++) 
-         for(int j=0;j<=3;j++){
+         for(int j=0;j<3;j++)
+            for(int k=0;k<3;k++){
             if((i+j)%3==1)
                continue;
-            h[(1<<i)|(1<<j)][j][k][(j+k)%2]=j;
+            h[(1<<i)|(1<<j)][j][k][(j+k)%2]=j+k;
       }
    }else
-      for(int j=0;j<3;j++)h[1<<j][j][0]=j;
+      for(int j=0;j<3;j++)h[1<<j][j][0][j]=j;
    for(int i=head[pos];i;i=eg[i].nxt){
       int to=eg[i].to;
-      if(fa[to]!=pos)
+      if(fa!=pos)
          continue;
-      memeset(tmp,63,sizeof(tmp));
+      memset(tmp,63,sizeof(tmp));
       for(int s=0;s<8;s++)
-      for(int j=0;j<3;j++)for(int k=0;k<3;k++)for(int t=0;t<2;t++)
-   }
+         for(int j=0;j<3;j++)
+            for(int k=0;k<3;k++)
+               for(int t=0;t<2;t++){
+                  for(int a=0;a<3;a++)
+                     for(int b=0;b<3;b++)
+                        for(int c=0;c<2;c++){
+                           if(ck(s,a))
+                              continue;
+                           if(!from[to]){
+                              MIN(tmp[s|a<<1|b<<1][j][k][t],h[s][j][k][t]+dp[to][a][b][c]);
+                           }else if(from[pos]!=from[to]){
+                              if(ck(s,b))
+                                 continue;
+                              if((a+b)%3==1)
+                                 continue;
+                              if(!c)
+                                 continue;
+                              MIN(tmp[s|1<<a|1<<b][j][k][t],h[s][j][k][t]+dp[to][a][b][c]);
+                           }else{
+                              MIN(tmp[s|1<<a][j][b][(c+j)%2],h[s][j][k][t]+dp[to][a][b][c]);
+                           }
+                        }
+               }
+         memcpy(h,tmp,sizeof tmp);
+      }
+   for(int s=0;s<8;s++)
+      for(int j=0;j<3;j++)
+         for(int k=0;k<3;k++)
+            for   (int t=0;t<2;t++)
+               MIN(dp[pos][j][k][t],h[s][j][k][t]);
 }
 void work()
 {
@@ -118,8 +157,20 @@ void work()
       add(u,v);
       add(v,u);
    }
-   for(int i=1;i<=n;i++)
-      tarjan(i,-1);
+   memset(dp,63, sizeof(dp));
+   int ans=0;
+   for(int i=1;i<=n;i++){
+      if(dfn[i])
+         continue;
+      tarjan(i,i);
+      int tt=llinf;
+      for(int j=0;j<3;j++)
+         for(int k=0;k<3;k++)
+            for(int s=0;s<2;s++)
+               MIN(tt,dp[i][j][k][s]);
+      ans+=tt;
+   }
+   cout<<ans<<endl;
 }
 signed main()
 {
@@ -127,8 +178,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
 //cin>>t;
 while (t--)
