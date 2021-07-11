@@ -52,50 +52,82 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 110;
+int n,k;
+int x[maxn],y[maxn],fl[maxn];
+vector<int> ans;
+double calc(double pos,int flag){
+    double ans=0;  
+    if(!flag){
+        for(int i=1;i<=n;i++){
+            if(!fl[i])
+                ans+=abs(x[i]-pos);
+        }
+    }else{
+        for(int i=1;i<=n;i++){
+            if(!fl[i])
+                ans+=abs(y[i]-pos);
+        }
+    }
+    return ans;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+        cin>>x[i]>>y[i];
+    for(int i=n;i>=1;i--){
+        double l=0,r=1e9;
+        while(r-l>eps){
+            double lmid=(l+r)/2;
+            double rmid=(lmid+r)/2;
+            if(calc(lmid,0)<calc(rmid,0)){
+                r=rmid;
+            }else{
+                l=lmid;
+            }
         }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
+        // cout<<"l="<<l<<endl;
+        double xx=l;
+        l=0,r=1e9;
+        while(r-l>eps){
+            double lmid=(l+r)/2;
+            double rmid=(lmid+r)/2;
+            if(calc(lmid,1)<calc(rmid,1)){
+                r=rmid;
+            }else{
+                l=lmid;
+            }
         }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
+        // ma=llinf;
+        double yy=l;
+        // for(int i=l-3;i<=r+3;i++){
+        //     int t=calc(i,1);
+        //     if(t<ma){
+        //         ma=t;
+        //         yy=i;
+        //     }
+        // }
+        ans.push_back(calc(xx,0)+calc(yy,1));
+        int ma=0;
+        int mix=0;
+        for(int i=1;i<=n;i++){
+            if(fl[i])
+                continue;
+            int dis=abs(x[i]-xx)+abs(y[i]-yy);
+            if(dis>ma){
+                ma=dis;
+                mix=i;
+            }
         }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
+        fl[mix]=1;
+        // cout<<"mix="<<mix<<endl;
+        // cout<<"xx="<<xx<<' '<<yy<<endl;
     }
-    cout<<"YES"<<endl;
-    return;
+    reverse(ans.begin(), ans.end());
+    for(int i=0;i<k;i++){
+        cout<<ans[i]<<endl;
+    }
 }
 signed main()
 {
@@ -103,10 +135,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

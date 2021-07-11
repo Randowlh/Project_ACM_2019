@@ -53,54 +53,66 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int dix[maxn],tot[maxn],tmp[maxn];
+int n,k;
+int flag=0;
+int ma;
+ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
+int calc(int pos){
+    int t=0;
+    // cout<<"asdsaadssaddsa"<<endl;
+    for(int i=0;i<ma;i++)
+        t+=powmod(k,i)*tot[i];
+    // }
+    // cout<<"tot="<<t<<endl;
+    for(int i=0;i<ma;i++){
+        tmp[i]=pos%k;
+        pos/=k;
+    }
+    for(int i=0;i<ma;i++){
+        if(flag)
+        dix[i]=((tmp[i]-tot[i])%k+k)%k;
+        else 
+        dix[i]=((tmp[i]-tot[i])%k+k)%k;
+    }
+    int ans=0;
+    int now=1;
+    for(int i=0;i<ma;i++)
+        ans+=dix[i]*now,now*=k;
+    int tans=ans;
+    int tt=0;
+    if(flag)
+       tt=1;
+    else tt=-1;
+    for(int i=0;i<ma;i++){
+        tot[i]=((tans%k-tot[i]%k)%k+k)%k;
+        tans/=k;
+    }
+    return ans;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
+    cin>>n>>k;
+    // flag=1;
+    // int cnt=0;
+    int tn=n;
+    while(tn){
+        tn/=k;
+        ma++;
     }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
+    for(int i=0;i<n;i++){
+        flag^=1;
+        cout<<calc(i)<<endl;
+        int opt;
+        cin>>opt;
+        if(opt)
+            break;
     }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);

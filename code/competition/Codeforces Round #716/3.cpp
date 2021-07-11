@@ -53,49 +53,43 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+int gcd(int a, int b, int& x, int& y) {
+    x = 1, y = 0;
+    int x1 = 0, y1 = 1, a1 = a, b1 = b;
+    while (b1) {
+      int q = a1 / b1;
+      tie(x, x1) = make_tuple(x1, x - q * x1);
+      tie(y, y1) = make_tuple(y1, y - q * y1);
+      tie(a1, b1) = make_tuple(b1, a1 - q * b1);
+    }
+    return a1;
+}
+int niyuan(int a,int b){
+    int ans,tmp;
+    gcd(a,b,ans,tmp);
+    return (ans%b+b)%b;
+}
 void work()
 {
     int n;
     cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
+    set<int> ans;
+    int aa=1;
+    for(int i=1;i<=n;i++){
+        if(gcd(i,n)==1){
+            ans.insert(i);
+            aa*=i;
+            aa%=n;
         }
     }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
+    if(aa!=1){
+        ans.erase(aa);
     }
-    cout<<"YES"<<endl;
-    return;
+    // ans.insert(1);
+    cout<<ans.size()<<endl;
+    for(auto i:ans)
+        cout<<i<<' ';
+    cout<<endl;
 }
 signed main()
 {
@@ -103,10 +97,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

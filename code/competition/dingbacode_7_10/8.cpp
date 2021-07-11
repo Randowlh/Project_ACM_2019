@@ -52,50 +52,82 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 1100;
+struct node{
+    int x;
+    int y;
+    bool operator<(node a){
+        return x<a.x; 
+    }
+}date[maxn];
+pair<int,vector<int>> v[maxn];
+pair<int,int> tt[maxn];
+int xx[maxn],yy[maxn];
+int ttail;
+int tail;
+map<int,vector<int>>M;
+multiset<pair<int,int>> sy;
+int calc2(){
+    sort(xx+1,xx+ttail+1);
+    sort(yy+1,yy+ttail+1);
+    int ans=0;
+    for(int i=1;i<=ttail/2;i++){
+        ans+=xx[ttail-i+1]-xx[i];
+        ans+=yy[ttail-i+1]-yy[i];
+    }
+    return ans;
+}
+int calc(int n){
+    tail=0;
+    for(auto i:sy)
+        tt[++tail]=i;
+    int aa=llinf;
+    for(int k=0;k<=tail-n;k++){
+        ttail=0;
+        for(int i=1+k;i<=n+k;i++){
+            yy[++ttail]=tt[i].first;
+            xx[ttail]=tt[i].second;  
+        }
+        MIN(aa,calc2());
+    }
+    return aa;
+}
+
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
+    int n,k;
+    cin>>n>>k;
+    for(int i=1;i<=n;i++){
+        cin>>date[i].x>>date[i].y;
+        M[date[i].x].push_back(date[i].y);
     }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
+    int now=1;
     for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
+        v[now]=i;
+        now++;
     }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
+    now--;
+    for(int i=1;i<=k;i++){
+        int l=1,r=0;
+        int ans=llinf;
+        sy.clear();
+        while(r<=now){
+            while(sy.size()<i&&r<=now){
+                r++;
+                if(r>now)
+                    break;
+                for(int j=0;j<v[r].Y.size();j++)
+                    sy.insert(make_pair(v[r].Y[j],v[r].X));
+            }
+            if(r>now||sy.size()<i)
+                break;
+            MIN(ans,calc(i));
+            for(int i=0;i<v[l].Y.size();i++)
+                sy.erase(sy.find(make_pair(v[l].Y[i],v[l].X)));
+            l++;
         }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
+        cout<<ans<<endl;
     }
-    cout<<"YES"<<endl;
-    return;
 }
 signed main()
 {
@@ -103,10 +135,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

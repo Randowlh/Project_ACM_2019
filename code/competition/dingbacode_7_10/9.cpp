@@ -52,50 +52,55 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 110;
+struct node{
+    int x,y;
+    bool operator<(node a){
+        if(x==a.x)
+            return y<a.y;
+        else return x<a.x; 
+    }
+}date[maxn];
+int tt[maxn];
+int tail;
+multiset<int> sy;
+int calc(int l,int r){
+    int ans=0;
+    tail=0;
+    for(auto i:sy){
+        tt[++tail]=i;
+    }
+    sort(tt+1,tt+tail+1);
+    for(int i=1;i<=tail/2;i++){
+        ans+=tt[tail-i+1]-tt[i];
+        ans+=date[tail-i+l].x-date[i-1+l].x;
+    }
+    int dis=r-l+1;
+    return ans;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
+    int n,k;
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+        cin>>date[i].x>>date[i].y;
+    sort(date+1,date+n+1);
+    for(int i=1;i<=k;i++){
+        int l=1,r=0;
+        int ans=llinf;
+        tail=0;
+        sy.clear();
+        while(r<=n){
+            while(r-l+1<i&&r<=n)
+                sy.insert(date[++r].y);
+            if(r>n)
+                break;
+            MIN(ans,calc(l,r));
+            sy.erase(sy.find(date[l].y));
+            l++;
         }
-        M[v[i]]++;
+        cout<<ans<<endl;
     }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
 }
 signed main()
 {
@@ -103,10 +108,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

@@ -53,49 +53,57 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+long double dfs(ld c,ld m,ld p,ld v){
+    long double ans=p;
+    // if(c>eps){
+    //     if(c<v){
+    //         if(m>eps) ret+=c*(dfs(0,0.5*c+m,0.5*c+p,v)+1);
+    //         else ret+=c*2.0;
+    //     }
+    //     else{
+    //         if(m>eps) ret+=c*(dfs(c-v,0.5*v+m,0.5*v+p,v)+1);
+    //         else ret+=c*(dfs(c-v,0,v+p,v)+1);
+    //     }
+    // }
+    // swap(c,m);
+    // if(c>eps){
+    //     if(c<v){
+    //         if(m>eps) ret+=c*(dfs(0,0.5*c+m,0.5*c+p,v)+1);
+    //         else ret+=c*2.0;
+    //     }
+    //     else{
+    //         if(m>eps) ret+=c*(dfs(c-v,0.5*v+m,0.5*v+p,v)+1);
+    //         else ret+=c*(dfs(c-v,0,v+p,v)+1);
+    //     }
+    // }
+    if(c>0){
+        ans+=c;
+        if(m>eps){
+            if(c>v) ans+=c*dfs(c-v,m+v/2,p+v/2,v);
+            else ans+=c*dfs(-1,m+c/2,p+c/2,v);    
+        }else{
+            if(c>v) ans+=c*dfs(c-v,-1,p+v,v);
+            else ans+=c;
+        }
+    }
+    swap(c,m);
+    if(c>0){
+        ans+=c;
+        if(m>eps){
+            if(c>v) ans+=c*dfs(c-v,m+v/2,p+v/2,v);
+            else ans+=c*dfs(-1,m+c/2,p+c/2,v);    
+        }else{
+            if(c>v) ans+=c*dfs(c-v,-1,p+v,v);
+            else ans+=c;
+        }
+    }
+    return ans;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    double c,m,p,v;
+    cin>>c>>m>>p>>v;
+    printf("%.10Lf\n",dfs(c,m,p,v));
 }
 signed main()
 {

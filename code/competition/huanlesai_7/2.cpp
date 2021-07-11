@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -51,51 +51,64 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
+const int maxm= 2100000;
+const int maxn = 1100000;
+struct edge{
+   int to,nxt;
+}eg[maxm];
+int head[maxn];
+int sz[maxn];
+int dp[maxn];
+int ecnt=0;
+inline void add(int u,int v){
+   eg[++ecnt].nxt=head[u];
+//    eg[ecnt].w=w;
+   eg[ecnt].to=v;
+   head[u]=ecnt;
+}
+inline void cl(int n){
+    for(int i=0;i<=n;i++)
+        head[i]=0;
+    ecnt=0;
+}
+int dfs1(int pos,int fa,int step){
+    sz[pos]=1;
+    int ans=step;
+    for(int i=head[pos];i;i=eg[i].nxt){
+        int to=eg[i].to;
+        if(to==fa)
+            continue;
+        ans+=dfs1(to,pos,step+1);
+        sz[pos]+=sz[to];
+    }
+    return ans;
+}
+void dfs2(int pos,int fa){
+    for(int i=head[pos];i;i=eg[i].nxt){
+        int to=eg[i].to;
+        if(to==fa)
+            continue;
+        dp[to]=dp[pos]-sz[to]*2+sz[1];
+        dfs2(to,pos);
+    }
+}
 void work()
 {
     int n;
     cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    int u,v;
+    for(int i=1;i<=n-1;i++){
+        cin>>u>>v;
+        // cout<<u<<' '<<v<<endl;
+        add(u,v);
+        add(v,u);
+    }    
+    dp[1]=dfs1(1,0,0);
+    dfs2(1,0);
+    int ans=llinf;
+    for(int i=1;i<=n;i++)
+        MIN(ans,dp[i]);
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -106,7 +119,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

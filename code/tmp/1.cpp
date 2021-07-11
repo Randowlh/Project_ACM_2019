@@ -1,248 +1,195 @@
 #include <bits/stdc++.h>
-// #include <bits/extc++.h>
-// using namespace __gnu_pbds;
-// using namespace __gnu_cxx;
+#include <bits/extc++.h>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 using namespace std;
-// #pragma optimize(2)
+#pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-// #define rbset(T) tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>
-// const int inf = 0x7FFFFFFF;
-// typedef long long ll;
-// typedef double db;
-// typedef long double ld;
-template <class T>
-inline void MAX(T &x, T y)
-{
-   if (y > x)
-      x = y;
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+template<class T>inline void rd(T &x){
+   x=0;char o,f=1;
+   while(o=getchar(),o<48)if(o==45)f=-f;
+   do x=(x<<3)+(x<<1)+(o^48);
+   while(o=getchar(),o>47);
+   x*=f;
 }
-template <class T>
-inline void MIN(T &x, T y)
-{
-   if (y < x)
-      x = y;
+template<class T>inline void wt(T x){
+   static int top,stk[105];
+   if(x<0)x=-x,putchar('-');
+   if(x==0)putchar('0');
+   while(x)stk[++top]=x%10,x/=10;
+   while(top)putchar(stk[top--]+'0');
 }
-template <class T>
-inline void rd(T &x)
+#define pii(a,b) pair<a,b>
+#define X first
+#define Y second
+#define lowbit(x) (x&-x)
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 510000;
+mt19937 rnd(514114);
+struct fhq_treap
 {
-   x = 0;
-   char o, f = 1;
-   while (o = getchar(), o < 48)
-      if (o == 45)
-         f = -f;
-   do
-      x = (x << 3) + (x << 1) + (o ^ 48);
-   while (o = getchar(), o > 47);
-   x *= f;
-}
-template <class T>
-inline void wt(T x)
-{
-   static int top, stk[105];
-   if (x < 0)
-      x = -x, putchar('-');
-   if (x == 0)
-      putchar('0');
-   while (x)
-      stk[++top] = x % 10, x /= 10;
-   while (top)
-      putchar(stk[top--] + '0');
-}
-// #define pii(a, b) pair<a, b>
-// #define X first
-// #define Y second
-// #define lowbit(x) (x & -x)
-// #define MP make_pair
-// #define pb push_back
-// #define pt putchar
-// #define yx_queue priority_queue
-// #define lson(pos) (pos << 1)
-// #define rson(pos) (pos << 1 | 1)
-// #define y1 code_by_Rand0w
-// #define yn A_muban_for_ACM
-// #define j1 it_is just_an_eastegg
-// #define lr hope_you_will_be_happy_to_see_this
-// #define int long long
-// #define rep(i, a, n) for (register int i = a; i <= n; ++i)
-// #define per(i, a, n) for (register int i = n; i >= a; --i)
-// const ll llinf = 4223372036854775807;
-// const ll mod = (0 ? 1000000007 : 998244353);
-// const ll mod2 = 999998639;
-// const int m1 = 998244353;
-// const int m2 = 1000001011;
-// const int pr = 233;
-// const double eps = 1e-7;
-const int maxm = 410000;
-const int maxn = 210000;
-struct edge
-{
-   int w, to, nxt;
-} eg[maxm][2];
-int head[maxn][2];
-int ecnt = 0;
-inline void add(int u, int v, int w, int fl)
-{
-   // if(fl)
-   // cout<<u<<"->"<<v<<endl;
-   eg[++ecnt][fl].nxt = head[u][fl];
-   eg[ecnt][fl].w = w;
-   eg[ecnt][fl].to = v;
-   head[u][fl] = ecnt;
-}
-int FA[maxn];
-int cnt1 = 0;
-int fa[maxn][25], cd[maxn][25];
-int dis[maxn];
-int dfn[maxn], low[maxn];
-int dep[maxn];
-int sum[maxn];
-int tail;
-bool book[maxn];
-void jiadian(int pos, int to, int w)
-{
-   sum[++tail] = dis[to] - dis[pos] + w;
-   // cout<<"tail="<<tail<<endl;
-   add(pos, tail, 0, 1);
-   add(tail, pos, 0, 1);
-   int now = to;
-   while (now != pos)
+   struct node
    {
-      // cout<<"now="<<now<<endl;
-      int ddis = min(dis[now] - dis[pos], sum[tail] - (dis[now] - dis[pos]));
-      // cout<<"ddis="<<ddis<<endl; add(now,tail,ddis,1);
-      add(tail, now, ddis, 1);
-      book[now] = (ddis == (dis[now] - dis[pos]));
-      now = fa[now][0];
+      int l, r;
+      int val, key;
+      int size;
+   } fhq[maxn];
+   int cnt, root;
+   inline int newnode(int val)
+   {
+      fhq[++cnt].val = val;
+      fhq[cnt].key = rnd();
+      fhq[cnt].size = 1;
+      fhq[cnt].l = fhq[cnt].r = 0;
+      return cnt;
    }
-}
-void tarjan(int pos, int f)
-{
-   // cout<<"pos="<<pos<<' '<<f<<endl;
-   dfn[pos] = low[pos] = ++cnt1;
-   fa[pos][0] = f;
-   for (int i = head[pos][0]; i; i = eg[i][0].nxt)
+   inline void pushup(int now)
    {
-      int to = eg[i][0].to, w = eg[i][0].w;
-      if (!dfn[to])
+   fhq[now].size = fhq[fhq[now].l].size + fhq[fhq[now].r].size + 1;
+   }
+   void split(int now, int val, int &x, int &y)
+   {
+      if (!now)
       {
-         dis[to] = dis[pos] + w;
-         tarjan(to, pos);
-         MIN(low[pos], low[to]);
+         x = y = 0;
+         return;
       }
-      else if (to != f)
-         MIN(low[pos], dfn[to]);
-      if (dfn[pos] < low[to])
-         add(pos, to, w, 1), add(to, pos, w, 1);
-   }
-   for (int i = head[pos][0]; i; i = eg[i][0].nxt)
-   {
-      int to = eg[i][0].to, w = eg[i][0].w;
-      if (fa[to][0] != pos && dfn[to] > dfn[pos])
-         jiadian(pos, to, w);
-   }
-}
-void dfs(int pos, int f)
-{
-   fa[pos][0]=f;
-   // cout<<"pre  fa["<<pos<<"]["<<0<<"]"<<fa[pos][0]<<endl;
-   dep[pos] = dep[f] + 1;
-   for (int i = 1; i <= 4; i++){
-      fa[pos][i] = fa[fa[pos][i - 1]][i - 1];
-      cd[pos][i] = cd[fa[pos][i - 1]][i - 1] + cd[pos][i - 1];
-      // cout<<fa[pos][i]<<endl;
-   }
-   // cout<<"aft  fa["<<pos<<"]["<<0<<"]"<<fa[pos][0]<<endl;
-   for (int i = head[pos][1]; i; i = eg[i][1].nxt)
-   {
-      int to = eg[i][1].to, w = eg[i][1].w;
-      if (to == f)
-         continue;
-      fa[to][0] = pos;
-      // cout<<"pos="<<pos<<"->to="<<to<<endl;
-      cd[to][0] = w;
-      dfs(to, pos);
-   }
-   // cout << "fa[" << pos << "]=" << fa[pos][0] << endl;
-}
-int n, m, q;
-int getans(int a, int b)
-{
-   int ans = 0;
-   if (dep[a] < dep[b])
-      swap(a, b);
-   for (int i = 20; i >= 0; i--)
-      if (dep[fa[a][i]] >= dep[b])
+      else if (fhq[now].val <= val)
       {
-         ans += cd[a][i];
-         a = fa[a][i];
+      x = now;
+      split(fhq[now].r, val, fhq[now].r, y);
       }
-   if (a == b)
+      else
+      {
+      y = now;
+      split(fhq[now].l, val, x, fhq[now].l);
+      }
+   pushup(now);
+   }
+   int merge(int x, int y)
+   {
+      if (!x || !y)
+         return x + y;
+      if (fhq[x].key > fhq[y].key)
+      {
+         fhq[x].r = merge(fhq[x].r, y);
+         pushup(x);
+         return x;
+      }
+      else
+      {
+         fhq[y].l = merge(x, fhq[y].l);
+         pushup(y);
+         return y;
+      }
+   }
+   inline void insert(int val)
+   {
+      int x, y;
+      split(root, val, x, y);
+      root = merge(merge(x, newnode(val)), y);
+   }
+   inline void del(int val)
+   {
+      int x, y, z;
+      split(root, val - 1, x, y);
+      split(y, val, y, z);
+      y = merge(fhq[y].l, fhq[y].r);
+      root = merge(merge(x, y), z);
+   }
+   inline int getrk(int num)
+   {
+      int x, y;
+      split(root, num - 1, x, y);
+      int ans = fhq[x].size + 1;
+      root = merge(x, y);
       return ans;
-   for (int i = 20; i >= 0; i--)
-      if (fa[a][i] != fa[b][i])
+   }
+   inline int getnum(int rank)
+   {
+      int now=root;
+      while(now)
       {
-         ans += cd[a][i] + cd[b][i];
-         a = fa[a][i];
-         b = fa[b][i];
+         if(fhq[fhq[now].l].size+1==rank)
+            break;
+         else if(fhq[fhq[now].l].size>=rank)
+             now=fhq[now].l;
+         else
+          {
+            rank-=fhq[fhq[now].l].size+1;
+             now=fhq[now].r;
+         }
       }
-   if (fa[a][0] <= n)
-      return ans + cd[a][0] + cd[b][0];
-   int dis;
-   if (book[a] != book[b])
-      dis = cd[a][0] + cd[b][0];
-   else
-      dis = abs(cd[a][0] - cd[b][0]);
-   return ans + min(dis, sum[fa[a][0]] - dis);
-}
+      return fhq[now].val;
+   }
+   inline int pre(int val)
+   {
+      int x, y, ans;
+      split(root, val - 1, x, y);
+      int t = x;
+      while (fhq[t].r)
+         t = fhq[t].r;
+      ans = fhq[t].val;
+      root = merge(x, y);
+      return ans;
+   }
+   inline int aft(int val)
+   {
+      int x, y, ans;
+      split(root, val, x, y);
+      int t = y;
+      while (fhq[t].l)
+         t = fhq[t].l;
+      ans = fhq[t].val;
+      root = merge(x, y);
+      return ans;
+   }
+} tree;
 void work()
 {
-   rd(n), rd(m), rd(q);
-   // cout<<n<<' '<<m<<' '<<q<<endl;
-   // int cnt = n;
-   int u, v, w;
-   for (int i = 1; i <= m; i++)
-   {
-      rd(u), rd(v), rd(w);
-      add(u, v, w, 0);
-      add(v, u, w, 0);
-   }
-   tail = n;
-   // cout<<"n="<<n<<endl;
-   tarjan(1, -1);
-   // cout<<"dadasd"<<endl;
-   fa[1][0] = 1;
-   dep[1] = -1;
-   memset(fa,0, sizeof(fa));
-   for(int i=1;i<=20;i++)
-      fa[1][i]=1;
-   dfs(1, 0);
-   // cout<<"dssdadsdsasad"<<endl;
-   // for (int i = 1; i <= tail; i++)
-   // {
-   //    cout << "fa[" << i << "]=" << fa[i][0] << endl;
-   // }
-   // cout<<"ads saddsasadads"<<endl;
-   for (int i = 1; i <= q; i++)
-   {
-      int a, b;
-      rd(a), rd(b);
-      cout << getans(a, b) << endl;
-   }
+    
 }
 signed main()
 {
-#ifndef ONLINE_JUDGE
-   freopen("in.txt", "r", stdin);
+   #ifndef ONLINE_JUDGE
+   freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-   //std::ios::sync_with_stdio( false);
-   //cin.tie(NULL);
-   int t = 1;
-   //cin>>t;
-   while (t--)
-   {
-      work();
-   }
-   return 0;
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
+int t = 1;
+//cin>>t;
+while (t--)
+{
+work();
+}
+return 0;
 }

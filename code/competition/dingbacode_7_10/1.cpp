@@ -45,68 +45,47 @@ template<class T>inline void wt(T x){
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+const ll mod = (1 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 110000;
+int date[maxn];
 void work()
 {
     int n;
     cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    sort(date+1,date+n+1);
+    int jian=0;
+    int now=0;
+    int ans=1;
+    for(int i=1;i<=n;i++){
+        now=date[i];
+        jian++;
+        if(jian>now){
+            cout<<0<<endl;
             return;
         }
-        M[v[i]]++;
+        ans=ans*(now-jian+1);
+        ans%=mod;
     }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    cout<<ans<<endl;
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
-//freopen("out.txt","w",stdout);
+// freopen("out.txt","w",stdout);
 #endif
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

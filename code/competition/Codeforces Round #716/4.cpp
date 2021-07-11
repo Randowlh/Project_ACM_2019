@@ -52,50 +52,65 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 310000;
+int blk;
+int date[maxn];
+int cnt[maxn];
+int num[maxn];
+int ans[maxn];
+int now=0;
+struct node{
+    int l,r,num;
+    bool operator<(node a){
+        if(l/blk==a.l/blk){
+            return r<a.r;
+        }else
+            return l<a.l;
+    }
+};
+void add(int pos){
+    cnt[num[pos]]--;
+    if(now==num[pos])
+        now++;
+    num[pos]++;
+    cnt[num[pos]]++;
+}
+void del(int pos){
+    cnt[num[pos]]--;
+    if(now==num[pos]&&cnt[num[pos]]==0)
+        now--;
+    num[pos]--;
+    cnt[num[pos]]++;
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
+    int n,m;
+    cin>>n>>m;
+    blk=sqrt(n);
+    for(int i=1;i<=n;i++)
+        cin>>date[i];
+    int l,r;
+    vector<node> v;
+    for(int i=1;i<=m;i++){
+        cin>>l>>r;
+        v.push_back((node){l,r,i});
     }
-    map<int,int> M;
     sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
+    l=1,r=0;
+    cnt[0]=n;
+    for(int i=0;i<m;i++){
+        while(r<v[i].r)
+            add(date[++r]);
+        while(l>v[i].l)
+            add(date[--l]);
+        while(r>v[i].r)
+            del(date[r--]);
+        while(l<v[i].l)
+            del(date[l++]);
+        ans[v[i].num]=max(1LL,now*2-(r-l+1));
     }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    for(int i=1;i<=m;i++)
+        cout<<ans[i]<<endl;
 }
 signed main()
 {
@@ -106,7 +121,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -51,51 +51,59 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
+const int maxm= 21000;
+const int maxn = 21000;
+int c[maxn];
+int du[maxn];
+struct edge{
+   int to,nxt;
+}eg[maxm];
+int head[maxn];
+int dp[maxn][2];
+int ecnt=0;
+inline void add(int u,int v){
+   eg[++ecnt].nxt=head[u];
+//    eg[ecnt].w=w;
+   eg[ecnt].to=v;
+   head[u]=ecnt;
+}
+inline void cl(int n){
+    for(int i=0;i<=n;i++)
+        head[i]=0;
+    ecnt=0;
+}
+int n,m;
+void dfs(int pos,int fa){
+    dp[pos][0]=dp[pos][1]=1;
+    if(pos<=n){
+        if(c[pos])
+            dp[pos][0]=llinf;
+        else dp[pos][1]=llinf;
+        return;
+    }
+    for(int i=head[pos];i;i=eg[i].nxt){
+        int to=eg[i].to;
+        if(to==fa)  
+            continue;
+        dfs(to,pos);
+        dp[pos][0]+=min(dp[to][0]-1,dp[to][1]);
+        dp[pos][1]+=min(dp[to][0],dp[to][1]-1);
+    }
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
+    // int m,n;    
+    cin>>m>>n;
+    for(int i=1;i<=n;i++)
+        cin>>c[i];
+    int u,v;
+    for(int i=1;i<m;i++){
+        cin>>u>>v;
+        add(u,v);
+        add(v,u);
     }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+    dfs(m,-1);
+    cout<<min(dp[m][0],dp[m][1])<<endl;
 }
 signed main()
 {
@@ -106,7 +114,7 @@ signed main()
 std::ios::sync_with_stdio(false);
 cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();

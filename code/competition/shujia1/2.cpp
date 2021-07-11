@@ -21,11 +21,11 @@ template<class T>inline void rd(T &x){
    x*=f;
 }
 template<class T>inline void wt(T x){
-    static int top,stk[105];
-    if(x<0)x=-x,putchar('-');
-    if(x==0)putchar('0');
-    while(x)stk[++top]=x%10,x/=10;
-    while(top)putchar(stk[top--]+'0');
+   static int top,stk[105];
+   if(x<0)x=-x,putchar('-');
+   if(x==0)putchar('0');
+   while(x)stk[++top]=x%10,x/=10;
+   while(top)putchar(stk[top--]+'0');
 }
 #define pii(a,b) pair<a,b>
 #define X first
@@ -51,51 +51,76 @@ const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
+const int maxm= 61000*2;
+const int maxn = 51000;
+struct edge{
+   int to,nxt;
+}eg[maxm];
+int head[maxn];
+int ecnt=0;
+inline void add(int u,int v){
+   eg[++ecnt].nxt=head[u];
+   eg[ecnt].to=v;
+   head[u]=ecnt;
+}
+int n,m;
+int dp[maxn][2];
+int cnt=0;
+int faa[maxn],dfn[maxn],low[maxn];
+void calc(int pos,int to){
+   int tt=to;
+   int ans0=0;
+   int ans1=0;
+   while(to!=pos){
+      int tmp=ans0;
+      ans0=max(ans0,ans1)+dp[to][0];
+      ans1=tmp+max(dp[to][1],dp[to][0]);
+      to=faa[to];
+   }444445555555555555555
+   dp[pos][0]+=max(ans1,ans0);
+   to=tt;
+   ans0=-llinf,ans1=0;
+   while(to!=pos){
+      int tmp=ans0;
+      ans0=max(ans0,ans1)+dp[to][0];
+      ans1=tmp+max(dp[to][1],dp[to][0]);
+      to=faa[to];
+   }
+   dp[pos][1]+=ans0;
+
+}
+void tarjan(int pos,int fa){
+   dfn[pos]=low[pos]=++cnt;
+   dp[pos][1]=1;
+   faa[pos]=fa;
+   for(int i=head[pos];i;i=eg[i].nxt){
+      int to=eg[i].to;
+      if(to==fa)
+         continue;
+      if(!dfn[to]){
+         tarjan(to,pos);
+         MIN(low[pos],low[to]);
+      }else MIN(low[pos],dfn[to]);
+      if(dfn[pos]<low[to])
+         dp[pos][0]+=max(dp[to][0],dp[to][1]),dp[pos][1]+=dp[to][0];
+   }
+   for(int i=head[pos];i;i=eg[i].nxt){
+      int to=eg[i].to;
+      if(faa[to]!=pos&&dfn[to]>dfn[pos])
+         calc(pos,to);
+   }
+}
 void work()
 {
-    int n;
-    cin>>n;
-    int tmp;    
-    vector<int> v;
-    for(int i=1;i<=n*2;i++){
-        cin>>tmp;
-        v.push_back(tmp);
-    }
-    map<int,int> M;
-    sort(v.begin(),v.end());
-    for(int i=0;i<n*2;i++){
-        if(v[i]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        M[v[i]]++;
-    }
-    for(auto i:M){
-        if(i.second!=2){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    v.erase(unique(v.begin(), v.end()),v.end());
-    int tot=0;
-    // vector<int> dd;
-    for(int i=v.size()-1;i>=0;i--){
-        int tt=v[i]/2-tot;
-        if(tt%(i+1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-        tt/=(i+1);
-        tot+=tt;
-        if(tt<=0){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    return;
+   rd(n),rd(m);
+   int u,v;
+   for(int i=1;i<=m;i++){
+      rd(u),rd(v);
+      add(u,v);
+      add(v,u);
+   }
+   tarjan(1,-1);
+   wt(max(dp[1][0],dp[1][1])),putchar('\n');
 }
 signed main()
 {
@@ -103,10 +128,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+//cin>>t;
 while (t--)
 {
 work();
