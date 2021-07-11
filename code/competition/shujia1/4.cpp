@@ -22,6 +22,7 @@ inline void add_edge(int a,int b){
 int dfsid,fa[M],dfn[M],bot[M];
 int all,from[M];
 int dp[M][3][3][2],DP[8][3][3][2],tmp[8][3][3][2];
+//dp[i][j][k][t] i的子树，i-fa[i]的权值为j，i-fa[i]所在的环的非树边为k，环的和为t
 bool check(int s,int x){
 	if((s&1<<0)&&x==1)return 1;
 	if((s&1<<1)&&x==0)return 1;

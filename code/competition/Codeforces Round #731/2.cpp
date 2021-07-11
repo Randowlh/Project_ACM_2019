@@ -52,31 +52,32 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1100;
-int x[maxn],y[maxn],ans[maxn];
+const int maxn = 510000;
 void work()
 {
-    int n,k;
-    cin>>n>>k;
-    for(int i=1;i<=n;i++)
-        cin>>x[i]>>y[i];
-    memset(ans,63,sizeof(ans));
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            vector<int> v;
-            for(int k=1;k<=n;k++)
-                v.push_back(abs(x[i]-x[k])+abs(y[j]-y[k]));
-            sort(v.begin(), v.end());
-            int pre=0;
-            for(int i=0;i<n;i++){
-                pre+=v[i];
-                MIN(ans[i+1],pre);
-            }
+    string a;
+    cin>>a;
+    deque<int> q;
+    int ma=0;
+    for(int i=0;i<a.size();i++){
+        q.push_back(a[i]);
+        MAX(ma,(int)a[i]);
+    }
+    for(int i=ma;i>='a';i--){
+        if(q.front()==i){
+            q.pop_front();
+            continue;
         }
+        if(q.back()==i){
+            q.pop_back();
+            continue;
+        }
+        cout<<"NO"<<endl;
+        return;
     }
-    for(int i=1;i<=k;i++){
-        cout<<ans[i]<<endl;
-    }
+    if(q.empty())
+    cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 signed main()
 {
@@ -84,10 +85,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

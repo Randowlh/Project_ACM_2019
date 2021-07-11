@@ -52,31 +52,25 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1100;
-int x[maxn],y[maxn],ans[maxn];
+const int maxn = 210000;
+int date[maxn];
 void work()
 {
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
+    vector<int> ans;
     for(int i=1;i<=n;i++)
-        cin>>x[i]>>y[i];
-    memset(ans,63,sizeof(ans));
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            vector<int> v;
-            for(int k=1;k<=n;k++)
-                v.push_back(abs(x[i]-x[k])+abs(y[j]-y[k]));
-            sort(v.begin(), v.end());
-            int pre=0;
-            for(int i=0;i<n;i++){
-                pre+=v[i];
-                MIN(ans[i+1],pre);
-            }
-        }
+        cin>>date[i];
+    ans.push_back(0);
+    for(int i=2;i<=n;i++){
+        int t=date[i]|date[i-1];
+        t-=date[i];
+        ans.push_back(t);
+        date[i]^=t;
     }
-    for(int i=1;i<=k;i++){
-        cout<<ans[i]<<endl;
-    }
+    for(int i=1;i<=n;i++)
+        cout<<ans[i-1]<<' ';
+    cout<<endl;
 }
 signed main()
 {
@@ -84,10 +78,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

@@ -52,31 +52,42 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1100;
-int x[maxn],y[maxn],ans[maxn];
+const int maxn = 510000;
 void work()
 {
-    int n,k;
-    cin>>n>>k;
-    for(int i=1;i<=n;i++)
-        cin>>x[i]>>y[i];
-    memset(ans,63,sizeof(ans));
+    int k,n,m; 
+    cin>>k>>n>>m;
+    int tmp;   
+    vector<int> a,b;
     for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            vector<int> v;
-            for(int k=1;k<=n;k++)
-                v.push_back(abs(x[i]-x[k])+abs(y[j]-y[k]));
-            sort(v.begin(), v.end());
-            int pre=0;
-            for(int i=0;i<n;i++){
-                pre+=v[i];
-                MIN(ans[i+1],pre);
-            }
+        cin>>tmp;
+        a.push_back(tmp);
+    }
+    for(int i=1;i<=m;i++){
+        cin>>tmp;
+        b.push_back(tmp);
+    }
+    int tail1=0,tail2=0;
+    vector<int> ans;
+    for(int i=1;i<=n+m;i++){
+        if(tail1<n&&a[tail1]<=k){
+            if(!a[tail1])
+                k++;
+            ans.push_back(a[tail1++]);
+            continue;
         }
+        if(tail2<m&&b[tail2]<=k){
+            if(!b[tail2])
+                k++;
+            ans.push_back(b[tail2++]);
+            continue;
+        }
+        cout<<-1<<endl;
+        return;
     }
-    for(int i=1;i<=k;i++){
-        cout<<ans[i]<<endl;
-    }
+    for(int i=0;i<ans.size();i++)
+        cout<<ans[i]<<' ';
+    cout<<endl;
 }
 signed main()
 {
@@ -84,10 +95,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();

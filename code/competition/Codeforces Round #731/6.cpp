@@ -52,31 +52,70 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1100;
-int x[maxn],y[maxn],ans[maxn];
+const int maxn = 210000;
+int gcd(int a, int b){ return b ? gcd(b, a % b) : a;}
+struct st_table
+{
+   int date[400100];
+   int mx[400100][30];
+   inline void RMQ(int num)
+   {
+      for (int i = 1; i <= num; i++)
+      mx[i][0] = date[i];
+      for (int j = 1; j < 25; ++j)
+         for (int i = 1; i <= num; ++i)
+            if (i + (1 << j) - 1 <= num)
+               mx[i][j] = gcd(mx[i][j - 1], mx[i + (1 << (j - 1))][j - 1]);
+   }
+   inline int query(int l, int r)
+   {
+      int k = log(r - l + 1) / log(2);
+      return gcd(mx[l][k], mx[r - (1 << k) + 1][k]);
+}
+} b;
+int date[maxn];
 void work()
 {
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
     for(int i=1;i<=n;i++)
-        cin>>x[i]>>y[i];
-    memset(ans,63,sizeof(ans));
+        cin>>date[i];
+    int now=date[1];
+    for(int i=2;i<=n;i++)
+        now=gcd(now,date[i]);
+    for(int i=1;i<=n;i++)
+        date[i]/=now;
+    for(int i=1;i<=n;i++)
+        b.date[i]=date[i];
+    for(int i=n+1;i<=n*2;i++)
+        b.date[i]=date[i-n];
+    // cout<<"date[]=";
+    // for(int i=1;i<=n;i++){
+        // cout<<date[i]<<' ';
+    // }
+    // cout<<endl;
+    b.RMQ(n*2);
+    int ans=0;
+    // for(int i=1;i<=n*2;i++){
+    //     cout<<b.query(i,i+1)<<' ';
+    // }
+    // cout<<endl;
     for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            vector<int> v;
-            for(int k=1;k<=n;k++)
-                v.push_back(abs(x[i]-x[k])+abs(y[j]-y[k]));
-            sort(v.begin(), v.end());
-            int pre=0;
-            for(int i=0;i<n;i++){
-                pre+=v[i];
-                MIN(ans[i+1],pre);
-            }
+        int l=i,r=n*2;
+        while(l^r){
+            int mid=(l+r)>>1;
+            // if(i==2){
+                // cout<<"mid="<<mid<<' '<<b.query(i,mid)<<endl;
+            // }
+            if(b.query(i,mid)==1){
+                r=mid;
+            }else l=mid+1;
         }
+        l--;
+        // cout<<"l="<<l<<' '<<i<<' '<<date[i]<<endl;
+        MAX(ans,l-i+1);
     }
-    for(int i=1;i<=k;i++){
-        cout<<ans[i]<<endl;
-    }
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -84,10 +123,10 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+std::ios::sync_with_stdio(false);
+cin.tie(NULL);
 int t = 1;
-//cin>>t;
+cin>>t;
 while (t--)
 {
 work();
