@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,33 +50,48 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
-}
+int date[2010][2010];
+int tt[2010][2010];
+vector<pair<int,int>> v[2010];
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    rd(n),rd(m);
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++)
+            rd(date[j][i]);
+    swap(n,m);
+    for(int i=1;i<=n;i++)
+        v[i].clear();
+    for(int i=1;i<=n;i++){
+        int now=-llinf;
+        int flag=0;
+        int pre=1;
+        for(int j=1;j<=m;j++){
+            if(date[i][j]>=now){
+                tt[i][j]=flag;
+                now=date[i][j];
+            }else{
+                now=date[i][j];
+                v[i].push_back(MP(pre,i-1));
+                flag^=1;
+                tt[i][j]=flag;
+            }
+        }
+    }
+    int ans=0;
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++)
+            tt[i][j]=tt[i][j-1]+tt[i][j];
+    for(int i=1;i<=n;i++){
+        for(int j=0;j<v[i].size();j++){
+            int bg=v[i].first,ed=v[i].second;
+            int l=1;r=i;
+            while(l^r){
+            
+                if()
+            }
+        }
+    }
 }
 signed main()
 {
@@ -87,10 +99,11 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+// cin>>t;
+rd(t);
 while (t--)
 {
 work();

@@ -52,34 +52,28 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
-}
+const int maxn = 1100;
+int t;
+int ci;
+int b[maxn];
+mt19937 rnd(233);
+
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    int n;
+    rd(n);
+    for(int i=0;i<n;i++)
+        rd(b[i]);
+    sort(b,b+n);
+    for(int i=1;i<=ci;i++){
+        int tt=rnd()%n;
+        int cc=rnd()%n;
+        if(abs(b[tt]-tt)+abs(b[cc]-cc)>abs(b[cc]-tt)+abs(b[tt]-cc))
+            swap(b[cc],b[tt]);
+    }
+    for(int i=0;i<n;i++)
+        wt(b[i]),pt(' ');
+    pt('\n');
 }
 signed main()
 {
@@ -87,10 +81,12 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
-int t = 1;
-cin>>t;
+// std::ios::sync_with_stdio(false);
+// cin.tie(NULL);
+// int t = 1;
+// cin>>t;
+rd(t);
+ci=1e7/t;
 while (t--)
 {
 work();

@@ -52,34 +52,65 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
+const int maxn = 110000;
+map<string,int> M;
+string tog[100];
+int date[maxn];
+string rev(string in){
+    string ans;
+    int n=in.size()-1;
+    if(tog)
+    for(int i=0;i<in.size();i++)
+        ans.push_back(((in[i]-'0')^1)+tog[]);
+    return  ans;
 }
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    // tog.clear();
+    for(int i=0;i<=40;i++)
+        tog[i].clear();
+    M.clear();
+    int n,k;
+    rd(n),rd(k);
+    string tmp;
+    for(int i=1;i<=n;i++)
+        rd(date[i]);
+    for(int i=30;i>=0;i--){
+        if((1<<i)&k){
+            tmp.push_back('1');
+        }else{
+            tmp.push_back('1');
+            tog.push_back(tmp);
+            tmp.pop_back();
+            tmp.push_back('0');
+        }
+    }
+    int ans=llinf;
+    int l=0,r=0;
+    tog.push_back(tmp);
+    tmp.clear();
+    for(int i=1;i<=n;i++){
+        tmp.clear();
+        for(int j=30;j>=0;j--){
+            if((1<<j)&date[i]){
+                tmp.push_back('1');
+            }else tmp.push_back('0');
+            string now=rev(tmp);
+            if(!now.empty()&&M.count(now)){
+                int t=M[now];
+                if(i-t<ans){
+                    ans=i-t;
+                    l=t+1;
+                    r=i;
+                }
+            }
+            M[tmp]=i;
+        }
+    }
+    if(ans==llinf)
+        wt(-1);
+    else wt(l),pt(' '),wt(r);
+    pt('\n');
 }
 signed main()
 {
@@ -87,10 +118,11 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+rd(t);
+//cin>>t;
 while (t--)
 {
 work();

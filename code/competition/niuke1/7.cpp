@@ -52,34 +52,42 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
-}
+const int maxn = 1100;
+int ans[maxn];
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    int n;
+    rd(n);
+    multiset<int> s;
+    int tmp;
+    for(int i=0;i<n;i++){
+        rd(tmp);
+        ans[i]=-1;
+        s.insert(tmp);
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(ans[j]!=-1)
+            continue;
+            if(s.count(j+i)){
+                ans[j]=j+i;
+                s.erase(s.find(j+i));
+            }else if(s.count(j-i)){
+                ans[j]=j-i;
+                s.erase(s.find(j-i));
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(ans[i]==-1){
+            // cout<<"asdadasd"<<endl;
+            ans[i]=*s.begin();
+            s.erase(s.begin());
+        }
+    }
+    for(int i=0;i<n;i++)
+        wt(ans[i]),pt(' ');
+    pt('\n');
 }
 signed main()
 {
@@ -87,10 +95,11 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+rd(t);
+//cin>>t;
 while (t--)
 {
 work();

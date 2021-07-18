@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -53,33 +50,23 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
-}
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    int n;
+    cin>>n;
+    if(n<=2){
+        cout<<0<<endl;
+        return;
+    }
+    int now=2;
+    int cnt=1;
+    n-=2;
+    while(now<n){
+        n-=now;
+        now<<=1;
+        cnt++;
+    }
+    cout<<(1LL<<cnt)-1<<endl;
 }
 signed main()
 {

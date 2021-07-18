@@ -52,34 +52,43 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
+const int maxn = 5100;
+ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
+int gcd(int a, int b){ return b ? gcd(b, a % b): a;}
+int dp[maxn];
+int date[maxn];
+int n;
+int niyuan(int a, int p)
+{
+    return (a == 1 ? 1 : (1 - p * niyuan(p % a, a)) / a + p);
+}
+int dfs(int pos){
+    if(dp[pos]!=-1) return dp[pos];
+    int cnt=0;
+    int tot=0;
+    for(int i=pos+1;i<=n;i++)
+        if(date[i]>date[pos]){
+            cnt++;
+            tot+=1+dfs(i);
+            tot%=mod;
+        }
+    if(cnt==0)
+        return dp[pos]=0;
+    tot=tot*niyuan(cnt,mod)%mod;
+    return dp[pos]=tot;
 }
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+        cin>>date[i],dp[i]=-1;
+    int ans=0;
+    for(int i=1;i<=n;i++){
+        ans+=dfs(i)+1;
+        ans%=mod;
+    }
+    ans=ans*niyuan(n,mod)%mod;
+    cout<<ans<<endl;
 }
 signed main()
 {

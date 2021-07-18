@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -52,45 +52,60 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-int date[210000];
-inline int ck(int a,int b,int c){
-   return (a<=b&&b<=c)||(a>=b&&b>=c);
+const int maxn = 10001000;
+vector<int> primes,pre;
+bool is_prime[11000000];
+void euler()
+{
+   is_prime[1] = 1;
+   for (int i = 2; i < maxn; i++)
+   {
+      if (!is_prime[i])
+      primes.push_back(i);
+      for (int j = 0; j < primes.size() && i * primes[j] < maxn; j++)
+      {
+         is_prime[i * primes[j]] = 1;
+         if ((i % primes[j]) == 0)
+            break;
+      }
+   }
 }
 void work()
 {
-   int n;
-   cin>>n;   
-   for(int i=1;i<=n;i++)   
-      cin>>date[i];
-   int ans=0;
-   ans+=n;
-   ans+=n-1;
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-2;i++)
-      ans+=!ck(date[i],date[i+1],date[i+2]);
-   // cout<<"ans="<<ans<<endl;
-   for(int i=1;i<=n-3;i++){
-      int tt=0;
-      tt+=ck(date[i],date[i+1],date[i+2]);
-      tt+=ck(date[i],date[i+1],date[i+3]);
-      tt+=ck(date[i],date[i+2],date[i+3]);
-      tt+=ck(date[i+1],date[i+2],date[i+3]);
-      if(!tt)  
-         ans++;
-   }
-   cout<<ans<<endl;
+    int n;
+    rd(n);
+    int l=0,r=primes.size();
+    while(l^r){
+        int mid=(l+r)>>1;
+        if(primes[mid]>n)
+            r=mid;
+        else l=mid+1;
+    }
+    l--;
+    // cout<<"l="<<l<<' '<<primes[l]<<endl;
+    int ans=n*(n+1)/2;
+    ans+=pre[l];
+    ans-=1;
+    ans-=4;
+    wt(ans),pt('\n');
 }
 signed main()
 {
+    euler();
+    int now=0;
+    for(int i=0;i<primes.size();i++){
+        now+=primes[i];
+        pre.push_back(now);
+    }
    #ifndef ONLINE_JUDGE
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-std::ios::sync_with_stdio(false);
-cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
-cin>>t;
+rd(t);
+//cin>>t;
 while (t--)
 {
 work();
