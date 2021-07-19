@@ -8,7 +8,7 @@ using namespace std;
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
-typedef long long ll;
+// typedef long long ll;
 typedef double db;
 typedef long double ld;
 template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
@@ -21,11 +21,11 @@ template<class T>inline void rd(T &x){
    x*=f;
 }
 template<class T>inline void wt(T x){
-  static int top,stk[105];
-  if(x<0)x=-x,putchar('-');
-  if(x==0)putchar('0');
-  while(x)stk[++top]=x%10,x/=10;
-  while(top)putchar(stk[top--]+'0');
+    static int top,stk[105];
+    if(x<0)x=-x,putchar('-');
+    if(x==0)putchar('0');
+    while(x)stk[++top]=x%10,x/=10;
+    while(top)putchar(stk[top--]+'0');
 }
 #define pii(a,b) pair<a,b>
 #define pow powmod
@@ -42,11 +42,12 @@ template<class T>inline void wt(T x){
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
+#define int __int128
+#define ll __int128
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
+ll mod = (0 ? 1000000007 : 998244353);
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
@@ -54,18 +55,36 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
-
+int calcphi(int x){
+    int ans=x;
+    for(int i=2;i*i<=x;i++){
+        if(x%i==0)
+            ans-=ans/i;
+        while(x%i==0){
+            x/=i;
+            ans*=(i-1);
+        }
+    }
+    if(x!=1)
+        ans-=ans/x;
+    return ans;
+}
+ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
 void work()
 {
-  mt19937 rnd(time(NULL));
-  cout<<1<<endl;
-  int n=rnd()%300;
-  int k=rnd()%30+1;
-  int p=rnd()+1e10;
-  cout<<n<<' '<<k<<' '<<p<<endl;
-  for(int i=1;i<=n;i++)
-    cout<<rnd()%80000<<' ';
-  cout<<endl;
+    int a;
+    rd(a),rd(mod);
+    int phi=calcphi(mod);
+    char now=0;
+    int b=0;
+    int ff=0;
+    while(!isdigit(now=getchar()));
+    do{
+        b=b*10+now-'0';
+        if(b>=phi)
+            b%=phi,ff=1;
+    }while(isdigit(now=getchar()));
+    wt(powmod(a,b+ff*phi));
 }
 signed main()
 {
