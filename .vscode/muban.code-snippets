@@ -3,9 +3,9 @@
 		"prefix": "randow",
 		"body": [
 			"#include <bits/stdc++.h>",
-			"#include <bits/extc++.h>",
-			"using namespace __gnu_pbds;",
-			"using namespace __gnu_cxx;",
+			"//#include <bits/extc++.h>",
+			"//using namespace __gnu_pbds;",
+			"//using namespace __gnu_cxx;",
 			"using namespace std;",
 			"#pragma optimize(2)",
 			"//#pragma GCC optimize(\"Ofast,no-stack-protector\")",
@@ -31,7 +31,8 @@
 			"	while(x)stk[++top]=x%10,x/=10;",
 			"	while(top)putchar(stk[top--]+'0');",
 			"}",
-			"#define pii(a,b) pair<a,b>"
+			"#define pii(a,b) pair<a,b>",
+			"#define pow powmod",
 			"#define X first",
 			"#define Y second",
 			"#define lowbit(x) (x&-x)",
