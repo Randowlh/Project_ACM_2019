@@ -11,12 +11,11 @@ const int inf = 0x7FFFFFFF;
 typedef long long ll;
 typedef double db;
 typedef long double ld;
-template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
-template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+#define MIN(x,y) if((y)>(x))(x)=(y)
+#define MAX(x,y) if((y)>(x))(x)=(y)
 namespace FastIO
 {
-char buf[1 << 21], buf2[1 << 21], a[20], *p1 = buf, *p2 = buf, hh = '
-';
+char buf[1 << 21], buf2[1 << 21], a[20], *p1 = buf, *p2 = buf, hh = '\n';
 int p, p3 = -1;
 void read() {}
 void print() {}
@@ -79,15 +78,40 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 510000;
+char nn[1100];
 void work()
 {
-    
+    cout<<"请输入板子关键字:"<<endl;
+    string name,filename,tsy;
+    getline(cin,name);
+    filename=name+".code-snippets";
+    for(int i=0;i<filename.size();i++)
+        nn[i]=filename[i];
+    cout<<"请输入提示语"<<endl;
+    getline(cin,tsy);
+    cout<<"请输入板子文本"<<endl;
+    freopen(nn,"w",stdout);
+    cout<<"{\"cpp\":{\n\"prefix\": \""<<name<<"\",\n"<<"\"body\":[";
+    string tmp;
+    string tot;
+    while(getline(cin,tmp)){
+        tmp="\""+tmp+"\","+"\n";
+        tot+=tmp;
+    }
+    tot.pop_back();
+    tot.pop_back();
+    tot.push_back('\n');
+    cout<<tot;
+    cout<<"],\n\"description\": \"";
+    cout<<tsy;
+    cout<<"\"\n}\n}"<<endl;
+    // oft.close();
 }
 signed main()
 {
    #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
-//freopen("out.txt","w",stdout);
+//    freopen("in.txt","r",stdin);
+// freopen("out.txt","w",stdout);
 #endif
 //std::ios::sync_with_stdio(false);
 //cin.tie(NULL);

@@ -93,7 +93,8 @@
         "__locale": "cpp",
         "__hash_table": "cpp",
         "__split_buffer": "cpp",
-        "__tree": "cpp"
+        "__tree": "cpp",
+        "locale": "cpp"
     },
     //右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认），文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认），PS和bash也能用，但文件名中有空格时无法运行
     "python.formatting.provider": "autopep8",
