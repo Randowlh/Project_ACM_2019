@@ -65,7 +65,8 @@ inline void print(T x, T2... oth)
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
+#define int __int128
+#define ll __int128
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
@@ -187,6 +188,9 @@ void init(){
             C[i][j]=t%phi+phi*(t>=phi);
         }
 }
+inline double run_time(){
+        return 1.0*clock()/CLOCKS_PER_SEC;
+}
 void work()
 {
     read(n,k,mod);
@@ -219,13 +223,15 @@ void work()
         for(int j=0;j<=(int)mp[i].size()-k;j++)
             ans=mul(ans,pow(pow(i,mp[i][j]),C[mp[i].size()-j-1][k-1]),mod); 
     print(ans);
+    // int now=run_time();
+    // print(now);
     flush();
 }
 signed main()
 {
     euler();
     #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
+//    freopen("in.txt","r",stdin);
 // freopen("out.txt","w",stdout);
 #endif
 

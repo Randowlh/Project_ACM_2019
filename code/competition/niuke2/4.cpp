@@ -1,101 +1,176 @@
-#include <bits/stdc++.h>
-//#include <bits/extc++.h>
-//using namespace __gnu_pbds;
-//using namespace __gnu_cxx;
+#include<bits/stdc++.h>
+#pragma GCC optimize(2)
+// #pragma GCC optimize("Ofast,no-stack-protector")
+// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 using namespace std;
-#pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
-#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
-const int inf = 0x7FFFFFFF;
 typedef long long ll;
-typedef double db;
-typedef long double ld;
-template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
-template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
-namespace FastIO
-{
-char buf[1 << 21], buf2[1 << 21], a[20], *p1 = buf, *p2 = buf, hh = '
-';
-int p, p3 = -1;
-void read() {}
-void print() {}
-inline int getc()
-{
-return p1 == p2 && (p2 = (p1 = buf) + fread(buf, 1, 1 << 21, stdin), p1 == p2) ? EOF : *p1++;
+typedef __int128 lxl;
+const lxl u = 1;
+ll mull(ll a, ll b, ll m) { ll d = ((long double)a / m * b + 1e-8); ll r = a * b - d * m; return r < 0 ? r + m : r; }
+ll T, NN, mx;
+inline ll gcd(ll a, ll b) {
+	if (!a) return b; if (!b) return a;
+	int t = __builtin_ctzll(a | b);
+	a >>= __builtin_ctzll(a);
+	do {
+		b >>= __builtin_ctzll(b);
+		if (a > b) { ll t = b; b = a, a = t; }
+		b -= a;
+	} while (b); return a << t;
 }
-inline void flush()
-{
-fwrite(buf2, 1, p3 + 1, stdout), p3 = -1;
+ll qpow(ll a, ll b, ll mod) {
+	ll res = 1; a %= mod;
+	for (; b; b /= 2, a = mull(a, a, mod)) if (b % 2) res = mull(res, a, mod);
+	return res;
 }
-template <typename T, typename... T2>
-inline void read(T &x, T2 &... oth)
-{
-int f = 0;x = 0;char ch = getc();
-while (!isdigit(ch)){if (ch == '-')f = 1;ch = getc();}
-while (isdigit(ch)){x = x * 10 + ch - 48;ch = getc();}
-x = f ? -x : x;read(oth...);
+namespace MR {
+	inline ll Quick_Pow(ll a, ll b, ll mod) {
+		if (b == 1) return a; if (!b) return 1;
+		ll tmp = Quick_Pow(a, b >> 1, mod);
+		if (b & 1) return mull(mull(tmp, tmp, mod), a, mod);
+		return mull(tmp, tmp, mod);
+	}
+	ll p[15] = { 2,61,5,7,9,11,13,17,19,21,23,29 }; int lim = 12;
+	inline bool check(ll p, ll o, ll q, ll x) {
+		if (p == x) return true;
+		ll now = Quick_Pow(p, o, x), temp = now;
+		for (int i = 1; i <= q; i++) {
+			temp = mull(temp, temp, x);
+			if (temp == 1 && now != 1 && now != x - 1) return false;
+			now = temp;
+		}
+		return temp == 1;
+	}
+	inline bool MR(ll x) {
+		if (x == 3) return true;
+		for (int i = 0; i < lim; i++) if (p[i] == x) return true;
+		if (!(x & 1)) return false; if (x % 6 != 1 && x % 6 != 5) return false;
+		if (x % 3 == 0 || x % 5 == 0) return false;
+		ll temp = x - 1, o = 0;
+		while (!(temp & 1)) { o++; temp >>= 1; }
+		for (int i = 0; i < lim; i++) if (!check(p[i], temp, o, x)) return false;
+		return true;
+	}
 }
-template <typename T, typename... T2>
-inline void print(T x, T2... oth)
-{
-if (p3 > 1 << 20)flush();
-if (x < 0)buf2[++p3] = 45, x = -x;
-do{a[++p] = x % 10 + 48;}while (x /= 10);
-do{buf2[++p3] = a[p];}while (--p);
-buf2[++p3] = hh;
-print(oth...);
+inline ll g(ll x, ll n, ll a) { ll t = mull(x, x, n) + a; return t < n ? t : t - n; }
+ll PollardRho(ll n) {
+	if (n % 2 == 0) return 2; if (n % 3 == 0) return 3;
+	ll x = 0, y = x, t = 1, q = 1, a = (rand() % (n - 1)) + 1;
+	for (int k = 2;; k <<= 1, y = x, q = 1) {
+		for (int i = 1; i <= k; ++i) {
+			x = g(x, n, a);
+			q = mull(q, abs(x - y), n);
+			if (!(i & 127)) {
+				t = gcd(q, n);
+				if (t > 1) break;
+			}
+		}
+		if (t > 1 || (t = gcd(q, n)) > 1) break;
+	}
+	if (t == n) {
+		t = 1;
+		while (t == 1) t = gcd(abs((x = g(x, n, a)) - y), n);
+	}
+	return t;
 }
-} // namespace FastIO
-#define read FastIO::read
-#define print FastIO::print
-#define flush FastIO::flush
-#define mul(a,b,mod) (__int128)(a)*(b)%(mod) 
-#define pii(a,b) pair<a,b>
-#define pow powmod
-#define X first
-#define Y second
-#define lowbit(x) (x&-x)
-#define MP make_pair
-#define pb push_back
-#define pt putchar
-#define yx_queue priority_queue
-#define lson(pos) (pos<<1)
-#define rson(pos) (pos<<1|1)
-#define y1 code_by_Rand0w
-#define yn A_muban_for_ACM
-#define j1 it_is just_an_eastegg
-#define lr hope_you_will_be_happy_to_see_this
-#define int long long
-#define rep(i, a, n) for (register int i = a; i <= n; ++i)
-#define per(i, a, n) for (register int i = n; i >= a; --i)
-const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
-ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
-const ll mod2 = 999998639;
-const int m1 = 998244353;
-const int m2 = 1000001011;
-const int pr=233;
-const double eps = 1e-7;
-const int maxm= 1;
-const int maxn = 510000;
-void work()
-{
-    
+void split(ll x) {
+	if (x == 1 || x <= mx) return;
+	if (MR::MR(x)) return mx = max(mx, x), void();
+	ll y = x;
+	while (y == x) y = PollardRho(x);
+	while (x % y == 0) x /= y;
+	split(x), split(y);
 }
-signed main()
-{
-   #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
-//freopen("out.txt","w",stdout);
-#endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
-int t = 1;
-//cin>>t;
-while (t--)
-{
-work();
+long long pri[700001], cnt;
+bool vis[10000021];
+void init() {
+	for (int i = 2; i < 100021; i++) {
+		if (!vis[i])
+			pri[cnt++] = i;
+		for (int j = 0; j < cnt && pri[j] * i < 100021; j++) {
+			vis[pri[j] * i] = 1;
+			if (i % pri[j] == 0)
+				break;
+		}
+	}
 }
-return 0;
+int t, n, k, x[40001];
+long long p, phi, mod, c[31][40001], b[80001];
+void mul(long long& a, long long b, long long mod) {
+	a = (__int128)a * b % mod;
+}
+void maxx(int& a, int b) {
+	if (a < b)
+		a = b;
+}
+void maxxx(long long& a, long long b) {
+	if (a < b)
+		a = b;
+}
+long long mi(long long n, long long k) {
+	long long an = 1;
+	while (k > 0) {
+		if (k & 1)
+			mul(an, n, mod);
+		mul(n, n, mod), k >>= 1;
+	}
+	return an;
+}
+signed main() {
+	srand(time(0));
+	init();
+	for (int i = 0; i < 31; i++)
+		c[i][i] = 1;
+	for (int i = 1; i < 40001; i++)
+		c[0][i] = 1;
+	scanf("%d", &t);
+	while (t--) {
+		mx = 0;
+		int ma = 0;
+		scanf("%d%d%lld", &n, &k, &p);
+		mod = phi = p;
+		split(p);
+		phi = phi / mx * (mx - 1);
+		while (p % mx == 0)
+			p /= mx;
+		for (int i = 0; pri[i] * pri[i] <= p; i++)
+			if (p % pri[i] == 0) {
+				phi = phi / pri[i] * (pri[i] - 1);
+				while (p % pri[i] == 0)
+					p /= pri[i];
+			}
+		if (p > 1)
+			phi = phi / p * (p - 1);
+		for (int i = 0; i < n; i++)
+			scanf("%d", &x[i]), maxx(ma, x[i]);
+		for (int i = 2; i <= ma; i++)
+			b[i] = 0;
+		for (int i = 0; i < n; i++)
+			b[x[i]]++;
+		long long mab = 0;
+		for (int i = 2; i <= ma; i++) {
+			for (int j = i * 2; j <= ma; j += i)
+				b[i] += b[j];
+			maxxx(mab, b[i]);
+		}
+		for (int i = 1; i <= k; i++)
+			for (int j = i + 1; j <= mab; j++) {
+				c[i][j] = c[i][j - 1] + c[i - 1][j - 1];
+				if (c[i][j] >= phi)
+					c[i][j] -= phi;
+			}
+		for (int i = ma; i > 1; i--) {
+			b[i] = c[k][b[i]];
+			for (int j = i * 2; j <= ma; j += i)
+				b[i] -= b[j];
+			b[i] = b[i] % phi;
+			if (b[i] < 0)
+				b[i] += phi;
+		}
+		long long ans = 1;
+		for (int i = 2; i <= ma; i++)
+			if (b[i])
+				mul(ans, mi(i, b[i]), mod);
+		printf("%lld\n", ans);
+	}
 }
