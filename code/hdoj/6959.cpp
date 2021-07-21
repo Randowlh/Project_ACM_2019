@@ -81,8 +81,8 @@ const int maxn = 110000;
 int date[maxn];
 int ans[maxn];
 int n,m;
-int blk;
-int blk2=sqrt(100000);
+int blk=sqrt(100000);
+// int blk2=;
 struct qs{
     int l,r;
     int yl,yr;
@@ -99,26 +99,25 @@ int cnt[maxn];
 int sum[maxn];
 int calc(int x){
         int now=0;
-        for (int i=0;i<x/blk2;i++) now+=sum[i];
-        for (int i=(x/blk2)*blk2;i<=x;i++) now+=(cnt[i]>=1);
+        for (int i=0;i<x/blk;i++) now+=sum[i];
+        for (int i=(x/blk)*blk;i<=x;i++) now+=(cnt[i]>=1);
         return now;
 }
 void move(int pos,int flag){
     if(flag){
         if(!cnt[date[pos]])
-            sum[date[pos]/blk2]++;
+            sum[date[pos]/blk]++;
         cnt[date[pos]]++;
     }else{
         if(cnt[date[pos]]==1)
-            sum[date[pos]/blk2]--;
-        sum[date[pos]]--;
+            sum[date[pos]/blk]--;
+        cnt[date[pos]]--;
     }
 }
 void work()
 {   
     int x0,y0,x1,y1;
     cin>>n>>m;
-    blk=sqrt(n);
     for(int i=0;i<=1e5+5;i++)
         sum[i]=cnt[i]=0;
     for(int i=1;i<=n;i++)
@@ -128,10 +127,10 @@ void work()
         qr[i]=qs(x0,x1,y0,y1,i);
     }
     sort(qr+1,qr+m+1);
-    int l=qr[1].yl,r=qr[1].yr;
+    int l=qr[1].l,r=qr[1].r;
     for(int i=l;i<=r;i++)
         move(i,1);
-    ans[qr[1].num]=calc(r)-calc(l-1);
+    ans[qr[1].num]=calc(qr[1].yr)-calc(qr[1].yl-1);
     // cout<<l<<' '<<r<<endl;
     for(int i=2;i<=m;i++){
         while(l>qr[i].l)move(--l,1);
@@ -141,7 +140,7 @@ void work()
         ans[qr[i].num]=calc(qr[i].yr)-calc(qr[i].yl-1);
     }
     for(int i=1;i<=m;i++)
-        cout<<(ans[i])<<endl;
+        cout<<ans[i]<<endl;
 }
 signed main()
 {
