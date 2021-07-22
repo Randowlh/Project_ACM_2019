@@ -1,7 +1,12 @@
-#include <bits/stdc++.h>
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
+#include<iostream>
+#include<cstring>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<queue>
+// #include <bits/extc++.h>
+// using namespace __gnu_pbds;
+// using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
@@ -27,6 +32,7 @@ template<class T>inline void wt(T x){
     while(x)stk[++top]=x%10,x/=10;
     while(top)putchar(stk[top--]+'0');
 }
+#define INF 0x7fffffff
 #define pii(a,b) pair<a,b>
 #define X first
 #define Y second
@@ -52,10 +58,45 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 1LL<<21;
+int ma[maxn],mi[maxn];
+int ma2[maxn],mi2[maxn];
+int a[maxn],b[maxn];
+int res[maxn];
 void work()
 {
-    
+    int n;
+    rd(n);
+    for(int i=0;i<n;i++)
+        rd(a[i]);
+    for(int i=0;i<n;i++)
+        rd(b[i]);
+    for(int i=0;i<n;i++){
+        ma[i]=a[i],mi[i]=a[i];
+        ma2[i]=b[i],mi2[i]=b[i];
+    }
+    for(int i=n-1;i>=1;i--){
+        for(int j=0;j<=20;j++){
+            if(i&(1LL<<j)){
+                int to=i-(1LL<<j);
+                MAX(ma[to],ma[i]);
+                MIN(mi[to],mi[i]);
+                MAX(ma2[to],ma2[i]);
+                MIN(mi2[to],mi2[i]);
+            }
+        }
+    }
+    int ans=0;
+    res[n] = -llinf;
+    for(int i=n-1;i>=0;i--){
+        res[i] = max(max(ma[i]*ma2[i],mi[i]*mi2[i]),max(ma[i]*mi2[i],mi[i]*ma2[i]));
+        res[i] = max(res[i+1],res[i]);
+        ans = ans+(res[i]%mod);
+        ans%=mod;
+        ans+=mod;
+        ans%=mod;
+    }
+    wt(ans),pt('\n');
 }
 signed main()
 {
@@ -63,10 +104,11 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-//std::ios::sync_with_stdio(false);
-//cin.tie(NULL);
+// std::ios::sync_with_stdio(false);
+// cin.tie(NULL);
 int t = 1;
-//cin>>t;
+// cin>>t;
+rd(t);
 while (t--)
 {
 work();
