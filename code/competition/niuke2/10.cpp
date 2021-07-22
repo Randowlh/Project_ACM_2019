@@ -110,7 +110,7 @@ void work()
     int n,m,q;
     read(n,m,q);
     int u,v;
-    for(int i=1;i<=n;i++){
+    for(int i=1;i<=m;i++){
         read(u,v);
         add(u,v);
         add(v,u);
@@ -121,10 +121,11 @@ void work()
         if(du[i]>blk)
             belong[i]=++tail;
     for(int i=1;i<=n;i++){
+        // pre[i]=1;
         if(du[i]<=blk)
             continue;
         for(int j=head[i];j;j=eg[j].nxt){
-            int to=eg[j].to;;
+            int to=eg[j].to;
             if(du[to]<=blk)
                 continue;
             mp[belong[i]].push_back(to);
@@ -135,7 +136,7 @@ void work()
         read(pos,val);
         if(du[pos]>blk){
             for(int j=now[pos]+1;j<=now[pos]+val;j++)
-                w[belong[pos]][i]=i;
+                w[belong[pos]][j]=i;
             for(int j=0;j<mp[belong[pos]].size();j++){
                 int to=mp[belong[pos]][j];
                 MAX(maa[to],now[pos]+val);
