@@ -1,0 +1,9 @@
+{"cpp":{
+"prefix": "dsu",
+"body":["int fa[maxn];",
+"int find(int x){if(fa[x]^x)return fa[x]=find(fa[x]);return x;}",
+"void merge(int a,int b){fa[find(a)]=find(b);}"
+],
+"description": "并查集"
+}
+}

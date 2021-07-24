@@ -4,8 +4,8 @@
 //using namespace __gnu_cxx;
 using namespace std;
 #pragma optimize(2)
-//#pragma GCC optimize("Ofast,no-stack-protector")
-//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+// #pragma GCC optimize("Ofast,no-stack-protector")
+// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
 #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
@@ -65,9 +65,9 @@ print(oth...);
 #define yn A_muban_for_ACM
 #define j1 it_is just_an_eastegg
 #define lr hope_you_will_be_happy_to_see_this
-#define int long long
-#define rep(i, a, n) for (register int i = a; i <= n; ++i)
-#define per(i, a, n) for (register int i = n; i >= a; --i)
+// #define int long long
+#define rep(i, a, n) for ( int i = a; i <= n; ++i)
+#define per(i, a, n) for ( int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
 const ll mod = (0 ? 1000000007 : 998244353);
 ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
@@ -78,44 +78,44 @@ const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
 const int maxn = 5010*5010;
-int A[maxn];
-int mat[5010][5010];
+// int A[maxn];
+// int mat[5010][5010];
 int h[5010],s[5010];
+vector<pair<int,int>> date[110000]; 
+int fa[11000];
+int find(int x){if(fa[x]^x)return fa[x]=find(fa[x]);return x;}
+inline void merge(int a,int b){fa[find(a)]=find(b);}
+struct node{
+    int x,y;
+    int val;
+    bool operator<(node a){
+        return val<a.val;
+    }
+}A[maxn];
 void work()
 {
-    int n,m,a,b,c,d,p;
+    int i;
+    ll n,m,a,b,c,d,p;
     cin>>n>>m>>a>>b>>c>>d>>p;
-    int ans=0;
-    A[0]=a;
-    rep(i,1,m*n) A[i]=(A[i-1]*A[i-1]*b+A[i-1]*c+d)%p;
-    rep(i,1,n) rep(j,1,m) mat[i][j]=A[m*(i-1)+j];
-    for(int i=1;i<=n;i++){
-        int mi=llinf;
-        int id=0;
-        for(int j=1;j<=m;j++){
-            if(mi>mat[i][j]){
-                mi=mat[i][j];
-                id=j;
+    for(i=1;i<=10100;i++)
+        fa[i]=i;
+    ll pre=a;
+    for(i=1;i<=n*m;i++){ 
+        int now=(pre*b*pre+pre*c+d)%p;
+        date[now].push_back(MP(((i-1)/m)+1,((i-1)%m)+1));
+        pre=now;
+    }
+    ll ans=0;
+    for(int i=0;i<=100000;i++)
+        for(int j=0;j<date[i].size();j++){
+            if(find(date[i][j].X)==find(date[i][j].Y+5000))
+                continue;
+            else {
+                ans+=i;
+                merge(date[i][j].X,date[i][j].Y+5000);
             }
         }
-        ans+=mi;
-        h[i]=1;
-        s[id]=1;
-    }
-    for(int i=1;i<=m;i++){
-        int mi=llinf;
-        int id=0;
-        if(s[i])
-            continue;
-        for(int j=1;j<=n;j++){
-            if(mi>mat[j][i]){
-                mi=mat[j][i];
-                id=j;
-            }
-        }
-        ans+=mi;
-    }
-
+    cout<<ans<<endl;
 }
 signed main()
 {
@@ -126,7 +126,7 @@ signed main()
     std::ios::sync_with_stdio(false);
     cin.tie(NULL);
     int t = 1;
-    cin>>t;
+    // cin>>t;÷
     while (t--)
     {
         work();
