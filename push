@@ -1,0 +1,4 @@
+cd Desktop/Project_ACM_renewed
+find ./ -name '*.exe' -type f -print -exec rm -rf {} \;
+git commit -a -m 'back up'
+git push origin main 
