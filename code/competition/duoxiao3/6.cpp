@@ -54,6 +54,8 @@ int main(){
         else B[m-i].x=(1.0/(double(s[i]-'a')));
     }
     while(limit<=(n+m)) limit<<=1,cnt++;
+
+    
     for(i=0;i<limit;i++) r[i]=((r[i>>1]>>1)|((i&1)<<(cnt-1)));
     fft(A,1);fft(B,1);
     for(i=0;i<=limit;i++) A[i]=A[i]*B[i];

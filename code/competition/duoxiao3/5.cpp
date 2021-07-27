@@ -6,6 +6,8 @@ using namespace std;
 #pragma optimize(2)
 //#pragma GCC optimize("Ofast,no-stack-protector")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+
+
 #define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
 const int inf = 0x7FFFFFFF;
 typedef long long ll;
