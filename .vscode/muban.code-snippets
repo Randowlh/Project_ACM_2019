@@ -53,6 +53,8 @@
 			"#define read FastIO::read",
 			"#define print FastIO::print",
 			"#define flush FastIO::flush",
+			"#define spt fixed<<setprecision",
+			"#define endll '\\n'",
 			"#define mul(a,b,mod) (__int128)(a)*(b)%(mod) ",
 			"#define pii(a,b) pair<a,b>",
 			"#define pow powmod",

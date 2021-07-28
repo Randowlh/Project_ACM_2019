@@ -49,6 +49,8 @@ print(oth...);
 #define read FastIO::read
 #define print FastIO::print
 #define flush FastIO::flush
+#define spt fixed<<setprecision
+#define endll '\n'
 #define mul(a,b,mod) (__int128)(a)*(b)%(mod) 
 #define pii(a,b) pair<a,b>
 #define pow powmod
@@ -77,7 +79,7 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 410000;
 const int SIZE=(1<<21)+5;
 const double PI=acos(-1);
 struct CP{
@@ -111,18 +113,50 @@ void FFT(int n,int m,CP *F,CP *G){
     for(int i=0;i<limit;i++)F[i]=F[i]*G[i];
     DFT(F,-1);
 }
+CP a[maxn],b[maxn];
+// int aa[maxn];
 void work()
 {
-
+    int tmp;
+    int n,m;
+    cin>>n>>m;
+    int a2=0,b2=0,a1=0,b1=0;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        a[i].x=tmp;
+        a1+=tmp*tmp;
+        a2+=tmp;
+        a[i+n].x=tmp;
+    }
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        b[i].x=tmp;
+        b1+=tmp*tmp;
+        b2+=tmp;
+    }
+    reverse(b+1,b+n+1);
+    FFT(n*2+10,n+10,a,b);
+    int ans=0;
+    // for(int i=1;i<=n;i++){
+    //     for(int j=-m;j<=m;j++){
+    //         ans=min(ans,a1+b1+j*j*n+2ll*j*(a2-b2)-2ll*(ll)a[i+n].x);
+    //     }
+    // }
+    for(int i=n+1;i<=2*n;i++)
+        MAX(ans,(int)(a[i].x+0.5));
+    int taa=llinf;
+    for(int i=-m;i<=m;i++)
+        MIN(taa,a1+b1+i*i*n+2*i*(a2-b2));
+    cout<<taa-2*ans<<endll;
 }
 signed main()
 {
-   #ifndef ONLINE_JUDGE
-   freopen("in.txt","r",stdin);
-    //freopen("out.txt","w",stdout);
-#endif
-    //std::ios::sync_with_stdio(false);
-    //cin.tie(NULL);
+//    #ifndef ONLINE_JUDGE
+//    freopen("in.txt","r",stdin);
+//     freopen("out.txt","w",stdout);
+// #endif
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int t = 1;
     //cin>>t;
     while (t--)

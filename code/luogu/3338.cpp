@@ -46,6 +46,8 @@ buf2[++p3] = hh;
 print(oth...);
 }
 } // namespace FastIO
+#define spt fixed<<setprecision
+#define endll '\n'
 #define read FastIO::read
 #define print FastIO::print
 #define flush FastIO::flush
@@ -77,7 +79,7 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
+const int maxn = 410000;
 const int SIZE=(1<<21)+5;
 const double PI=acos(-1);
 struct CP{
@@ -111,9 +113,22 @@ void FFT(int n,int m,CP *F,CP *G){
     for(int i=0;i<limit;i++)F[i]=F[i]*G[i];
     DFT(F,-1);
 }
+CP A[maxn],B[maxn],C[maxn];
+int n;
+int gcd(int a, int b){ return b ? gcd(b, a % b) : a;}
 void work()
 {
-
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>A[i].x;
+        C[n-i].x=A[i].x;
+        B[i].x=(db(1)/i/i);
+    }
+    FFT(n,n,A,B);
+    DFT(B,-1);
+    FFT(n,n,C,B);
+    for(int i=1;i<=n;i++)
+        cout<<spt(10)<<A[i].x-C[n-i].x<<endll;
 }
 signed main()
 {
