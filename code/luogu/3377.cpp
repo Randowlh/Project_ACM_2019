@@ -106,8 +106,8 @@ signed main()
    freopen("in.txt","r",stdin);
 //freopen("out.txt","w",stdout);
 #endif
-// //std::ios::sync_with_stdio(false);
-// //cin.tie(NULL);
+//std::ios::sync_with_stdio(false);
+//cin.tie(NULL);
 int t = 1;
 //cin>>t;
 while (t--)

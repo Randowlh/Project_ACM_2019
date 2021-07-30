@@ -94,7 +94,7 @@ struct node{
 }bl[210000],wi[210000];
 node egs[210000];
 int tail=0;
-int ans[1100];
+int ans[maxn];
 int fa[maxn];
 int sum[maxn];
 int l[maxn],r[maxn];
@@ -110,10 +110,10 @@ void work()
 {
     tail=0;
     int n,m;
-    read(n,m);
+    cin>>n>>m;
     int u,v,d,c;
     for(int i=1;i<=m;i++){
-        read(u,v,d,c);
+        cin>>u>>v>>d>>c;
         bl[i]=node(u,v,d,0);
         wi[i]=node(u,v,c,1);
     }
@@ -171,22 +171,28 @@ void work()
         }
     }
     for(int i=0;i<=n-1;i++){
-        print(ans[i]);
+        // print(ans[i]);
+        cout<<ans[i]<<endll;
     }
-    flush();
+    // flush();
+}
+inline double run_time(){
+    return 1.0*clock()/CLOCKS_PER_SEC;
 }
 signed main()
 {
     freopen("1010.in", "r", stdin);
     freopen("out.txt", "w", stdout);
-    // std::ios::sync_with_stdio(false);
-    // cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int t = 1;
-    // cin>>t;
-    read(t);
+    cin>>t;
+    // read(t);
+    // t=1;
     while (t--)
     {
         work();
     }
+    cout<<run_time()<<endll;
     return 0;
 }
