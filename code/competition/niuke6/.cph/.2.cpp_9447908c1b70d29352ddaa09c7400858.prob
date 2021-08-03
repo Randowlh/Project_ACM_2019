@@ -1,0 +1,1 @@
+{"name":"Local: 2","url":"/Users/randow/Desktop/Project_ACM_renewed/code/competition/niuke6/2.cpp","tests":[{"id":1627882914552,"input":"2\n4\n1 2 2 1\n8\n1 2 3 4 5 6 7 8","output":"200000005\n119223647"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/randow/Desktop/Project_ACM_renewed/code/competition/niuke6/2.cpp","group":"local","local":true}
