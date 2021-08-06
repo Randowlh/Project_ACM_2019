@@ -1,0 +1,1 @@
+{"name":"Local: 4213","url":"/Users/randow/Desktop/Project_ACM_renewed/code/luogu/4213.cpp","tests":[{"id":1628237000598,"input":"6\n1\n2\n8\n13\n30\n2333","output":"1 1\n2 0\n22 -2\n58 -3\n278 -3\n1655470 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/randow/Desktop/Project_ACM_renewed/code/luogu/4213.cpp","group":"local","local":true}
