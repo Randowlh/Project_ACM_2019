@@ -79,49 +79,94 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1<<20;
-int inv2=499122177;
-int n;
-int ta[maxn],tb[maxn],a[maxn],b[maxn],c[maxn];
-void FWT(ll *f, int op) {
-    for(int len=2; len<=n; len<<=1) {
-        for(int l=0, hf=len>>1; l<n; l+=len) {
-            for(int i=l; i<l+hf; ++i) {
-                ll x=f[i], y=f[i+hf];
-                if(op>0) {
-                    if(op==1) f[i]=(x+y)%mod, f[i+hf]=(x-y+mod)%mod; //xor
-                    else if(op==2) f[i]=(x+y)%mod; //and
-                    else f[i+hf]=(x+y)%mod; //or
-                }
-                else {
-                    if(op==-1) f[i]=(x+y)*inv2%mod, f[i+hf]=(x-y+mod)*inv2%mod; //xor
-                    else if(op==-2) f[i]=(x-y+mod)%mod; //and
-                    else f[i+hf]=(y-x+mod)%mod; //or
-                }
-            }
+const int maxn = 510000;
+struct edge{
+    int to,nxt;
+}eg[maxm];
+int head[maxn];
+int ecnt=0;
+inline void add(int u,int v){
+   eg[++ecnt].nxt=head[u];
+//    eg[ecnt].w=w;
+   eg[ecnt].to=v;
+   head[u]=ecnt;
+}
+inline void cl(int n){
+    for(int i=0;i<=n;i++)
+        head[i]=0;
+    ecnt=0;
+}  
+int n,m; 
+int sz[maxn];
+int a[maxn],low[maxn],dfn[maxn],belong[maxn],vl[maxn];
+bool flag[maxn];
+int cnt,cnt2;
+stack<int> s;
+void tarjan(int x,int fa){
+    dfn[x]=low[x]=++cnt;
+    flag[x]=1;
+    s.push(x);
+    for(int i=head[x];i;i=eg[i].nxt){
+        int to=eg[i].to;
+        if(to==fa)
+            continue;
+        if(!dfn[to]){
+            tarjan(to,x);
+            MIN(low[x],low[to]);    
+        }else if(flag[to])
+            MIN(low[x],dfn[to]);
+    }
+    if(low[x]==dfn[x]){
+        ++cnt2;
+        while(s.top()!=x){
+            int t=s.top();
+            s.pop();
+            belong[t]=cnt2;
+            flag[t]=0;
+            vl[cnt2]++;
         }
+        s.pop();
+        vl[cnt2]++;
+        belong[x]=cnt2;
     }
 }
 void work()
 {
-    cin>>n;
-    n=1<<n;
-    for(int i=0;i<n;i++)
-        cin>>a[i];
-    for(int i=0;i<n;i++)
-        cin>>b[i];
-    for(int i=3;i>=1;i--){
-        for(int j=0;j<n;j++)
-        {ta[j]=a[j],tb[j]=b[j];}
-        FWT(ta,i);
-        FWT(tb,i);
-        for(int j=0;j<n;j++)
-        {ta[j]*=tb[j];
-        ta[j]%=mod;}
-        FWT(ta,-i);
-        for(int j=0;j<n;j++)
-            cout<<ta[j]<<' ';
-        cout<<endll;
+    int ans=0;
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+        cin>>a[i],ans+=a[i];
+    int u,v;
+    for(int i=1;i<=m;i++){
+        cin>>u>>v;
+        add(u,v);
+        add(v,u);
+    }
+    if(n%2==0){
+        cout<<ans<<endll;
+        return;
+    }
+    for(int i=1;i<=n;i++)
+        if(!dfn[i])
+            tarjan(i,-1);
+    int mi=llinf;
+    for(int i=1;i<=n;i++){
+        set<int> s;
+        for(int j=head[i];j;j=eg[j].nxt){
+            int to=eg[j].to;
+            s.insert(belong[j]);
+        }
+        if(s.size()>1){
+            MIN(mi,a[i]);
+            continue;
+        }
+        // ge[i]=1;
+        vl[belong[i]]--;
+        int fl=0;
+        for(int j=head[i];j;j=eg[j].nxt){
+            int to=eg[j].to;
+            if(vl[eg[j]])
+        }
     }
 }
 signed main()
@@ -130,8 +175,8 @@ signed main()
    //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
 #endif
-    //std::ios::sync_with_stdio(false);
-    //cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int t = 1;
     //cin>>t;
     while (t--)

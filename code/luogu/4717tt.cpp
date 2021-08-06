@@ -71,21 +71,24 @@ print(oth...);
 #define rep(i, a, n) for (register int i = a; i <= n; ++i)
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775807;
-const ll mod = (0 ? 1000000007 : 998244353);
-ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
+// const ll mod = (0 ? 1000000007 : 998244353);
+// ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1<<20;
-int inv2=499122177;
-int n;
-int ta[maxn],tb[maxn],a[maxn],b[maxn],c[maxn];
+
+const int maxn = (1<<20)+7;
+const int mod = 998244353, inv2 = 499122177;
+
+int n, up;
+ll f[maxn], g[maxn], h[maxn];
+
 void FWT(ll *f, int op) {
-    for(int len=2; len<=n; len<<=1) {
-        for(int l=0, hf=len>>1; l<n; l+=len) {
+    for(int len=2; len<=up; len<<=1) {
+        for(int l=0, hf=len>>1; l<up; l+=len) {
             for(int i=l; i<l+hf; ++i) {
                 ll x=f[i], y=f[i+hf];
                 if(op>0) {
@@ -102,41 +105,24 @@ void FWT(ll *f, int op) {
         }
     }
 }
-void work()
-{
+
+signed main() {
     cin>>n;
-    n=1<<n;
-    for(int i=0;i<n;i++)
-        cin>>a[i];
-    for(int i=0;i<n;i++)
-        cin>>b[i];
-    for(int i=3;i>=1;i--){
-        for(int j=0;j<n;j++)
-        {ta[j]=a[j],tb[j]=b[j];}
-        FWT(ta,i);
-        FWT(tb,i);
-        for(int j=0;j<n;j++)
-        {ta[j]*=tb[j];
-        ta[j]%=mod;}
-        FWT(ta,-i);
-        for(int j=0;j<n;j++)
-            cout<<ta[j]<<' ';
-        cout<<endll;
-    }
-}
-signed main()
-{
-   #ifndef ONLINE_JUDGE
-   //freopen("in.txt","r",stdin);
-    //freopen("out.txt","w",stdout);
-#endif
-    //std::ios::sync_with_stdio(false);
-    //cin.tie(NULL);
-    int t = 1;
-    //cin>>t;
-    while (t--)
-    {
-        work();
-    }
-    return 0;
+    up=(1<<n);
+     for(int i=0; i<up; ++i) cin>>f[i];
+     for(int i=0; i<up; ++i) cin>>g[i];
+    FWT(f,3); FWT(g,3);
+    for(int i=0; i<up; ++i) h[i]=f[i]*g[i]%mod;
+    FWT(f,-3); FWT(g,-3); FWT(h,-3);
+    for(int i=0; i<up; ++i) printf("%lld%c", h[i], " \n"[i==up-1]);
+
+    FWT(f,2); FWT(g,2);
+    for(int i=0; i<up; ++i) h[i]=f[i]*g[i]%mod;
+    FWT(f,-2); FWT(g,-2); FWT(h,-2);
+    for(int i=0; i<up; ++i) printf("%lld%c", h[i], " \n"[i==up-1]);
+
+    FWT(f,1); FWT(g,1);
+    for(int i=0; i<up; ++i) h[i]=f[i]*g[i]%mod;
+    FWT(f,-1); FWT(g,-1); FWT(h,-1);
+    for(int i=0; i<up; ++i) printf("%lld%c", h[i], " \n"[i==up-1]);
 }
