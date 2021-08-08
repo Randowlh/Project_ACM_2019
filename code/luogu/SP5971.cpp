@@ -73,104 +73,66 @@ print(oth...);
 const ll llinf = 4223372036854775807;
 const ll mod = (0 ? 1000000007 : 998244353);
 ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
-class mint{
-    public:
-    int powmod(int a,int b) {int res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
-    inline int niyuan(int x, int mod) { return powmod(x, mod - 2); }
-    int  n;
-    mint() : n(0) { ; }
-    mint(ll m) : n(m)
-    {
-        if (n >= mod)
-            n %= mod;
-        else if (n < 0)
-            n = (n % mod + mod) % mod;
-    }
-    operator int() { return n; }
-    inline mint operator=(mint a){n=a.n;return n;}
-    inline bool operator==(mint a){return n==a.n;}
-    inline bool operator!=(mint a){return n!=a.n;}
-    inline bool operator<(mint a){return n<a.n;}
-    inline bool operator>(mint a){return n>a.n;}
-    inline bool operator<=(mint a){return n<=a.n;}
-    inline bool operator>=(mint a){return n>=a.n;}
-    inline mint operator+(mint a){int res=n+a.n;if(res>=mod)res-=mod; return res;}
-    inline mint operator-(mint a){int res=n-a.n;if(res<0)res+=mod;return res;}
-    inline mint operator*(mint a){int res=n*a.n%mod;return res;}
-    inline mint operator/(mint a){int res=n*niyuan(a.n,mod)%mod;return res;}
-    inline mint operator+=(mint a){*this=*this+a;return *this;}
-    inline mint operator-=(mint a){*this=*this-a;return *this;}
-    inline mint operator*=(mint a){*this=*this*a;return *this;}
-    inline mint operator/=(mint a){*this=*this/a;return *this;}
-    inline mint operator++(){n++;n%=mod;return n;}
-};
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 210000;
-mint seg[maxn<<2];
-mint lazy[maxn<<2][2];
-int date[maxn];
-int excrt(int a[],int b[],int n)
+const int maxn = 1010000;
+vector<int> primes;
+bool is_prime[maxn+100];
+int phi[maxn+100],ans[maxn+100];
+void euler()
 {
-    int lc=1;
-    for(int i=1;i<=n;i++)
-        lc=lcm(lc,a[i]);
-    for(int i=1;i<n;i++){
-         int p,q,g;
-        g=exgcd(a[i],a[i+1],p,q);
-        int k=(b[i+1]-b[i])/g;
-        q=-q;p*=k;q*=k;
-        b[i+1]=a[i]*p%lc+b[i];
-        b[i+1]%=lc;
-        a[i+1]=lcm(a[i],a[i+1]);
-    }
-    return (b[n]%lc+lc)%lc;
-}
-void pushup(int pos){
-    seg[pos]=seg[lson(pos)]+seg[rson(pos)];
-}
-void pushdown(int pos,int l,int r){
-    int mid=l+r>>1;
-    if(lazy[pos][0]){
-        pushdown(lson(pos),l,mid);
-        pushdown(rson(pos),mid+1,r);
-
-    }
-    if(lazy[pos][1]){
-
-    }
-}
-void build(int pos,int l,int r){
-    if(l==r){
-        seg[pos]=date[l];
-        return;
-    }
-    int mid=(l+r)>>1;
-    build(lson(pos),l,mid);
-    build(rson(pos),mid+1,r);
-    pushup(pos);
-}
-void update(int pos,int l,int r,int ql,int qr,int v,int tp){
-
+   is_prime[1] = 1;
+   phi[1]=1;
+   for (int i = 2; i < maxn; i++)
+   {
+      if (!is_prime[i]){
+        phi[i]=i-1;
+        primes.push_back(i);
+      }
+      for (int j = 0; j < primes.size() && i * primes[j] < maxn; j++)
+      {
+        is_prime[i * primes[j]] = 1;
+        if ((i % primes[j]) == 0){
+            phi[i*primes[j]]=phi[i]*primes[j];
+            break;
+        }
+        phi[i*primes[j]]=phi[i]*phi[primes[j]];
+      }
+   }
 }
 void work()
-{
-    
+{ 
+    int n;
+    cin>>n;
+    int ans=0;
+    for(int i=1;i*i<=n;i++){
+        if(n%i==0){
+                ans+=phi[i]*i/2;
+            if(i*i!=n)
+                ans+=phi[n/i]*(n/i)/2;
+        }
+    }
+    cout<<ans*n<<endll;
+    return;
 }
 signed main()
 {
+    euler();
    #ifndef ONLINE_JUDGE
    //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
 #endif
-    //std::ios::sync_with_stdio(false);
-    //cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
     int t = 1;
-    //cin>>t;
+    cin>>t;
+    // for(int i=1;i<=100;i++)
+    //     cout<<phi[i]<<' ';
+    cout<<endl;
     while (t--)
     {
         work();

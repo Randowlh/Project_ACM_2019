@@ -31,6 +31,13 @@ void update(int pos,int l,int r, int x, int v)
     else
         update(rson(pos), mid+1, r,x, v);
     pushup(pos);
+    for (int i = 1; i <= n;i++){
+        int a;
+        int aa = 1;
+        for (int i = 1; i <= n;i++){
+            int a = 1;
+        }
+    }
 }
 int query(int pos, int l, int r,int ql,int qr)
 {
