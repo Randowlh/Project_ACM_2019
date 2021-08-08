@@ -16,15 +16,13 @@ int date[4 * maxn + 100];
 inline void pushup(int pos)
 {
     date[pos] = date[lson(pos)];
-    date[pos] += date[rson(pos)];
+    MAX(date[pos],date[rson(pos)]);
 }
 void update(int pos,int l,int r, int x, int v)
 {
     if (l == r)
     {
-        if(v)
-            date[pos]=x;
-        else date[pos]=0;
+        date[pos]=v;
         return;
     }
     int mid = (l + r) >> 1;
@@ -41,9 +39,9 @@ int query(int pos, int l, int r,int ql,int qr)
     int ans = 0;
     int mid =(l+r) >> 1;
     if (ql <= mid)
-        ans += query(lson(pos),l,mid,ql,qr);
+        ans = query(lson(pos),l,mid,ql,qr);
     if (qr >= mid + 1)
-        ans += query(rson(pos),mid+1,r,ql,qr);
+        MAX(ans, query(rson(pos),mid+1,r,ql,qr));
     return ans;
 }
 struct node
@@ -81,12 +79,8 @@ void tree_decomposition(int x, int top)
     }
     tree_decomposition(tree[x].hson, top);
     for (int i = 0; i < mp[x].size(); i++)
-    {
         if (mp[x][i] != tree[x].hson && mp[x][i] != tree[x].fa)
-        {
             tree_decomposition(mp[x][i], mp[x][i]);
-        }
-    }
     chu[x] = cnt;
 }
 inline int tree_path_sum(int u, int v)
@@ -96,56 +90,34 @@ inline int tree_path_sum(int u, int v)
     {
         if (tree[tree[u].top].depth < tree[tree[v].top].depth)
             swap(u, v);
-        tol += query(1,1,n, dfn[tree[u].top], dfn[u]);
+        MAX(tol, query(1,1,n, dfn[tree[u].top], dfn[u]));
         u = tree[tree[u].top].fa;
     }
     if (tree[u].depth < tree[v].depth)
         swap(u, v);
-    tol += query(1,1,n,dfn[v], dfn[u]);
+    MAX(tol, query(1,1,n,dfn[v], dfn[u]));
     return tol;
 }
 inline int sub_tree_sum(int x) { return query(1,1,n,dfn[x], chu[x]); }
 int ans=0;
-int tot=0;
-map<int,int> M;
-void dfs(int pos,int fa){
-    // cout<<pos<<' '<<fa<<' '<<tot<<endl;
-    // MAX(ans,tot);
+void dfs(int pos,int fa,int step,int ma){
+    MAX(ans,step-ma);
     for(int i=0;i<mp2[pos].size();i++){
         int to=mp2[pos][i];
         if(to==fa)
             continue;
-        int a=sub_tree_sum(to);
-        if(a){
-            dfs(to,pos);
-        }else{
-            int bf;
-            int tt=tree_path_sum(1,to);
-            if(tt){
-                int tr=rk[tt];
-                bf=M[tr];
-                tot-=bf
-                update(1,1,n,tt,0);
-            }
-            tot++;
-            update(1,1,n,dfn[to],1);
-            dfs(to,pos);
-            tot--;
-            update(1,1,n,dfn[to],0);
-            if(tt){
-                tot++;
-                tot+=bf;
-                update(1,1,n,tt,1);
-            }
-        }
+        int maa=ma;
+        MAX(maa,tree_path_sum(1,to));
+        MAX(maa,sub_tree_sum(to));
+        update(1,1,n,dfn[to],step+1);
+        dfs(to,pos,step+1,maa);
+        update(1,1,n,dfn[to],0);
     }
 }
 void work()
 {
-    M.clear();
     cnt=0;
     ans=0;
-    tot=0;
     cin >> n;
     for(int i=1;i<=n;i++){
         mp[i].clear();
@@ -156,34 +128,28 @@ void work()
         date[i]=0;
     int u, v;
     for (int i= 2;i<=n;i++){
-        cin>>u;
-        mp2[i].push_back(u);
-        mp2[u].push_back(i);
+        cin>>u>>v;
+        mp2[v].push_back(u);
+        mp2[u].push_back(v);
     }
     for (int i = 2; i <=n ; i++)
     {
-        cin >>v;
-        mp[i].push_back(v);
-        mp[v].push_back(i);
+        cin >>u>>v;
+        mp[u].push_back(v);
+        mp[v].push_back(u);
     }
-    // cout<<"adsadsdsa"<<endl;
     tree[1].fa = -1;
     tree_build(1, 1);
     tree_decomposition(1, 1);
     update(1,1,n,dfn[1],1);
-    tot++;
-    M[1]=1;
-    dfs(1,-1);
-    M.erase(1);
-    stk.pop_back();
-    tot--;
+    dfs(1,-1,1,0);
     update(1,1,n,dfn[1],0);
     cout<<ans<<'\n';
 }
 signed main()
 {
     #ifndef ONLINE_JUDGE
-        freopen("in.txt","r",stdin);
+      //  freopen("in.txt","r",stdin);
         // freopen("out.txt","w",stdout);
     #endif
     std::ios::sync_with_stdio(false);
