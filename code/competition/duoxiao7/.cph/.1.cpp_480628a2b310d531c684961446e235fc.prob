@@ -1,0 +1,1 @@
+{"name":"Local: 1","url":"/Users/randow/Desktop/Project_ACM_renewed/code/competition/duoxiao7/1.cpp","tests":[{"id":1628569429234,"input":"3\n2\n1 2\n2\n1 1\n6\n6 5 4 3 2 1 \n","output":"NO\nYES\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/randow/Desktop/Project_ACM_renewed/code/competition/duoxiao7/1.cpp","group":"local","local":true}
