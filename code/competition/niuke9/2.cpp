@@ -1,0 +1,205 @@
+#include <bits/stdc++.h>
+//#include <bits/extc++.h>
+//using namespace __gnu_pbds;
+//using namespace __gnu_cxx;
+using namespace std;
+#pragma optimize(2)
+//#pragma GCC optimize("Ofast,no-stack-protector")
+//#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
+#define rbset(T) tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>
+const int inf = 0x7FFFFFFF;
+typedef long long ll;
+typedef double db;
+typedef long double ld;
+template<class T>inline void MAX(T &x,T y){if(y>x)x=y;}
+template<class T>inline void MIN(T &x,T y){if(y<x)x=y;}
+namespace FastIO
+{
+char buf[1 << 21], buf2[1 << 21], a[20], *p1 = buf, *p2 = buf, hh = '\n';
+int p, p3 = -1;
+void read() {}
+void print() {}
+inline int getc()
+{
+return p1 == p2 && (p2 = (p1 = buf) + fread(buf, 1, 1 << 21, stdin), p1 == p2) ? EOF : *p1++;
+}
+inline void flush()
+{
+fwrite(buf2, 1, p3 + 1, stdout), p3 = -1;
+}
+template <typename T, typename... T2>
+inline void read(T &x, T2 &... oth)
+{
+int f = 0;x = 0;char ch = getc();
+while (!isdigit(ch)){if (ch == '-')f = 1;ch = getc();}
+while (isdigit(ch)){x = x * 10 + ch - 48;ch = getc();}
+x = f ? -x : x;read(oth...);
+}
+template <typename T, typename... T2>
+inline void print(T x, T2... oth)
+{
+if (p3 > 1 << 20)flush();
+if (x < 0)buf2[++p3] = 45, x = -x;
+do{a[++p] = x % 10 + 48;}while (x /= 10);
+do{buf2[++p3] = a[p];}while (--p);
+buf2[++p3] = hh;
+print(oth...);
+}
+} // namespace FastIO
+#define read FastIO::read
+#define print FastIO::print
+#define flush FastIO::flush
+#define spt fixed<<setprecision
+#define endll '\n'
+#define mul(a,b,mod) (__int128)(a)*(b)%(mod) 
+#define pii(a,b) pair<a,b>
+#define pow powmod
+#define X first
+#define Y second
+#define lowbit(x) (x&-x)
+#define MP make_pair
+#define pb push_back
+#define pt putchar
+#define yx_queue priority_queue
+#define lson(pos) (pos<<1)
+#define rson(pos) (pos<<1|1)
+#define y1 code_by_Rand0w
+#define yn A_muban_for_ACM
+#define j1 it_is just_an_eastegg
+#define lr hope_you_will_be_happy_to_see_this
+#define int long long
+#define rep(i, a, n) for (register int i = a; i <= n; ++i)
+#define per(i, a, n) for (register int i = n; i >= a; --i)
+const ll llinf = 4223372036854775807;
+const ll mod = (0 ? 1000000007 : 998244353);
+ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
+const ll mod2 = 999998639;
+const int m1 = 998244353;
+const int m2 = 1000001011;
+const int pr=233;
+const double eps = 1e-7;
+const int maxm= 1;
+const int maxn = 110000;
+int fa[maxn][30];
+vector<int> mp[maxn];
+int sz[maxn];
+int t[maxn],tt[maxn];
+int dfn[maxn];
+int chu[maxn];
+int n;
+int cnt=0;
+int len=0;
+int root[maxn];
+struct chair_man_tree{
+    struct node{
+        int v;
+        int lson,rson;
+    }tree[maxn<<5];
+    int tail=0;
+    inline int addnode(int pos){
+        tree[++tail]=tree[pos];
+        return tail;
+    }
+    int build(int l,int r){
+        int now=++tail;
+        tree[now].v=0;
+        if(l==r){
+            return now;
+        }
+        int mid=(l+r)>>1;
+        tree[now].lson=build(l,mid);
+        tree[now].rson=build(mid+1,r);
+        return now;
+    }
+    int update(int pos,int l,int r,int x){
+        int now=addnode(pos);
+        tree[now].v++;
+        if(l<r){
+            int  mid=(l+r)>>1;
+            if(x<=mid)tree[now].lson=update(tree[pos].lson,l,mid,x);
+            else tree[now].rson=update(tree[pos].rson,mid+1,r,x);
+        }
+        return now;
+    }
+    int query(int pos,int pos2,int l,int r,int ql,int qr){
+        if(ql<=l&&qr>=r)
+            return tree[pos2].v-tree[pos].v;
+        int mid=l+r>>1;
+        int ans=0;
+        if(ql<=mid)
+            ans+=query(tree[pos].lson,tree[pos2].lson,l,mid,ql,qr);
+        if(qr>=mid+1)
+            ans+=query(tree[pos].rson,tree[pos2].rson,mid+1,r,ql,qr);
+        return ans;
+    }
+}a;
+void dfs(int pos){
+    sz[pos]=1;
+    dfn[pos]=++cnt;
+    root[cnt]=a.update(root[cnt-1],1,n+3,lower_bound(tt+1,tt+n+3,t[pos])-tt);
+    for(auto i:mp[pos]){
+        if(i==fa[pos][0])
+            continue;
+        fa[i][0]=pos;
+        dfs(i);
+        sz[pos]+=sz[i];
+    }
+    chu[pos]=cnt;
+}
+void work()
+{
+    cin>>n;
+    int u,v;
+    for(int i=1;i<n;i++){
+        cin>>u>>v;
+        mp[u].push_back(v);
+        mp[v].push_back(u);
+    }
+    for(int i=2;i<=n+1;i++)
+        cin>>t[i-1],tt[i]=t[i-1];
+    tt[1]=-llinf;
+    tt[n+2]=llinf;
+    sort(tt+1,tt+n+3);
+    len=unique(tt+1,tt+n+3)-tt;
+    root[0]=a.build(1,n+3);
+    dfs(1);
+    for(int i=0;i<=20;i++)
+        fa[1][i]=1;
+    for(int i=1;i<=20;i++)
+        for(int j=1;j<=n;j++)
+            fa[j][i]=fa[fa[j][i-1]][i-1];
+    int q;
+    cin>>q;
+    int x,l,r;
+    for(int i=1;i<=q;i++){
+        cin>>x>>l>>r;
+        if(t[x]>r||t[x]<l){
+            cout<<"0"<<endll;
+            continue;
+        }
+        while(t[fa[x][0]]<=r&&x!=1){
+            for(int i=20;i>=0;i--)
+                if(t[fa[x][i]]<=r){
+                    x=fa[x][i];
+                    break;
+                }
+        }
+        cout<<a.query(root[dfn[x]-1],root[chu[x]],1,n+3,lower_bound(tt+1,tt+n+3,l)-tt,n+3)<<endll;
+    }
+}
+signed main()
+{
+   #ifndef ONLINE_JUDGE
+//    freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+#endif
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t = 1;
+    //cin>>t;
+    while (t--)
+    {
+        work();
+    }
+    return 0;
+}
