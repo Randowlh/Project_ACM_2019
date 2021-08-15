@@ -1,0 +1,32 @@
+{"cpp":{
+"prefix": "NTT",
+"body":["const int SIZE=(1<<21)+5;",
+"int limit,rev[SIZE];",
+"void DFT(ll *f, int op) {",
+"    const ll G = 3;",
+"    for(int i=0; i<limit; ++i) if(i<rev[i]) swap(f[i],f[rev[i]]);",
+"    for(int len=2; len<=limit; len<<=1) {",
+"        ll w1=pow(pow(G,(mod-1)/len),~op?1:mod-2);",
+"        for(int l=0, hf=len>>1; l<limit; l+=len) {",
+"            ll w=1;",
+"            for(int i=l; i<l+hf; ++i) {",
+"                ll tp=w*f[i+hf]%mod;",
+"                f[i+hf]=(f[i]-tp+mod)%mod;",
+"                f[i]=(f[i]+tp)%mod;",
+"                w=w*w1%mod;",
+"            }",
+"        }",
+"    }",
+"    if(op==-1) for(int i=0, inv=pow(limit,mod-2); i<limit; ++i) f[i]=f[i]*inv%mod;",
+"}",
+"void NTT(int n,int m,int *F,int *G){",
+"    for(limit=1;limit<=n+m;limit<<=1);",
+"    for(int i=0;i<limit;i++)rev[i]=(rev[i>>1]>>1)|((i&1)?limit>>1:0);",
+"    DFT(F,1),DFT(G,1);",
+"    for(int i=0;i<limit;i++)F[i]=F[i]*G[i];",
+"    DFT(F,-1);",
+"}"
+],
+"description": "NTT"
+}
+}
