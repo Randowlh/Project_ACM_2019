@@ -51,7 +51,7 @@ print(oth...);
 #define flush FastIO::flush
 #define spt fixed<<setprecision
 #define endll '\n'
-#define mul(a,b,mod) (__int128)(a)*(b)%(mod) 
+// #define mul(a,b,mod) (__int128)(a)*(b)%(mod) 
 #define pii(a,b) pair<a,b>
 #define pow powmod
 #define X first
@@ -72,96 +72,78 @@ print(oth...);
 #define per(i, a, n) for (register int i = n; i >= a; --i)
 const ll llinf = 4223372036854775851;
 const ll mod = (0 ? 1000000007 : 998244353);
-ll pow(ll a,ll b,ll md=mod) {ll res=1;a%=md; assert(b>=0); for(;b;b>>=1){if(b&1)res=mul(res,a,md);a=mul(a,a,md);}return res;}
+inline int add(int a,int b){a+=b;return a>=mod?a-mod:a;}
+inline int sub(int a,int b){a-=b;return a<0?a+mod:a;}
+inline int mul(int a,int b){return 1ll*a*b%mod;}
+
+inline int pow(int a,int b){int ret=1;for(;b;b>>=1,a=mul(a,a))if(b&1)ret=mul(ret,a);return ret;}
 const ll mod2 = 999998639;
 const int m1 = 998244353;
 const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 510000;
-// #define repeat(i,x,y) for(int i=(x);i<(y);++i)
-struct MTT{
-	static const int N=1<<20;
-	struct cp{
-		long double a,b;
-		cp(){a=0,b=0;}
-		cp(const long double &a,const long double &b):a(a),b(b){}
-		cp operator+(const cp &t)const{return cp(a+t.a,b+t.b);}
-		cp operator-(const cp &t)const{return cp(a-t.a,b-t.b);}
-		cp operator*(const cp &t)const{return cp(a*t.a-b*t.b,a*t.b+b*t.a);}
-		cp conj()const{return cp(a,-b);}
-	};
-	cp wn(int n,int f){
-		static const long double pi=acos(-1.0);
-		return cp(cos(pi/n),f*sin(pi/n));
-	}
-	int g[N];
-	void dft(cp a[],int n,int f){
-		for(int i=0;i<n;i++)if(i>g[i])swap(a[i],a[g[i]]);
-		for(int i=1;i<n;i<<=1){
-			cp w=wn(i,f);
-			for(int j=0;j<n;j+=i<<1){
-				cp e(1,0);
-				for(int k=0;k<i;e=e*w,k++){
-					cp x=a[j+k],y=a[j+k+i]*e;
-					a[j+k]=x+y,a[j+k+i]=x-y;
-				}
+const int maxn =2010000;
+typedef vector<int> poly;
+
+const int Ntt_Lim = 5e6+6;
+	int rev[Ntt_Lim],_w[Ntt_Lim];
+	const int G_mod = 3;
+	inline void _w_init(){
+		for(int step=1;step*2<=Ntt_Lim;step<<=1){
+			int wn = pow(G_mod, (mod-1)/(step<<1));
+			for(int j=step,w=1;j<step<<1;j++,w=mul(w,wn)){
+				_w[j]=w;
 			}
 		}
-		if(f==-1){
-			cp Inv(1.0/n,0);
-			for(int i=0;i<n;i++)a[i]=a[i]*Inv;
-		}
 	}
-	cp a[N],b[N],Aa[N],Ab[N],Ba[N],Bb[N];
-	vector<ll> conv_mod(const vector<ll> &u,const vector<ll> &v,ll mod){ // 任意模数fft
-		const int n=(int)u.size()-1,m=(int)v.size()-1,M=sqrt(mod)+1;
-		const int k=32-__builtin_clz(n+m+1),s=1<<k;
-		g[0]=0; for(int i=1;i<s;i++)g[i]=(g[i/2]/2)|((i&1)<<(k-1));
-		for(int i=0;i<s;i++){
-			a[i]=i<=n?cp(u[i]%mod%M,u[i]%mod/M):cp();
-			b[i]=i<=m?cp(v[i]%mod%M,v[i]%mod/M):cp();
+	inline void dft(int *f,int len,int type){
+		int l=0;while(1<<l<len)++l;
+		for(int i=0;i<len;i++)rev[i]=(rev[i>>1]>>1)|((i&1)<<(l-1));
+		for(int i=0;i<len;i++)if(i<rev[i])swap(f[i],f[rev[i]]);
+		for(int step=1;step<len;step<<=1){
+			for(int i=0;i<len;i+=step<<1)for(int x,y,j=0;j<step;j++){
+				x=f[i+j],y=mul(_w[j+step],f[i+j+step]);
+				f[i+j]=add(x,y),f[i+j+step]=sub(x,y);
+			}
 		}
-		dft(a,s,1); dft(b,s,1);
-		for(int i=0;i<s;i++){
-			int j=(s-i)%s;
-			cp t1=(a[i]+a[j].conj())*cp(0.5,0);
-			cp t2=(a[i]-a[j].conj())*cp(0,-0.5);
-			cp t3=(b[i]+b[j].conj())*cp(0.5,0);
-			cp t4=(b[i]-b[j].conj())*cp(0,-0.5);
-			Aa[i]=t1*t3,Ab[i]=t1*t4,Ba[i]=t2*t3,Bb[i]=t2*t4;
-		}
-		for(int i=0;i<s;i++){
-			a[i]=Aa[i]+Ab[i]*cp(0,1);
-			b[i]=Ba[i]+Bb[i]*cp(0,1);
-		}
-		dft(a,s,-1); dft(b,s,-1);
-		vector<ll> ans;
-		for(int i=0;i<n+m+1;i++){
-			ll t1=llround(a[i].a)%mod;
-			ll t2=llround(a[i].b)%mod;
-			ll t3=llround(b[i].a)%mod;
-			ll t4=llround(b[i].b)%mod;
-			ans.push_back((t1+(t2+t3)*M%mod+t4*M*M)%mod);
-		}
-		return ans;
+		if(type==1)return;
+		int inv=pow(len,mod-2);reverse(f+1,f+len);
+		for(int i=0;i<len;i++)f[i]=mul(f[i],inv);
 	}
-}mtt;
+	poly ntt(poly a,poly b,int n,int m){
+		int l=1;while(l<n+m-1)l<<=1;
+		a.resize(l),b.resize(l);dft(&a[0],l,1),dft(&b[0],l,1);
+		for(int i=0;i<l;i++)a[i]=mul(a[i],b[i]);
+		dft(&a[0],l,-1);a.resize(n+m-1);
+		return a;
+	}
+	poly ntt(poly a,poly b){return ntt(a,b,a.size(),b.size());}
+vector<int>date(maxn,0);
+int fac[maxn], ifac[maxn];
+inline void init(int n = 2e6){
+	fac[0]=ifac[0]=1;for(int i=1;i<=n;i++)fac[i]=mul(fac[i-1],i);
+	ifac[n]=pow(fac[n],mod-2);for(int i=n-1;i;i--)ifac[i]=mul(ifac[i+1],i+1);
+}
 void work()
 {
-    int n,m,p;
-    cin>>n>>m>>p;
-    vector<int> a,b;
+    init();
+    int n;
+    cin>>n;
     int tmp;
-    for(int i=0;i<=n;i++)
-        cin>>tmp,a.push_back(tmp);
-    for(int i=0;i<=m;i++)
-        cin>>tmp,b.push_back(tmp);
-    vector<int> ans=mtt.conv_mod(a,b,p);
-    for(auto i:ans)
-        cout<<i<<' ';
-    cout<<endl;
+    int ans=1;
+    for(int i=1;i<=n;i++){
+        cin>>tmp;
+        date[tmp+1]++;
+        ans=ans*(tmp+1)%mod;
+    }
+    vector<int> rvs=date;
+    reverse(rvs.begin(),rvs.end());
+    vector<int> aa=ntt(date,rvs);
+    for(int i=1;i<=n;i++)ans = ans*ifac[i]%mod;
+    for(int i=1;i<=2000000;i++)
+        ans=ans*pow(i,date[2000000+i])%mod;
+    cout<<ans<<endll;
 }
 signed main()
 {
@@ -172,7 +154,7 @@ signed main()
     std::ios::sync_with_stdio(false);
     cin.tie(NULL);
     int t = 1;
-    // cin>>t;
+    //cin>>t;
     while (t--)
     {
         work();
