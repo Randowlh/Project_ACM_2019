@@ -14,9 +14,9 @@
 "inline int niyuan(int x, int mod) { ",
 "    int ans,tmp;",
 "    exgcd(x,mod,ans,tmp);",
-"    return ans;",
+"    return (ans%mod+mod)%mod;",
 "}"
 ],
-"description": "求逆元"
+"description": "niyuan"
 }
 }
