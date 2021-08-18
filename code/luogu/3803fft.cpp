@@ -79,7 +79,9 @@ const int m2 = 1000001011;
 const int pr=233;
 const double eps = 1e-7;
 const int maxm= 1;
-const int maxn = 1100000;
+const int maxn = 2100000;
+int n,m;
+
 const int SIZE=(1<<21)+5;
 const double PI=acos(-1);
 struct CP{
@@ -89,6 +91,7 @@ struct CP{
     CP operator -(const CP &A)const{return CP(x-A.x,y-A.y);}
     CP operator *(const CP &A)const{return CP(x*A.x-y*A.y,x*A.y+y*A.x);}
 };
+CP a[maxn<<1],b[maxn<<1];
 int limit,rev[SIZE];
 void DFT(CP *F,int op){
     for(int i=0;i<limit;i++)if(i<rev[i])swap(F[i],F[rev[i]]);
@@ -113,44 +116,18 @@ void FFT(int n,int m,CP *F,CP *G){
     for(int i=0;i<limit;i++)F[i]=F[i]*G[i];
     DFT(F,-1);
 }
-CP a[maxn<<1],b[maxn<<1];
-int ans[maxn<<1];
-string tmp;
 void work()
 {
     int n,m;
-    cin>>tmp;
-    n=tmp.size();
-    for(int i=0;i<tmp.size();i++)
-        a[i].x=tmp[i]-'0';
-    reverse(a,a+n);
-    cin>>tmp;
-    m=tmp.size();
-    for(int i=0;i<tmp.size();i++)
-        b[i].x=tmp[i]-'0';
-    reverse(b,b+m);
-    // for(int i=0;i<n;i++)  
-    //     cout<<a[i].x<<' ';
-    // cout<<endl;
-    // for(int j=0;j<m;j++)
-    //     cout<<b[j].x<<' ';
-    // cout<<endl;
+    cin>>n>>m;
+    for(int i=0;i<=n;i++)
+        cin>>a[i].x;
+    for(int j=0;j<=m;j++)
+        cin>>b[j].x;
     FFT(n,m,a,b);
-    for(int i=0;i<=limit;i++){
-        ans[i]=(int)a[i].x;
-    }
-    for(int i=0;i<=limit;i++){
-        ans[i+1]+=ans[i]/10,
-        ans[i]%=10;
-    }
-    int flag=0;
-    for(int i=limit;i>=0;i--){
-        if(flag||((int)(ans[i]))){
-            cout<<((int)(ans[i]));
-            flag=1;
-        }
-    }
-    cout<<endl;
+    for(int i=0;i<=n+m;i++)
+        cout<<(int)a[i].x<<' ';
+    cout<<endll;
 }
 signed main()
 {
@@ -158,8 +135,8 @@ signed main()
    //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
 #endif
-    std::ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    //std::ios::sync_with_stdio(false);
+    //cin.tie(NULL);
     int t = 1;
     //cin>>t;
     while (t--)
